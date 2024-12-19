@@ -98,4 +98,4 @@
 		- Maps JavaScript API(地図のマーカーと2点間の距離計算)
 - 認証:
 	- LINEログイン
-		- Googleログイン
+	- Googleログイン
