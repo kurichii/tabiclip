@@ -99,3 +99,6 @@
 - 認証:
 	- LINEログイン
 	- Googleログイン
+
+## ■ 画面遷移図
+https://www.figma.com/design/hFI7FPp7fZ95IcAQkhaPwx/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=G3nde0mVRNaHbNWf-1
