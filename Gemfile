@@ -41,7 +41,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # デバッグツール
-  gem 'pry-byebug'
+  gem "pry-byebug"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
