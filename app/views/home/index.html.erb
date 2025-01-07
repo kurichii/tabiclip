@@ -1,2 +1,16 @@
 <h1>Home#index</h1>
 <p class="bg-blue-300">Find me in app/views/home/index.html.erb</p>
+<ul>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to "logout", destroy_user_session_path, data: { turbo_method: :delete } %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to "sign up", new_user_registration_path %>
+    </li>
+    <li>
+      <%= link_to "login", new_user_session_path %>
+    </li>
+  <% end %>
+</ul>
