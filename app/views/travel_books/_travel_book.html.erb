@@ -1,0 +1,22 @@
+<%= link_to new_user_session_path, class: "block" do %>
+  <div class="card bg-base-100 w-full">
+    <figure>
+      <img
+        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+        alt="Shoes" />
+    </figure>
+    <div class="card-body flex flex-col items-center justify-center text-center">
+      <h2 class="card-title"><%= travel_book.title %></h2>
+      <p>エリア</p>
+      <p>カテゴリー</p>
+      <div class="flex items-center justify-center gap-2">
+        <div class="avatar">
+          <div class="w-6 md:w-7 rounded-full">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+          </div>
+        </div>
+        <p>ニックネーム</p>
+      </div>
+    </div>
+  </div>
+<% end %>
