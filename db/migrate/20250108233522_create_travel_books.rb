@@ -6,6 +6,8 @@ class CreateTravelBooks < ActiveRecord::Migration[7.2]
       t.boolean :is_public, null: false
       t.date :start_date
       t.date :end_date
+
+      t.timestamps
     end
   end
 end
