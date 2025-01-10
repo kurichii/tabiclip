@@ -1,0 +1,2 @@
+module TravelBooksHelper
+end
