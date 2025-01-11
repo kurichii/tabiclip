@@ -1,4 +1,5 @@
 class TravelBook < ApplicationRecord
+  belongs_to :area
   has_many :user_travel_books, dependent: :destroy
   has_many :users, through: :user_travel_books
 
