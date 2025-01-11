@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_11_000040) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_11_012216) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "travel_books", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
-    t.boolean "is_public", null: false
+    t.boolean "is_public", default: false, null: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false
