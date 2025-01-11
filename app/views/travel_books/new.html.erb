@@ -25,6 +25,22 @@
 
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div class="sm:col-span-3">
+            <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2">
+              <%= f.date_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
+            <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2">
+                <%= f.date_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
             <%= f.label :area_id, class: "block text-sm/6 font-medium text-gray-900" %>
             <div class="mt-2 grid grid-cols-1">
               <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: "選択してください" }, { class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" } %>
@@ -41,29 +57,16 @@
           </div>
         </div>
 
-        <div class="mt-6 space-y-1">
-          <div class="flex items-center gap-x-3">
-            <%= f.radio_button :is_public, true, id: "is_public_true", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
-            <%= f.label :is_public, "公開", for: "is_public_true" %>
-          </div>
-          <div class="flex items-center gap-x-3">
-            <%= f.radio_button :is_public, false, id: "is_public_false", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
-            <%= f.label :is_public, "非公開", for: "is_public_false" %>
-          </div>
-        </div>
-
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-              <%= f.date_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          <div class="mt-6 space-y-1">
+            <p class="block text-sm/6 font-medium text-gray-900">tet</p>
+            <div class="flex items-center gap-x-3">
+              <%= f.radio_button :is_public, true, id: "is_public_true", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
+              <%= f.label :is_public, "公開", for: "is_public_true" %>
             </div>
-          </div>
-
-          <div class="sm:col-span-3">
-            <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-                <%= f.date_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            <div class="flex items-center gap-x-3">
+              <%= f.radio_button :is_public, false, id: "is_public_false", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
+              <%= f.label :is_public, "非公開", for: "is_public_false" %>
             </div>
           </div>
         </div>
