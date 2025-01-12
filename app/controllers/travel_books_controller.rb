@@ -17,6 +17,10 @@ class TravelBooksController < ApplicationController
     end
   end
 
+  def show
+    @travel_book = TravelBook.find(params[:id])
+  end
+
   private
 
   def travel_book_param

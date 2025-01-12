@@ -1,0 +1,34 @@
+<div class="bg-white rounded-lg shadow-md p-6 m-6">
+  <!-- タイトル -->
+  <h1 class="text-2xl font-bold"><%= @travel_book.title %></h1>
+
+  <!-- 説明 -->
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">説明</h2>
+    <p class="text-gray-700"><%= @travel_book.description %></p>
+  </div>
+
+  <!-- 期間 -->
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">期間</h2>
+    <p class="text-gray-700"><%= @travel_book.start_date %><span class="mx-2">〜</span><%= @travel_book.end_date %></p>
+  </div>
+
+  <!-- エリア -->
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">エリア</h2>
+    <p class="text-gray-700"><%= @travel_book.area.name %></p>
+  </div>
+
+  <!-- 旅行タイプ -->
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">旅行タイプ</h2>
+    <p class="text-gray-700"><%= @travel_book.traveler_type.name %></p>
+  </div>
+
+  <!-- 公開設定 -->
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">公開設定</h2>
+    <p class="text-gray-700"><%= @travel_book.is_public %></p>
+  </div>
+</div>
