@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_11_131352) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_13_064017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_11_131352) do
     t.datetime "updated_at", null: false
     t.bigint "area_id"
     t.bigint "traveler_type_id"
+    t.string "travel_book_image"
     t.index ["area_id"], name: "index_travel_books_on_area_id"
     t.index ["traveler_type_id"], name: "index_travel_books_on_traveler_type_id"
   end
