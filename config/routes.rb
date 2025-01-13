@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get "home/index"
   resources :travel_books, only: %i[ index new create show edit update destroy ] do
-    delete 'delete_image', on: :member
+    delete "delete_image", on: :member
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
