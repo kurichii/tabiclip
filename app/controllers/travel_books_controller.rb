@@ -9,7 +9,10 @@ class TravelBooksController < ApplicationController
 
   def create
     @travel_book = current_user.travel_books.build(travel_book_param)
+
     if @travel_book.save
+      # 中間テーブルに関連付けを追加
+      current_user.user_travel_books.create(travel_book: @travel_book)
       redirect_to travel_books_path, notice: "作成成功"
     else
       flash.now[:alert] = "作成失敗"
