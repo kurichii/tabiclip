@@ -48,6 +48,6 @@ class TravelBooksController < ApplicationController
   private
 
   def travel_book_param
-    params.require(:travel_book).permit(:title, :description, :is_public, :area_id, :traveler_type_id, :start_date, :end_date)
+    params.require(:travel_book).permit(:title, :description, :is_public, :area_id, :traveler_type_id, :start_date, :end_date, :travel_book_image, :travel_book_image_cache)
   end
 end

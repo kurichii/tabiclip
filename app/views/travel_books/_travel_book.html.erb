@@ -1,9 +1,7 @@
 <%= link_to travel_book_path(travel_book), class: "block" do %>
   <div class="card bg-base-100 w-full">
     <figure>
-      <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+      <%= image_tag travel_book.travel_book_image_url %>
     </figure>
     <div class="card-body flex flex-col items-center justify-center text-center">
       <h2 class="card-title"><%= travel_book.title %></h2>
