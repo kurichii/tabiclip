@@ -21,6 +21,21 @@ class TravelBooksController < ApplicationController
     @travel_book = TravelBook.find(params[:id])
   end
 
+  def edit
+    @travel_book = current_user.travel_books.find(params[:id])
+  end
+
+  def update
+    @travel_book = current_user.travel_books.find(params[:id])
+
+    if @travel_book.update(travel_book_param)
+      redirect_to travel_books_path(@travel_book), notice: "編集成功"
+    else
+      flash.now[:alert] = "編集失敗"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def travel_book_param
