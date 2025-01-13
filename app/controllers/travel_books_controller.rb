@@ -39,6 +39,12 @@ class TravelBooksController < ApplicationController
     end
   end
 
+  def destroy
+    travel_book = current_user.travel_books.find(params[:id])
+    travel_book.destroy!
+    redirect_to travel_books_path, notice: "削除成功"
+  end
+
   private
 
   def travel_book_param
