@@ -57,6 +57,16 @@
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+            <%= f.label :travel_book_image, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2 grid grid-cols-1">
+              <%= f.file_field :travel_book_image, accept: "image/*", class: "" %>
+              <%= f.hidden_field :travel_book_image_cache %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div class="mt-6 space-y-1">
             <p class="block text-sm/6 font-medium text-gray-900">tet</p>
             <div class="flex items-center gap-x-3">
@@ -69,6 +79,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <div class="mt-6 flex items-center justify-end gap-x-6">
