@@ -32,8 +32,10 @@
     <p class="text-gray-700"><%= @travel_book.is_public %></p>
   </div>
 
-  <!-- 編集ボタン -->
   <% if @travel_book.owned_by_user?(current_user) %>
+      <!-- 編集ボタン -->
       <%= link_to "edit", edit_travel_book_path(@travel_book), class: "btn btn-ghost rounded-btn" %>
+      <!-- 削除ボタン -->
+      <%= link_to "destroy", travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-ghost rounded-btn" %>
   <% end %>
 </div>
