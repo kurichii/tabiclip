@@ -21,6 +21,10 @@
   <body class="bg-base-200 min-h-screen">
     <%= render "shared/header" %>
     <%= yield %>
-    <%= render "shared/bottom_navigation" %>
+    <% if display_bottom_nav? %>
+      <%= render "shared/bottom_navigation_on_travel_book", travel_book: @travel_book %>
+    <% else %>
+      <%= render "shared/bottom_navigation" %>
+    <% end %>
   </body>
 </html>
