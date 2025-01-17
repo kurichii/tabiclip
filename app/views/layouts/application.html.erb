@@ -14,11 +14,13 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script src="https://kit.fontawesome.com/db3944d085.js" crossorigin="anonymous"></script>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body class="bg-base-200 min-h-screen">
-    <%= render 'shared/header' %>
+    <%= render "shared/header" %>
     <%= yield %>
+    <%= render "shared/bottom_navigation" %>
   </body>
 </html>
