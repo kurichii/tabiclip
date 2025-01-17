@@ -1,14 +1,14 @@
 <div class="btm-nav">
-  <button>
+  <%= link_to root_path, class: "#{add_active_class(root_path)}" do %>
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="btm-nav-label">しおり検索</span>
-  </button>
-  <button class="active">
+  <% end %>
+  <%= link_to "#" do %>
     <i class="fa-solid fa-map-location-dot"></i>
     <span class="btm-nav-label">マイしおり</span>
-  </button>
-  <button>
+  <% end %>
+  <%= link_to "#" do %>
     <i class="fa-solid fa-circle-user"></i>
     <span class="btm-nav-label">マイページ</span>
-  </button>
+  <% end %>
 </div>
