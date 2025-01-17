@@ -1,0 +1,22 @@
+<div class="btm-nav">
+  <%= link_to travel_book_path(travel_book.id), class: "#{add_active_class(travel_book_path)}" do %>
+    <i class="fa-regular fa-map"></i>
+    <span class="btm-nav-label">しおり情報</span>
+  <% end %>
+  <%= link_to "#" do %>
+    <i class="fa-regular fa-clock"></i>
+    <span class="btm-nav-label">スケジュール</span>
+  <% end %>
+  <%= link_to "#" do %>
+  <i class="fa-solid fa-location-dot"></i>
+    <span class="btm-nav-label">マップ</span>
+  <% end %>
+  <%= link_to "#" do %>
+    <i class="fa-solid fa-file-pen"></i>
+    <span class="btm-nav-label">ノート</span>
+  <% end %>
+  <%= link_to "#" do %>
+    <i class="fa-solid fa-image"></i>
+    <span class="btm-nav-label">アルバム</span>
+  <% end %>
+</div>
