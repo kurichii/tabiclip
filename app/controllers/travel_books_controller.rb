@@ -2,7 +2,7 @@ class TravelBooksController < ApplicationController
   def index
     @travel_books =
     if params[:scope] == "own"
-      current_user.travel_books
+      current_user ? current_user.travel_books : []
     else
       TravelBook.public_travel_books.includes(:users)
     end
