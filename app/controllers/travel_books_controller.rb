@@ -1,6 +1,11 @@
 class TravelBooksController < ApplicationController
   def index
-    @travel_books = TravelBook.includes(:users)
+    @travel_books =
+    if params[:scope] == "own"
+      current_user.travel_books
+    else
+      TravelBook.public_travel_books.includes(:users)
+    end
   end
 
   def new

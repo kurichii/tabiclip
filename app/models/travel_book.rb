@@ -9,6 +9,8 @@ class TravelBook < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 65_535 }
 
+  scope :public_travel_books, -> { where(is_public: true) }
+
   def owned_by_user?(user)
     users.exists?(id: user.id)
   end
