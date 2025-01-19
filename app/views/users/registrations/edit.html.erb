@@ -4,21 +4,23 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <div class="mt-10 grid grid-cols-1">
+      <%= f.label :name, class: "block text-sm/6 font-medium text-gray-900" %>
+      <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+        <%= f.text_field :name, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="mt-10 grid grid-cols-1">
+      <%= f.label :email, class: "block text-sm/6 font-medium text-gray-900" %>
+      <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+        <%= f.email_field :email, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
+  <div class="mt-10 flex gap-2 justify-center">
+    <%= link_to "Back", :back, class: "btn" %>
+    <%= f.submit "Update", class: "btn" %><% end %>
   </div>
-<% end %>
-
-<%= link_to "Back", :back, class: "btn" %>
 
 </div>
