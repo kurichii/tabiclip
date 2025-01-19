@@ -67,7 +67,6 @@
         </div>
 
         <div class="mt-2">
-          <%= image_tag @travel_book.travel_book_image_url, width:"80" %>
           <% if @travel_book.persisted? %>
             <% if @travel_book.travel_book_image_url %>
               <%= link_to "destroy", delete_image_travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-ghost rounded-btn" %>
