@@ -3,11 +3,13 @@
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="btm-nav-label">しおり検索</span>
   <% end %>
-  <%= link_to travel_books_path(scope: 'own'), class: "#{add_active_class(travel_books_path(scope: 'own'))}" do %>
+
+  <%= link_to (user_signed_in? ? travel_books_path(scope: 'own') : new_user_session_path), class: "#{add_active_class(travel_books_path(scope: 'own'))}" do %>
     <i class="fa-solid fa-map-location-dot"></i>
     <span class="btm-nav-label">マイしおり</span>
   <% end %>
-  <%= link_to "#" do %>
+
+  <%= link_to (user_signed_in? ? users_profile_path : new_user_session_path), class: "#{add_active_class(users_profile_path)}" do %>
     <i class="fa-solid fa-circle-user"></i>
     <span class="btm-nav-label">マイページ</span>
   <% end %>
