@@ -1,11 +1,7 @@
 <%= link_to travel_book_path(travel_book), class: "block" do %>
   <div class="card bg-base-100 w-full">
     <figure>
-    <% if travel_book.travel_book_image? %>
-      <%= image_tag travel_book.travel_book_image_url %>
-    <% else %>
-      <%= image_tag("travel_book_placeholder.jpg") %>
-    <% end %>
+    <%= image_tag(travel_book.travel_book_image? ? travel_book.travel_book_image_url : "default_travel_book_image.jpg") %>
     </figure>
     <div class="card-body flex flex-col items-center justify-center text-center">
       <h2 class="card-title"><%= travel_book.title %></h2>
