@@ -1,11 +1,18 @@
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-  <%if @travel_books.present? %>
-    <%if params[:scope] == "own" %>
-      <%= render "my_travel_book", travel_books: @travel_books %>
+<div class="p-4">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <%if @travel_books.present? %>
+      <%if params[:scope] == "own" %>
+        <%= render "my_travel_book", travel_books: @travel_books %>
+      <% else %>
+        <%= render @travel_books %>
+      <% end %>
     <% else %>
-      <%= render @travel_books %>
+      しおりがありません
     <% end %>
-  <% else %>
-    しおりがありません
+  </div>
+  <%if params[:scope] == "own" %>
+    <%= link_to new_travel_book_path, class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
+      新規作成
+    <% end %>
   <% end %>
 </div>

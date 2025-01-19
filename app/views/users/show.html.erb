@@ -1,0 +1,14 @@
+<div class="bg-white rounded-lg shadow-md p-6 m-6">
+
+    <h1 class="text-center text-lg">アイコン(仮)</h2>
+    <!-- 名前 -->
+    <h1 class="text-center text-lg"><%= @user.name %></h2>
+
+    <!-- メールアドレス -->
+    <div class="flex gap-2">
+      <p>メールアドレス</p>
+      <p><%= @user.email %></p>
+    </div>
+
+    <%= link_to "edit", edit_user_registration_path, class: "btn btn-ghost rounded-btn" %>
+</div>
