@@ -21,8 +21,8 @@ class TravelBookUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  def default_url
-    "travel_book_placeholder"
+  def default_url(*args)
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "travel_book_placeholder.jpg"].compact.join('_'))
   end
 
   # Process files as they are uploaded:
