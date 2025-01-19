@@ -1,8 +1,8 @@
 class TravelBook < ApplicationRecord
   mount_uploader :travel_book_image, TravelBookUploader
 
-  belongs_to :area
-  belongs_to :traveler_type
+  belongs_to :area, optional: true
+  belongs_to :traveler_type, optional: true
   has_many :user_travel_books, dependent: :destroy
   has_many :users, through: :user_travel_books
 
