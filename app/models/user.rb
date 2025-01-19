@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  mount_uploader :icon_image, UserUploader
   has_many :user_travel_books, dependent: :destroy
   has_many :travel_books, through: :user_travel_books
 
