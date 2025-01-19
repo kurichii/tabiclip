@@ -1,16 +1,16 @@
-<div class="bg-white rounded-lg shadow-md p-6 m-6">
+<div class="bg-white rounded-lg shadow-md p-6 m-6 flex flex-col items-center">
 
-    <h1 class="text-center text-lg">アイコン(仮)</h2>
-    <!-- 名前 -->
-    <h1 class="text-center text-lg"><%= @user.name %></h2>
+  <%= image_tag(@user.icon_image? ? @user.icon_image_url : "default_icon.png",
+    class: "rounded-full w-24 h-24 shadow-md object-cover border border-gray-200") %>
 
-    <!-- メールアドレス -->
-    <div class="flex gap-2">
-      <p>メールアドレス</p>
-      <p><%= @user.email %></p>
-    </div>
+  <h1 class="mt-2 text-center text-lg font-bold"><%= @user.name %></h2>
 
-    <div class="mt-10 text-center">
-      <%= link_to "edit", edit_user_registration_path, class: "btn rounded-btn" %>
-    </div>
+  <div class="mt-5 flex gap-2">
+    <p>メールアドレス</p>
+    <p><%= @user.email %></p>
+  </div>
+
+  <div class="mt-10 text-center">
+    <%= link_to "edit", edit_user_registration_path, class: "btn rounded-btn" %>
+  </div>
 </div>
