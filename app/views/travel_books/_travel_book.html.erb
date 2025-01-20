@@ -5,8 +5,8 @@
     </figure>
     <div class="card-body flex flex-col items-center justify-center text-center">
       <h2 class="card-title"><%= travel_book.title %></h2>
-      <p>エリア</p>
-      <p>カテゴリー</p>
+      <p><%= area_name(travel_book) %></p>
+      <p><%= traveler_type_name(travel_book) %></p>
       <div class="flex items-center justify-center gap-2">
         <div class="avatar">
           <div class="w-6 md:w-7 rounded-full">
