@@ -1,6 +1,6 @@
 <div class="card bg-base-100 shadow-md m-6">
   <figure>
-    <%= image_tag(travel_book.travel_book_image? ? travel_book.travel_book_image_url : "default_travel_book_image.jpg") %>
+    <%= image_tag(@travel_book.travel_book_image? ? @travel_book.travel_book_image_url : "default_travel_book_image.jpg") %>
   </figure>
 
   <div class="card-body">
