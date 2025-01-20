@@ -1,4 +1,4 @@
-class TravelBookUploader < CarrierWave::Uploader::Base
+class UserUploader < CarrierWave::Uploader::Base
   # Include RMagick, MiniMagick, or Vips support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -15,14 +15,11 @@ class TravelBookUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
   def default_url(*args)
-    ActionController::Base.helpers.asset_path("fallback/" + [ version_name, "default_travel_book_image.jpg" ].compact.join("_"))
+    # For Rails 3.1+ asset pipeline compatibility:
+    ActionController::Base.helpers.asset_path("fallback/" + [ version_name, "default_icon.png" ].compact.join("_"))
+
+    # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
 
   # Process files as they are uploaded:
@@ -38,8 +35,9 @@ class TravelBookUploader < CarrierWave::Uploader::Base
   # end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
+  # For images you might use something like this:
   def extension_allowlist
-    %w[jpg jpeg gif png]
+    %w[ jpg jpeg gif png ]
   end
 
   # Override the filename of the uploaded files:
@@ -47,11 +45,4 @@ class TravelBookUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg"
   # end
-
-  # 本番環境と開発・テスト環境で保存先を分ける
-  if Rails.env.production?
-    storage :fog
-  else
-    storage :file
-  end
 end

@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [ :name ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :icon_image, :icon_image_cache ])
   end
 
   # The path used after sign up.
@@ -63,4 +63,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # プロフィール編集後にマイページにリダイレクトする
+  def after_update_path_for(resource)
+    users_profile_path
+  end
 end
