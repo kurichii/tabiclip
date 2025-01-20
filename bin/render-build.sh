@@ -6,4 +6,4 @@ set -e
 bin/rails db:migrate
 
 # seedsデータの適用
-bin/rails db:seed
+# bin/rails db:seed
