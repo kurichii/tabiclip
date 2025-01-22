@@ -14,6 +14,7 @@ class TravelBooksController < ApplicationController
 
   def create
     @travel_book = current_user.travel_books.build(travel_book_param)
+    @travel_book.creator_id = current_user.id
 
     if @travel_book.save
       # 中間テーブルに関連付けを追加
