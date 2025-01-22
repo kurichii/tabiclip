@@ -3,6 +3,7 @@ class TravelBook < ApplicationRecord
 
   belongs_to :area, optional: true
   belongs_to :traveler_type, optional: true
+  belongs_to :creator, class_name: "User"
   has_many :user_travel_books, dependent: :destroy
   has_many :users, through: :user_travel_books
 
