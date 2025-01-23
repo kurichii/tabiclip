@@ -14,6 +14,7 @@ class TravelBook < ApplicationRecord
   scope :public_travel_books, -> { where(is_public: true) }
 
   def owned_by_user?(user)
+    return false if user.nil?
     users.exists?(id: user.id)
   end
 end
