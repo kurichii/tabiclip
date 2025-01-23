@@ -6,6 +6,7 @@ class TravelBook < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :user_travel_books, dependent: :destroy
   has_many :users, through: :user_travel_books
+  has_many :schedules
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 65_535 }
@@ -13,6 +14,7 @@ class TravelBook < ApplicationRecord
   scope :public_travel_books, -> { where(is_public: true) }
 
   def owned_by_user?(user)
+    return false if user.nil?
     users.exists?(id: user.id)
   end
 end

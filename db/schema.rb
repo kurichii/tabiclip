@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_20_122157) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_22_022836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_122157) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "travel_book_id", null: false
+    t.string "title", null: false
+    t.integer "budged", default: 0
+    t.text "memo"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["travel_book_id"], name: "index_schedules_on_travel_book_id"
   end
 
   create_table "travel_books", force: :cascade do |t|
@@ -67,6 +79,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_122157) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "schedules", "travel_books"
   add_foreign_key "travel_books", "areas"
   add_foreign_key "travel_books", "traveler_types"
   add_foreign_key "travel_books", "users", column: "creator_id"
