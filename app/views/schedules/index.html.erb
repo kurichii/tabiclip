@@ -1,0 +1,17 @@
+<div class="bg-white rounded-lg shadow-md p-6 m-6 flex flex-col items-center">
+
+  <h1 class="mt-2 text-center text-lg font-bold"><%= @travel_book.title %></h2>
+
+  <div class="mt-5 flex gap-2">
+    <p><%= travel_book_duration(@travel_book)%></p>
+  </div>
+
+    <%= render @schedules %>
+  <% if @schedules.present? %>
+    <%= render @schedules %>
+  <% else %>
+    <%= link_to "#" do %>
+      スケジュールを登録のリンク
+    <% end %>
+  <% end %>
+</div>
