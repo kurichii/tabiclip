@@ -1,0 +1,30 @@
+<div class="bg-white rounded-lg shadow-md p-6 m-6">
+
+  <div class="flex flex-col items-center">
+    <h1 class="mt-2 text-center text-lg font-bold"><%= @schedule.title %></h2>
+  </div>
+
+  <div class="mt-5">
+    <p>日時</p>
+    <p><%= @schedule.start_date.strftime("%Y年%-m月%-d日(%a) %H:%M") %> ~ <%= @schedule.end_date.strftime("%Y年%-m月%-d日(%a) %H:%M") %></p>
+  </div>
+
+  <div class="mt-5">
+    <p>場所</p>
+    <p>これから設定</p>
+  </div>
+
+  <div class="mt-5">
+    <p>予算</p>
+    <p><%= @schedule.budged %>円</p>
+  </div>
+
+  <div class="mt-5">
+    <p>メモ</p>
+    <p><%= @schedule.memo.blank?  ? "未設定" : @schedule.memo %></p>
+  </div>
+
+  <div class="mt-10 text-center">
+    <%= link_to "edit", edit_schedule_path, class: "btn rounded-btn" %>
+  </div>
+</div>

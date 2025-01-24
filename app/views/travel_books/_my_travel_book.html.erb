@@ -8,11 +8,11 @@
         <h2 class="card-title"><%= travel_book.title %></h2>
         <div class="flex items-center justify-center gap-2">
           <div class="badge">出発</div>
-          <p><%= travel_book_date(travel_book, :start) %></p>
+          <p><%= fmt_date(travel_book.start_date) %></p>
         </div>
         <div class="flex items-center justify-center gap-2">
           <div class="badge">到着</div>
-          <p><%= travel_book_date(travel_book, :end) %></p>
+          <p><%= fmt_date(travel_book.end_date) %></p>
         </div>
       </div>
     </div>
