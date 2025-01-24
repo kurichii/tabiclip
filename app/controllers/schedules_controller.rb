@@ -23,6 +23,21 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find(params[:id])
   end
 
+  def edit
+    @schedule = Schedule.find(params[:id])
+  end
+
+  def update
+    @schedule = Schedule.find(params[:id])
+
+    if @schedule.update(schedule_param)
+      redirect_to schedule_path(@schedule), notice: "登録成功"
+    else
+      flash.now[:alert] = "編集失敗"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def schedule_param
