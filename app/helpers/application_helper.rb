@@ -3,7 +3,7 @@ module ApplicationHelper
   # TravelController#showでユーザーがしおりとリレーションを組んでいる場合true
   def display_bottom_nav?
     return false if current_user.nil?
-    controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(id: params[:id])
+    (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(id: params[:id]))|| controller_name == "schedules"
   end
 
   # 指定したパスが現在のページであれば"active"を返す

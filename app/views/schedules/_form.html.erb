@@ -1,63 +1,64 @@
-  <%= form_with model: [@travel_book, @schedule] do |f| %>
-    <div class="space-y-12">
-      <div class="border-b border-gray-900/10 pb-12">
+<%= form_with model: schedule, url: schedule.new_record? ? travel_book_schedules_path(travel_book) : schedule_path(schedule) do |f| %>
 
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-4">
-            <%= f.label :title, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-              <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                <%= f.text_field :title, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
-              </div>
+  <div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12">
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-4">
+          <%= f.label :title, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+            <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <%= f.text_field :title, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
             </div>
           </div>
         </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-              <%= f.datetime_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-
-          <div class="sm:col-span-3">
-            <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-                <%= f.datetime_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          場所
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :budged, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= f.number_field :budged, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="col-span-full">
-            <%= f.label :memo, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-                <%= f.text_area :memo, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          アイコン
-        </div>
-
       </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+            <%= f.datetime_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+              <%= f.datetime_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        場所
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= f.label :budged, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= f.number_field :budged, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="col-span-full">
+          <%= f.label :memo, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+              <%= f.text_area :memo, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        アイコン
+      </div>
+
     </div>
-    <div class="mt-6 flex items-center justify-end gap-x-6">
-      <%= f.submit nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-    </div>
-  <% end %>
+  </div>
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= f.submit nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  </div>
+<% end %>

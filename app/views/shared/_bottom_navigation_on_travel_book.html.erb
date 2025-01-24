@@ -1,9 +1,9 @@
 <div class="btm-nav">
-  <%= link_to travel_book_path(travel_book.id), class: "#{add_active_class(travel_book_path)}" do %>
+  <%= link_to travel_book_path(@travel_book.id), class: "#{add_active_class(travel_book_path(@travel_book))}" do %>
     <i class="fa-regular fa-map"></i>
     <span class="btm-nav-label">しおり情報</span>
   <% end %>
-  <%= link_to travel_book_schedules_path(@travel_book) do %>
+  <%= link_to travel_book_schedules_path(@travel_book), class: "#{add_active_class(travel_book_schedules_path(@travel_book))}" do %>
     <i class="fa-regular fa-clock"></i>
     <span class="btm-nav-label">スケジュール</span>
   <% end %>
