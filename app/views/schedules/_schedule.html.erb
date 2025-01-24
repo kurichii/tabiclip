@@ -1,9 +1,12 @@
-<div class="flex gap-3">
-  <div class="flex">
-    <%= @schedules.start_date %>
-    ~<%= @schedules.end_date %>
-  </div>
+<div class="flex gap-4">
   <div>
-    <%= @schedules.title %>
+    <p><%= fmt_datetime(schedule.start_date) %></p>
+    <p>~ <%= fmt_datetime(schedule.end_date) %></p>
+  </div>
+  <div class="flex items-center">
+    <i class="fa-solid fa-train-subway"></i>
+  </div>
+  <div class="flex items-center">
+      <%= schedule.title %>
   </div>
 </div>
