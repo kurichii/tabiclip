@@ -22,7 +22,7 @@
     <p class="text-right">合計金額：<%= sum_budgets(@schedules) %>円</p>
 
   <% else %>
-    <%= link_to new_travel_book_schedule_path	do %>
+    <%= link_to new_travel_book_schedule_path(@travel_book) do %>
       スケジュールを登録のリンク
     <% end %>
   <% end %>
