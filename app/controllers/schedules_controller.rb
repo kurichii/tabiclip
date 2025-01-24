@@ -1,6 +1,8 @@
 class SchedulesController < ApplicationController
+  before_action :set_schedule, only: %i[ index new create ]
+  before_action :set_schedule, only: %i[ show edit update ]
+
   def index
-    @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedules = @travel_book.schedules.sort_by(&:start_date)
   end
 
@@ -19,17 +21,11 @@ class SchedulesController < ApplicationController
     end
   end
 
-  def show
-    @schedule = Schedule.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @schedule = Schedule.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @schedule = Schedule.find(params[:id])
-
     if @schedule.update(schedule_param)
       redirect_to schedule_path(@schedule), notice: "登録成功"
     else
@@ -39,6 +35,14 @@ class SchedulesController < ApplicationController
   end
 
   private
+
+  def set_travel_book
+    @travel_book = current_user.travel_books.find(params[:travel_book_id])
+  end
+
+  def set_schedule
+    @schedule = Schedule.find(params[:id])
+  end
 
   def schedule_param
     params.require(:schedule).permit(:title, :budged, :memo, :start_date, :end_date)
