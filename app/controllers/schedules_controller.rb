@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: %i[ index new create ]
+  before_action :set_travel_book, only: %i[ index new create ]
   before_action :set_schedule, only: %i[ show edit update ]
 
   def index
