@@ -25,7 +25,9 @@ class SchedulesController < ApplicationController
     @travel_book = @schedule.travel_book
   end
 
-  def edit; end
+  def edit
+    @travel_book = @schedule.travel_book
+  end
 
   def update
     if @schedule.update(schedule_param)
