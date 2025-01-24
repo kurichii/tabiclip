@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :set_travel_book, only: %i[ index new create ]
-  before_action :set_schedule, only: %i[ show edit update ]
+  before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
     @schedules = @travel_book.schedules.sort_by(&:start_date)
@@ -21,7 +21,9 @@ class SchedulesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @travel_book = @schedule.travel_book
+  end
 
   def edit; end
 
@@ -32,6 +34,12 @@ class SchedulesController < ApplicationController
       flash.now[:alert] = "編集失敗"
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @schedule.destroy!
+    @travel_book = @schedule.travel_book
+    redirect_to travel_book_schedules_path(@travel_book), notice: "削除成功"
   end
 
   private
