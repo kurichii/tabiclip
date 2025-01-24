@@ -18,13 +18,14 @@
       <% end %>
       </div>
     <% end %>
+
+    <p class="text-right">合計金額：<%= sum_budgets(@schedules) %>円</p>
+
   <% else %>
     <%= link_to new_travel_book_schedule_path	do %>
       スケジュールを登録のリンク
     <% end %>
   <% end %>
-
-  <p class="text-right">合計金額：<%= sum_budgets(@schedules) %>円</p>
 
   <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
     追加
