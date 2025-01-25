@@ -1,7 +1,10 @@
 <div class="bg-white rounded-lg shadow-md p-6 m-6">
-  <%= link_to travel_book_schedules_path(@travel_book) do %>
-    <i class="fa-solid fa-chevron-left"></i>
-  <% end %>
+  <div class="flex items-center justify-between">
+    <%= link_to schedule_path(@schedule) do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
+    <h1 class="text-center flex-1 text-lg font-bold">スケジュールを編集</h1>
+  </div>
 
   <%= render "form", schedule: @schedule %>
 </div>
