@@ -1,5 +1,5 @@
 <%= form_with model: schedule, url: schedule.new_record? ? travel_book_schedules_path(travel_book) : schedule_path(schedule) do |f| %>
-
+  <%= render "shared/error_messages", object: f.object %>
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
 
