@@ -3,12 +3,16 @@ class SchedulesController < ApplicationController
   before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
-    @schedules = @travel_book.schedules.sort_by(&:start_date)
+    @schedules = @travel_book.sorted_schedules
   end
 
   def new
     @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedule = @travel_book.schedules.new
+    # Scheduleのstart_dateの初期値を設定
+    if @travel_book.start_date.present?
+      @schedule.start_date = @travel_book.start_date.to_datetime
+    end
   end
 
   def create

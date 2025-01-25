@@ -1,96 +1,93 @@
-  <%= form_with model: @travel_book do |f| %>
-    <div class="space-y-12">
-      <div class="border-b border-gray-900/10 pb-12">
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-4">
-            <%= f.label :title, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-              <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                <%= f.text_field :title, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
-              </div>
+<%= form_with model: @travel_book do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="space-y-5">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-4">
+          <%= f.label :title, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+            <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+              <%= f.text_field :title, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
             </div>
           </div>
         </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="col-span-full">
-            <%= f.label :description, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-                <%= f.text_area :description, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-              <%= f.date_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-
-          <div class="sm:col-span-3">
-            <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2">
-                <%= f.date_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :area_id, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: "選択してください" }, { class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" } %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :traveler_type_id, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= f.collection_select :traveler_type_id, TravelerType.all, :id, :name,{ prompt: "選択してください" }, { class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" } %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= f.label :travel_book_image, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= f.file_field :travel_book_image, accept: "image/*", class: "" %>
-              <%= f.hidden_field :travel_book_image_cache %>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-2">
-          <% if @travel_book.persisted? %>
-            <% if @travel_book.travel_book_image %>
-              <%= link_to "destroy", delete_image_travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-ghost rounded-btn" %>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="mt-6 space-y-1">
-            <p class="block text-sm/6 font-medium text-gray-900">tet</p>
-            <div class="flex items-center gap-x-3">
-              <%= f.radio_button :is_public, true, id: "is_public_true", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
-              <%= f.label :is_public, "公開", for: "is_public_true" %>
-            </div>
-            <div class="flex items-center gap-x-3">
-              <%= f.radio_button :is_public, false, id: "is_public_false", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
-              <%= f.label :is_public, "非公開", for: "is_public_false" %>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </div>
-    <div class="mt-6 flex items-center justify-end gap-x-6">
-      <%= f.submit nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-    </div>
-  <% end %>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="col-span-full">
+          <%= f.label :description, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+              <%= f.text_area :description, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+            <%= f.date_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+              <%= f.date_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= f.label :area_id, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: "選択してください" }, { class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= f.label :traveler_type_id, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= f.collection_select :traveler_type_id, TravelerType.all, :id, :name,{ prompt: "選択してください" }, { class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= f.label :travel_book_image, class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= f.file_field :travel_book_image, accept: "image/*", class: "" %>
+            <%= f.hidden_field :travel_book_image_cache %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <% if @travel_book.persisted? %>
+          <% if @travel_book.travel_book_image %>
+            <%= link_to "destroy", delete_image_travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-ghost rounded-btn" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="space-y-1">
+          <p class="block text-sm/6 font-medium text-gray-900">公開設定</p>
+          <div class="flex items-center gap-x-3">
+            <%= f.radio_button :is_public, true, id: "is_public_true", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
+            <%= f.label :is_public, "公開", for: "is_public_true" %>
+          </div>
+          <div class="flex items-center gap-x-3">
+            <%= f.radio_button :is_public, false, id: "is_public_false", class: "relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden" %>
+            <%= f.label :is_public, "非公開", for: "is_public_false" %>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= f.submit nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  </div>
+<% end %>

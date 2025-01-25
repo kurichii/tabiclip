@@ -4,44 +4,42 @@
   </figure>
 
   <div class="card-body">
-    <!-- タイトル -->
-    <h2 class="card-title"><%= @travel_book.title %></h2>
+    <div class="card-actions items-center justify-between">
+      <h2 class="card-title"><%= @travel_book.title %></h2>
+      <div>
+        <% if @travel_book.owned_by_user?(current_user) %>
+          <div class="justify-end">
+            <%= link_to edit_travel_book_path(@travel_book) do %>
+              <i class="fa-solid fa-pen"></i>
+            <% end %>
+            <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-    <!-- 説明 -->
     <p><%= travel_book_desctiption(@travel_book) %></p>
 
-    <!-- 期間 -->
     <div class="mb-6">
       <p>期間</p>
       <p class="text-gray-700"><%= travel_book_duration(@travel_book)%></p>
     </div>
 
-    <!-- エリア -->
     <div class="mb-6">
       <p>エリア</p>
       <p class="text-gray-700"><%= area_name(@travel_book) %></p>
     </div>
 
-    <!-- 旅行タイプ -->
     <div class="mb-6">
       <p>旅行タイプ</p>
       <p class="text-gray-700"><%= traveler_type_name(@travel_book) %></p>
     </div>
 
-    <!-- 公開設定 -->
     <div class="mb-6">
       <p>公開設定</p>
       <p class="text-gray-700"><%= travel_book_is_public(@travel_book) %></p>
     </div>
-
-    <% if @travel_book.owned_by_user?(current_user) %>
-      <div class="card-actions justify-end">
-        <!-- 編集ボタン -->
-        <%= link_to "edit", edit_travel_book_path(@travel_book), class: "btn btn-ghost rounded-btn" %>
-        <!-- 削除ボタン -->
-        <%= link_to "destroy", travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-ghost rounded-btn" %>
-      </div>
-    <% end %>
-
   </div>
 </div>
