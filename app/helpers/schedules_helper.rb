@@ -3,7 +3,37 @@ module SchedulesHelper
     schedules.sum { | schedule | schedule.budged.to_i }
   end
 
+  def fmt_schedule_date(date)
+    return "" if date.nil?
+    date.strftime("%Y年%-m月%-d日(%a) %-H:%M")
+  end
+
   def fmt_datetime(date)
-    date.strftime("%H:%M") || "未定"
+    return "" if date.nil?
+    date.strftime("%-H:%M")
+  end
+
+  def fmt_schedule_duration(schedule)
+    if schedule.start_date && schedule.end_date
+      "#{fmt_schedule_date(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}"
+    elsif schedule.start_date || schedule.end_date
+      "#{fmt_schedule_date(schedule.start_date)} - #{fmt_schedule_date(schedule.end_date)}".strip
+    else
+      "未定"
+    end
+  end
+
+  def fmt_schedule_datetime_duration(schedule)
+    if schedule.start_date && schedule.end_date
+      "#{fmt_datetime(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}"
+    elsif schedule.start_date || schedule.end_date
+      "#{fmt_datetime(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}".strip
+    else
+      "未定"
+    end
+  end
+
+  def display_memo(date)
+    date == "" ? "メモはありません" : date
   end
 end

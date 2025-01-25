@@ -1,38 +1,42 @@
 <div class="bg-white rounded-lg shadow-md p-6 m-6">
-  <%= link_to travel_book_schedules_path(@travel_book) do %>
-    <i class="fa-solid fa-chevron-left"></i>
-  <% end %>
 
-  <div class="flex flex-col items-center">
-    <h1 class="mt-2 text-center text-lg font-bold"><%= @schedule.title %></h2>
-  </div>
-
-  <div class="mt-5">
-    <p>日時</p>
-    <p><%= @schedule.start_date.strftime("%Y年%-m月%-d日(%a) %H:%M") %> ~ <%= @schedule.end_date.strftime("%Y年%-m月%-d日(%a) %H:%M") %></p>
-  </div>
-
-  <div class="mt-5">
-    <p>場所</p>
-    <p>これから設定</p>
-  </div>
-
-  <div class="mt-5">
-    <p>予算</p>
-    <p><%= @schedule.budged %>円</p>
-  </div>
-
-  <div class="mt-5">
-    <p>メモ</p>
-    <p><%= @schedule.memo.blank?  ? "未設定" : @schedule.memo %></p>
-  </div>
-
-  <div class="mt-10 text-right">
-    <%= link_to edit_schedule_path(@schedule), class: "btn rounded-btn" do %>
-      <i class="fa-solid fa-pen"></i>
+  <div class="flex items-center justify-between">
+    <%= link_to travel_book_schedules_path(@travel_book) do %>
+      <i class="fa-solid fa-chevron-left"></i>
     <% end %>
-    <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn rounded-btn" do %>
-      <i class="fa-solid fa-trash-can"></i>
-    <% end %>
+    <div>
+      <%= link_to edit_schedule_path(@schedule) do %>
+        <i class="fa-solid fa-pen"></i>
+      <% end %>
+      <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mx-10 mb-5">
+    <div class="mt-5">
+      <h2 class="flex-1 text-lg font-bold"><%= @schedule.title %></h2>
+    </div>
+
+    <div class="mt-5 flex items-center">
+      <i class="fa-regular fa-clock"></i>
+      <p class="ml-2"><%= fmt_schedule_duration(@schedule) %></p>
+    </div>
+
+    <div class="mt-5 flex items-center">
+      <i class="fa-solid fa-location-dot"></i>
+      <p class="ml-2">場所</p>
+    </div>
+
+    <div class="mt-5 flex items-center">
+      <i class="fa-solid fa-wallet"></i>
+      <p class="ml-2"><%= @schedule.budged %>円</p>
+    </div>
+
+    <div class="mt-5 flex items-start">
+      <i class="fa-solid fa-file-pen mt-1"></i>
+      <p class="ml-2"><%= display_memo(@schedule.memo) %></p>
+    </div>
   </div>
 </div>
