@@ -19,6 +19,10 @@ class TravelBook < ApplicationRecord
     users.exists?(id: user.id)
   end
 
+  def sorted_schedules
+    schedules.sort_by { |schedule| schedule.start_date || DateTime.new(0) }
+  end
+
   private
 
   def end_date_after_start_date

@@ -3,7 +3,7 @@ class SchedulesController < ApplicationController
   before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
-    @schedules = @travel_book.schedules.sort_by(&:start_date)
+    @schedules = @travel_book.sorted_schedules
   end
 
   def new
