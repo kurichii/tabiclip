@@ -9,6 +9,10 @@ class SchedulesController < ApplicationController
   def new
     @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedule = @travel_book.schedules.new
+    # Scheduleのstart_dateの初期値を設定
+    if @travel_book.start_date.present?
+      @schedule.start_date = @travel_book.start_date.to_datetime
+    end
   end
 
   def create
