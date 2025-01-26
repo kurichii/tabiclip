@@ -26,7 +26,12 @@
 
     <div class="mt-5 flex items-center">
       <i class="fa-solid fa-location-dot"></i>
-      <p class="ml-2">場所</p>
+      <div>
+        <p class="ml-2"><%= @schedule.spot.name %></p>
+        <p class="ml-2"><%= desplay_value(@schedule.spot.telephone) %></p>
+        <p class="ml-2"><%= desplay_value(@schedule.spot.post_code) %></p>
+        <p class="ml-2"><%= desplay_value(@schedule.spot.address) %></p>
+      </div>
     </div>
 
     <div class="mt-5 flex items-center">
