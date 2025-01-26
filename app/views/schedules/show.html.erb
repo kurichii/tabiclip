@@ -26,11 +26,15 @@
 
     <div class="mt-5 flex items-center">
       <i class="fa-solid fa-location-dot"></i>
-      <div>
-        <p class="ml-2"><%= @schedule.spot.name %></p>
-        <p class="ml-2"><%= desplay_value(@schedule.spot.telephone) %></p>
-        <p class="ml-2"><%= desplay_value(@schedule.spot.post_code) %></p>
-        <p class="ml-2"><%= desplay_value(@schedule.spot.address) %></p>
+      <div class="ml-2">
+        <% if @schedule.spot.present? %>
+          <p><%= desplay_value(@schedule.spot.name) %></p>
+          <p><%= desplay_value(@schedule.spot.telephone) %></p>
+          <p><%= desplay_value(@schedule.spot.post_code) %></p>
+          <p><%= desplay_value(@schedule.spot.address) %></p>
+        <% else %>
+          <p>場所は登録されていません</p>
+        <% end %>
       </div>
     </div>
 
