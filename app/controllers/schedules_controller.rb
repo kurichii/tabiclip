@@ -76,6 +76,6 @@ class SchedulesController < ApplicationController
 
   def schedule_param
     params.require(:schedule).permit(:title, :budged, :memo, :start_date, :end_date,
-    spot_attributes: [:name, :telephone, :post_code, :address, :_destroy])
+    spot_attributes: [ :name, :telephone, :post_code, :address, :_destroy ])
   end
 end
