@@ -28,9 +28,44 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        場所
-      </div>
+      <%# 場所情報の登録フォーム %>
+      <%= f.fields_for :spot do |spot_form| %>
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+            <%= spot_form.label :name, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2 grid grid-cols-1">
+              <%= spot_form.text_field :name, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+            <%= spot_form.label :telephone, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2 grid grid-cols-1">
+              <%= spot_form.text_field :telephone, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+            <%= spot_form.label :post_code, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2 grid grid-cols-1">
+              <%= spot_form.text_field :post_code, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+            <%= spot_form.label :address, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2 grid grid-cols-1">
+              <%= spot_form.text_field :address, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
       <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-3">
