@@ -1,101 +1,49 @@
 <%= form_with model: schedule, url: schedule.new_record? ? travel_book_schedules_path(travel_book) : schedule_path(schedule) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
-  <div class="space-y-5">
-      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-          <%= f.label :title, class: "block text-sm/6 font-medium text-gray-900" %>
-          <div class="mt-2">
-            <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <%= f.text_field :title, class: "block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
+    <%= f.label :title, class: "" %>
+    <%= f.text_field :title, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
+
+    <%= f.label :start_date, class: "" %>
+    <%= f.datetime_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
+
+    <%= f.label :end_date, class: "" %>
+    <%= f.datetime_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
+
+    <%# 場所情報の登録フォーム %>
+    <div class="flex justify-between">
+      <div>
+        <%= f.label :spot_id, class: "" %>
       </div>
-
-      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
-          <%= f.label :start_date, class: "block text-sm/6 font-medium text-gray-900" %>
-          <div class="mt-2">
-            <%= f.datetime_field :start_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-          </div>
-        </div>
-
-        <div class="sm:col-span-3">
-          <%= f.label :end_date, class: "block text-sm/6 font-medium text-gray-900" %>
-          <div class="mt-2">
-              <%= f.datetime_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-          </div>
-        </div>
+      <div>
+          <% if @schedule.persisted? && @schedule.spot.present? %>
+            <%= link_to "削除", delete_spot_schedule_path(@schedule),
+                        data:{ turbo_method: :delete, turbo_confirm: "場所情報を削除しますか?" } %>
+          <% end %>
       </div>
+    </div>
+    <%= f.fields_for :spot do |spot_form| %>
+    <div class="ml-2">
+      <%= spot_form.label :name, class: "" %>
+      <%= spot_form.text_field :name, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
-      <%# 場所情報の登録フォーム %>
-      <%= f.fields_for :spot do |spot_form| %>
-      <div class="text-right">
-        <% if @schedule.persisted? && @schedule.spot.present? %>
-          <%= link_to "削除", delete_spot_schedule_path(@schedule),
-                      data:{ turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-        <% end %>
-      </div>
-        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= spot_form.label :name, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= spot_form.text_field :name, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
+      <%= spot_form.label :telephone, class: "" %>
+      <%= spot_form.text_field :telephone, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
-        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= spot_form.label :telephone, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= spot_form.text_field :telephone, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
+      <%= spot_form.label :post_code, class: "" %>
+      <%= spot_form.text_field :post_code, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
-        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= spot_form.label :post_code, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= spot_form.text_field :post_code, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
+      <%= spot_form.label :address, class: "" %>
+      <%= spot_form.text_field :address, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
+    </div>
+    <% end %>
 
-        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <%= spot_form.label :address, class: "block text-sm/6 font-medium text-gray-900" %>
-            <div class="mt-2 grid grid-cols-1">
-              <%= spot_form.text_field :address, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+    <%= f.label :budged, class: "" %>
+    <%= f.number_field :budged, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
-      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
-          <%= f.label :budged, class: "block text-sm/6 font-medium text-gray-900" %>
-          <div class="mt-2 grid grid-cols-1">
-            <%= f.number_field :budged, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-          </div>
-        </div>
-      </div>
+    <%= f.label :memo, class: "" %>
+    <%= f.text_area :memo, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
-      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="col-span-full">
-          <%= f.label :memo, class: "block text-sm/6 font-medium text-gray-900" %>
-          <div class="mt-2">
-              <%= f.text_area :memo, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" %>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        アイコン
-      </div>
-  </div>
-  <div class="mt-6 flex items-center justify-end gap-x-6">
+  <div class="flex justify-end mt-5">
     <%= f.submit nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
   </div>
 <% end %>
