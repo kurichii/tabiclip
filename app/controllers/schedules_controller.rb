@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :set_travel_book, only: %i[ index new create ]
-  before_action :set_schedule, only: %i[ show edit update destroy delete_spot ]
+  before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
     @schedules = @travel_book.sorted_schedules
@@ -9,11 +9,9 @@ class SchedulesController < ApplicationController
   def new
     @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedule = @travel_book.schedules.new
-    @spot = @schedule.build_spot
+    @spot = @schedule.build_spot unless @schedule.spot
     # Scheduleのstart_dateの初期値を設定
-    if @travel_book.start_date.present?
-      @schedule.start_date = @travel_book.start_date.to_datetime
-    end
+    @schedule.start_date = @travel_book.start_date.to_datetime if @travel_book.start_date.present?
   end
 
   def create
@@ -45,23 +43,9 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
-    @schedule.destroy!
     @travel_book = @schedule.travel_book
-    @schedule.spot.destroy
+    @schedule.destroy!
     redirect_to travel_book_schedules_path(@travel_book), notice: "削除成功"
-  end
-
-  def delete_spot
-    if @schedule.spot
-      if @schedule.spot.destroy
-        flash[:notice] = "spotを削除しました"
-      else
-        flash[:alert] = "spotを削除できませんでした"
-      end
-    else
-      flash[:alert] = "spotが見つかりません"
-    end
-    redirect_to edit_schedule_path(@schedule)
   end
 
   private
@@ -76,6 +60,6 @@ class SchedulesController < ApplicationController
 
   def schedule_param
     params.require(:schedule).permit(:title, :budged, :memo, :start_date, :end_date,
-    spot_attributes: [ :name, :telephone, :post_code, :address, :_destroy ])
+    spot_attributes: [ :id, :name, :telephone, :post_code, :address, :_destroy ])
   end
 end

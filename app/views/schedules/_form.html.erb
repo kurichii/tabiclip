@@ -10,20 +10,14 @@
     <%= f.datetime_field :end_date, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
     <%# 場所情報の登録フォーム %>
-    <div class="flex justify-between">
-      <div>
-        <%= f.label :spot_id, class: "" %>
-      </div>
-      <div>
-          <% if @schedule.persisted? && @schedule.spot.present? %>
-            <%= link_to "削除", delete_spot_schedule_path(@schedule),
-                        data:{ turbo_method: :delete, turbo_confirm: "場所情報を削除しますか?" } %>
-          <% end %>
-      </div>
-    </div>
+    <%= f.label :spot_id, class: "" %>
     <%= f.fields_for :spot do |spot_form| %>
     <div class="ml-2">
-      <%= spot_form.label :name, class: "" %>
+    <% if @schedule.spot&.persisted? %>
+      <%= spot_form.label :_destroy, "削除" %>
+      <%= spot_form.check_box :_destroy %>
+    <% end %>
+      <%= spot_form.label :name, class: "block" %>
       <%= spot_form.text_field :name, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" %>
 
       <%= spot_form.label :telephone, class: "" %>

@@ -7,9 +7,7 @@ Rails.application.routes.draw do
   get "home/index"
   resources :travel_books, only: %i[ index new create show edit update destroy ] do
     delete "delete_image", on: :member
-    resources :schedules, shallow: true do
-      delete "delete_spot", on: :member
-    end
+    resources :schedules, shallow: true
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
