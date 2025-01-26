@@ -30,6 +30,12 @@
 
       <%# 場所情報の登録フォーム %>
       <%= f.fields_for :spot do |spot_form| %>
+      <div class="text-right">
+        <% if @schedule.persisted? && @schedule.spot.present? %>
+          <%= link_to "削除", delete_spot_schedule_path(@schedule),
+                      data:{ turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
         <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div class="sm:col-span-3">
             <%= spot_form.label :name, class: "block text-sm/6 font-medium text-gray-900" %>

@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :set_travel_book, only: %i[ index new create ]
-  before_action :set_schedule, only: %i[ show edit update destroy ]
+  before_action :set_schedule, only: %i[ show edit update destroy delete_spot ]
 
   def index
     @schedules = @travel_book.sorted_schedules
@@ -32,6 +32,7 @@ class SchedulesController < ApplicationController
 
   def edit
     @travel_book = @schedule.travel_book
+    @spot = @schedule.build_spot unless @schedule.spot
   end
 
   def update
@@ -48,6 +49,19 @@ class SchedulesController < ApplicationController
     @travel_book = @schedule.travel_book
     @schedule.spot.destroy
     redirect_to travel_book_schedules_path(@travel_book), notice: "削除成功"
+  end
+
+  def delete_spot
+    if @schedule.spot
+      if @schedule.spot.destroy
+        flash[:notice] = "spotを削除しました"
+      else
+        flash[:alert] = "spotを削除できませんでした"
+      end
+    else
+      flash[:alert] = "spotが見つかりません"
+    end
+    redirect_to edit_schedule_path(@schedule)
   end
 
   private
