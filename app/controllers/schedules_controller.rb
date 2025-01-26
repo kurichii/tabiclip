@@ -9,10 +9,9 @@ class SchedulesController < ApplicationController
   def new
     @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedule = @travel_book.schedules.new
+    @spot = @schedule.build_spot unless @schedule.spot
     # Scheduleのstart_dateの初期値を設定
-    if @travel_book.start_date.present?
-      @schedule.start_date = @travel_book.start_date.to_datetime
-    end
+    @schedule.start_date = @travel_book.start_date.to_datetime if @travel_book.start_date.present?
   end
 
   def create
@@ -31,6 +30,7 @@ class SchedulesController < ApplicationController
 
   def edit
     @travel_book = @schedule.travel_book
+    @spot = @schedule.build_spot unless @schedule.spot
   end
 
   def update
@@ -43,8 +43,8 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
-    @schedule.destroy!
     @travel_book = @schedule.travel_book
+    @schedule.destroy!
     redirect_to travel_book_schedules_path(@travel_book), notice: "削除成功"
   end
 
@@ -59,6 +59,7 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_param
-    params.require(:schedule).permit(:title, :budged, :memo, :start_date, :end_date)
+    params.require(:schedule).permit(:title, :budged, :memo, :start_date, :end_date,
+    spot_attributes: [ :id, :name, :telephone, :post_code, :address, :_destroy ])
   end
 end

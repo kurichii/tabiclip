@@ -33,7 +33,11 @@ module SchedulesHelper
     end
   end
 
-  def display_memo(date)
-    date == "" ? "メモはありません" : date
+  def desplay_value(data)
+    data.presence || ""
+  end
+
+  def display_memo(data)
+    data == "" ? "メモはありません" : data
   end
 end
