@@ -38,6 +38,6 @@ module SchedulesHelper
   end
 
   def display_memo(data)
-    data == "" ? "メモはありません" : date
+    data == "" ? "メモはありません" : data
   end
 end
