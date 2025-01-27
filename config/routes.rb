@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :travel_books, only: %i[ index new create show edit update destroy ] do
     delete "delete_image", on: :member
     resources :schedules, shallow: true
+    resources :check_lists, shallow: true
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
