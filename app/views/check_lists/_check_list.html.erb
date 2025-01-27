@@ -1,4 +1,6 @@
-<div class="bg-base-100 flex items-center mt-2">
-  <i class="fa-solid fa-square-check"></i>
-  <p class="ml-2"><%= check_list.title %></p>
-</div>
+<%= link_to check_list_path(check_list), class: "block" do %>
+  <div class="bg-base-100 flex items-center mt-2">
+    <i class="fa-solid fa-square-check"></i>
+    <p class="ml-2"><%= check_list.title %></p>
+  </div>
+<% end %>
