@@ -7,7 +7,6 @@ class SchedulesController < ApplicationController
   end
 
   def new
-    @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedule = @travel_book.schedules.new
     @spot = @schedule.build_spot unless @schedule.spot
     # Scheduleのstart_dateの初期値を設定
@@ -15,7 +14,6 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @travel_book = current_user.travel_books.find(params[:travel_book_id])
     @schedule = @travel_book.schedules.build(schedule_param)
     if @schedule.save
       redirect_to travel_book_schedules_path(@travel_book)

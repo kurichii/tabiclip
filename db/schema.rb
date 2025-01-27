@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_26_014044) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_041147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_26_014044) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "check_lists", force: :cascade do |t|
+    t.bigint "travel_book_id", null: false
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["travel_book_id"], name: "index_check_lists_on_travel_book_id"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -90,6 +98,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_26_014044) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "check_lists", "travel_books"
   add_foreign_key "schedules", "travel_books"
   add_foreign_key "spots", "schedules"
   add_foreign_key "travel_books", "areas"

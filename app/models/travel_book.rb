@@ -7,6 +7,7 @@ class TravelBook < ApplicationRecord
   has_many :user_travel_books, dependent: :destroy
   has_many :users, through: :user_travel_books
   has_many :schedules, dependent: :destroy
+  has_many :check_lists, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 65_535 }
