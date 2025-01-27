@@ -1,0 +1,6 @@
+<%= form_with model: check_list, url: check_list.new_record? ? travel_book_check_lists_path(travel_book) : check_list_path(check_list) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.submit nil %>
+<% end %>
