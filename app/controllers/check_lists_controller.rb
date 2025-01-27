@@ -1,6 +1,6 @@
 class CheckListsController < ApplicationController
   before_action :set_travel_book, only: %i[ index new create ]
-  before_action :set_check_list, only: %i[ show edit update ]
+  before_action :set_check_list, only: %i[ show edit update destroy ]
 
   def index
     @check_lists = @travel_book.check_lists
@@ -34,6 +34,12 @@ class CheckListsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @travel_book = @check_list.travel_book
+    @check_list.destroy!
+    redirect_to travel_book_check_lists_path(@travel_book)
   end
 
   private
