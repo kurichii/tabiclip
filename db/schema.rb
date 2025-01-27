@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_27_041147) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_092638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_041147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["travel_book_id"], name: "index_check_lists_on_travel_book_id"
+  end
+
+  create_table "list_items", force: :cascade do |t|
+    t.bigint "check_list_id", null: false
+    t.string "title", null: false
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["check_list_id"], name: "index_list_items_on_check_list_id"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -99,6 +108,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_041147) do
   end
 
   add_foreign_key "check_lists", "travel_books"
+  add_foreign_key "list_items", "check_lists"
   add_foreign_key "schedules", "travel_books"
   add_foreign_key "spots", "schedules"
   add_foreign_key "travel_books", "areas"
