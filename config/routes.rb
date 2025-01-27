@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
   get "users/profile" => "users#show"
   get "home/index"
-  resources :travel_books, only: %i[ index new create show edit update destroy ] do
+  resources :travel_books do
     delete "delete_image", on: :member
     resources :schedules, shallow: true
     resources :check_lists, shallow: true

@@ -1,7 +1,10 @@
 <div class="p-6 m-6">
-  <% if @check_list.present? %>
-    <%= render "check_list" %>
+  <% if @check_lists.present? %>
+      <%= render @check_lists %>
   <% else %>
     チェックリストはありません
   <% end %>
 </div>
+<%= link_to new_travel_book_check_list_path, class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
+  新規作成
+<% end %>
