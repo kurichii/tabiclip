@@ -20,6 +20,25 @@ class CheckListsController < ApplicationController
     end
   end
 
+  def show
+    @check_list = CheckList.find(params[:id])
+    @travel_book = @check_list.travel_book
+  end
+
+  def edit
+    @check_list = CheckList.find(params[:id])
+    @travel_book = @check_list.travel_book
+  end
+
+  def update
+    @check_list = CheckList.find(params[:id])
+    if @check_list.update(check_list_param)
+      redirect_to check_list_path(@check_list)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def check_list_param
