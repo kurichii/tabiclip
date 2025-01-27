@@ -22,6 +22,7 @@ class CheckListsController < ApplicationController
 
   def show
     @travel_book = @check_list.travel_book
+    @list_items = @check_list.list_items
   end
 
   def edit
