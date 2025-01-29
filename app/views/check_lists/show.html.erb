@@ -24,4 +24,7 @@
   <% else %>
     チェックリストは登録されていません
   <% end %>
+
+  <button><i class="fa-solid fa-circle-plus"></i></button>
+  <%= render "list_items/form", check_list: @check_list, list_item: @list_item %>
 </div>

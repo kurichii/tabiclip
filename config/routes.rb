@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   resources :travel_books do
     delete "delete_image", on: :member
     resources :schedules, shallow: true
-    resources :check_lists, shallow: true
+    resources :check_lists, shallow: true do
+      resources :list_items, only: %i[ create ]
+    end
   end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
