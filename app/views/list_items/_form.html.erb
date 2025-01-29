@@ -1,0 +1,9 @@
+  <%= form_with model: list_item, url: check_list_list_items_path(@check_list) do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.submit 'Add Item' %>
+    </div>
+  <% end %>
