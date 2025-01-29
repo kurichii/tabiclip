@@ -1,5 +1,4 @@
 class ListItemsController < ApplicationController
-
   def create
     @check_list = CheckList.find(params[:check_list_id])
     @list_item = @check_list.list_items.build(list_item_param)
