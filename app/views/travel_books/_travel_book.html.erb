@@ -9,8 +9,8 @@
       <p><%= traveler_type_name(travel_book) %></p>
       <div class="flex items-center justify-center gap-2">
         <div class="avatar">
-          <div class="w-6 md:w-7 rounded-full">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+          <div class="w-8 rounded-full shadow-lg border border-gray-200">
+            <%= image_tag(travel_book.creator.icon_image? ? travel_book.creator.icon_image_url : "default_icon.png") %>
           </div>
         </div>
         <p><%= travel_book.creator.name %></p>

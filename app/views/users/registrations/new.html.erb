@@ -1,34 +1,47 @@
-<h2>Sign up</h2>
+<div class="container">
+  <div class="form-container rounded-lg shadow-md bg-white p-8">
+    <h2>アカウント登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+      <div class="field mt-3">
+        <div class="flex items-center gap-1">
+          <%= f.label :name, class: "label" %>
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <%= f.text_field :name, placeholder: "アカウント名", class: "input input-bordered w-full" %>
+      </div>
+
+      <div class="field mt-3">
+        <div class="flex items-center gap-1">
+          <%= f.label :email, class: "label" %>
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "tabiclip@example.com", class: "input input-bordered w-full" %>
+      </div>
+
+      <div class="field mt-3">
+        <div class="flex items-center gap-1">
+          <%= f.label :password, class: "label" %>
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "半角英数6文字以上", class: "input input-bordered w-full" %>
+      </div>
+
+      <div class="field mt-3">
+        <div class="flex items-center gap-1">
+          <%= f.label :password_confirmation, class: "label" %>
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "半角英数6文字以上", class: "input input-bordered w-full" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "btn btn-primary w-full mt-6 mx-auto" %>
+      </div>
+    <% end %>
+
+    <%= render "users/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
