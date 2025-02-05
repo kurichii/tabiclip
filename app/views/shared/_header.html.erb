@@ -6,8 +6,8 @@
   </div>
   <div class="flex flex-1 justify-end px-2">
     <div class="flex items-stretch">
-      <%= link_to '#', class: "btn btn-ghost rounded-btn" do %>
-        Button
+      <% unless user_signed_in? %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-ghost rounded-btn" %>
       <% end %>
       <div class="dropdown dropdown-end">
         <div class="flex-none">
