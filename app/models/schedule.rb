@@ -10,7 +10,7 @@ class Schedule < ApplicationRecord
   validate :end_date_after_start_date
 
   def self.group_by_date(schedules)
-    schedules.group_by { |schedule| (schedule.start_date&.to_date || schedule.end_date&.to_date ) || "日付未定" }
+    schedules.group_by { |schedule| (schedule.start_date&.to_date || schedule.end_date&.to_date) || "日付未定" }
   end
 
   private

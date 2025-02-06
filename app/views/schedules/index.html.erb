@@ -12,7 +12,7 @@
         <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked" />
         <div role="tabpanel" class="tab-content p-10">
           <% @schedules.each do |schedule| %>
-            <%= render partial: "schedule", locals: { schedule: schedule } %>
+            <%= render partial: "schedule", locals: { schedule: schedule, all_day: true } %>
           <% end %>
           <p class="text-right my-5">合計金額：<%= total_budget(@schedules) %>円</p>
         </div>
