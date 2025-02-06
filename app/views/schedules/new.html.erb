@@ -1,10 +1,13 @@
-<div class="bg-white rounded-lg shadow-md p-6 m-6">
-  <div class="flex items-center justify-between">
-    <%= link_to travel_book_schedules_path(@travel_book) do %>
-      <i class="fa-solid fa-chevron-left"></i>
-    <% end %>
-    <h1 class="text-center flex-1 text-lg font-bold">スケジュールを追加</h1>
-  </div>
+<div class="container">
+  <div class="form-container bg-white rounded-lg shadow-md p-8">
 
-  <%= render "form", schedule: @schedule, travel_book: @travel_book %>
+    <div class="relative flex items-center justify-center">
+      <%= link_to travel_book_schedules_path(@travel_book), class: "absolute left-0" do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+      <h3>スケジュールを追加</h3>
+    </div>
+
+    <%= render "form", schedule: @schedule, travel_book: @travel_book %>
+  </div>
 </div>
