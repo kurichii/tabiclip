@@ -5,12 +5,12 @@ module SchedulesHelper
 
   def fmt_schedule_date(date)
     return "" if date.nil?
-    date.strftime("%Y年%-m月%-d日(%a) %-H:%M")
+    date.strftime("%Y/%-m/%-d/(%a) %-H:%M")
   end
 
   def fmt_simple_date(date)
     return date if date.is_a?(String)  # 文字列ならそのまま返す
-    date.strftime("%-m月%-d日(%a)")
+    date.strftime("%-m/%-d(%a)")
   end
 
   def fmt_datetime(date)

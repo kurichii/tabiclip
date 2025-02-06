@@ -20,6 +20,6 @@ module ApplicationHelper
   # 日付をフォーマットする
   def fmt_date(date)
     return "未定" if date.nil?
-    date.strftime("%Y年%-m月%-d日(%a)")
+    date.strftime("%Y/%-m/%-d(%a)")
   end
 end
