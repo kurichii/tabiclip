@@ -8,6 +8,11 @@ module SchedulesHelper
     date.strftime("%Y年%-m月%-d日(%a) %-H:%M")
   end
 
+  def fmt_simple_date(date)
+    return date if date.is_a?(String)  # 文字列ならそのまま返す
+    date.strftime("%-m月%-d日(%a)")
+  end
+
   def fmt_datetime(date)
     return "" if date.nil?
     date.strftime("%-H:%M")
@@ -39,5 +44,9 @@ module SchedulesHelper
 
   def display_memo(data)
     data == "" ? "メモはありません" : data
+  end
+
+  def total_budget(schedules)
+    schedules.sum { |schedule| schedule.budged.to_i }
   end
 end
