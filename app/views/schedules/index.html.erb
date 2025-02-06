@@ -1,26 +1,40 @@
-<div class="bg-white rounded-lg shadow-md p-6 m-6">
+<div class="container">
+  <div class="form-container bg-white rounded-lg shadow-md p-8">
 
-  <div class="flex flex-col items-center">
-    <h1 class="text-center text-lg font-bold"><%= @travel_book.title %></h1>
-    <p><%= travel_book_duration(@travel_book)%></p>
-  </div>
+    <div class="flex flex-col items-center mb-5">
+      <h3><%= @travel_book.title %></h3>
+      <p><%= travel_book_duration(@travel_book)%></p>
+    </div>
 
-  <% if @schedules.present? %>
-      <% @schedules.group_by { |schedule| schedule.start_date.nil? ? "日付未設定" : schedule.start_date.to_date }.each do |date, schedules| %>
-        <p class="mt-5 mb-2"><%= date == "日付未設定" ? "日付未設定" : fmt_date(date) %></p>
-        <div class="divide-y divide-blue-400">
-        <% schedules.each do |schedule| %>
-          <%= render partial: "schedule", locals: { schedule: schedule } %>
-        <% end %>
+    <% if @schedules.present? %>
+      <div role="tablist" class="tabs tabs-bordered">
+        <!-- 全日程タブを追加 -->
+        <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked" />
+        <div role="tabpanel" class="tab-content p-10">
+          <% @schedules.each do |schedule| %>
+            <%= render partial: "schedule", locals: { schedule: schedule, all_day: true } %>
+          <% end %>
+          <p class="text-right my-5">合計金額：<%= total_budget(@schedules) %>円</p>
         </div>
-      <% end %>
-    <p class="text-right">合計金額：<%= sum_budgets(@schedules) %>円</p>
 
-  <% else %>
-    <p>スケジュールを登録しましょう</p>
-  <% end %>
+        <!-- 各日付ごとのタブ -->
+        <% Schedule.group_by_date(@schedules).each do |date, schedules| %>
+          <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_simple_date(date) %>" />
+          <div role="tabpanel" class="tab-content p-10">
+            <% schedules.each do |schedule| %>
+              <%= render partial: "schedule", locals: { schedule: schedule } %>
+            <% end %>
+            <p class="text-right my-5">合計金額：<%= total_budget(schedules) %>円</p>
+          </div>
+        <% end %>
+      </div>
 
-  <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
-    追加
-  <% end %>
+    <% else %>
+      <p class="text-center my-10">スケジュールを登録しましょう</p>
+    <% end %>
+
+    <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
+      スケジュールを追加
+    <% end %>
+  </div>
 </div>
