@@ -7,7 +7,7 @@ class SchedulesController < ApplicationController
   end
 
   def new
-    @schedule_form = ScheduleForm.new
+    @schedule_form = ScheduleForm.new(travel_book:@travel_book)
   end
 
   def create

@@ -29,11 +29,13 @@ class ScheduleForm
   # ScheduleFormオブジェクトがpersisted?メソッドを呼ぶと、Scheduleオブジェクトのpersisted?メソッドが呼び出される
   delegate :persisted?, to: :schedule
 
-  def initialize(attributes = nil, schedule: Schedule.new, spot: nil)
+  def initialize(attributes = nil, schedule: Schedule.new, spot: nil,travel_book:nil)
     @schedule = schedule
     @spot = spot || @schedule.build_spot
+    @travel_book = travel_book
 
-    attributes ||= default_attributes
+
+    attributes ||= default_attributes(@travel_book)
     super(attributes)
   end
 
@@ -79,13 +81,13 @@ class ScheduleForm
 
   attr_reader :schedule, :spot
 
-  def default_attributes
+  def default_attributes(travel_book)
     {
       title: schedule.title,
       budged: schedule.budged,
       memo: schedule.memo,
-      start_date: schedule.start_date,
-      end_date: schedule.end_date,
+      start_date: schedule.start_date || travel_book&.start_date&.to_datetime || nil,
+      end_date: schedule.start_date || travel_book&.start_date&.to_datetime || nil,
       name: spot.name,
       telephone: spot.telephone,
       post_code: spot.post_code,
