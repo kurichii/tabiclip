@@ -5,11 +5,13 @@
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
     <div>
-      <%= link_to edit_schedule_path(@schedule) do %>
-        <i class="fa-solid fa-pen"></i>
-      <% end %>
-      <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
-        <i class="fa-solid fa-trash-can"></i>
+      <% if @travel_book.owned_by_user?(current_user) %>
+        <%= link_to edit_schedule_path(@schedule) do %>
+          <i class="fa-solid fa-pen"></i>
+        <% end %>
+        <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
