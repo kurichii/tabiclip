@@ -7,32 +7,29 @@ class SchedulesController < ApplicationController
   end
 
   def new
-    @schedule = @travel_book.schedules.new
-    @spot = @schedule.build_spot unless @schedule.spot
-    # Scheduleのstart_dateの初期値を設定
-    @schedule.start_date = @travel_book.start_date.to_datetime if @travel_book.start_date.present?
+    @schedule_form = ScheduleForm.new
   end
 
   def create
-    @schedule = @travel_book.schedules.build(schedule_param)
-    if @schedule.save
+    @schedule_form = ScheduleForm.new(schedule_params)
+    if @schedule_form.save
       redirect_to travel_book_schedules_path(@travel_book)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-    @travel_book = @schedule.travel_book
-  end
+  def show; end
 
   def edit
-    @travel_book = @schedule.travel_book
-    @spot = @schedule.build_spot unless @schedule.spot
+    @spot = @schedule.spot
+    @schedule_form = ScheduleForm.new(schedule: @schedule, spot: @spot)
   end
 
   def update
-    if @schedule.update(schedule_param)
+    @spot = @schedule.spot
+    @schedule_form = ScheduleForm.new(schedule_params, schedule: @schedule, spot: @spot)
+    if @schedule_form.update(schedule_params)
       redirect_to schedule_path(@schedule), notice: "登録成功"
     else
       flash.now[:alert] = "編集失敗"
@@ -41,23 +38,34 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
-    @travel_book = @schedule.travel_book
     @schedule.destroy!
     redirect_to travel_book_schedules_path(@travel_book), notice: "削除成功"
   end
 
   private
 
+  def schedule_params
+    params.require(:schedule_form).permit(
+      :title,
+      :start_date,
+      :end_date,
+      :budged,
+      :memo,
+      :name,
+      :telephone,
+      :post_code,
+      :address,
+    ).merge(
+      travel_book_id: @travel_book.id
+    )
+  end
+
   def set_travel_book
-    @travel_book = current_user.travel_books.find(params[:travel_book_id])
+    @travel_book = TravelBook.find(params[:travel_book_id])
   end
 
   def set_schedule
     @schedule = Schedule.find(params[:id])
-  end
-
-  def schedule_param
-    params.require(:schedule).permit(:title, :budged, :memo, :start_date, :end_date,
-    spot_attributes: [ :id, :name, :telephone, :post_code, :address, :_destroy ])
+    @travel_book = @schedule.travel_book
   end
 end

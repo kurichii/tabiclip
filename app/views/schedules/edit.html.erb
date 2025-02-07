@@ -6,5 +6,5 @@
     <h1 class="text-center flex-1 text-lg font-bold">スケジュールを編集</h1>
   </div>
 
-  <%= render "form", schedule: @schedule %>
+  <%= render "form", schedule_form: @schedule_form, url: schedule_path(@schedule) %>
 </div>
