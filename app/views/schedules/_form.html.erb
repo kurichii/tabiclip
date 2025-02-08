@@ -1,12 +1,12 @@
 <%= form_with model: @schedule_form, url: url do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
-      <div class="field mt-3">
-        <%= f.label :title, class: "w-full" do %>
-          <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
-        <% end %>
-        <%= f.text_field :title, autofocus: true, placeholder: "待ち合わせ", class: "input input-bordered w-full" %>
-      </div>
+    <div class="field mt-3">
+      <%= f.label :title, class: "w-full" do %>
+        <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
+      <% end %>
+      <%= f.text_field :title, autofocus: true, placeholder: "待ち合わせ", class: "input input-bordered w-full" %>
+    </div>
 
     <div class="mt-3 flex flex-col sm:flex-row gap-2">
       <div class="w-full">
