@@ -1,30 +1,31 @@
-<div class="bg-white rounded-lg shadow-md p-6 m-6">
-  <div class="flex items-center justify-between">
-    <%= link_to travel_book_check_lists_path(@travel_book) do %>
-      <i class="fa-solid fa-chevron-left"></i>
-    <% end %>
-    <div>
-      <%= link_to edit_check_list_path(@check_list) do %>
-        <i class="fa-solid fa-pen"></i>
+<div class="container">
+  <div class="form-container bg-white rounded-lg shadow-md p-8">
+
+    <div class="flex items-center justify-between">
+      <%= link_to travel_book_check_lists_path(@travel_book) do %>
+        <i class="fa-solid fa-chevron-left"></i>
       <% end %>
-      <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
-        <i class="fa-solid fa-trash-can"></i>
+      <h3 class="flex-grow text-center"><%= @check_list.title %></h3>
+      <% if @travel_book.owned_by_user?(current_user) %>
+        <%= link_to edit_check_list_path(@check_list) do %>
+          <i class="fa-solid fa-pen"></i>
+        <% end %>
+        <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
       <% end %>
     </div>
-  </div>
 
-  <div class="mx-10 mb-5">
-    <div class="mt-5">
-      <h2 class="flex-1 text-lg font-bold"><%= @check_list.title %></h2>
+    <div class="m-10">
+      <% if @list_items.present? %>
+        <%= render @list_items %>
+      <% else %>
+        チェックリストは登録されていません
+      <% end %>
+
+      <button><i class="fa-solid fa-circle-plus"></i></button>
+      <%= render "list_items/form", check_list: @check_list, list_item: @list_item %>
     </div>
+
   </div>
-
-  <% if @list_items.present? %>
-    <%= render @list_items %>
-  <% else %>
-    チェックリストは登録されていません
-  <% end %>
-
-  <button><i class="fa-solid fa-circle-plus"></i></button>
-  <%= render "list_items/form", check_list: @check_list, list_item: @list_item %>
 </div>
