@@ -29,7 +29,7 @@ class ScheduleForm
   # ScheduleFormオブジェクトがpersisted?メソッドを呼ぶと、Scheduleオブジェクトのpersisted?メソッドが呼び出される
   delegate :persisted?, to: :schedule
 
-  def initialize(attributes = nil, schedule: Schedule.new, spot: nil,travel_book:nil)
+  def initialize(attributes = nil, schedule: Schedule.new, spot: nil, travel_book: nil)
     @schedule = schedule
     @spot = spot || @schedule.build_spot
     @travel_book = travel_book
