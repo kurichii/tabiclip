@@ -1,9 +1,6 @@
-#!/usr/bin/env bash
+set -o errexit
 
-set -e
-
-# データベースのマイグレーション
-bin/rails db:migrate
-
-# seedsデータの適用
-# bin/rails db:seed
+bundle install
+bundle exec rails assets:precompile
+bundle exec rails assets:clean
+bundle exec rails db:migrate

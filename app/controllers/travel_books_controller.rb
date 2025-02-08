@@ -1,4 +1,6 @@
 class TravelBooksController < ApplicationController
+  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
+
   def index
     @travel_books =
     if params[:scope] == "own"
