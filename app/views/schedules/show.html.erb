@@ -1,10 +1,11 @@
-<div class="bg-white rounded-lg shadow-md p-6 m-6">
+<div class="container">
+  <div class="form-container bg-white rounded-lg shadow-md p-8">
 
-  <div class="flex items-center justify-between">
-    <%= link_to travel_book_schedules_path(@travel_book) do %>
-      <i class="fa-solid fa-chevron-left"></i>
-    <% end %>
-    <div>
+    <div class="flex items-center justify-between">
+      <%= link_to travel_book_schedules_path(@travel_book) do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+      <h3 class="flex-grow text-center"><%= @schedule.title %></h3>
       <% if @travel_book.owned_by_user?(current_user) %>
         <%= link_to edit_schedule_path(@schedule) do %>
           <i class="fa-solid fa-pen"></i>
@@ -14,40 +15,36 @@
         <% end %>
       <% end %>
     </div>
-  </div>
 
-  <div class="mx-10 mb-5">
-    <div class="mt-5">
-      <h2 class="flex-1 text-lg font-bold"><%= @schedule.title %></h2>
-    </div>
-
-    <div class="mt-5 flex items-center">
-      <i class="fa-regular fa-clock"></i>
-      <p class="ml-2"><%= fmt_schedule_duration(@schedule) %></p>
-    </div>
-
-    <div class="mt-5 flex items-center">
-      <i class="fa-solid fa-location-dot"></i>
-      <div class="ml-2">
-        <% if @schedule.spot.present? %>
-          <p><%= desplay_value(@schedule.spot.name) %></p>
-          <p><%= desplay_value(@schedule.spot.telephone) %></p>
-          <p><%= desplay_value(@schedule.spot.post_code) %></p>
-          <p><%= desplay_value(@schedule.spot.address) %></p>
-        <% else %>
-          <p>場所は登録されていません</p>
-        <% end %>
+    <div class="mx-10 mb-5">
+      <div class="mt-5 flex items-center">
+        <i class="fa-regular fa-clock"></i>
+        <p class="ml-2"><%= fmt_schedule_duration(@schedule) %></p>
       </div>
-    </div>
 
-    <div class="mt-5 flex items-center">
-      <i class="fa-solid fa-wallet"></i>
-      <p class="ml-2"><%= @schedule.budged %>円</p>
-    </div>
+      <div class="mt-5 flex items-center">
+        <i class="fa-solid fa-location-dot"></i>
+        <div class="ml-2">
+          <% if @schedule.spot.present? %>
+            <p><%= desplay_value(@schedule.spot.name) %></p>
+            <p><%= desplay_value(@schedule.spot.telephone) %></p>
+            <p><%= desplay_value(@schedule.spot.post_code) %></p>
+            <p><%= desplay_value(@schedule.spot.address) %></p>
+          <% else %>
+            <p>場所は登録されていません</p>
+          <% end %>
+        </div>
+      </div>
 
-    <div class="mt-5 flex items-start">
-      <i class="fa-solid fa-file-pen mt-1"></i>
-      <p class="ml-2"><%= display_memo(@schedule.memo) %></p>
+      <div class="mt-5 flex items-center">
+        <i class="fa-solid fa-wallet"></i>
+        <p class="ml-2"><%= @schedule.budged %>円</p>
+      </div>
+
+      <div class="mt-5 flex items-start">
+        <i class="fa-solid fa-file-pen mt-1"></i>
+        <p class="ml-2"><%= display_memo(@schedule.memo) %></p>
+      </div>
     </div>
   </div>
 </div>
