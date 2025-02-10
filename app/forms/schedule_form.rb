@@ -23,8 +23,6 @@ class ScheduleForm
   validates :post_code, length: { maximum: 10 }
   validates :address, length: { maximum: 255 }
 
-  attr_accessor :schedule, :spot
-
   # フォームのアクションをPOST/PUTCHに切り替える
   # ScheduleFormオブジェクトがpersisted?メソッドを呼ぶと、Scheduleオブジェクトのpersisted?メソッドが呼び出される
   delegate :persisted?, to: :schedule
@@ -33,7 +31,6 @@ class ScheduleForm
     @schedule = schedule
     @spot = spot || @schedule.build_spot
     @travel_book = travel_book
-
 
     attributes ||= default_attributes(@travel_book)
     super(attributes)
