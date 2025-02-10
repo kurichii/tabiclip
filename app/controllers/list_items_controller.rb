@@ -16,6 +16,20 @@ class ListItemsController < ApplicationController
     end
   end
 
+  def edit
+    @list_item = ListItem.find(params[:id])
+  end
+
+  def update
+    @list_item = ListItem.find(params[:id])
+    if @list_item.update(list_item_params)
+      flash.now[:notice] = "成功"
+    else
+      flash.now[:alert] = "失敗"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def list_item_params
