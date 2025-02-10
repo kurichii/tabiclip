@@ -17,15 +17,22 @@
     </div>
 
     <div class="m-10">
-      <% if @list_items.present? %>
-        <%= render @list_items %>
-      <% else %>
-        チェックリストは登録されていません
+      <%= turbo_frame_tag "list_item" do %>
+        <% if @list_items.present? %>
+          <% @list_items.each do |list_item| %>
+            <%= render "list_items/list_item", list_item: list_item %>
+          <% end %>
+        <% else %>
+          <div>チェックリストは登録されていません</div>
+        <% end %>
       <% end %>
 
-      <button><i class="fa-solid fa-circle-plus"></i></button>
-      <%= render "list_items/form", check_list: @check_list, list_item: @list_item %>
+      <div id="list_item_button_field">
+      <%= link_to new_check_list_list_item_path(@check_list), class: "btn", id: "add_list_item_button",data: { turbo_stream: true } do %>
+        <i class="fa-solid fa-circle-plus"></i>リストを追加
+      <% end %>
+      </div>
+      <div id="list_item_form_field"></div>
     </div>
-
   </div>
 </div>

@@ -21,14 +21,11 @@ class CheckListsController < ApplicationController
   end
 
   def show
-    @travel_book = @check_list.travel_book
-    @list_items = @check_list.list_items
-    @list_item = @check_list.list_items.build
+    @list_items = @check_list.list_items.order(created_at: :asc) # 既存のリストアイテム
   end
 
-  def edit
-    @travel_book = @check_list.travel_book
-  end
+
+  def edit; end
 
   def update
     if @check_list.update(check_list_param)
@@ -39,7 +36,6 @@ class CheckListsController < ApplicationController
   end
 
   def destroy
-    @travel_book = @check_list.travel_book
     @check_list.destroy!
     redirect_to travel_book_check_lists_path(@travel_book)
   end
@@ -52,6 +48,7 @@ class CheckListsController < ApplicationController
 
   def set_check_list
     @check_list = CheckList.find(params[:id])
+    @travel_book = @check_list.travel_book
   end
 
   def check_list_param

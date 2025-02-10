@@ -1,4 +1,18 @@
-<div class="flex gap-2">
-  <div><%= check_box_tag "list_item[completed]", "true", list_item.completed %></div>
-  <div><%= list_item.title %></div>
-</div>
+<%= turbo_frame_tag "list_item_#{list_item.id}" do %>
+  <div class="flex justify-between my-2">
+    <div>
+      <%= check_box_tag "list_item[completed]", "true", list_item.completed %>
+      <%= list_item.title %>
+    </div>
+    <div class="flex gap-3">
+      <% if list_item.persisted? %>
+        <%= link_to edit_list_item_path(list_item), data: { turbo_stream: true }, class: "hover:text-base-300" do %>
+          <i class="fa-solid fa-pen"></i>
+        <% end %>
+        <%= link_to list_item_path(list_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "hover:text-base-300" do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
