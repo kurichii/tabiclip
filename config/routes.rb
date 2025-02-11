@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     delete "delete_image", on: :member
     resources :schedules, shallow: true
     resources :check_lists, shallow: true do
-      resources :list_items do
+      resources :list_items, only: %i[ new create edit update destroy toggle ] do
         collection do
           post :cancel # new 用
         end
