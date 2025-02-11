@@ -1,6 +1,6 @@
 class ListItemsController < ApplicationController
   before_action :set_check_list, only: %i[ new create ]
-  before_action :set_list_item, only: %i[ edit update destroy]
+  before_action :set_list_item, only: %i[ edit update destroy toggle]
 
   def new
     @list_item = @check_list.list_items.new
@@ -44,6 +44,11 @@ class ListItemsController < ApplicationController
         format.turbo_stream { render "cancel_new" }
       end
     end
+  end
+
+  def toggle
+    @list_item.update(completed: !@list_item.completed)
+    render turbo_stream: turbo_stream.replace(@list_item, partial: "list_item", locals: { list_item: @list_item })
   end
 
   private

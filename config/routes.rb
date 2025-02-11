@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         end
         member do
           post :cancel # edit 用
+          patch :toggle
         end
       end
     end
