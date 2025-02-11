@@ -1,11 +1,11 @@
 <%= turbo_frame_tag "list_item_#{list_item.id}" do %>
   <%= form_with model: list_item, url: toggle_list_item_path(list_item) do |f| %>
-    <div class="flex justify-between my-2">
-      <div>
-        <%= f.check_box :completed, onchange: "this.form.requestSubmit()" %>
+    <div class="flex items-center justify-between my-3">
+      <div class="flex items-center gap-2">
+        <%= f.check_box :completed, onchange: "this.form.requestSubmit()", class: "checkbox" %>
         <%= list_item.title %>
       </div>
-      <div class="flex gap-3">
+      <div class="flex gap-5">
         <% if list_item.persisted? %>
           <%= link_to edit_list_item_path(list_item), data: { turbo_stream: true }, class: "hover:text-base-300" do %>
             <i class="fa-solid fa-pen"></i>
