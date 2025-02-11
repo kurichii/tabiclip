@@ -32,6 +32,20 @@ class ListItemsController < ApplicationController
     @list_item.destroy!
   end
 
+  def cancel
+    respond_to do |format|
+      if params[:id].present?
+        # 編集時（edit）のキャンセル
+        @list_item = ListItem.find(params[:id])
+        format.turbo_stream
+      else
+        # 新規作成時（new）のキャンセル
+        @check_list = CheckList.find(params[:check_list_id])
+        format.turbo_stream { render "cancel_new" }
+      end
+    end
+  end
+
   private
 
   def set_check_list

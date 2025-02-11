@@ -1,11 +1,10 @@
-<div id="list_item_form" >
 <%= turbo_frame_tag "list_item_#{list_item.id}" do %>
   <%= form_with model: @list_item, url: @list_item.new_record? ? check_list_list_items_path(@check_list): list_item_path(@list_item) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
   <div class="flex gap-2">
       <%= f.text_field :title, autofocus: true, placeholder: "リストのアイテムを追加", class: "input input-bordered w-full" %>
     <div class="flex gap-2">
-      <%= link_to "", class: "btn" do %>
+      <%= link_to @list_item.new_record? ? cancel_check_list_list_items_path(@check_list) : cancel_list_item_path(@list_item), class: "btn", data: { turbo_method: :post } do %>
         <i class="fa-solid fa-xmark"></i>
       <% end %>
       <%= f.submit nil, class: "btn" %>
@@ -13,4 +12,3 @@
   </div>
   <% end %>
 <% end %>
-</div>
