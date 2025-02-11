@@ -11,21 +11,26 @@
           <i class="fa-solid fa-pen"></i>
         <% end %>
         <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
-          <i class="fa-solid fa-trash-can"></i>
+          <i class="fa-solid fa-trash"></i>
         <% end %>
       <% end %>
     </div>
 
     <div class="m-10">
-      <% if @list_items.present? %>
-        <%= render @list_items %>
-      <% else %>
-        チェックリストは登録されていません
+      <%= turbo_frame_tag "list_item" do %>
+        <% if @list_items.present? %>
+          <% @list_items.each do |list_item| %>
+            <%= render "list_items/list_item", list_item: list_item %>
+          <% end %>
+        <% else %>
+          <div>チェックリストは登録されていません</div>
+        <% end %>
       <% end %>
 
-      <button><i class="fa-solid fa-circle-plus"></i></button>
-      <%= render "list_items/form", check_list: @check_list, list_item: @list_item %>
+      <div id="add_list_item_button" class="my-5">
+        <%= render "list_items/add_button", check_list: @check_list %>
+      </div>
+      <div id="list_item_form"></div>
     </div>
-
   </div>
 </div>
