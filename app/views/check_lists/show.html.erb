@@ -27,12 +27,10 @@
         <% end %>
       <% end %>
 
-      <div id="list_item_button_field">
-      <%= link_to new_check_list_list_item_path(@check_list), class: "btn", id: "add_list_item_button",data: { turbo_stream: true } do %>
-        <i class="fa-solid fa-circle-plus"></i>リストを追加
-      <% end %>
+      <div id="add_list_item_button" class="my-5">
+        <%= render "list_items/add_button", check_list: @check_list %>
       </div>
-      <div id="list_item_form_field"></div>
+      <div id="list_item_form"></div>
     </div>
   </div>
 </div>

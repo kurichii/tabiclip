@@ -2,5 +2,8 @@
   <%= render "list_items/list_item", list_item: @list_item %>
 <% end %>
 
-<%# formを削除 %>
-<%= turbo_stream.replace "list_item_form", "" %>
+<%= turbo_stream.update "list_item_form", "" %>
+
+<%= turbo_stream.update "add_list_item_button" do %>
+  <%= render "list_items/add_button", check_list: @check_list %>
+<% end %>
