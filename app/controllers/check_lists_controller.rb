@@ -21,7 +21,7 @@ class CheckListsController < ApplicationController
   end
 
   def show
-    @list_items = @check_list.list_items.order(created_at: :asc) # 既存のリストアイテム
+    @list_items = @check_list.list_items.order(created_at: :asc)
   end
 
 
