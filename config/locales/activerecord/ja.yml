@@ -1,0 +1,44 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      travel_book: しおり
+      schedule: スケジュール
+      spot: 場所
+      area: エリア
+      check_list: チェックリスト
+      list_item: リストアイテム
+      traveler_type: 旅行スタイル
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+      travel_book:
+        title: タイトル
+        description: 旅行の説明
+        is_public: 公開設定
+        start_date: 開始日
+        end_date: 終了日
+        travel_book_image: 画像
+        area: エリア
+        traveler_type: 旅行スタイル
+      area:
+        name: エリア名
+      traveler_type:
+        name: 旅行スタイル
+      schedule:
+        title: タイトル
+        budged: 予算
+        memo: メモ
+        start_date: 開始時刻
+        end_date: 終了時刻
+      spot:
+        name: 場所名
+        telephone: 電話番号
+        address: 住所
+      check_list:
+        title: タイトル
+      list_items:
+        title: タイトル
