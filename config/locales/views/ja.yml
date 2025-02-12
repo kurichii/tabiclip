@@ -1,0 +1,35 @@
+ja:
+  helpers:
+    prompt:
+      select: 選択してください
+    submit:
+      create: 登録
+      update: 更新
+    total_amount: "合計金額：%{amount}"
+    currency_unit: 円
+    undecided: 未定
+    public: 公開
+    unpublic: 未公開
+  defaults:
+    delete_confirm: 削除しますか？
+  users:
+  travel_books:
+    index:
+      no_data: しおりがありません
+      new_button: しおり作成
+    show:
+      duration: 期間
+    new:
+      title: しおり作成
+    edit:
+      title: しおり編集
+    _my_travel_book:
+      departure: 出発
+      arrival: 到着
+    form:
+      placeholder:
+        title: 旅行のタイトルを記入
+        description: 旅行の説明を記入
+      is_public:
+        true: 公開
+        false: 非公開

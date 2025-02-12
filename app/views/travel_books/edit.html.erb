@@ -4,7 +4,7 @@
       <%= link_to travel_book_path(@travel_book) do %>
         <i class="fa-solid fa-chevron-left"></i>
       <% end %>
-      <h3 class="flex-grow text-center">しおりを編集</h3>
+      <h3 class="flex-grow text-center"><%= t(".title")%></h3>
     </div>
 
     <%= render "form", travel_book: @travel_book %>

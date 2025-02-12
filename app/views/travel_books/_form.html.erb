@@ -5,12 +5,12 @@
     <%= f.label :title, class: "w-full" do %>
       <span class="text-red-400">*</span><%= TravelBook.human_attribute_name(:title) %>
     <% end %>
-    <%= f.text_field :title, autofocus: true, placeholder: "春の東京観光", class: "input input-bordered w-full" %>
+    <%= f.text_field :title, autofocus: true, placeholder: t("travel_books.form.placeholder.title"), class: "input input-bordered w-full" %>
   </div>
 
   <div class="field mt-3">
     <%= f.label :description, TravelBook.human_attribute_name(:description), class: "label" %>
-    <%= f.text_area :description, placeholder: "旅行やおでかけの説明を記入", rows: "1", class: "textarea textarea-bordered w-full" %>
+    <%= f.text_area :description, placeholder: t("travel_books.form.placeholder.description"), rows: "1", class: "textarea textarea-bordered w-full" %>
   </div>
 
   <div class="mt-3 flex flex-col sm:flex-row gap-2">
@@ -26,12 +26,12 @@
 
   <div class="field mt-3">
     <%= f.label :area_id, TravelBook.human_attribute_name(:area), class: "label" %>
-    <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: "選択してください" }, { class: "select select-bordered w-full max-w-xs" } %>
+    <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: t("helpers.prompt.select") }, { class: "select select-bordered w-full max-w-xs" } %>
   </div>
 
   <div class="field mt-3">
     <%= f.label :traveler_type_id, TravelBook.human_attribute_name(:traveler_type), class: "label" %>
-    <%= f.collection_select :traveler_type_id, TravelerType.all, :id, :name,{ prompt: "選択してください" }, { class: "select select-bordered w-full max-w-xs" } %>
+    <%= f.collection_select :traveler_type_id, TravelerType.all, :id, :name,{ prompt: t("helpers.prompt.select") }, { class: "select select-bordered w-full max-w-xs" } %>
   </div>
 
   <div class="field mt-3">
@@ -53,11 +53,11 @@
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1">
         <%= f.radio_button :is_public, true, id: "is_public_true", class: "radio radio-primary" %>
-        <%= f.label :is_public_true, "公開", for: "is_public_true" %>
+        <%= f.label :is_public_true, t("travel_books.form.is_public.true"), for: "is_public_true" %>
       </div>
       <div class="flex items-center gap-1">
         <%= f.radio_button :is_public, false, id: "is_public_false", class: "radio radio-primary", checked: "checked" %>
-        <%= f.label :is_public_false, "非公開", for: "is_public_false" %>
+        <%= f.label :is_public_false, t("travel_books.form.is_public.false"), for: "is_public_false" %>
       </div>
     </div>
   </div>
