@@ -10,7 +10,7 @@
         <%= link_to edit_schedule_path(@schedule) do %>
           <i class="fa-solid fa-pen"></i>
         <% end %>
-        <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+        <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5" do %>
           <i class="fa-solid fa-trash"></i>
         <% end %>
       <% end %>
@@ -22,28 +22,21 @@
         <p class="ml-2"><%= fmt_schedule_duration(@schedule) %></p>
       </div>
 
-      <div class="mt-5 flex items-center">
-        <i class="fa-solid fa-location-dot"></i>
+      <div class="mt-5 flex">
+        <i class="fa-solid fa-location-dot mt-1"></i>
         <div class="ml-2">
-          <% if @schedule.spot.present? %>
-            <p><%= desplay_value(@schedule.spot.name) %></p>
-            <p><%= desplay_value(@schedule.spot.telephone) %></p>
-            <p><%= desplay_value(@schedule.spot.post_code) %></p>
-            <p><%= desplay_value(@schedule.spot.address) %></p>
-          <% else %>
-            <p>場所は登録されていません</p>
-          <% end %>
+          <ul><%= schedule_spot_info(@schedule.spot) %></ul>
         </div>
       </div>
 
       <div class="mt-5 flex items-center">
         <i class="fa-solid fa-wallet"></i>
-        <p class="ml-2"><%= @schedule.budged %>円</p>
+        <p class="ml-2"><%= @schedule.budged %><%= t("helpers.currency_unit") %></p>
       </div>
 
       <div class="mt-5 flex items-start">
         <i class="fa-solid fa-file-pen mt-1"></i>
-        <p class="ml-2"><%= display_memo(@schedule.memo) %></p>
+        <p class="ml-2"><%= schedule_memo(@schedule.memo) %></p>
       </div>
     </div>
   </div>

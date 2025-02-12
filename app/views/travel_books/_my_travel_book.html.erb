@@ -7,11 +7,11 @@
       <div class="card-body flex flex-col items-center justify-center text-center">
         <h2 class="card-title"><%= travel_book.title %></h2>
         <div class="flex items-center justify-center gap-2">
-          <div class="badge">出発</div>
+          <div class="badge"><%= t(".departure") %></div>
           <p><%= fmt_date(travel_book.start_date) %></p>
         </div>
         <div class="flex items-center justify-center gap-2">
-          <div class="badge">到着</div>
+          <div class="badge"><%= t(".arrival") %></div>
           <p><%= fmt_date(travel_book.end_date) %></p>
         </div>
       </div>

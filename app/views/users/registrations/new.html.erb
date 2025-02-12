@@ -1,44 +1,44 @@
 <div class="container">
   <div class="form-container rounded-lg shadow-md bg-white p-8">
-    <h2>アカウント登録</h2>
+    <h2><%= t(".title") %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
 
       <div class="field mt-3">
         <div class="flex items-center gap-1">
-          <%= f.label :name, class: "label" %>
+          <%= f.label :name, User.human_attribute_name(:name), class: "label" %>
           <i class="fa-solid fa-user"></i>
         </div>
-        <%= f.text_field :name, placeholder: "アカウント名", class: "input input-bordered w-full" %>
+        <%= f.text_field :name, placeholder: t("users.form.placeholder.name"), class: "input input-bordered w-full" %>
       </div>
 
       <div class="field mt-3">
         <div class="flex items-center gap-1">
-          <%= f.label :email, class: "label" %>
+          <%= f.label :email, User.human_attribute_name(:email), class: "label" %>
           <i class="fa-solid fa-envelope"></i>
         </div>
-        <%= f.email_field :email, autocomplete: "email", placeholder: "tabiclip@example.com", class: "input input-bordered w-full" %>
+        <%= f.email_field :email, autocomplete: "email", placeholder: t("users.form.placeholder.email"), class: "input input-bordered w-full" %>
       </div>
 
       <div class="field mt-3">
         <div class="flex items-center gap-1">
-          <%= f.label :password, class: "label" %>
+          <%= f.label :password, User.human_attribute_name(:password), class: "label" %>
           <i class="fa-solid fa-key"></i>
         </div>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "半角英数6文字以上", class: "input input-bordered w-full" %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: t("users.form.placeholder.password"), class: "input input-bordered w-full" %>
       </div>
 
       <div class="field mt-3">
         <div class="flex items-center gap-1">
-          <%= f.label :password_confirmation, class: "label" %>
+          <%= f.label :password_confirmation, User.human_attribute_name(:password_confirmation), class: "label" %>
           <i class="fa-solid fa-key"></i>
         </div>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "半角英数6文字以上", class: "input input-bordered w-full" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: t("users.form.placeholder.password"), class: "input input-bordered w-full" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary w-full mt-6 mx-auto" %>
+        <%= f.submit t(".submit"), class: "btn btn-primary w-full mt-6 mx-auto" %>
       </div>
     <% end %>
 

@@ -5,7 +5,7 @@
     <%= f.label :title, class: "w-full" do %>
       <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
     <% end %>
-    <%= f.text_field :title, autofocus: true, placeholder: "購入品リスト", class: "input input-bordered w-full" %>
+    <%= f.text_field :title, autofocus: true, placeholder: t("check_lists.form.placeholder.title"), class: "input input-bordered w-full" %>
   </div>
   <div class="flex justify-end mt-5">
     <%= f.submit nil, class: "btn btn-primary w-full mt-6 mx-auto" %>

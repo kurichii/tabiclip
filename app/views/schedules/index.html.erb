@@ -8,33 +8,33 @@
 
     <% if @schedules.present? %>
       <div role="tablist" class="tabs tabs-bordered">
-        <!-- 全日程タブを追加 -->
+        <!-- Tab for allday -->
         <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked" />
         <div role="tabpanel" class="tab-content p-10">
           <% @schedules.each do |schedule| %>
             <%= render partial: "schedule", locals: { schedule: schedule, all_day: true } %>
           <% end %>
-          <p class="text-right my-5">合計金額：<%= total_budget(@schedules) %>円</p>
+          <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(@schedules)) %><%= t("helpers.currency_unit") %></p>
         </div>
 
-        <!-- 各日付ごとのタブ -->
+        <!-- Tab for each date -->
         <% Schedule.group_by_date(@schedules).each do |date, schedules| %>
-          <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_simple_date(date) %>" />
+          <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
           <div role="tabpanel" class="tab-content p-10">
             <% schedules.each do |schedule| %>
               <%= render partial: "schedule", locals: { schedule: schedule } %>
             <% end %>
-            <p class="text-right my-5">合計金額：<%= total_budget(schedules) %>円</p>
+            <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(schedules)) %><%= t("helpers.currency_unit") %></p>
           </div>
         <% end %>
       </div>
 
     <% else %>
-      <p class="text-center my-10">スケジュールを登録しましょう</p>
+      <p class="text-center my-10"><%= t(".no_data") %></p>
     <% end %>
 
     <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
-      スケジュールを追加
+      <%= t(".new_button") %>
     <% end %>
   </div>
 </div>

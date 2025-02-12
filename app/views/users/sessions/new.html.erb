@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-container rounded-lg shadow-md bg-white p-8">
-    <h2>ログイン</h2>
+    <h2><%= t(".title") %></h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
@@ -9,7 +9,7 @@
           <%= f.label :email, class: "label" %>
           <i class="fa-solid fa-envelope"></i>
         </div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "tabiclip@example.com", class: "input input-bordered w-full" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: t("users.form.placeholder.email"), class: "input input-bordered w-full" %>
       </div>
 
       <div class="field mt-3">
@@ -17,7 +17,7 @@
           <%= f.label :password, class: "label" %>
           <i class="fa-solid fa-key"></i>
         </div>
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: "半角英数6文字以上", class: "input input-bordered w-full" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-full" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -28,10 +28,9 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "Log in", class: "btn btn-primary w-full mt-6 mx-auto" %>
+        <%= f.submit t(".submit"), class: "btn btn-primary w-full mt-6 mx-auto" %>
       </div>
     <% end %>
-
     <%= render "users/shared/links" %>
   </div>
 </div>

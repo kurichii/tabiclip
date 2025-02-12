@@ -1,5 +1,5 @@
 module TravelBooksHelper
-  def travel_book_desctiption(travel_book)
+  def travel_book_description(travel_book)
     travel_book.description || ""
   end
 
@@ -9,19 +9,19 @@ module TravelBooksHelper
     elsif travel_book.start_date || travel_book.end_date
       "#{fmt_date(travel_book.start_date) || ''} #{fmt_date(travel_book.end_date) || ''}".strip
     else
-      "未定"
+       t("helpers.undecided")
     end
   end
 
   def area_name(travel_book)
-    travel_book.area&.name || "未設定"
+    travel_book.area&.name || t("helpers.undecided")
   end
 
   def traveler_type_name(travel_book)
-    travel_book.traveler_type&.name || "未設定"
+    travel_book.traveler_type&.name || t("helpers.undecided")
   end
 
   def travel_book_is_public(travel_book)
-    travel_book.is_public ? "公開" : "未公開"
+    travel_book.is_public ? t("helpers.public") : t("helpers.unpublic")
   end
 end

@@ -13,32 +13,32 @@
               <%= link_to edit_travel_book_path(@travel_book) do %>
                 <i class="fa-solid fa-pen"></i>
               <% end %>
-              <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+              <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5" do %>
                 <i class="fa-solid fa-trash"></i>
               <% end %>
             </div>
           <% end %>
         </div>
 
-        <div><%= travel_book_desctiption(@travel_book) %></div>
+        <div><%= travel_book_description(@travel_book) %></div>
 
         <div class="mt-3">
-          <div class="font-bold">期間</div>
+          <div class="font-bold"><%= t(".duration") %></div>
           <div><%= travel_book_duration(@travel_book)%></div>
         </div>
 
         <div class="mt-3">
-          <div class="font-bold">エリア</div>
+          <div class="font-bold"><%= TravelBook.human_attribute_name(:area) %></div>
           <div><%= area_name(@travel_book) %></div>
         </div>
 
         <div class="mt-3">
-          <div class="font-bold">旅行タイプ</div>
+          <div class="font-bold"><%= TravelBook.human_attribute_name(:traveler_type) %></div>
           <div><%= traveler_type_name(@travel_book) %></div>
         </div>
 
         <div class="mt-3">
-          <div class="font-bold">公開設定</div>
+          <div class="font-bold"><%= TravelBook.human_attribute_name(:is_public) %></div>
           <div><%= travel_book_is_public(@travel_book) %></div>
         </div>
       </div>

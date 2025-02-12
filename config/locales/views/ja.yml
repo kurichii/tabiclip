@@ -1,0 +1,102 @@
+ja:
+  helpers:
+    prompt:
+      select: 選択してください
+    submit:
+      create: 登録
+      update: 更新
+      submit: 保存
+    back: 前の画面に戻る
+    total_amount: "合計金額：%{amount}"
+    currency_unit: 円
+    undecided: 未定
+    public: 公開
+    unpublic: 未公開
+  defaults:
+    delete_confirm: 削除しますか？
+  users:
+    form:
+      placeholder:
+        name: アカウント名
+        email: tabiclip@example.com
+        password: 半角英数6文字以上
+    shared:
+      links:
+        signup: アカウントを作成
+        forgot_pass: パスワードをお忘れの方はこちら
+        login_page: ログインページはこちら
+    sessions:
+      new:
+        title: ログイン
+        submit: ログイン
+    registrations:
+      new:
+        title: アカウント登録
+        submit: アカウントを作成
+      edit:
+        title: プロフィール編集
+    passwords:
+      new:
+        title: パスワード再設定
+        send: 送信
+        login_page: ログインページはこちら
+    show:
+      profile_button: プロフィールを編集
+  travel_books:
+    index:
+      no_data: しおりがありません
+      new_button: しおり作成
+    show:
+      duration: 期間
+    new:
+      title: しおり作成
+    edit:
+      title: しおり編集
+    my_travel_book:
+      departure: 出発
+      arrival: 到着
+    form:
+      placeholder:
+        title: 旅行のタイトルを記入
+        description: 旅行の説明を記入
+      is_public:
+        true: 公開
+        false: 非公開
+  schedules:
+    index:
+      new_button: スケジュール作成
+      no_data: スケジュールを登録しましょう
+    show:
+      no_data: 場所の登録はありません
+    new:
+      title: スケジュール作成
+    edit:
+      title: スケジュール編集
+    form:
+      placeholder:
+        title: スケジュールのタイトルを記入
+        memo: 移動手段や観光地の情報などのメモを記入
+      is_public:
+        true: 公開
+        false: 非公開
+    helpers:
+      no_memo: メモはありません
+  check_lists:
+    index:
+      new_button: チェックリスト作成
+      no_data: チェックリストはありません
+    show:
+      no_data: チェックリストに項目を追加しましょう
+    new:
+      title: チェックリスト作成
+    edit:
+      title: チェックリスト編集
+    form:
+      placeholder:
+        title: チェックリストのタイトルを記入
+  list_items:
+    form:
+      placeholder:
+        title: 項目名を記入
+    add_button:
+      new_button: 項目を追加
