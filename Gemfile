@@ -13,7 +13,7 @@ gem "fog-aws"
 gem "draper"
 
 # i18n
-gem 'rails-i18n', "~> 7.0.0"
+gem "rails-i18n", "~> 7.0.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1"
