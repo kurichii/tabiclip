@@ -10,7 +10,7 @@
           <%= link_to edit_list_item_path(list_item), data: { turbo_stream: true }, class: "hover:text-base-300" do %>
             <i class="fa-solid fa-pen"></i>
           <% end %>
-          <%= link_to list_item_path(list_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "hover:text-base-300" do %>
+          <%= link_to list_item_path(list_item), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "hover:text-base-300" do %>
             <i class="fa-solid fa-trash"></i>
           <% end %>
         <% end %>

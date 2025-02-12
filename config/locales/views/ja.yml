@@ -65,3 +65,9 @@ ja:
     form:
       placeholder:
         title: チェックリストのタイトルを記入
+  list_items:
+    form:
+      placeholder:
+        title: 項目名を記入
+    _add_button:
+      new_button: 項目を追加
