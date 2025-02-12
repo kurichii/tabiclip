@@ -11,19 +11,19 @@
 # Areasテーブルに値を格納
 ApplicationRecord.transaction do
 areas = [
-  { id: 1, name: "Hokkaido" },
-  { id: 2, name: "Tohoku" },
-  { id: 3, name: "KitaKanto" },
-  { id: 4, name: "Syutoken" },
-  { id: 5, name: "Koshinetsu" },
-  { id: 6, name: "Tokai" },
-  { id: 7, name: "Hokuriku" },
-  { id: 8, name: "Kinki" },
-  { id: 9, name: "SaninSanyou" },
-  { id: 10, name: "Shikoku" },
-  { id: 11, name: "Kyushu" },
-  { id: 12, name: "Okinawa" },
-  { id: 13, name: "other" }
+  { id: 1, name: "北海道" },
+  { id: 2, name: "東北" },
+  { id: 3, name: "北関東" },
+  { id: 4, name: "首都圏" },
+  { id: 5, name: "甲信越" },
+  { id: 6, name: "東海" },
+  { id: 7, name: "北陸" },
+  { id: 8, name: "近畿" },
+  { id: 9, name: "山陰・山陽" },
+  { id: 10, name: "四国" },
+  { id: 11, name: "九州" },
+  { id: 12, name: "沖縄" },
+  { id: 13, name: "その他" }
 ]
 
   areas.each do |area|
@@ -34,11 +34,11 @@ areas = [
 
   # TravelerTypesテーブルに値を格納
   traveler_types = [
-    { id: 1, name: "family" },
-    { id: 2, name: "friends" },
-    { id: 3, name: "alone" },
-    { id: 4, name: "couple" },
-    { id: 5, name: "other" }
+    { id: 1, name: "家族" },
+    { id: 2, name: "友人" },
+    { id: 3, name: "一人旅" },
+    { id: 4, name: "夫婦・カップル" },
+    { id: 5, name: "その他" }
   ]
 
   traveler_types.each do | traveler_type |
