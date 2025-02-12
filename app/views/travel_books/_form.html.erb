@@ -5,12 +5,12 @@
     <%= f.label :title, class: "w-full" do %>
       <span class="text-red-400">*</span><%= TravelBook.human_attribute_name(:title) %>
     <% end %>
-    <%= f.text_field :title, autofocus: true, placeholder: t("travel_books.form.placeholder.title"), class: "input input-bordered w-full" %>
+    <%= f.text_field :title, autofocus: true, placeholder: t(".placeholder.title"), class: "input input-bordered w-full" %>
   </div>
 
   <div class="field mt-3">
     <%= f.label :description, TravelBook.human_attribute_name(:description), class: "label" %>
-    <%= f.text_area :description, placeholder: t("travel_books.form.placeholder.description"), rows: "1", class: "textarea textarea-bordered w-full" %>
+    <%= f.text_area :description, placeholder: t(".placeholder.description"), rows: "1", class: "textarea textarea-bordered w-full" %>
   </div>
 
   <div class="mt-3 flex flex-col sm:flex-row gap-2">
@@ -53,11 +53,11 @@
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1">
         <%= f.radio_button :is_public, true, id: "is_public_true", class: "radio radio-primary" %>
-        <%= f.label :is_public_true, t("travel_books.form.is_public.true"), for: "is_public_true" %>
+        <%= f.label :is_public_true, t(".is_public.true"), for: "is_public_true" %>
       </div>
       <div class="flex items-center gap-1">
         <%= f.radio_button :is_public, false, id: "is_public_false", class: "radio radio-primary", checked: "checked" %>
-        <%= f.label :is_public_false, t("travel_books.form.is_public.false"), for: "is_public_false" %>
+        <%= f.label :is_public_false, t(".is_public.false"), for: "is_public_false" %>
       </div>
     </div>
   </div>
