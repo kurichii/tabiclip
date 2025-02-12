@@ -10,7 +10,7 @@
         <%= link_to edit_check_list_path(@check_list) do %>
           <i class="fa-solid fa-pen"></i>
         <% end %>
-        <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ml-5" do %>
+        <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5" do %>
           <i class="fa-solid fa-trash"></i>
         <% end %>
       <% end %>
@@ -23,7 +23,7 @@
             <%= render "list_items/list_item", list_item: list_item %>
           <% end %>
         <% else %>
-          <div>チェックリストは登録されていません</div>
+          <div><%= t(".no_data") %></div>
         <% end %>
       <% end %>
 

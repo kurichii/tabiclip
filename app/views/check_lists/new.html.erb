@@ -4,7 +4,7 @@
       <%= link_to travel_book_check_lists_path(@travel_book) do %>
         <i class="fa-solid fa-chevron-left"></i>
       <% end %>
-      <h3 class="flex-grow text-center">チェックリストを追加</h3>
+      <h3 class="flex-grow text-center"><%= t(".title") %></h3>
     </div>
     <%= render "form", check_list: @check_list, travel_book: @travel_book %>
   </div>

@@ -52,3 +52,16 @@ ja:
         false: 非公開
     helpers:
       no_memo: メモはありません
+  check_lists:
+    index:
+      new_button: チェックリスト作成
+      no_data: チェックリストはありません
+    show:
+      no_data: チェックリストに項目を追加しましょう
+    new:
+      title: チェックリスト作成
+    edit:
+      title: チェックリスト編集
+    form:
+      placeholder:
+        title: チェックリストのタイトルを記入
