@@ -5,6 +5,8 @@ ja:
     submit:
       create: 登録
       update: 更新
+      submit: 保存
+    back: 前の画面に戻る
     total_amount: "合計金額：%{amount}"
     currency_unit: 円
     undecided: 未定
@@ -13,6 +15,33 @@ ja:
   defaults:
     delete_confirm: 削除しますか？
   users:
+    form:
+      placeholder:
+        name: アカウント名
+        email: tabiclip@example.com
+        password: 半角英数6文字以上
+    shared:
+      links:
+        signup: アカウントを作成
+        forgot_pass: パスワードをお忘れの方はこちら
+        login_page: ログインページはこちら
+    sessions:
+      new:
+        title: ログイン
+        submit: ログイン
+    registrations:
+      new:
+        title: アカウント登録
+        submit: アカウントを作成
+      edit:
+        title: プロフィール編集
+    passwords:
+      new:
+        title: パスワード再設定
+        send: 送信
+        login_page: ログインページはこちら
+    show:
+      profile_button: プロフィールを編集
   travel_books:
     index:
       no_data: しおりがありません
@@ -23,7 +52,7 @@ ja:
       title: しおり作成
     edit:
       title: しおり編集
-    _my_travel_book:
+    my_travel_book:
       departure: 出発
       arrival: 到着
     form:
@@ -69,5 +98,5 @@ ja:
     form:
       placeholder:
         title: 項目名を記入
-    _add_button:
+    add_button:
       new_button: 項目を追加

@@ -1,7 +1,6 @@
 ja:
   activerecord:
     models:
-      user: ユーザー
       travel_book: しおり
       schedule: スケジュール
       spot: 場所
@@ -10,11 +9,6 @@ ja:
       list_item: リストアイテム
       traveler_type: 旅行スタイル
     attributes:
-      user:
-        name: 名前
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: パスワード確認
       travel_book:
         title: タイトル
         description: 旅行の説明

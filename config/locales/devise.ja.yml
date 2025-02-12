@@ -1,0 +1,70 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        icon_image: アイコン
+        remember_me: ログイン状態を保持
+  devise:
+    failure:
+      already_authenticated: "すでにログインしています"
+      inactive: "アカウントが有効化されていません"
+      invalid: "%{authentication_keys} またはパスワードが無効です"
+      locked: "アカウントがロックされています"
+      last_attempt: "アカウントがロックされる前にあと1回試行できます"
+      not_found_in_database: "%{authentication_keys} またはパスワードが無効です"
+      timeout: "セッションが期限切れのため再度ログインが必要です"
+      unauthenticated: "ログインが必要です"
+      unconfirmed: "メールアドレスの確認後に続行できます"
+    mailer:
+      confirmation_instructions:
+        subject: "確認手順"
+      reset_password_instructions:
+        subject: "パスワードリセット手順"
+      unlock_instructions:
+        subject: "ロック解除手順"
+      email_changed:
+        subject: "メールアドレスを変更しました"
+      password_change:
+        subject: "パスワードを変更しました"
+    omniauth_callbacks:
+      failure: '%{kind} アカウントでログインできませんでした: \"%{reason}\"'
+      success: "%{kind} アカウントでログインしました"
+    passwords:
+      no_token: "パスワード再設定メールからアクセス可能なページです。提供された完全なURLを使用したことを確認してください。"
+      send_instructions: "パスワード再設定の手順を数分以内にメールで送信します"
+      send_paranoid_instructions: "パスワード再設定の手順を数分以内にメールで送信します"
+      updated: "パスワードを変更しました"
+      updated_not_active: "パスワードを変更しました"
+    registrations:
+      destroyed: "アカウントを削除しました"
+      signed_up: "アカウントを作成しました"
+      signed_up_but_inactive: "アカウントを作成しましたが、アカウントが有効化されていないためログインできませんでした"
+      signed_up_but_locked: "アカウントを作成しましたが、アカウントがロックされているためログインできませんでした"
+      signed_up_but_unconfirmed: "送信されたメールの確認リンクをクリックしてアカウントを有効化してください"
+      update_needs_confirmation: "アカウントを更新したので、新しいメールアドレスの確認が必要です。送信されたメールの確認リンクを開いてください。"
+      updated: "アカウントを更新しました"
+      updated_but_not_signed_in: "パスワードが変更されたため再度ログインしてください"
+    sessions:
+      signed_in: "ログインしました"
+      signed_out: "ログアウトしました"
+      already_signed_out: "ログアウトしました"
+    unlocks:
+      send_instructions: "アカウントのロック解除手順を数分以内にメールで送信します"
+      send_paranoid_instructions: "アカウントのロック解除手順を数分以内にメールで送信します"
+      unlocked: "アカウントのロックを解除したため、ログインしてください"
+  errors:
+    messages:
+      already_confirmed: "すでに確認されているため、ログインをお試しください"
+      confirmation_period_expired: "確認は %{period} 内に完了する必要があるため、新しい確認リンクをリクエストしてください"
+      expired: "期限が切れたため、新しいリンクをリクエストしてください"
+      not_found: "見つかりませんでした"
+      not_locked: "ロックされていません"
+      not_saved:
+        one: "%{resource} は保存されませんでした: 1つのエラーがあります"
+        other: "%{resource} は保存されませんでした: %{count} のエラーがあります"

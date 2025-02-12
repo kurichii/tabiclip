@@ -1,16 +1,18 @@
-<div class="bg-white rounded-lg shadow-md p-6 m-6 flex flex-col items-center">
+<div class="container">
+  <div class="form-container bg-white rounded-lg shadow-md p-8">
 
-  <%= image_tag(@user.icon_image? ? @user.icon_image_url : "default_icon.png",
-    class: "rounded-full w-24 h-24 shadow-md object-cover border border-gray-200") %>
+    <%= image_tag(@user.icon_image? ? @user.icon_image_url : "default_icon.png",
+      class: "mx-auto rounded-full w-20 h-20 shadow-md object-cover border border-gray-200") %>
 
-  <h1 class="mt-2 text-center text-lg font-bold"><%= @user.name %></h2>
+    <h1 class="mt-2 text-center text-lg font-bold"><%= @user.name %></h2>
 
-  <div class="mt-5 flex gap-2">
-    <p>メールアドレス</p>
-    <p><%= @user.email %></p>
-  </div>
+    <div class="mt-5 flex justify-center gap-2">
+      <p><%= User.human_attribute_name(:email) %></p>
+      <p><%= @user.email %></p>
+    </div>
 
-  <div class="mt-10 text-center">
-    <%= link_to "edit", edit_user_registration_path, class: "btn rounded-btn" %>
+    <div class="mt-5">
+      <%= link_to t(".profile_button"), edit_user_registration_path, class: "btn btn-primary w-full mt-6 mx-auto" %>
+    </div>
   </div>
 </div>

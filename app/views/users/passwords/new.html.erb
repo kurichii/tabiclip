@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-container rounded-lg shadow-md bg-white p-8">
-    <h2>Forgot your password?</h2>
+    <h2><%= t(".title") %></h2>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
@@ -14,10 +14,14 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Send me reset password instructions", class: "btn btn-primary w-full mt-6 mx-auto" %>
+        <%= f.submit t(".send"), class: "btn btn-primary w-full mt-6 mx-auto" %>
       </div>
     <% end %>
 
-    <%= render "users/shared/links" %>
+    <%- if controller_name != 'sessions' %>
+      <div class="text-center my-3">
+        <%= link_to t(".login_page"), new_session_path(resource_name), class: "underline" %><br />
+      </div>
+    <% end %>
   </div>
 </div>
