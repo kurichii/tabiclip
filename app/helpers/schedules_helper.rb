@@ -1,15 +1,11 @@
 module SchedulesHelper
-  def sum_budgets(schedules)
-    schedules.sum { | schedule | schedule.budged.to_i }
-  end
-
   def fmt_schedule_date(date)
     return "" if date.nil?
     date.strftime("%Y/%-m/%-d/(%a) %-H:%M")
   end
 
-  def fmt_simple_date(date)
-    return date if date.is_a?(String)  # 文字列ならそのまま返す
+  def fmt_date_with_day(date)
+    return date if date.is_a?(String)
     date.strftime("%-m/%-d(%a)")
   end
 
@@ -29,36 +25,33 @@ module SchedulesHelper
     elsif schedule.start_date || schedule.end_date
       "#{fmt_schedule_date(schedule.start_date)} - #{fmt_schedule_date(schedule.end_date)}".strip
     else
-      "未定"
+      t("helpers.undecided")
     end
   end
 
   def fmt_schedule_datetime_duration(schedule)
-    if schedule.start_date && schedule.end_date
-      "#{fmt_datetime(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}"
-    elsif schedule.start_date || schedule.end_date
-      "#{fmt_datetime(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}".strip
-    else
-      "未定"
-    end
+    return t("helpers.undecided") unless schedule.start_date || schedule.end_date
+    "#{fmt_datetime(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}"
   end
 
   def fmt_all_day_schedule_datetime_duration(schedule)
-    if schedule.start_date && schedule.end_date
-      "#{fmt_date_with_datetime(schedule.start_date)} - #{fmt_date_with_datetime(schedule.end_date)}"
-    elsif schedule.start_date || schedule.end_date
-      "#{fmt_date_with_datetime(schedule.start_date)} - #{fmt_date_with_datetime(schedule.end_date)}".strip
-    else
-      "未定"
-    end
+    return t("helpers.undecided") unless schedule.start_date || schedule.end_date
+    "#{fmt_date_with_datetime(schedule.start_date)} - #{fmt_date_with_datetime(schedule.end_date)}"
   end
 
-  def desplay_value(data)
-    data.presence || ""
+
+  def schedule_spot_info(data)
+    return content_tag(:li, t(".no_data")) if data.nil?
+    content = []
+    content << content_tag(:li, data.name) if data.name.present?
+    content << content_tag(:li, data.telephone) if data.telephone.present?
+    content << content_tag(:li, data.address) if data.address.present?
+    safe_join(content)
   end
 
-  def display_memo(data)
-    data == "" ? "メモはありません" : data
+
+  def schedule_memo(data)
+    data.blank? ? t("schedules.helpers.no_memo") : data
   end
 
   def total_budget(schedules)

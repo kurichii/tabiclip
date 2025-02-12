@@ -33,3 +33,22 @@ ja:
       is_public:
         true: 公開
         false: 非公開
+  schedules:
+    index:
+      new_button: スケジュール作成
+      no_data: スケジュールを登録しましょう
+    show:
+      no_data: 場所の登録はありません
+    new:
+      title: スケジュール作成
+    edit:
+      title: スケジュール編集
+    form:
+      placeholder:
+        title: スケジュールのタイトルを記入
+        memo: 移動手段や観光地の情報などのメモを記入
+      is_public:
+        true: 公開
+        false: 非公開
+    helpers:
+      no_memo: メモはありません
