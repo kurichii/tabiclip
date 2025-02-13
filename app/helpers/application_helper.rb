@@ -23,11 +23,13 @@ module ApplicationHelper
     date.strftime("%Y/%-m/%-d(%a)")
   end
 
-  def flash_mesage_color(type)
-    case type.to_sym
-    when :success then "alert-success"
-    when :error then "alert-error"
-    else "bg-gray-300"
-    end
+  def flash_message_color(type)
+    colors = {
+      success: "alert-success",
+      notice: "alert-success",
+      error: "alert-error",
+      alert: "alert-error"
+    }
+    colors[type.to_sym] || "bg-gray-300"
   end
 end
