@@ -42,7 +42,7 @@
 
   <div class="mt-2 flex flex-row-reverse">
     <% if @travel_book.persisted? && @travel_book.travel_book_image %>
-      <%= link_to delete_image_travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+      <%= link_to delete_image_travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "hover:opacity-50" do %>
         <i class="fa-solid fa-trash"></i>
       <% end %>
     <% end %>
