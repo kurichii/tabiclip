@@ -1,3 +1,5 @@
+<%= turbo_stream.update "flash_messages", partial: "shared/flash_message" %>
+
 <%= turbo_stream.append "list_item" do %>
   <%= render "list_items/list_item", list_item: @list_item %>
 <% end %>

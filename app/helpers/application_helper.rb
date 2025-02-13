@@ -22,4 +22,8 @@ module ApplicationHelper
     return "未定" if date.nil?
     date.strftime("%Y/%-m/%-d(%a)")
   end
+
+  def flash_message_color(type)
+    type.to_sym == :notice ? "alert-success" : "alert-error"
+  end
 end
