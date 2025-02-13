@@ -8,27 +8,31 @@ class ListItemsController < ApplicationController
 
   def create
     @list_item = @check_list.list_items.build(list_item_params)
-
-    if @list_item.save
-      flash.now[:notice] = "成功"
-    else
-      flash.now[:alert] = "失敗"
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @list_item.save
+        format.turbo_stream { flash.now[:success] = t("defaults.flash_message.created", item: ListItem.model_name.human) }
+      else
+        flash.now[:error] = t("defaults.flash_message.not_created", item: ListItem.model_name.human)
+        format.turbo_stream { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit; end
 
   def update
-    if @list_item.update(list_item_params)
-      flash.now[:notice] = "成功"
-    else
-      flash.now[:alert] = "失敗"
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @list_item.update(list_item_params)
+        format.turbo_stream { flash.now[:success] = t("defaults.flash_message.updated", item: ListItem.model_name.human) }
+      else
+        flash.now[:error] = t("defaults.flash_message.not_updated", item: ListItem.model_name.human)
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
+    flash.now[:success] = t("defaults.flash_message.deleted", item: ListItem.model_name.human)
     @list_item.destroy!
   end
 
