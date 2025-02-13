@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "users/profile" => "users#show"
   get "home/index"
   resources :travel_books do
+    collection do
+      get "public", action: :public_travel_books
+    end
     delete "delete_image", on: :member
     resources :schedules, shallow: true
     resources :check_lists, shallow: true do
@@ -33,5 +36,6 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "travel_books#index"
+  # root "travel_books#index"
+  root "home#index"
 end

@@ -1,10 +1,10 @@
 <div class="btm-nav">
-  <%= link_to travel_books_path, class: "#{add_active_class(travel_books_path)}" do %>
+  <%= link_to public_travel_books_path, class: "#{add_active_class(travel_books_path)}" do %>
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="btm-nav-label">しおり検索</span>
   <% end %>
 
-  <%= link_to (user_signed_in? ? travel_books_path(scope: 'own') : new_user_session_path), class: "#{add_active_class(travel_books_path(scope: 'own'))}" do %>
+  <%= link_to travel_books_path, class: "#{add_active_class(travel_books_path(scope: 'own'))}" do %>
     <i class="fa-solid fa-map-location-dot"></i>
     <span class="btm-nav-label">マイしおり</span>
   <% end %>

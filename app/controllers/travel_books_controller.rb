@@ -1,13 +1,8 @@
 class TravelBooksController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
+  before_action :authenticate_user!, only: %i[ index new edit update destroy ]
 
   def index
-    @travel_books =
-    if params[:scope] == "own"
-      current_user ? current_user.travel_books : []
-    else
-      TravelBook.public_travel_books.includes(:users)
-    end
+    @travel_books = current_user.travel_books
   end
 
   def new
@@ -58,6 +53,10 @@ class TravelBooksController < ApplicationController
     @travel_book.remove_travel_book_image! # CarrierWaveのメソッドを使って画像を削除
     @travel_book.save
     redirect_to edit_travel_book_path(@travel_book), success: t("defaults.flash_message.deleted", item: TravelBook.model_name.human)
+  end
+
+  def public_travel_books
+    @travel_books = TravelBook.public_travel_books.includes(:users)
   end
 
   private
