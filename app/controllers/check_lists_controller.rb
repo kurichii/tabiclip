@@ -16,7 +16,7 @@ class CheckListsController < ApplicationController
     if @check_list.save
       redirect_to travel_book_check_lists_path(@travel_book), success: t("defaults.flash_message.created", item: CheckList.model_name.human)
     else
-      flash.now[:error] = t("defaults.flash_message.not_created", item: CheckList.model_name.human)
+      flash.now[:alert] = t("defaults.flash_message.not_created", item: CheckList.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,7 +32,7 @@ class CheckListsController < ApplicationController
     if @check_list.update(check_list_param)
       redirect_to check_list_path(@check_list), success: t("defaults.flash_message.updated", item: CheckList.model_name.human)
     else
-      flash.now[:error] = t("defaults.flash_message.not_updated", item: CheckList.model_name.human)
+      flash.now[:alert] = t("defaults.flash_message.not_updated", item: CheckList.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end

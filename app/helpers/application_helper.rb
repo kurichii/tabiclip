@@ -24,12 +24,6 @@ module ApplicationHelper
   end
 
   def flash_message_color(type)
-    colors = {
-      success: "alert-success",
-      notice: "alert-success",
-      error: "alert-error",
-      alert: "alert-error"
-    }
-    colors[type.to_sym] || "bg-gray-300"
+    type.to_sym == :notice ? "alert-success" : "alert-error"
   end
 end

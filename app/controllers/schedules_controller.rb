@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
     if @schedule_form.save
       redirect_to travel_book_schedules_path(@travel_book), success: t("defaults.flash_message.created", item: Schedule.model_name.human)
     else
-      flash.now[:error] = t("defaults.flash_message.not_created", item: Schedule.model_name.human)
+      flash.now[:alert] = t("defaults.flash_message.not_created", item: Schedule.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,7 +34,7 @@ class SchedulesController < ApplicationController
     if @schedule_form.update(schedule_params)
       redirect_to travel_book_schedules_path(@travel_book), success: t("defaults.flash_message.updated", item: Schedule.model_name.human)
     else
-      flash.now[:error] = t("defaults.flash_message.not_updated", item: Schedule.model_name.human)
+      flash.now[:alert] = t("defaults.flash_message.not_updated", item: Schedule.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end

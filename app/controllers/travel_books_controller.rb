@@ -23,7 +23,7 @@ class TravelBooksController < ApplicationController
       current_user.user_travel_books.create(travel_book: @travel_book)
       redirect_to travel_books_path, success: t("defaults.flash_message.created", item: TravelBook.model_name.human)
     else
-      flash.now[:error] = t("defaults.flash_message.not_created", item: TravelBook.model_name.human)
+      flash.now[:alert] = t("defaults.flash_message.not_created", item: TravelBook.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -42,7 +42,7 @@ class TravelBooksController < ApplicationController
     if @travel_book.update(travel_book_param)
       redirect_to travel_books_path(@travel_book), success: t("defaults.flash_message.updated", item: TravelBook.model_name.human)
     else
-      flash.now[:error] = t("defaults.flash_message.not_updated", item: TravelBook.model_name.human)
+      flash.now[:alert] = t("defaults.flash_message.not_updated", item: TravelBook.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end
