@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 shadow">
+<div class="navbar bg-base-100 shadow-sm">
   <div class="flex-1 px-2 lg:flex-none">
     <%= link_to '/', class: "text-lg font-bold" do %>
         TabiClip
@@ -6,54 +6,31 @@
   </div>
   <div class="flex flex-1 justify-end px-2">
     <div class="flex items-stretch">
-      <% unless user_signed_in? %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-ghost rounded-btn" %>
-      <% end %>
-      <div class="dropdown dropdown-end">
+      <% if user_signed_in? %>
+            <div class="dropdown dropdown-end">
         <div class="flex-none">
-          <button class="btn btn-square btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              class="inline-block h-5 w-5 stroke-current">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
+          <button>
+            <%= image_tag(current_user.icon_image? ? current_user.icon_image_url : "default_icon.png",
+                class: "mx-auto rounded-full w-10 h-10 mr-2 object-cover shadow-sm border border-base-500 hover:opacity-50") %>
           </button>
         </div>
         <ul
           tabindex="0"
-          class="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-52 p-2 shadow">
-          <% if user_signed_in? %>
+          class="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-52 p-2">
             <li>
-              <%= link_to "logout", destroy_user_session_path, data: { turbo_method: :delete } %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "sign up", new_user_registration_path %>
-            </li>
-          <% end %>
-            <li>
-              <%= link_to "how to use", "#" %>
+              <%= link_to "#{current_user.name}", users_profile_path %>
             </li>
             <li>
-              <%= link_to "travel books", "#" %>
+              <%= link_to t("header.how_to_use"), "#" %>
             </li>
             <li>
-              <%= link_to "terms of service", "#" %>
-            </li>
-            <li>
-              <%= link_to "contact", "#" %>
-            </li>
-            <li>
-              <%= link_to "privacy policy", "#" %>
+              <%= link_to t("header.logout"), destroy_user_session_path, data: { turbo_method: :delete } %>
             </li>
         </ul>
       </div>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>
