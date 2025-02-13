@@ -20,7 +20,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # protected
 
-  #ログイン後のリダイレクト先
+  # ログイン後のリダイレクト先
   def after_sign_in_path_for(resource)
     travel_books_path
   end
