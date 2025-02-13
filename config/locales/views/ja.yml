@@ -20,6 +20,21 @@ ja:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
+  header:
+    logout: ログアウト
+    how_to_use: 使い方
+    terms_of_service: 利用規約
+    contact: お問い合わせ
+    privacy_policy: プライバシーポリシー
+  btm_nav:
+    travel_books_search: しおり検索
+    travel_book_create: しおり作成
+    my_travel_book: マイしおり
+    travel_book_info: しおり情報
+    schedule: スケジュール
+    map: マップ
+    note: ノート
+    album: アルバム
   users:
     form:
       placeholder:

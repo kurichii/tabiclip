@@ -1,20 +1,16 @@
 module ApplicationHelper
-  # ボトムナビゲーションのだしわけ
-  # TravelController#showでユーザーがしおりとリレーションを組んでいる場合true
-  def display_bottom_nav?
+  # ボトムナビゲーションのだしわけ判定
+  def display_bottom_nav
     return false if current_user.nil?
-    (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(id: params[:id]))|| controller_name == "schedules"
+    (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(id: params[:id]))||
+    (controller_name == "schedules")||
+    (controller_name == "check_lists") ||
+    (controller_name == "list_items")
   end
 
   # 指定したパスが現在のページであれば"active"を返す
   def add_active_class(path)
-    if path == travel_books_path && (request.fullpath == root_path || request.fullpath == travel_books_path)
-      "active"
-    elsif request.fullpath == path
-      "active"
-    else
-      ""
-    end
+    current_page?(path) ? "hover:bg-base-200" : "hover:bg-base-200 opacity-50"
   end
 
   # 日付をフォーマットする
