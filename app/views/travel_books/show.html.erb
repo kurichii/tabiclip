@@ -7,10 +7,10 @@
 
       <div class="card-body">
         <div class="card-actions items-center justify-between">
-        <%= link_to travel_books_path, class: "hover:opacity-50" do %>
-          <i class="fa-solid fa-chevron-left"></i>
-        <% end %>
-          <h2 class="card-title"><%= @travel_book.title %></h2>
+          <%= link_to (user_signed_in? ? travel_books_path : public_travel_books_path), class: "hover:opacity-50" do %>
+            <i class="fa-solid fa-chevron-left"></i>
+          <% end %>
+          <h3 class="flex-grow text-center"><%= @travel_book.title %></h3>
           <% if @travel_book.owned_by_user?(current_user) %>
             <div class="justify-end">
               <%= link_to edit_travel_book_path(@travel_book), class: "hover:opacity-50" do %>
@@ -47,6 +47,12 @@
           <div class="font-bold"><%= TravelBook.human_attribute_name(:is_public) %></div>
           <div><%= travel_book_is_public(@travel_book) %></div>
         </div>
+
+        <% unless @travel_book.owned_by_user?(current_user) %>
+          <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary hover:opacity-50" do %>
+            スケジュールを見る
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

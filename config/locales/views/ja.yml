@@ -87,8 +87,9 @@ ja:
     index:
       new_button: スケジュール作成
       no_data: スケジュールを登録しましょう
+      no_creator_no_data: スケジュールが登録されていません
     show:
-      no_data: 場所の登録はありません
+      no_data: 場所が登録されていません
     new:
       title: スケジュール作成
     edit:
@@ -101,11 +102,11 @@ ja:
         true: 公開
         false: 非公開
     helpers:
-      no_memo: メモはありません
+      no_memo: メモは登録されていません
   check_lists:
     index:
       new_button: チェックリスト作成
-      no_data: チェックリストはありません
+      no_data: チェックリストは登録されていません
     show:
       no_data: チェックリストに項目を追加しましょう
     new:
