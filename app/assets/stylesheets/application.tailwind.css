@@ -33,3 +33,10 @@ h3 {
   text-align: center;
   font-weight: bold;
 }
+
+.bg-image {
+  background-image: url('map.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+}

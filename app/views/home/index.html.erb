@@ -1,1 +1,28 @@
-ここはホームです！
+<div class="min-h-screen relative flex flex-col bg-fixed">
+
+  <div class="bg-image absolute inset-0 opacity-50 z-0"></div>
+
+  <div class="flex flex-col flex-grow items-center justify-center z-10 text-center">
+
+    <h1 class="text-6xl font-bold mb-2">TabiClip</h1>
+    <p>旅行のしおりをつくるサービスです</p>
+    <div class="flex gap-4 justify-center mt-5">
+      <%= link_to "みんなのしおりを見る", public_travel_books_path, class: "btn btn-primary" %>
+    </div>
+    <div class="flex gap-4 justify-center mt-5">
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <footer class="footer footer-center bg-base-100 p-5 z-10">
+    <nav class="grid grid-flow-col gap-4">
+      <%= link_to "利用規約", "#", class: "link link-hover" %>
+      <%= link_to "お問い合わせ", "#", class: "link link-hover" %>
+      <%= link_to "プライバシーポリシー", "#", class: "link link-hover" %>
+    </nav>
+    <aside>
+      <p>Copyright © 2025 Tabiclip</p>
+    </aside>
+  </footer>
+</div>
