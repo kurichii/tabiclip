@@ -2,6 +2,7 @@
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <%if @travel_books.present? %>
       <%= render "my_travel_book", travel_books: @travel_books %>
+      <%= paginate @travel_books %>
     <% else %>
       <%= t(".no_data") %>
     <% end %>
