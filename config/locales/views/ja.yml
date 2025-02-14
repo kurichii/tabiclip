@@ -20,6 +20,21 @@ ja:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
+  header:
+    logout: ログアウト
+    how_to_use: 使い方
+    terms_of_service: 利用規約
+    contact: お問い合わせ
+    privacy_policy: プライバシーポリシー
+  btm_nav:
+    travel_books_search: しおり検索
+    travel_book_create: しおり作成
+    my_travel_book: マイしおり
+    travel_book_info: しおり情報
+    schedule: スケジュール
+    map: マップ
+    note: ノート
+    album: アルバム
   users:
     form:
       placeholder:
@@ -72,8 +87,9 @@ ja:
     index:
       new_button: スケジュール作成
       no_data: スケジュールを登録しましょう
+      no_creator_no_data: スケジュールが登録されていません
     show:
-      no_data: 場所の登録はありません
+      no_data: 場所が登録されていません
     new:
       title: スケジュール作成
     edit:
@@ -86,11 +102,11 @@ ja:
         true: 公開
         false: 非公開
     helpers:
-      no_memo: メモはありません
+      no_memo: メモは登録されていません
   check_lists:
     index:
       new_button: チェックリスト作成
-      no_data: チェックリストはありません
+      no_data: チェックリストは登録されていません
     show:
       no_data: チェックリストに項目を追加しましょう
     new:

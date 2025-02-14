@@ -1,9 +1,13 @@
 <div class="container">
-  <div class="form-container bg-white rounded-lg shadow-md p-8">
-
-    <div class="flex flex-col items-center mb-5">
-      <h3><%= @travel_book.title %></h3>
-      <p><%= travel_book_duration(@travel_book)%></p>
+  <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
+    <div class="flex items-center justify-between">
+      <%= link_to travel_book_path(@travel_book), class: "hover:opacity-50" do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+      <div class="flex flex-grow flex-col items-center">
+        <h3><%= @travel_book.title %></h3>
+        <p><%= travel_book_duration(@travel_book) %></p>
+      </div>
     </div>
 
     <% if @schedules.present? %>
@@ -30,11 +34,17 @@
       </div>
 
     <% else %>
-      <p class="text-center my-10"><%= t(".no_data") %></p>
+      <% if @travel_book.owned_by_user?(current_user) %>
+        <p class="text-center my-10"><%= t(".no_data") %></p>
+      <% else %>
+        <p class="text-center my-10"><%= t(".no_creator_no_data") %></p>
+      <% end %>
     <% end %>
 
-    <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
-      <%= t(".new_button") %>
+    <% if @travel_book.owned_by_user?(current_user) %>
+      <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
+        <%= t(".new_button") %>
+      <% end %>
     <% end %>
   </div>
 </div>

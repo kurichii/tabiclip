@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="form-container bg-white rounded-lg shadow-md p-8">
+  <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
     <div class="flex items-center justify-between">
-      <%= link_to travel_book_check_lists_path(@travel_book) do %>
+      <%= link_to check_list_path(@check_list), class:"hover:opacity-50" do %>
         <i class="fa-solid fa-chevron-left"></i>
       <% end %>
       <h3 class="flex-grow text-center"><%= t(".title") %></h1>
