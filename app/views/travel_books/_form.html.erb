@@ -52,11 +52,11 @@
     <%= f.label :is_public, TravelBook.human_attribute_name(:is_public), class: "label" %>
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1">
-        <%= f.radio_button :is_public, true, id: "is_public_true", class: "radio radio-primary" %>
+        <%= f.radio_button :is_public, true, id: "is_public_true", class: "radio radio-primary", checked: f.object.is_public? %>
         <%= f.label :is_public_true, t(".is_public.true"), for: "is_public_true" %>
       </div>
       <div class="flex items-center gap-1">
-        <%= f.radio_button :is_public, false, id: "is_public_false", class: "radio radio-primary", checked: "checked" %>
+        <%= f.radio_button :is_public, false, id: "is_public_false", class: "radio radio-primary", checked: !f.object.is_public? %>
         <%= f.label :is_public_false, t(".is_public.false"), for: "is_public_false" %>
       </div>
     </div>
