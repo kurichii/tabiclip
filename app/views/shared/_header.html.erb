@@ -1,6 +1,6 @@
 <div class="navbar bg-base-100 shadow-sm">
   <div class="flex-1 px-2 lg:flex-none">
-    <%= link_to (user_signed_in? ? travel_books_path : public_travel_books_path), class: "text-lg font-bold hover:opacity-50" do %>
+    <%= link_to (user_signed_in? ? travel_books_path : home_index_path), class: "text-lg font-bold hover:opacity-50" do %>
         TabiClip
     <% end %>
   </div>
