@@ -11,12 +11,14 @@
   <i class="fa-solid fa-location-dot"></i>
     <span class="btm-nav-label"><%= t("btm_nav.map") %></span>
   <% end %>
-  <%= link_to travel_book_check_lists_path(@travel_book), class: "#{add_active_class(travel_book_check_lists_path(@travel_book))}" do %>
-    <i class="fa-solid fa-file-pen"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.note") %></span>
-  <% end %>
-  <%= link_to "#", class: "opacity-50" do %>
-    <i class="fa-solid fa-image"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.album") %></span>
+  <% if @travel_book.owned_by_user?(current_user) %>
+    <%= link_to travel_book_check_lists_path(@travel_book), class: "#{add_active_class(travel_book_check_lists_path(@travel_book))}" do %>
+      <i class="fa-solid fa-file-pen"></i>
+      <span class="btm-nav-label"><%= t("btm_nav.note") %></span>
+    <% end %>
+    <%= link_to "#", class: "opacity-50" do %>
+      <i class="fa-solid fa-image"></i>
+      <span class="btm-nav-label"><%= t("btm_nav.album") %></span>
+    <% end %>
   <% end %>
 </div>
