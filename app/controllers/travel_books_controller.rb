@@ -57,6 +57,7 @@ class TravelBooksController < ApplicationController
 
   def public_travel_books
     @travel_books = TravelBook.includes(:users).order(:created_at).page(params[:page])
+    render "travel_books/public_travel_books"
   end
 
   private
