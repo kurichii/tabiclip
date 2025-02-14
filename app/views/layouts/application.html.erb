@@ -23,12 +23,10 @@
     <div id="flash_messages"></div>
     <%= render "shared/flash_message" %>
     <%= yield %>
-    <% if user_signed_in? %>
-      <% if display_bottom_nav %>
-        <%= render "shared/bottom_navigation_on_travel_book", travel_book: @travel_book %>
-      <% else %>
-        <%= render "shared/bottom_navigation" %>
-      <% end %>
+    <% if user_signed_in? && display_bottom_nav_on_travel_book %>
+      <%= render "shared/bottom_navigation_on_travel_book", travel_book: @travel_book %>
+    <% elsif controller_name != "home" %>
+      <%= render "shared/bottom_navigation" %>
     <% end %>
   </body>
 </html>
