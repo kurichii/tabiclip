@@ -1,4 +1,8 @@
 ja:
+  views:
+    pagination:
+      previous: "前へ"
+      next: "次へ"
   helpers:
     prompt:
       select: 選択してください
