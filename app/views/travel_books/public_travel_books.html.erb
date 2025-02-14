@@ -1,5 +1,6 @@
 <div class="container">
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <%= render @travel_books %>
+    <%= render partial: "travel_books/travel_book", collection: @travel_books, as: :travel_book %>
   </div>
+  <%= paginate @travel_books %>
 </div>

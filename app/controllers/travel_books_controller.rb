@@ -2,7 +2,7 @@ class TravelBooksController < ApplicationController
   before_action :authenticate_user!, only: %i[ index new edit update destroy ]
 
   def index
-    @travel_books = current_user.travel_books
+    @travel_books = current_user.travel_books.order(:created_at).page(params[:page])
   end
 
   def new
@@ -56,7 +56,7 @@ class TravelBooksController < ApplicationController
   end
 
   def public_travel_books
-    @travel_books = TravelBook.public_travel_books.includes(:users)
+    @travel_books = TravelBook.includes(:users).order(:created_at).page(params[:page])
   end
 
   private
