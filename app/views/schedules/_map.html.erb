@@ -1,0 +1,30 @@
+<script>
+function initMap() {
+  // Mapを表示してmarkerをつける処理
+  // Mapの表示領域
+  let map = document.getElementById("map")
+  if (map) {
+    // Railsから渡されたスポットデータをJSで扱えるようにパース
+    const spots = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name]) %>;
+
+    // @spotsが空でない場合、最初のスポットをセンターにする
+    const position = Array.isArray(spots) && spots.length > 0
+      ? { lat: parseFloat(spots[0].latitude), lng: parseFloat(spots[0].longitude) }
+      : { lat: 35.6803997, lng: 139.7690174 }; // デフォルトの位置（東京駅）
+
+    map = new google.maps.Map(document.getElementById("map"),  {
+      zoom: 10,
+      center: position,
+      mapId: "DEMO_MAP_ID", // 高度なmarkerを使用するために必要
+    });
+
+    spots.forEach((spot) =>{
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+        position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
+        map: map,
+        title: spot.name
+      });
+    });
+  }
+}
+</script>

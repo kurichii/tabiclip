@@ -1,16 +1,11 @@
-document.addEventListener("turbo:load", function() {
-  console.log("turbo:load");
-  initMap();
-});
+<script>
 
 function initMap() {
-  // 場所名
+  // 場所名と住所のフォームにオートコンプリートをつける処理
+  // 場所名,電話番号, 住所
   const inputSpotName = document.getElementById("spotName");
-  // 電話番号
   const inputPhoneNumber = document.getElementById("phoneNumber");
-  // 住所
   const inputAddress = document.getElementById("address");
-
 
   function setAutocomplete(inputElement){
     const options = {
@@ -26,14 +21,12 @@ function initMap() {
       inputAddress.value = place.formatted_address ?? "";
     });
   }
-  // 場所名のオートコンプリート
+
   if(inputSpotName){
     setAutocomplete(inputSpotName);
   }
-  // 住所のオートコンプリート
   if(inputAddress){
     setAutocomplete(inputAddress);
   }
 }
-
-window.initMap = initMap;
+</script>
