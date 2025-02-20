@@ -1,5 +1,4 @@
 <script>
-
 function initMap() {
   // Mapを表示してmarkerをつける処理
   // Mapの表示領域
@@ -26,34 +25,6 @@ function initMap() {
         title: spot.name
       });
     });
-  }
-
-  // 場所名と住所のフォームにオートコンプリートをつける処理
-  // 場所名,電話番号, 住所
-  const inputSpotName = document.getElementById("spotName");
-  const inputPhoneNumber = document.getElementById("phoneNumber");
-  const inputAddress = document.getElementById("address");
-
-  function setAutocomplete(inputElement){
-    const options = {
-      componentRestrictions: { country: 'JP' }
-    };
-    const autocomplete = new google.maps.places.Autocomplete(inputElement, options);
-
-    autocomplete.addListener("place_changed", function() {
-      const place = autocomplete.getPlace();
-      // 場所名、電話番号、住所を更新する(nilかundefinedの場合は空文字)
-      inputSpotName.value = place.name ?? "";
-      inputPhoneNumber.value = place.formatted_phone_number ?? "";
-      inputAddress.value = place.formatted_address ?? "";
-    });
-  }
-
-  if(inputSpotName){
-    setAutocomplete(inputSpotName);
-  }
-  if(inputAddress){
-    setAutocomplete(inputAddress);
   }
 }
 </script>
