@@ -11,7 +11,11 @@ Rails.application.routes.draw do
       get "public", action: :public_travel_books
     end
     delete "delete_image", on: :member
-    resources :schedules, shallow: true
+    resources :schedules, shallow: true do
+      collection do
+        get :map
+      end
+    end
     resources :check_lists, shallow: true do
       resources :list_items, only: %i[ new create edit update destroy toggle ] do
         collection do
