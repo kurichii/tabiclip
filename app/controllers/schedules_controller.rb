@@ -5,6 +5,8 @@ class SchedulesController < ApplicationController
 
   def index
     @schedules = @travel_book.sorted_schedules
+    # scheduleには0もしくは1のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
+    @spots = @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }
   end
 
   def new

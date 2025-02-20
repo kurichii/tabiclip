@@ -1,0 +1,59 @@
+<script>
+
+function initMap() {
+  // Mapを表示してmarkerをつける処理
+  // Mapの表示領域
+  let map = document.getElementById("map")
+  if (map) {
+    // Railsから渡されたスポットデータをJSで扱えるようにパース
+    const spots = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name]) %>;
+
+    // @spotsが空でない場合、最初のスポットをセンターにする
+    const position = Array.isArray(spots) && spots.length > 0
+      ? { lat: parseFloat(spots[0].latitude), lng: parseFloat(spots[0].longitude) }
+      : { lat: 35.6803997, lng: 139.7690174 }; // デフォルトの位置（東京駅）
+
+    map = new google.maps.Map(document.getElementById("map"),  {
+      zoom: 10,
+      center: position,
+      mapId: "DEMO_MAP_ID", // 高度なmarkerを使用するために必要
+    });
+
+    spots.forEach((spot) =>{
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+        position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
+        map: map,
+        title: spot.name
+      });
+    });
+  }
+
+  // 場所名と住所のフォームにオートコンプリートをつける処理
+  // 場所名,電話番号, 住所
+  const inputSpotName = document.getElementById("spotName");
+  const inputPhoneNumber = document.getElementById("phoneNumber");
+  const inputAddress = document.getElementById("address");
+
+  function setAutocomplete(inputElement){
+    const options = {
+      componentRestrictions: { country: 'JP' }
+    };
+    const autocomplete = new google.maps.places.Autocomplete(inputElement, options);
+
+    autocomplete.addListener("place_changed", function() {
+      const place = autocomplete.getPlace();
+      // 場所名、電話番号、住所を更新する(nilかundefinedの場合は空文字)
+      inputSpotName.value = place.name ?? "";
+      inputPhoneNumber.value = place.formatted_phone_number ?? "";
+      inputAddress.value = place.formatted_address ?? "";
+    });
+  }
+
+  if(inputSpotName){
+    setAutocomplete(inputSpotName);
+  }
+  if(inputAddress){
+    setAutocomplete(inputAddress);
+  }
+}
+</script>
