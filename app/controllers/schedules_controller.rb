@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
-  before_action :set_travel_book, only: %i[ index new create ]
+  before_action :set_travel_book, only: %i[ index new create map ]
   before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
@@ -44,6 +44,12 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy!
     redirect_to travel_book_schedules_path(@travel_book), success: t("defaults.flash_message.deleted", item: Schedule.model_name.human)
+  end
+
+  def map
+    @schedules = @travel_book.sorted_schedules
+    # scheduleには0もしくは1のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
+    @spots = @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }
   end
 
   private
