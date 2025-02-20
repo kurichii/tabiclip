@@ -7,7 +7,7 @@
     <i class="fa-regular fa-clock"></i>
     <span class="btm-nav-label"><%= t("btm_nav.schedule") %></span>
   <% end %>
-  <%= link_to "#", class: "opacity-50" do %>
+  <%= link_to map_travel_book_schedules_path(@travel_book), class: "#{add_active_class(map_travel_book_schedules_path(@travel_book))}" do %>
   <i class="fa-solid fa-location-dot"></i>
     <span class="btm-nav-label"><%= t("btm_nav.map") %></span>
   <% end %>
