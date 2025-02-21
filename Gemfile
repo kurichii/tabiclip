@@ -5,6 +5,7 @@ gem "devise"
 
 # 画像
 gem "carrierwave", "~> 3.0"
+gem "mini_magick"
 
 # Amazon S3
 gem "fog-aws"

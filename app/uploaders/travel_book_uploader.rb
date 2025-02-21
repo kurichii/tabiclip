@@ -1,7 +1,7 @@
 class TravelBookUploader < CarrierWave::Uploader::Base
   # Include RMagick, MiniMagick, or Vips support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
   # include CarrierWave::Vips
 
   # Choose what kind of storage to use for this uploader:
@@ -21,12 +21,13 @@ class TravelBookUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  def default_url(*args)
-    ActionController::Base.helpers.asset_path("fallback/" + [ version_name, "default_travel_book_image.jpg" ].compact.join("_"))
+  def default_url
+    "default_travel_book_image.jpg"
   end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
+  process resize_to_fit: [ 800, 250 ]
   #
   # def scale(width, height)
   #   # do something
@@ -35,6 +36,13 @@ class TravelBookUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]
+  # end
+  # version :travel_book_show do
+  #   process resize_to_fit: [800, 250]
+  # end
+
+  # version :travel_book_index do
+  #   process resize_to_fit: [300, 200]
   # end
 
   # Add an allowlist of extensions which are allowed to be uploaded.

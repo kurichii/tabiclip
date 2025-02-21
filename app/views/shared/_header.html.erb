@@ -10,9 +10,7 @@
             <div class="dropdown dropdown-end">
         <div class="flex-none">
           <button>
-            <%= image_tag(current_user.icon_image? ? current_user.icon_image_url : "default_icon.png",
-                class: "mx-auto rounded-full w-10 h-10 mr-2 object-cover shadow-sm border border-base-500 hover:opacity-50") %>
-          </button>
+            <%= image_tag current_user.icon_image_url, class: "mx-auto rounded-full w-10 h-10 object-cover shadow-sm border border-gray-200 mr-2 hover:opacity-50" %>
         </div>
         <ul
           tabindex="0"

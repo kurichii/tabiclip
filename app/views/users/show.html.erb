@@ -1,8 +1,7 @@
 <div class="container">
   <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
 
-    <%= image_tag(@user.icon_image? ? @user.icon_image_url : "default_icon.png",
-      class: "mx-auto rounded-full w-20 h-20 shadow-md object-cover border border-gray-200") %>
+    <%= image_tag current_user.icon_image_url, class: "mx-auto rounded-full w-20 h-20 shadow-md object-cover border border-gray-200" %>
 
     <h1 class="mt-2 text-center text-lg font-bold"><%= @user.name %></h2>
 
