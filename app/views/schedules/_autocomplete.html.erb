@@ -1,6 +1,5 @@
 <script>
-
-function initMap() {
+function initAutocomplete() {
   // 場所名と住所のフォームにオートコンプリートをつける処理
   // 場所名,電話番号, 住所
   const inputSpotName = document.getElementById("spotName");
@@ -22,11 +21,7 @@ function initMap() {
     });
   }
 
-  if(inputSpotName){
-    setAutocomplete(inputSpotName);
-  }
-  if(inputAddress){
-    setAutocomplete(inputAddress);
-  }
+  setAutocomplete(inputSpotName);
+  setAutocomplete(inputAddress);
 }
 </script>
