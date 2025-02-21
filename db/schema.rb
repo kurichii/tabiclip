@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_21_061741) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_061741) do
   end
 
   create_table "check_lists", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigserial "id", null: false
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,7 +30,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_061741) do
   end
 
   create_table "list_items", force: :cascade do |t|
-    t.bigint "check_list_id", null: false
     t.string "title", null: false
     t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
