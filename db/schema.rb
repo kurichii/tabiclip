@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_21_041915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,11 +21,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
   end
 
   create_table "check_lists", force: :cascade do |t|
-    t.bigint "travel_book_id", null: false
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["travel_book_id"], name: "index_check_lists_on_travel_book_id"
+    t.uuid "travel_book_uuid", null: false
+    t.index ["travel_book_uuid"], name: "index_check_lists_on_travel_book_uuid"
   end
 
   create_table "list_items", force: :cascade do |t|
@@ -38,7 +38,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.bigint "travel_book_id", null: false
     t.string "title", null: false
     t.integer "budged", default: 0
     t.text "memo"
@@ -46,7 +45,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["travel_book_id"], name: "index_schedules_on_travel_book_id"
+    t.uuid "travel_book_uuid", null: false
+    t.index ["travel_book_uuid"], name: "index_schedules_on_travel_book_uuid"
   end
 
   create_table "spots", force: :cascade do |t|
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
     t.index ["schedule_id"], name: "index_spots_on_schedule_id"
   end
 
-  create_table "travel_books", force: :cascade do |t|
+  create_table "travel_books", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
     t.boolean "is_public", default: false, null: false
@@ -77,6 +77,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
     t.index ["area_id"], name: "index_travel_books_on_area_id"
     t.index ["creator_id"], name: "index_travel_books_on_creator_id"
     t.index ["traveler_type_id"], name: "index_travel_books_on_traveler_type_id"
+    t.index ["uuid"], name: "index_travel_books_on_uuid", unique: true
   end
 
   create_table "traveler_types", force: :cascade do |t|
@@ -87,11 +88,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
 
   create_table "user_travel_books", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "travel_book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["travel_book_id"], name: "index_user_travel_books_on_travel_book_id"
-    t.index ["user_id", "travel_book_id"], name: "index_user_travel_books_on_user_id_and_travel_book_id", unique: true
+    t.uuid "travel_book_uuid", null: false
+    t.index ["travel_book_uuid"], name: "index_user_travel_books_on_travel_book_uuid"
     t.index ["user_id"], name: "index_user_travel_books_on_user_id"
   end
 
@@ -109,13 +109,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_074029) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "check_lists", "travel_books"
+  add_foreign_key "check_lists", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "list_items", "check_lists"
-  add_foreign_key "schedules", "travel_books"
+  add_foreign_key "schedules", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "spots", "schedules"
   add_foreign_key "travel_books", "areas"
   add_foreign_key "travel_books", "traveler_types"
   add_foreign_key "travel_books", "users", column: "creator_id"
-  add_foreign_key "user_travel_books", "travel_books"
+  add_foreign_key "user_travel_books", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "user_travel_books", "users"
 end

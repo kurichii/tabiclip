@@ -1,5 +1,5 @@
 class Schedule < ApplicationRecord
-  belongs_to :travel_book
+  belongs_to :travel_book, foreign_key: :travel_book_uuid
   has_one :spot, dependent: :destroy
 
   def self.group_by_date(schedules)
