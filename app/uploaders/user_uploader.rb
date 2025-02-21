@@ -5,8 +5,14 @@ class UserUploader < CarrierWave::Uploader::Base
   # include CarrierWave::Vips
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
+  # 本番環境と開発・テスト環境で保存先を分ける
+  if Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -16,7 +22,7 @@ class UserUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    "default_icon.png"
+    "icon.webp"
   end
 
   # Process files as they are uploaded:
@@ -35,7 +41,7 @@ class UserUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w[ jpg jpeg gif png ]
+    %w[ jpg jpeg gif png heic webp ]
   end
 
   # Override the filename of the uploaded files:
@@ -43,4 +49,18 @@ class UserUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg"
   # end
+
+  # WebPに変換
+  process :convert_to_webp
+
+  def convert_to_webp
+    manipulate! do |img|
+      img.format "webp"
+      img
+    end
+  end
+
+  def filename
+    super.chomp(File.extname(super)) + ".webp" if original_filename.present?
+  end
 end
