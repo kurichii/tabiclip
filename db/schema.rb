@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_21_041915) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,21 +20,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_041915) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "check_lists", force: :cascade do |t|
+  create_table "check_lists", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "travel_book_uuid", null: false
     t.index ["travel_book_uuid"], name: "index_check_lists_on_travel_book_uuid"
+    t.index ["uuid"], name: "index_check_lists_on_uuid", unique: true
   end
 
   create_table "list_items", force: :cascade do |t|
-    t.bigint "check_list_id", null: false
     t.string "title", null: false
     t.boolean "completed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["check_list_id"], name: "index_list_items_on_check_list_id"
+    t.uuid "check_list_uuid", null: false
+    t.index ["check_list_uuid"], name: "index_list_items_on_check_list_uuid"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -110,7 +111,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_041915) do
   end
 
   add_foreign_key "check_lists", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
-  add_foreign_key "list_items", "check_lists"
+  add_foreign_key "list_items", "check_lists", column: "check_list_uuid", primary_key: "uuid"
   add_foreign_key "schedules", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "spots", "schedules"
   add_foreign_key "travel_books", "areas"
