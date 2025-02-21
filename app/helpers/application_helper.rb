@@ -3,7 +3,7 @@ module ApplicationHelper
   def display_bottom_nav_on_travel_book
     return false if current_user.nil?
     return false if controller_name == "home"
-    (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(id: params[:id]))||
+    (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(uuid: params[:id]))||
     (controller_name == "schedules")||
     (controller_name == "check_lists") ||
     (controller_name == "list_items")
