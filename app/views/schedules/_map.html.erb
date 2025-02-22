@@ -45,11 +45,14 @@ function initMap() {
         </div>
       </div>`;
 
-      // 削除ボタン（×マーク）にクリックイベントを追加
+      // 削除ボタンクリック時にpopupを削除
       document.querySelector("#close-btn").addEventListener("click", () => {
-        document.getElementById("popup").innerHTML = ""; // カードを削除
+        document.getElementById("popup").innerHTML = "";
       });
     });
   });
 }
+</script>
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&loading=async&libraries=marker&callback=initMap">
 </script>

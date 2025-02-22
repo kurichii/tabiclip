@@ -46,6 +46,37 @@
   </div>
 
   <div class="flex justify-end mt-5">
-    <%= f.button nil, type: 'button', onclick: 'submit();', class: "btn btn-primary w-full mt-6 mx-auto" %>
+    <%= f.button nil, type: 'button', onclick: 'submit();', data: { turbo: false }, class: "btn btn-primary w-full mt-6 mx-auto" %>
   </div>
 <% end %>
+
+<script>
+function initMap() {
+  // 場所名と住所のフォームにオートコンプリートをつける処理
+  // 場所名,電話番号, 住所
+  const inputSpotName = document.getElementById("spotName");
+  const inputPhoneNumber = document.getElementById("phoneNumber");
+  const inputAddress = document.getElementById("address");
+
+  function setAutocomplete(inputElement){
+    const options = {
+      componentRestrictions: { country: 'JP' }
+    };
+    const autocomplete = new google.maps.places.Autocomplete(inputElement, options);
+
+    autocomplete.addListener("place_changed", function() {
+      const place = autocomplete.getPlace();
+      // 場所名、電話番号、住所を更新する(nilかundefinedの場合は空文字)
+      inputSpotName.value = place.name ?? "";
+      inputPhoneNumber.value = place.formatted_phone_number ?? "";
+      inputAddress.value = place.formatted_address ?? "";
+    });
+  }
+
+  setAutocomplete(inputSpotName);
+  setAutocomplete(inputAddress);
+}
+</script>
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&loading=async&libraries=places&callback=initMap">
+</script>
