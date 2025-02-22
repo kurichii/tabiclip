@@ -6,7 +6,7 @@ function initMap() {
   let map = document.getElementById("map")
 
   // Railsから渡されたスポットデータをJSで扱えるようにパース
-  const spots = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name]) %>;
+  const spots = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name, :schedule_id ]) %>;
 
   // @spotsが空でない場合、最初のスポットをセンターにする
   const position = Array.isArray(spots) && spots.length > 0
@@ -29,14 +29,15 @@ function initMap() {
     // markerがクリックされた時に地図の詳細情報を表示
     marker.addListener("click", ()=> {
       console.log("markerクリック");
-      // `schedule_path` のURLを適切に生成（Railsヘルパーを使う）
+      // URLを生成
       const scheduleUrl = "<%= request.base_url %>/schedules/" + spot.schedule_id;
 
       document.getElementById("popup").innerHTML =
       `<div class="card bg-base-100 w-96 shadow-md">
         <div class="card-body">
           <div class="flex items-center justify-between">
-            <p>${spot.name}</p>
+            <a href="${scheduleUrl}" class="text-blue-500 underline">${spot.name}</a>
+
             <button id="close-btn" class="btn btn-square btn-sm">
               <i class="fa-solid fa-xmark"></i>
             </button>
