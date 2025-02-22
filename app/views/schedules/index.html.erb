@@ -42,7 +42,7 @@
     <% end %>
 
     <% if @travel_book.owned_by_user?(current_user) %>
-      <%= link_to new_travel_book_schedule_path(@travel_book), class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
+      <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
         <%= t(".new_button") %>
       <% end %>
     <% end %>
