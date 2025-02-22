@@ -66,7 +66,7 @@ class SchedulesController < ApplicationController
       :post_code,
       :address,
     ).merge(
-      travel_book_id: @travel_book.id
+      travel_book_uuid: @travel_book.id
     )
   end
 

@@ -1,5 +1,5 @@
 <script>
-function initAutocomplete() {
+function initMap() {
   // 場所名と住所のフォームにオートコンプリートをつける処理
   // 場所名,電話番号, 住所
   const inputSpotName = document.getElementById("spotName");
@@ -24,4 +24,7 @@ function initAutocomplete() {
   setAutocomplete(inputSpotName);
   setAutocomplete(inputAddress);
 }
+</script>
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&loading=async&libraries=places&callback=initMap">
 </script>

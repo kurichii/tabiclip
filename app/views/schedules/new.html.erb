@@ -2,7 +2,7 @@
   <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
 
     <div class="relative flex items-center justify-center">
-      <%= link_to travel_book_schedules_path(@travel_book), class: "hover:opacity-50" do %>
+      <%= link_to travel_book_schedules_path(@travel_book), data: { turbo: false }, class: "hover:opacity-50" do %>
         <i class="fa-solid fa-chevron-left"></i>
       <% end %>
       <h3 class="flex-grow text-center"><%= t(".title") %></h3>
@@ -11,4 +11,3 @@
     <%= render "form", schedule: @schedule_form, travel_book: @travel_book, url: travel_book_schedules_path(@travel_book) %>
   </div>
 </div>
-<%= render "autocomplete" %>

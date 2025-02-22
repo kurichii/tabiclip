@@ -2,7 +2,7 @@ class ScheduleForm
   include ActiveModel::Model # 通常のモデルのようにvalidationなどを使えるようにする
   include ActiveModel::Attributes # ActiveRecordのカラムのような属性を加えられるようにする
   # パラメータの読み書きを許可する
-  attribute :travel_book_id, :integer
+  attribute :travel_book_uuid, :string
   attribute :title, :string
   attribute :start_date, :datetime
   attribute :end_date, :datetime
@@ -13,7 +13,7 @@ class ScheduleForm
   attribute :post_code, :string
   attribute :address, :string
 
-  validates :travel_book_id, presence: true
+  validates :travel_book_uuid, presence: true
   validates :title, presence: true, length: { maximum: 255 }
   validate  :end_date_after_start_date
   validates :budged, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -39,7 +39,7 @@ class ScheduleForm
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id)
+      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid)
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
@@ -57,7 +57,7 @@ class ScheduleForm
   def update(attributes)
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id)
+      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid)
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
