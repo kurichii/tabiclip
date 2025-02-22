@@ -46,7 +46,11 @@
         <%= t(".new_button") %>
       <% end %>
     <% end %>
-    <div id="map" style="height: 600px;"></div>
+
+    <div id="map-container" class="relative w-full h-[600px]">
+      <div id="map" class="w-full h-full"></div>
+      <div id="popup" class="absolute bottom-5 left-1/2 -translate-x-1/2"></div>
+    </div>
   </div>
 </div>
 <%= render "map" %>
