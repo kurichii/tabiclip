@@ -1,14 +1,13 @@
 <script>
 let popup, Popup;
+let map;
 function initMap() {
-  // Mapを表示してmarkerをつける処理
-  // Mapの表示領域
-  let map = document.getElementById("map")
-
   // Railsから渡されたスポットデータをJSで扱えるようにパース
   const spots = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name, :schedule_id ]) %>;
 
-  // @spotsが空でない場合、最初のスポットをセンターにする
+  // 表示するMapの位置を緯度経度で指定
+  // @spotsが空の場合、東京駅をセンターにする
+  // @spotsが空でない場合、場所が紐づく一つ目のスケジュールの場所をセンターにする
   const position = Array.isArray(spots) && spots.length > 0
     ? { lat: parseFloat(spots[0].latitude), lng: parseFloat(spots[0].longitude) }
     : { lat: 35.6803997, lng: 139.7690174 }; // デフォルトの位置（東京駅）
@@ -18,8 +17,9 @@ function initMap() {
     center: position,
     mapId: "DEMO_MAP_ID", // 高度なmarkerを使用するために必要
   });
-  // markerの設定
+
   spots.forEach((spot) =>{
+    // markerの設定
     const marker = new google.maps.marker.AdvancedMarkerElement({
       position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
       map: map,
@@ -28,16 +28,14 @@ function initMap() {
 
     // markerがクリックされた時に地図の詳細情報を表示
     marker.addListener("click", ()=> {
-      console.log("markerクリック");
       // URLを生成
       const scheduleUrl = "<%= request.base_url %>/schedules/" + spot.schedule_id;
-
+      // popupを表示
       document.getElementById("popup").innerHTML =
       `<div class="card bg-base-100 w-96 shadow-md">
         <div class="card-body">
           <div class="flex items-center justify-between">
             <a href="${scheduleUrl}" class="text-blue-500 underline">${spot.name}</a>
-
             <button id="close-btn" class="btn btn-square btn-sm">
               <i class="fa-solid fa-xmark"></i>
             </button>
