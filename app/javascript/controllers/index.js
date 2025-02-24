@@ -7,5 +7,8 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import LinkController from "./link_controller";
-application.register("link", LinkController);
+import LinkController from "./link_controller"
+application.register("link", LinkController)
+
+import TabsController from "./tabs_controller"
+application.register("tabs", TabsController)
