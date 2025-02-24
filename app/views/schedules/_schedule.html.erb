@@ -14,10 +14,7 @@
           <span class="ml-2"><%= link_to schedule.title, schedule_path(schedule) %></span>
         </td>
         <td class="p-4">
-          <% if defined?(index) && index %>
-            <% index = index +1 %>
-          <% end %>
-
+          <% index = index +1 if defined?(index) && index %>
           <% if schedule.spot&.latitude %>
             <div class="relative inline-block">
               <i class="fa-solid fa-location-pin text-2xl text-red-500"></i>
