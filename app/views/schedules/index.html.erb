@@ -9,22 +9,24 @@
         <p><%= travel_book_duration(@travel_book) %></p>
       </div>
     </div>
-
     <% if @schedules.present? %>
+    <div data-controller="tabs">
       <div role="tablist" class="tabs tabs-bordered">
         <!-- Tab for allday -->
-        <input type="radio" data-spots="<%= @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked"/>
-        <div role="tabpanel" class="tab-content p-10">
-          <% @schedules.each_with_index do |schedule, i| %>
-            <%= render partial: "schedule", locals: { schedule: schedule, all_day: true, index: i } %>
-          <% end %>
-          <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(@schedules)) %><%= t("helpers.currency_unit") %></p>
-        </div>
+          <input type="radio" data-action="change->tabs#changeTab"
+            data-spots="<%= @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
+            name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked"/>
+          <div role="tabpanel" class="tab-content p-10">
+            <% @schedules.each_with_index do |schedule, i| %>
+              <%= render partial: "schedule", locals: { schedule: schedule, all_day: true, index: i } %>
+            <% end %>
+            <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(@schedules)) %><%= t("helpers.currency_unit") %></p>
+          </div>
 
         <!-- Tab for each date -->
         <% Schedule.group_by_date(@schedules).each do |date, schedules| %>
-
-          <input type="radio" data-spots="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
+          <input type="radio" data-action="change->tabs#changeTab"
+            data-spots="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
           <div role="tabpanel" class="tab-content p-10">
             <% schedules.each_with_index do |schedule, i| %>
               <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
@@ -33,6 +35,7 @@
           </div>
         <% end %>
       </div>
+    </div>
     <% else %>
       <% if @travel_book.owned_by_user?(current_user) %>
         <p class="text-center my-10"><%= t(".no_data") %></p>
@@ -40,7 +43,6 @@
         <p class="text-center my-10"><%= t(".no_creator_no_data") %></p>
       <% end %>
     <% end %>
-
 
     <% if @travel_book.owned_by_user?(current_user) %>
       <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
@@ -59,13 +61,10 @@
 let popup, Popup;
 let map;
 function initMap() {
-  console.log("initMap")
   // Railsから渡されたスポットデータをJSで扱えるようにJSON形式に変換
   const initSpotsJsonData = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name, :schedule_id ]) %>;
   // tabをクリックしたらグローバル変数のspotsが更新されるためそれを取得
   const spots = window.spots || initSpotsJsonData;
-  console.log(initSpotsJsonData)
-  console.log(spots)
 
   // 表示するMapの位置を緯度経度で指定
   // @spotsが空の場合、東京駅をセンターにする
@@ -81,12 +80,6 @@ function initMap() {
   });
 
   spots.forEach((spot,i) =>{
-    // markerの設定
-    //  const marker = new google.maps.marker.AdvancedMarkerElement({
-      // position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
-      // map: map,
-      // title: spot.name
-    // });
     // markerに登録された場所のindex番号を表示
     const pinTextGlyph = new google.maps.marker.PinElement({
       glyph: `${i+1}`,
@@ -123,25 +116,6 @@ function initMap() {
     });
   });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOMContentLoaded");
-  const tabs = document.querySelectorAll('input[name="my_tabs_1"]');
-
-  tabs.forEach(tab => {
-    tab.addEventListener("change", ()=> {
-      console.log(tab);
-      // viewで設定したカスタムdata属性からデータを取得
-      const spots = JSON.parse(tab.getAttribute("data-spots") || "[]");
-      console.log("Updated spots:", spots);
-      // グローバル変数のspotsを更新し
-      window.spots = spots;
-      // マップを再描写
-      initMap();
-    });
-  });
-});
-
 </script>
 <script async
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&loading=async&libraries=marker&callback=initMap">
