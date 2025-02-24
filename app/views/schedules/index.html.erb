@@ -14,7 +14,7 @@
       <div role="tablist" class="tabs tabs-bordered">
         <!-- Tab for allday -->
           <input type="radio" data-action="change->tabs#changeTab"
-            data-spots="<%= @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
+            data-tabs-spots-value="<%= @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
             name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked"/>
           <div role="tabpanel" class="tab-content p-10">
             <% @schedules.each_with_index do |schedule, i| %>
@@ -26,7 +26,7 @@
         <!-- Tab for each date -->
         <% Schedule.group_by_date(@schedules).each do |date, schedules| %>
           <input type="radio" data-action="change->tabs#changeTab"
-            data-spots="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
+            data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
           <div role="tabpanel" class="tab-content p-10">
             <% schedules.each_with_index do |schedule, i| %>
               <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
