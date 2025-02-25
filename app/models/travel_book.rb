@@ -4,6 +4,7 @@ class TravelBook < ApplicationRecord
   belongs_to :area, optional: true
   belongs_to :traveler_type, optional: true
   belongs_to :creator, class_name: "User"
+
   has_many :user_travel_books, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
   has_many :users, through: :user_travel_books
   has_many :schedules, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy

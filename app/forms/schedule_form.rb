@@ -43,7 +43,7 @@ class ScheduleForm
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
-        @spot = Spot.create!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_id: schedule.id)
+        @spot = Spot.create!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_uuid: schedule.id)
       end
       true
     end
@@ -61,7 +61,7 @@ class ScheduleForm
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
-        @spot.update!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_id: @schedule.id)
+        @spot.update!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_uuid: @schedule.id)
       else
         @schedule.spot.destroy
       end

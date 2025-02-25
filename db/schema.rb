@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_25_040043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,7 +38,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
     t.index ["check_list_uuid"], name: "index_list_items_on_check_list_uuid"
   end
 
-  create_table "schedules", force: :cascade do |t|
+  create_table "schedules", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.integer "budged", default: 0
     t.text "memo"
@@ -48,10 +48,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
     t.datetime "updated_at", null: false
     t.uuid "travel_book_uuid", null: false
     t.index ["travel_book_uuid"], name: "index_schedules_on_travel_book_uuid"
+    t.index ["uuid"], name: "index_schedules_on_uuid", unique: true
   end
 
   create_table "spots", force: :cascade do |t|
-    t.bigint "schedule_id"
     t.string "name"
     t.string "telephone"
     t.string "post_code"
@@ -60,7 +60,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.index ["schedule_id"], name: "index_spots_on_schedule_id"
+    t.uuid "schedule_uuid", null: false
+    t.index ["schedule_uuid"], name: "index_spots_on_schedule_uuid"
   end
 
   create_table "travel_books", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -113,7 +114,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_062404) do
   add_foreign_key "check_lists", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "list_items", "check_lists", column: "check_list_uuid", primary_key: "uuid"
   add_foreign_key "schedules", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
-  add_foreign_key "spots", "schedules"
+  add_foreign_key "spots", "schedules", column: "schedule_uuid", primary_key: "uuid"
   add_foreign_key "travel_books", "areas"
   add_foreign_key "travel_books", "traveler_types"
   add_foreign_key "travel_books", "users", column: "creator_id"
