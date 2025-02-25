@@ -14,7 +14,7 @@
       <div role="tablist" class="tabs tabs-bordered">
         <!-- Tab for allday -->
           <input type="radio" data-action="change->tabs#changeTab"
-            data-spots="<%= @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
+            data-tabs-spots-value="<%= @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
             name="my_tabs_1" role="tab" class="tab" aria-label="ALL" checked="checked"/>
           <div role="tabpanel" class="tab-content p-10">
             <% @schedules.each_with_index do |schedule, i| %>
@@ -26,7 +26,7 @@
         <!-- Tab for each date -->
         <% Schedule.group_by_date(@schedules).each do |date, schedules| %>
           <input type="radio" data-action="change->tabs#changeTab"
-            data-spots="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
+            data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
           <div role="tabpanel" class="tab-content p-10">
             <% schedules.each_with_index do |schedule, i| %>
               <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
@@ -62,7 +62,7 @@ let popup, Popup;
 let map;
 function initMap() {
   // Railsから渡されたスポットデータをJSで扱えるようにJSON形式に変換
-  const initSpotsJsonData = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name, :schedule_id ]) %>;
+  const initSpotsJsonData = <%= raw @spots.to_json(only: [:id, :latitude, :longitude, :name, :schedule_uuid ]) %>;
   // tabをクリックしたらグローバル変数のspotsが更新されるためそれを取得
   const spots = window.spots || initSpotsJsonData;
 
@@ -95,7 +95,7 @@ function initMap() {
     // markerがクリックされた時に地図の詳細情報を表示
     markerViewGlyphText.addListener("click", ()=> {
       // URLを生成
-      const scheduleUrl = "<%= request.base_url %>/schedules/" + spot.schedule_id;
+      const scheduleUrl = "<%= request.base_url %>/schedules/" + spot.schedule_uuid;
       // popupを表示
       document.getElementById("popup").innerHTML =
       `<div class="card bg-base-100 w-96 shadow-md">
