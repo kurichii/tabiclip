@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_25_040043) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_25_063902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_25_040043) do
     t.datetime "updated_at", null: false
     t.uuid "check_list_uuid", null: false
     t.index ["check_list_uuid"], name: "index_list_items_on_check_list_uuid"
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.datetime "reminder_date", null: false
+    t.boolean "completed", default: false, null: false
+    t.bigint "list_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_item_id"], name: "index_reminders_on_list_item_id"
   end
 
   create_table "schedules", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -113,6 +122,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_25_040043) do
 
   add_foreign_key "check_lists", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "list_items", "check_lists", column: "check_list_uuid", primary_key: "uuid"
+  add_foreign_key "reminders", "list_items"
   add_foreign_key "schedules", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "spots", "schedules", column: "schedule_uuid", primary_key: "uuid"
   add_foreign_key "travel_books", "areas"
