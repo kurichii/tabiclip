@@ -3,4 +3,3 @@ class Reminder < ApplicationRecord
 
   validates :reminder_date, presence: true
 end
-
