@@ -10,6 +10,13 @@
           <%= link_to edit_list_item_path(list_item), data: { turbo_stream: true }, class: "hover:opacity-50" do %>
             <i class="fa-solid fa-pen"></i>
           <% end %>
+          <button class="hover:opacity-50" type="button" onclick="modal_<%= list_item.id %>.showModal()">
+            <% if list_item.reminder&.persisted? %>
+              <i class="fa-solid fa-bell"></i>
+            <% else %>
+              <i class="fa-solid fa-bell-slash"></i>
+            <% end %>
+          </button>
           <%= link_to list_item_path(list_item), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "hover:opacity-50" do %>
             <i class="fa-solid fa-trash"></i>
           <% end %>
@@ -18,3 +25,4 @@
     </div>
   <% end %>
 <% end %>
+<%= render "reminders/modal", list_item: list_item %>

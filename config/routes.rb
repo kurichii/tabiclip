@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
     resources :check_lists, shallow: true do
       resources :list_items, only: %i[ new create edit update destroy toggle ] do
+        resources :reminders, only: %i[ create update ]
         collection do
           post :cancel # new 用
         end
