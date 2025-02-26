@@ -23,6 +23,9 @@ class CheckListsController < ApplicationController
 
   def show
     @list_items = @check_list.list_items.order(created_at: :asc)
+    @list_items.each do |list_item|
+      list_item.reminder || list_item.build_reminder
+    end
   end
 
 

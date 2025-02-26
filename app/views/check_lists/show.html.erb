@@ -20,6 +20,10 @@
       <%= turbo_frame_tag "list_item" do %>
         <% if @list_items.present? %>
           <% @list_items.each do |list_item| %>
+            <!-- リマインダー用エラーメッセージ -->
+            <div id="error_messages_<%= list_item.id %>">
+              <%= render "shared/error_messages", object: list_item.reminder || list_item.build_reminder %>
+            </div>
             <%= render "list_items/list_item", list_item: list_item %>
           <% end %>
         <% else %>
