@@ -22,9 +22,10 @@ class CheckListsController < ApplicationController
   end
 
   def show
-    @list_items = @check_list.list_items.order(created_at: :asc)
-    @list_items.each do |list_item|
+    # 必ずlist_itemにreminderが紐づく
+    @list_items = @check_list.list_items.order(created_at: :asc).map do |list_item|
       list_item.reminder || list_item.build_reminder
+      list_item
     end
   end
 

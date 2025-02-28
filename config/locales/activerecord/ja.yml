@@ -8,6 +8,7 @@ ja:
       check_list: チェックリスト
       list_item: リストアイテム
       traveler_type: 旅行スタイル
+      reminder: リマインダー
     attributes:
       travel_book:
         title: タイトル
@@ -36,3 +37,15 @@ ja:
         title: タイトル
       list_item:
         title: タイトル
+      reminder:
+        reminder_date: リマインドする時間
+    errors:
+      models:
+        travel_book:
+          attributes:
+            end_date:
+              end_date_after_start_date: "は開始日以降の日付を入力してください"
+        reminder:
+          attributes:
+            reminder_date:
+              reminder_date_cannot_be_in_the_past: "に過去の日時は設定できません"
