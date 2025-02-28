@@ -6,7 +6,7 @@ class Reminder < ApplicationRecord
 
   def reminder_date_cannot_be_in_the_past
     if reminder_date.present? && reminder_date < Time.zone.now
-      errors.add(:reminder_date, "過去の日時は設定できません")
+      errors.add(:reminder_date, :reminder_date_cannot_be_in_the_past)
     end
   end
 end
