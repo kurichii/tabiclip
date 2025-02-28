@@ -1,0 +1,15 @@
+<%= form_with model: reminder, url: reminder.new_record? ? list_item_reminders_path(list_item) : reminder_path(reminder) do |f| %>
+  <% if reminder.errors.any? %>
+  <div class="mt-5">
+    <ul>
+      <% reminder.errors.each do | error | %>
+        <li class="text-red-500"><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="flex gap-2">
+    <%= f.datetime_field :reminder_date, value: reminder.reminder_date, class: "input input-bordered w-full" %>
+    <%= f.submit nil, class: "btn btn-primary" %>
+  </div>
+<% end %>

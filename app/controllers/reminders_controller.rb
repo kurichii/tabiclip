@@ -3,21 +3,23 @@ class RemindersController < ApplicationController
     @list_item = ListItem.find(params[:list_item_id])
     @check_list = @list_item.check_list
     @reminder = @list_item.build_reminder(reminder_params)
+
     if @reminder.save
-      redirect_to check_list_path(@check_list), notice: t("defaults.flash_message.created", item: Reminder.model_name.human)
+      flash.now[:notice] = t("defaults.flash_message.created", item: Reminder.model_name.human)
     else
-      redirect_to check_list_path(@check_list), alert: t("defaults.flash_message.not_created", item: Reminder.model_name.human)
+      render "not_create"
     end
   end
 
   def update
-    @list_item = ListItem.find(params[:id])
-    @reminder = @list_item.reminder
+    @reminder = Reminder.find(params[:id])
+    @list_item = @reminder.list_item
     @check_list = @list_item.check_list
+
     if @reminder.update(reminder_params)
-      redirect_to check_list_path(@check_list), notice: t("defaults.flash_message.updated", item: Reminder.model_name.human)
+      flash.now[:notice] = t("defaults.flash_message.updated", item: Reminder.model_name.human)
     else
-      redirect_to check_list_path(@check_list), alert: t("defaults.flash_message.not_updated", item: Reminder.model_name.human)
+      render "not_update"
     end
   end
 

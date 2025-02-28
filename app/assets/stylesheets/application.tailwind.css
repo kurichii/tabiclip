@@ -40,3 +40,7 @@ h3 {
   background-size: cover;
   background-position: center top;
 }
+
+.field_with_errors {
+  display: contents;
+}
