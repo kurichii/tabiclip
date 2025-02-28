@@ -8,6 +8,7 @@ class ListItemsController < ApplicationController
 
   def create
     @list_item = @check_list.list_items.build(list_item_params)
+    @reminder = @list_item.build_reminder
     respond_to do |format|
       if @list_item.save
         format.turbo_stream { flash.now[:notice] = t("defaults.flash_message.created", item: ListItem.model_name.human) }
@@ -52,7 +53,8 @@ class ListItemsController < ApplicationController
 
   def toggle
     @list_item.update(completed: !@list_item.completed)
-    render turbo_stream: turbo_stream.replace(@list_item, partial: "list_item", locals: { list_item: @list_item })
+    @reminder = @list_item.reminder || @list_item.build_reminder
+    render turbo_stream: turbo_stream.replace(@list_item, partial: "list_item", locals: { list_item: @list_item, reminder: @reminder })
   end
 
   private

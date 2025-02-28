@@ -24,5 +24,8 @@
       </div>
     </div>
   <% end %>
+
+  <div id="reminder_modal">
+    <%= render "reminders/modal", list_item: list_item, reminder: list_item.reminder %>
+  </div>
 <% end %>
-<%= render "reminders/modal", list_item: list_item %>
