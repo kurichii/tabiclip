@@ -41,6 +41,10 @@ ja:
         reminder_date: リマインドする時間
     errors:
       models:
+        travel_book:
+          attributes:
+            end_date:
+              end_date_after_start_date: "は開始日以降の日付を入力してください"
         reminder:
           attributes:
             reminder_date:

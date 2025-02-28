@@ -29,7 +29,7 @@ class TravelBook < ApplicationRecord
 
   def end_date_after_start_date
     if start_date.present? && end_date.present? && end_date < start_date
-      errors.add(:end_date, "must be after start date")
+      errors.add(:end_date, :end_date_after_start_date)
     end
   end
 end
