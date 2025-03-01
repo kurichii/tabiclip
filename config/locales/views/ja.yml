@@ -26,9 +26,9 @@ ja:
       deleted: "%{item}を削除しました"
   flash_message:
     reminder:
-      created: "%{item}を設定しました"
-      canceled: "リマインダー設定を解除しました"
-      not_canceled: "リマインダー設定を解除できませんでした"
+      updated: "%{item}を設定しました"
+      canceled: "%{item}設定を解除しました"
+      not_canceled: "%{item}設定を解除できませんでした"
   header:
     logout: ログアウト
     how_to_use: 使い方
