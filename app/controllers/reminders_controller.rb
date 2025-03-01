@@ -1,6 +1,18 @@
 class RemindersController < ApplicationController
   before_action :set_reminder, only: %i[ update clear_reminder ]
 
+  def create
+    @list_item = ListItem.find(params[:list_item_id])
+    @check_list = @list_item.check_list
+    @reminder = @list_item.build_reminder(reminder_params)
+
+    if @reminder.save
+      flash.now[:notice] = t("flash_message.reminder.created", item: Reminder.model_name.human)
+    else
+      render "not_create"
+    end
+  end
+
   def update
     if @reminder.update(reminder_params)
       flash.now[:notice] = t("flash_message.reminder.updated", item: Reminder.model_name.human)
