@@ -1,9 +1,7 @@
 class RemindersController < ApplicationController
-  def update
-    @reminder = Reminder.find(params[:id])
-    @list_item = @reminder.list_item
-    @check_list = @list_item.check_list
+  before_action :set_reminder, only: %i[ update clear_reminder ]
 
+  def update
     if @reminder.update(reminder_params)
       flash.now[:notice] = t("flash_message.reminder.updated", item: Reminder.model_name.human)
     else
@@ -12,8 +10,6 @@ class RemindersController < ApplicationController
   end
 
   def clear_reminder
-    @reminder = Reminder.find(params[:id])
-    @list_item = @reminder.list_item
     if @reminder.update(reminder_date: nil)
       flash.now[:notice] = t("flash_message.reminder.canceled", item: Reminder.model_name.human)
     else
@@ -22,6 +18,11 @@ class RemindersController < ApplicationController
   end
 
   private
+
+  def set_reminder
+    @reminder = Reminder.find(params[:id])
+    @list_item = @reminder.list_item
+  end
 
   def reminder_params
     params.require(:reminder).permit(:reminder_date)
