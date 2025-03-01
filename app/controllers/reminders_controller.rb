@@ -23,7 +23,18 @@ class RemindersController < ApplicationController
     end
   end
 
+  def clear_reminder
+    @reminder = Reminder.find(params[:id])
+    @list_item = @reminder.list_item
+    if @reminder.update(reminder_date: nil)
+      flash.now[:notice] = "リマインダーを解除しました"
+    else
+      flash.now[:alert] = "リマインダーを解除できませんでした"
+    end
+  end
+
   private
+
   def reminder_params
     params.require(:reminder).permit(:reminder_date)
   end
