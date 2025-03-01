@@ -11,10 +11,13 @@
       <% else %>
         <p>リマインダーの設定はされていません</p>
       <% end %>
-      <div class="flex items-center mt-5 gap-2">
-        <div id="reminder_form_<%= list_item.id %>" class="w-full">
-          <%= render "reminders/form", list_item: list_item, reminder: reminder %>
-        </div>
+      <div id="reminder_form_<%= list_item.id %>" class="w-full mt-5">
+        <%= render "reminders/form", list_item: list_item, reminder: reminder %>
+      </div>
+      <div class="mt-5">
+        <% if reminder&.reminder_date %>
+          <%= link_to "リマインダー解除", clear_reminder_reminder_path(reminder), data: { turbo_method: :patch }, class: "btn w-full" %>
+        <% end %>
       </div>
     </div>
   </div>
