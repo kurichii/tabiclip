@@ -6,13 +6,15 @@
     <h3 class="text-lg font-bold">リマインダー設定</h3>
     <div class="m-5 text-center">
       <p><%= list_item.title %></p>
-      <% if reminder&.persisted? %>
-        <p><%= fmt_schedule_date(list_item.reminder.reminder_date) %>にリマインダーの設定がされています</p>
+      <% if reminder&.reminder_date %>
+        <p><%= fmt_schedule_date(list_item.reminder.reminder_date) %>にリマインダーの設定があります</p>
       <% else %>
         <p>リマインダーの設定はされていません</p>
       <% end %>
-      <div id="reminder_form_<%= list_item.id %>" class="mt-5">
-        <%= render "reminders/form", list_item: list_item, reminder: reminder %>
+      <div class="flex items-center mt-5 gap-2">
+        <div id="reminder_form_<%= list_item.id %>" class="w-full">
+          <%= render "reminders/form", list_item: list_item, reminder: reminder %>
+        </div>
       </div>
     </div>
   </div>
