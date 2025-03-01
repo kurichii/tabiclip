@@ -1,29 +1,29 @@
 class RemindersController < ApplicationController
-  def create
-    @list_item = ListItem.find(params[:list_item_id])
-    @check_list = @list_item.check_list
-    @reminder = @list_item.build_reminder(reminder_params)
-
-    if @reminder.save
-      flash.now[:notice] = t("defaults.flash_message.created", item: Reminder.model_name.human)
-    else
-      render "not_create"
-    end
-  end
+  before_action :set_reminder, only: %i[ update clear_reminder ]
 
   def update
-    @reminder = Reminder.find(params[:id])
-    @list_item = @reminder.list_item
-    @check_list = @list_item.check_list
-
     if @reminder.update(reminder_params)
-      flash.now[:notice] = t("defaults.flash_message.updated", item: Reminder.model_name.human)
+      flash.now[:notice] = t("flash_message.reminder.updated", item: Reminder.model_name.human)
     else
       render "not_update"
     end
   end
 
+  def clear_reminder
+    if @reminder.update(reminder_date: nil)
+      flash.now[:notice] = t("flash_message.reminder.canceled", item: Reminder.model_name.human)
+    else
+      flash.now[:alert] = t("flash_message.reminder.not_canceled", item: Reminder.model_name.human)
+    end
+  end
+
   private
+
+  def set_reminder
+    @reminder = Reminder.find(params[:id])
+    @list_item = @reminder.list_item
+  end
+
   def reminder_params
     params.require(:reminder).permit(:reminder_date)
   end
