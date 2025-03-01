@@ -5,7 +5,7 @@ class RemindersController < ApplicationController
     @reminder = @list_item.build_reminder(reminder_params)
 
     if @reminder.save
-      flash.now[:notice] = t("defaults.flash_message.created", item: Reminder.model_name.human)
+      flash.now[:notice] = t("flash_message.reminder.created", item: Reminder.model_name.human)
     else
       render "not_create"
     end
@@ -27,9 +27,9 @@ class RemindersController < ApplicationController
     @reminder = Reminder.find(params[:id])
     @list_item = @reminder.list_item
     if @reminder.update(reminder_date: nil)
-      flash.now[:notice] = "リマインダーを解除しました"
+      flash.now[:notice] = t("flash_message.reminder.canceled")
     else
-      flash.now[:alert] = "リマインダーを解除できませんでした"
+      flash.now[:alert] = t("flash_message.reminder.not_canceled")
     end
   end
 
