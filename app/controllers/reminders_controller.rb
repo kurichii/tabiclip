@@ -22,7 +22,9 @@ class RemindersController < ApplicationController
   end
 
   def clear_reminder
-    if @reminder.update(reminder_date: nil)
+    @reminder.assign_attributes(reminder_date: nil)
+    # バリデーションをスキップ
+    if @reminder.save(validate: false)
       flash.now[:notice] = t("flash_message.reminder.canceled", item: Reminder.model_name.human)
     else
       flash.now[:alert] = t("flash_message.reminder.not_canceled", item: Reminder.model_name.human)
