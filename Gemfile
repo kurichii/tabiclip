@@ -3,6 +3,10 @@ source "https://rubygems.org"
 # ユーザー認証
 gem "devise"
 
+# LINEログイン
+gem "omniauth-line"
+gem "omniauth-rails_csrf_protection"
+
 # 画像
 gem "carrierwave", "~> 3.0"
 gem "mini_magick"
