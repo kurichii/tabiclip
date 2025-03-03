@@ -10,6 +10,13 @@ class ReminderPushJob < ApplicationJob
   end
 
   def perform(*args)
-    PushMessageService.call
+    # argsでリストアイテムのidを受け取る
+    list_item = ListItem.find(args[0])
+    # リマインダー設定されたリストアイテムが紐づいたしおりを所有するユーザーを配列へ格納
+    users = User.joins(travel_books: :check_lists).where(check_lists: { uuid: list_item.check_list.uuid }).select(:uid, :name)
+
+    users.each do |user|
+      PushMessageService.call(user, list_item)
+    end
   end
 end
