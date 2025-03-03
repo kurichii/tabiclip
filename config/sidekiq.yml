@@ -1,0 +1,9 @@
+:concurrency: 3
+:queues:
+  - default
+:scheduler:
+  :schedule:
+    reminder_push_job:
+      every: "1m"
+      class: "ReminderPushJob"
+      queue: default
