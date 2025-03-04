@@ -7,6 +7,7 @@ class RemindersController < ApplicationController
     @reminder = @list_item.build_reminder(reminder_params)
 
     if @reminder.save
+      ReminderPushJob.set(wait_until: @reminder.reminder_date).perform_later(@list_item.id)
       flash.now[:notice] = t("flash_message.reminder.created", item: Reminder.model_name.human)
     else
       render "not_create"
@@ -15,6 +16,7 @@ class RemindersController < ApplicationController
 
   def update
     if @reminder.update(reminder_params)
+      ReminderPushJob.set(wait_until: @reminder.reminder_date).perform_later(@list_item.id)
       flash.now[:notice] = t("flash_message.reminder.updated", item: Reminder.model_name.human)
     else
       render "not_update"

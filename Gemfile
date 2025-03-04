@@ -7,6 +7,13 @@ gem "devise"
 gem "omniauth-line"
 gem "omniauth-rails_csrf_protection"
 
+# LINEプッシュ通知
+gem "line-bot-api"
+
+# Background Job
+gem "sidekiq"
+gem "sidekiq-scheduler"
+
 # 画像
 gem "carrierwave", "~> 3.0"
 gem "mini_magick"
