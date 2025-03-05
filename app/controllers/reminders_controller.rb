@@ -1,4 +1,3 @@
-# SupportRequest/20250304
 class RemindersController < ApplicationController
   before_action :set_reminder, only: %i[ update clear_reminder ]
 
