@@ -7,8 +7,8 @@ class RemindersController < ApplicationController
     @reminder = @list_item.build_reminder(reminder_params)
 
     if @reminder.save
-      ReminderPushJob.set(wait_until: @reminder.reminder_date).perform_later(@list_item.id)
       flash.now[:notice] = t("flash_message.reminder.created", item: Reminder.model_name.human)
+      job_set
     else
       render "not_create"
     end
@@ -16,8 +16,9 @@ class RemindersController < ApplicationController
 
   def update
     if @reminder.update(reminder_params)
-      ReminderPushJob.set(wait_until: @reminder.reminder_date).perform_later(@list_item.id)
       flash.now[:notice] = t("flash_message.reminder.updated", item: Reminder.model_name.human)
+      JobDeleteService.call(@reminder.job_id) if @reminder.job_id
+      job_set
     else
       render "not_update"
     end
@@ -25,9 +26,12 @@ class RemindersController < ApplicationController
 
   def clear_reminder
     @reminder.assign_attributes(reminder_date: nil)
-    # バリデーションをスキップ
+    # reminder_dateをpresence: trueにしているためバリデーションを回避させる
     if @reminder.save(validate: false)
       flash.now[:notice] = t("flash_message.reminder.canceled", item: Reminder.model_name.human)
+      JobDeleteService.call(@reminder.job_id) if @reminder.job_id
+      # reminder_dateをpresence: trueにしているためバリデーションを回避させる
+      @reminder.update_column(:job_id, nil)
     else
       flash.now[:alert] = t("flash_message.reminder.not_canceled", item: Reminder.model_name.human)
     end
@@ -42,5 +46,10 @@ class RemindersController < ApplicationController
 
   def reminder_params
     params.require(:reminder).permit(:reminder_date)
+  end
+
+  def job_set
+    job = ReminderPushJob.set(wait_until: @reminder.reminder_date).perform_later(@list_item.id)
+    @reminder.update(job_id: job.job_id)
   end
 end
