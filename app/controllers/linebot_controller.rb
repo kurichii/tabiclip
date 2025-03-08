@@ -21,8 +21,10 @@ class LinebotController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           handle_message_event(event)
         when Line::Bot::Event::MessageType::Follow #友だち追加
-          userId = event["source"]["userId"]
-          Rails.logger.info "#{userId}が友だち追加されました"
+          # userId = event["source"]["userId"]
+          # Rails.logger.info "#{userId}が友だち追加されました"
+          # LINE Developersで挨拶メッセージを登録しています
+          # reply(event, "友だち登録ありがとうございます！LINEアカウントとTabiClipアカウントを連携すると、リマインダー機能を使用することができます！アカウント連携するためには、マイページのアカウント連携tokenをコピーして送信してください！")
         when Line::Bot::Event::MessageType::Unfollow #友だち削除
           userId = event["source"]["userId"]
           user = User.find_by(uid: userId)
@@ -41,7 +43,7 @@ class LinebotController < ApplicationController
     line_user_id = event["source"]["userId"]
 
     # 送信されたテキストがパターンマッチしない場合
-    return reply(event, "マイページのアカウント連携tokenをコピーして送信してね！") unless received_text.match?(/\A連携:[a-f0-9]{32}\z/)
+    return reply(event, "マイページのアカウント連携tokenをコピーして送信してください！") unless received_text.match?(/\A連携:[a-f0-9]{32}\z/)
 
     # received_textからtokenを取り出す(連携:の文字を削除)
     token = received_text.sub("連携:","")
