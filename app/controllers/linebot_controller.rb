@@ -20,12 +20,12 @@ class LinebotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           handle_message_event(event)
-        when Line::Bot::Event::MessageType::Follow #友だち追加
+        when Line::Bot::Event::MessageType::Follow # 友だち追加
           # userId = event["source"]["userId"]
           # Rails.logger.info "#{userId}が友だち追加されました"
           # LINE Developersで挨拶メッセージを登録しています
           # reply(event, "友だち登録ありがとうございます！LINEアカウントとTabiClipアカウントを連携すると、リマインダー機能を使用することができます！アカウント連携するためには、マイページのアカウント連携tokenをコピーして送信してください！")
-        when Line::Bot::Event::MessageType::Unfollow #友だち削除
+        when Line::Bot::Event::MessageType::Unfollow # 友だち削除
           userId = event["source"]["userId"]
           user = User.find_by(uid: userId)
           user.update(uid: nil) if user
@@ -46,7 +46,7 @@ class LinebotController < ApplicationController
     return reply(event, "マイページのアカウント連携tokenをコピーして送信してください！") unless received_text.match?(/\A連携:[a-f0-9]{32}\z/)
 
     # received_textからtokenを取り出す(連携:の文字を削除)
-    token = received_text.sub("連携:","")
+    token = received_text.sub("連携:", "")
     # tokenでUserを取得
     user = User.find_by(token: token)
 
@@ -69,6 +69,6 @@ class LinebotController < ApplicationController
       type: "text",
       text: text
     }
-    return LINE_CLIENT.reply_message(event["replyToken"], message)
+    LINE_CLIENT.reply_message(event["replyToken"], message)
   end
 end
