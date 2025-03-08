@@ -10,6 +10,24 @@
       <p><%= @user.email %></p>
     </div>
 
+    <% unless @user.uid %>
+      <div class="mt-5 flex justify-center">
+        <button class="btn text-white bg-[#06C755] hover:bg-[#06C755] hover:opacity-50" onclick="link_line_modal.showModal()">LINEアカウント連携</button>
+      </div>
+      <dialog id="link_line_modal" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <h3 class="text-lg font-bold">LINEアカウント連携用トークン</h3>
+          <div class="m-5 text-center">
+            <p>以下のtokenをTabiClip公式LINEに送信してください</p>
+            <p>連携:<%= @user.token %></p>
+          </div>
+        </div>
+      </dialog>
+    <% end %>
+
     <div class="mt-5">
       <%= link_to t(".profile_button"), edit_user_registration_path, class: "btn btn-primary w-full mt-6 mx-auto" %>
     </div>
