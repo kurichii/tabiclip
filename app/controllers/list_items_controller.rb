@@ -1,4 +1,5 @@
 class ListItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_check_list, only: %i[ new create ]
   before_action :set_list_item, only: %i[ edit update destroy toggle]
 
