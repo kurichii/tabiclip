@@ -1,4 +1,4 @@
-<%= form_with model: check_list, url: check_list.new_record? ? travel_book_check_lists_path(travel_book) : check_list_path(check_list) do |f| %>
+<%= form_with model: check_list, url: check_list.new_record? ? travel_book_check_lists_path(travel_book) : check_list_path(check_list), data: { turbo: false } do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
   <div class="field mt-3">
