@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     passwords: "users/passwords",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+  post "/callback" => "linebot#callback"
   get "users/profile" => "users#show"
   get "home/index"
   resources :travel_books do
