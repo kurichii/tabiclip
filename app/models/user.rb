@@ -10,6 +10,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[ line ]
 
+  before_create :generate_unique_token
+
+  def generate_unique_token
+    self.token = loop do
+      random_token = SecureRandom.hex(16)
+      break random_token unless User.exists?(token: random_token)
+    end
+  end
+
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
   end
