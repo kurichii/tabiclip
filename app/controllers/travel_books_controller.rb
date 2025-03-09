@@ -59,6 +59,11 @@ class TravelBooksController < ApplicationController
     @travel_books = TravelBook.where(is_public: true).includes(:users).order(:created_at).page(params[:page])
   end
 
+  def share
+    @travel_book = TravelBook.find(params[:id])
+    @users = @travel_book.users
+  end
+
   private
 
   def travel_book_param
