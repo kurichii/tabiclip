@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     collection do
       get "public", action: :public_travel_books
     end
+    member do
+      get :share
+    end
     delete "delete_image", on: :member
     resources :schedules, shallow: true do
       collection do
