@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions",
     passwords: "users/passwords",
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: "users/omniauth_callbacks",
+    invitations: "users/invitations"
   }
   post "/callback" => "linebot#callback"
   get "users/profile" => "users#show"
