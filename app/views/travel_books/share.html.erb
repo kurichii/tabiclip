@@ -8,29 +8,34 @@
       <h3 class="flex-grow text-center">メンバーリスト</h3>
     </div>
 
-      <table class="table">
-        <tbody>
-          <% @users.each do |user| %>
-            <tr class="border-b last:border-none">
-              <td>
-                <div class="flex justify-between items-center">
-                  <div class="flex items-center gap-3">
-                    <%= image_tag user.icon_image_url, class: "rounded-full w-10 h-10 object-cover border border-gray-200" %>
-                    <%= user.name %>
-                  </div>
-                    <div class="dropdown dropdown-end">
-                      <div tabindex="0" role="button" class="btn btn-circle">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                      </div>
-                      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                        <li>削除</li>
-                      </ul>
-                    </div>
+    <table class="table">
+      <tbody>
+        <% @users.each do |user| %>
+          <tr class="border-b last:border-none">
+            <td>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <%= image_tag user.icon_image_url, class: "rounded-full w-10 h-10 object-cover border border-gray-200" %>
+                  <%= user.name %>
                 </div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+                  <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-circle">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                      <li>削除</li>
+                    </ul>
+                  </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="text-right mt-5">
+      <%= link_to new_user_invitation_path(travel_book_uuid: @travel_book.uuid), class: "btn btn-primary hover:opacity-50" do %>
+        <i class="fa-solid fa-share-from-square"></i>メンバーを招待
+      <% end %>
+    </div>
   </div>
 </div>
