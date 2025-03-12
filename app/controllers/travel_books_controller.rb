@@ -64,6 +64,14 @@ class TravelBooksController < ApplicationController
     @users = @travel_book.users
   end
 
+  def delete_owner
+    @travel_book = TravelBook.find(params[:id])
+    user = User.find(params[:user_id])
+    @travel_book.users.destroy(user)
+
+    redirect_to share_travel_book_path(@travel_book), success: "しおりのメンバーから削除しました"
+  end
+
   private
 
   def travel_book_param
