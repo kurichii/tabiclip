@@ -67,9 +67,13 @@ class TravelBooksController < ApplicationController
   def delete_owner
     @travel_book = TravelBook.find(params[:id])
     user = User.find(params[:user_id])
-    @travel_book.users.destroy(user)
-
-    redirect_to share_travel_book_path(@travel_book), success: "しおりのメンバーから削除しました"
+    # しおりの作成者でない場合のみ削除
+    if user != @travel_book.creator
+      @travel_book.users.destroy(user)
+      redirect_to share_travel_book_path(@travel_book), success: "しおりのメンバーから削除しました"
+    else
+      redirect_to share_travel_book_path(@travel_book), alert: "しおりの作成者は削除できません"
+    end
   end
 
   private
