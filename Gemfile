@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 # ユーザー認証
 gem "devise"
+# 招待機能
+gem "devise_invitable"
 
 # LINEログイン
 gem "omniauth-line"
