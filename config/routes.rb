@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
     member do
       get :share
+      delete "delete_owner"
     end
     delete "delete_image", on: :member
     resources :schedules, shallow: true do

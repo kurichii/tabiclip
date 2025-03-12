@@ -18,14 +18,11 @@
                   <%= image_tag user.icon_image_url, class: "rounded-full w-10 h-10 object-cover border border-gray-200" %>
                   <%= user.name %>
                 </div>
-                  <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-circle">
-                      <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                      <li>削除</li>
-                    </ul>
-                  </div>
+                <% unless user == @travel_book.creator %>
+                  <%= link_to delete_owner_travel_book_path(@travel_book, user_id: user.id), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "btn" do %>
+                    <i class="fa-solid fa-minus"></i>
+                  <% end %>
+                <% end %>
               </div>
             </td>
           </tr>
