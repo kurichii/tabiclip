@@ -6,23 +6,25 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def create
+    @user = User.new
     user_email = params[:user][:email]
     travel_book_uuid = params[:user][:travel_book_uuid]
-    travel_book = TravelBook.find_by(uuid: travel_book_uuid)
     user = User.find_by(email: user_email)
 
     if user.present?
+      # 既存のユーザーに招待を送信
       user.invite!(current_user)
       user.update(invited_by_travel_book_id: travel_book_uuid)
-      redirect_to travel_book_path(travel_book), notice: "招待メールが #{user_email} に送信されました"
+      redirect_to travel_book_path(travel_book_uuid), notice: "招待メールが #{user_email} に送信されました"
     else
+      # 存在しないユーザーに招待を送信
       user = User.invite!({ email: user_email }, current_user)
       user.update(invited_by_travel_book_id: travel_book_uuid)
       if user.valid?
-        redirect_to travel_book_path(travel_book), notice: "招待メールが #{user_email} に送信されました"
+        redirect_to travel_book_path(travel_book_uuid), notice: "招待メールが #{user_email} に送信されました"
       else
-        flash[:alert] = "メールアドレスを正しく入力してください"
-        render "new", locals: { invited_by_travel_book_id: travel_book_uuid, resource: User.new, resource_name: :user }
+        flash.now[:alert] = "メールアドレスを正しく入力してください"
+        render :new, status: :unprocessable_entity, locals: { travel_book_uuid: travel_book_uuid }
       end
     end
   end
