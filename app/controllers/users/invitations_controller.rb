@@ -6,23 +6,25 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def create
+    @user = User.new
     user_email = params[:user][:email]
     travel_book_uuid = params[:user][:travel_book_uuid]
-    travel_book = TravelBook.find_by(uuid: travel_book_uuid)
     user = User.find_by(email: user_email)
 
     if user.present?
+      # 既存のユーザーに招待を送信
       user.invite!(current_user)
       user.update(invited_by_travel_book_id: travel_book_uuid)
-      redirect_to travel_book_path(travel_book), notice: "招待メールが #{user_email} に送信されました"
+      redirect_to travel_book_path(travel_book_uuid), notice: "招待メールが #{user_email} に送信されました"
     else
+      # 存在しないユーザーに招待を送信
       user = User.invite!({ email: user_email }, current_user)
       user.update(invited_by_travel_book_id: travel_book_uuid)
       if user.valid?
-        redirect_to travel_book_path(travel_book), notice: "招待メールが #{user_email} に送信されました"
+        redirect_to travel_book_path(travel_book_uuid), notice: "招待メールが #{user_email} に送信されました"
       else
-        flash[:alert] = "メールアドレスを正しく入力してください"
-        render "new", locals: { invited_by_travel_book_id: travel_book_uuid, resource: User.new, resource_name: :user }
+        flash.now[:alert] = "メールアドレスを正しく入力してください"
+        render :new, status: :unprocessable_entity, locals: { travel_book_uuid: travel_book_uuid }
       end
     end
   end
@@ -32,27 +34,23 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def update
-    # リダイレクト先を招待されたしおりのビューにリダイレクトさせるために、元々の承認後の動作をオーバーライド
-    self.resource = accept_resource
+    # deviseのupdate処理を実行
+    # これをしない場合、signinやバリデーションエラーが表示がデフォルトで行われなくなる
+    super
 
-    # オーバーライドする場合、自分でサインインしないといけないみたい(オーバーライドする際は自動ログイン)
-    sign_in(resource_name, resource)
+    resource = self.resource
 
-    # createアクションでuserに保存しておいたしおりのidを取得
-    travel_book_uuid = resource.invited_by_travel_book_id
-
-    if travel_book_uuid.present?
+    if resource.errors.empty? && resource.invited_by_travel_book_id.present?
       # 中間テーブルに招待ユーザーと対象のしおりのidを保存
-      user_travel_book = UserTravelBook.new
-      user_travel_book.user_id = resource.id
-      user_travel_book.travel_book_uuid = travel_book_uuid
-      user_travel_book.save
-
-      travel_book = TravelBook.find_by(uuid: travel_book_uuid)
-      # 招待されたしおりにリダイレクト
-      redirect_to travel_book_path(travel_book), notice: "#{travel_book.title} に参加しました"
-    else
-      redirect_to root_path, notice: "しおりに参加できませんでした"
+      user_travel_book = UserTravelBook.new(
+        user_id: resource.id,
+        travel_book_uuid: resource.invited_by_travel_book_id
+      )
+      if user_travel_book.save
+        flash[:notice] = "しおりのメンバーに追加されました"
+      else
+        flash[:alert] = "しおりのメンバーに追加できませんでした"
+      end
     end
   end
 
@@ -60,15 +58,17 @@ class Users::InvitationsController < Devise::InvitationsController
     super
   end
 
-  private
-
-  # 招待を受け入れる処理をオーバーライド
-  def accept_resource
-    resource = resource_class.accept_invitation!(update_resource_params)
-    resource
-  end
-
   protected
+
+  # ユーザーが招待を承認したあとに招待されたしおりの詳細ページにリダイレクト
+  def after_accept_path_for(resource)
+    travel_book_id = resource.invited_by_travel_book_id
+    if travel_book_id.present?
+      travel_book_path(travel_book_id)
+    else
+      root_path
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: [ :name ])
