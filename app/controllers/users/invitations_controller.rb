@@ -32,27 +32,23 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def update
-    # リダイレクト先を招待されたしおりのビューにリダイレクトさせるために、元々の承認後の動作をオーバーライド
-    self.resource = accept_resource
+    # deviseのupdate処理を実行
+    # これをしない場合、signinやバリデーションエラーが表示がデフォルトで行われなくなる
+    super
 
-    # オーバーライドする場合、自分でサインインしないといけないみたい(オーバーライドする際は自動ログイン)
-    sign_in(resource_name, resource)
+    resource = self.resource
 
-    # createアクションでuserに保存しておいたしおりのidを取得
-    travel_book_uuid = resource.invited_by_travel_book_id
-
-    if travel_book_uuid.present?
+    if resource.errors.empty? && resource.invited_by_travel_book_id.present?
       # 中間テーブルに招待ユーザーと対象のしおりのidを保存
-      user_travel_book = UserTravelBook.new
-      user_travel_book.user_id = resource.id
-      user_travel_book.travel_book_uuid = travel_book_uuid
-      user_travel_book.save
-
-      travel_book = TravelBook.find_by(uuid: travel_book_uuid)
-      # 招待されたしおりにリダイレクト
-      redirect_to travel_book_path(travel_book), notice: "#{travel_book.title} に参加しました"
-    else
-      redirect_to root_path, notice: "しおりに参加できませんでした"
+      user_travel_book = UserTravelBook.new(
+        user_id: resource.id,
+        travel_book_uuid: resource.invited_by_travel_book_id
+      )
+      if user_travel_book.save
+        flash[:notice] = "しおりのメンバーに追加されました"
+      else
+        flash[:alert] = "しおりのメンバーに追加できませんでした"
+      end
     end
   end
 
@@ -60,15 +56,17 @@ class Users::InvitationsController < Devise::InvitationsController
     super
   end
 
-  private
-
-  # 招待を受け入れる処理をオーバーライド
-  def accept_resource
-    resource = resource_class.accept_invitation!(update_resource_params)
-    resource
-  end
-
   protected
+
+  # ユーザーが招待を承認したあとに招待されたしおりの詳細ページにリダイレクト
+  def after_accept_path_for(resource)
+    travel_book_id = resource.invited_by_travel_book_id
+    if travel_book_id.present?
+      travel_book_path(travel_book_id)
+    else
+      root_path
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: [ :name ])
