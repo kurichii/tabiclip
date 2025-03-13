@@ -1,10 +1,10 @@
 <div class="container">
   <div class="form-container rounded-lg shadow-md bg-base-100 p-8">
-    <h2><%= t "devise.invitations.new.header" %></h2>
+    <h2>しおりへ招待する</h2>
 
     <%= form_for(@user, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
 
-      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= render "shared/error_messages", object: resource %>
 
       <% resource.class.invite_key_fields.each do |field| -%>
         <div class="field mt-3">
