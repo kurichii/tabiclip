@@ -111,6 +111,8 @@ ja:
       is_public:
         true: 公開
         false: 非公開
+      schedule_icon:
+        none_icon: なし
     helpers:
       no_memo: メモは登録されていません
   check_lists:
