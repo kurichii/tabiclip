@@ -12,6 +12,7 @@ class ScheduleForm
   attribute :telephone, :string
   attribute :post_code, :string
   attribute :address, :string
+  attribute :schedule_icon_id, :integer
 
   validates :travel_book_uuid, presence: true
   validates :title, presence: true, length: { maximum: 255 }
@@ -22,6 +23,7 @@ class ScheduleForm
   validates :telephone, length: { maximum: 15 }
   validates :post_code, length: { maximum: 10 }
   validates :address, length: { maximum: 255 }
+  validates :schedule_icon_id, inclusion: { in: ScheduleIcon.pluck(:id) }
 
   # フォームのアクションをPOST/PUTCHに切り替える
   # ScheduleFormオブジェクトがpersisted?メソッドを呼ぶと、Scheduleオブジェクトのpersisted?メソッドが呼び出される
@@ -39,7 +41,7 @@ class ScheduleForm
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid)
+      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid, schedule_icon_id: schedule_icon_id)
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
@@ -57,7 +59,7 @@ class ScheduleForm
   def update(attributes)
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid)
+      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid, schedule_icon_id: schedule_icon_id)
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
@@ -88,7 +90,8 @@ class ScheduleForm
       name: spot.name,
       telephone: spot.telephone,
       post_code: spot.post_code,
-      address: spot.address
+      address: spot.address,
+      schedule_icon_id: 1
     }
   end
 

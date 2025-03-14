@@ -46,4 +46,29 @@ areas = [
       t.name = traveler_type[:name]
     end
   end
+
+  schedule_icons = [
+    { id: 1, name: "none" },
+    { id: 2, name: "fa-person-walking" },
+    { id: 3, name: "fa-bicycle" },
+    { id: 4, name: "fa-car" },
+    { id: 5, name: "fa-train-subway" },
+    { id: 6, name: "fa-plane-up" },
+    { id: 7, name: "fa-ship" },
+    { id: 8, name: "fa-hotel" },
+    { id: 9, name: "fa-utensils" },
+    { id: 10, name: "fa-mug-saucer" },
+    { id: 11, name: "fa-cart-shopping" },
+    { id: 12, name: "fa-star" },
+    { id: 13, name: "fa-torii-gate" },
+    { id: 14, name: "fa-guitar" },
+    { id: 15, name: "fa-heart" },
+    { id: 16, name: "fa-baby-carriage" }
+  ]
+
+  schedule_icons.each do |schedule_icon|
+    ScheduleIcon.find_or_create_by(id: schedule_icon[:id]) do |t|
+      t.name = schedule_icon[:name]
+    end
+  end
 end

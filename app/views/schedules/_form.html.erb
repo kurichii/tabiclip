@@ -45,6 +45,24 @@
     <%= f.text_area :memo, placeholder: t("schedules.form.placeholder.memo"), rows: "3", class: "textarea textarea-bordered w-full", autocomplete: "off" %>
   </div>
 
+  <div class="field mt-3">
+    <%= f.label :schedule_icon_id, ScheduleIcon.human_attribute_name(:name), class: "label" %>
+    <div class="flex flex-wrap gap-x-3 gap-y-2">
+      <% ScheduleIcon.all.each do |icon| %>
+        <div class="flex items-center gap-1">
+          <%= f.radio_button :schedule_icon_id, icon.id, id: "schedule_icon_#{icon.id}", class: "radio radio-primary", checked: (icon.name == "none") %>
+          <%= f.label "schedule_icon_#{icon.id}", for: "schedule_icon_#{icon.id}", class: "cursor-pointer" do %>
+            <% if icon.name == "none" %>
+              <span class="text-base"><%= t(".schedule_icon.none_icon") %></span>
+            <% else %>
+              <i class="fa-solid <%= icon.name %> text-xl"></i>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="flex justify-end mt-5">
     <%= f.button nil, type: 'button', onclick: 'submit();', data: { turbo: false }, class: "btn btn-primary w-full mt-6 mx-auto" %>
   </div>
