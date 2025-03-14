@@ -63,7 +63,7 @@ areas = [
     { id: 13, name: "fa-torii-gate" },
     { id: 14, name: "fa-guitar" },
     { id: 15, name: "fa-heart" },
-    { id: 16, name: "fa-baby-carriage" },
+    { id: 16, name: "fa-baby-carriage" }
   ]
 
   schedule_icons.each do |schedule_icon|
