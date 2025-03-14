@@ -65,6 +65,7 @@ class SchedulesController < ApplicationController
       :telephone,
       :post_code,
       :address,
+      :schedule_icon_id
     ).merge(
       travel_book_uuid: @travel_book.id
     )
