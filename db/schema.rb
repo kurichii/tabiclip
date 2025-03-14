@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_11_051027) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_14_015132) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_11_051027) do
     t.index ["list_item_id"], name: "index_reminders_on_list_item_id"
   end
 
+  create_table "schedule_icons", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "schedules", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.integer "budged", default: 0
@@ -57,6 +63,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_11_051027) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "travel_book_uuid", null: false
+    t.integer "schedule_icon_id"
     t.index ["travel_book_uuid"], name: "index_schedules_on_travel_book_uuid"
     t.index ["uuid"], name: "index_schedules_on_uuid", unique: true
   end
