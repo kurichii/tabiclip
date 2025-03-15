@@ -117,6 +117,8 @@ ja:
       no_memo: メモは登録されていません
   check_lists:
     index:
+      note_link: ノート
+      check_list_link: チェックリスト
       new_button: チェックリスト作成
       no_data: チェックリストは登録されていません
     show:
@@ -128,6 +130,11 @@ ja:
     form:
       placeholder:
         title: チェックリストのタイトルを記入
+  notes:
+    index:
+      note_link: ノート
+      check_list_link: チェックリスト
+      no_data: ノートは登録されていません
   list_items:
     form:
       placeholder:

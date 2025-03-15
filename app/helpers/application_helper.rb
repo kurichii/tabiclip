@@ -5,6 +5,7 @@ module ApplicationHelper
     return false if controller_name == "home"
     (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(uuid: params[:id]))||
     (controller_name == "schedules")||
+    (controller_name == "notes") ||
     (controller_name == "check_lists") ||
     (controller_name == "list_items")
   end
