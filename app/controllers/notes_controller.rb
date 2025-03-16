@@ -23,6 +23,11 @@ class NotesController < ApplicationController
     end
   end
 
+  def show
+    @note = Note.find(params[:id])
+    @travel_book = @note.travel_book
+  end
+
   private
 
   def note_params
