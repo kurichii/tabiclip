@@ -1,0 +1,19 @@
+<%= form_with model: note, url: travel_book_notes_path(travel_book) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <div class="space-y-4">
+    <div class="field">
+      <%= f.label :title, class: "w-full" do %>
+        <span class="text-red-400">*</span><%= Note.human_attribute_name(:title) %>
+      <% end %>
+      <%= f.text_field :title, autofocus: true, placeholder: t(".placeholder.title"), class: "input input-bordered w-full" %>
+    </div>
+
+    <div class="field">
+      <%= f.text_area :body, placeholder: t(".placeholder.body"), rows: "5", class: "textarea textarea-bordered w-full" %>
+    </div>
+
+    <%= f.submit nil, class: "btn btn-primary w-full mt-6 mx-auto" %>
+  </div>
+
+<% end %>

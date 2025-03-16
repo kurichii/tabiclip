@@ -5,6 +5,7 @@ ja:
       schedule: スケジュール
       spot: 場所
       area: エリア
+      note: ノート
       check_list: チェックリスト
       list_item: リストアイテム
       traveler_type: 旅行スタイル
@@ -35,6 +36,8 @@ ja:
         name: 場所名
         telephone: 電話番号
         address: 住所
+      note:
+        title: タイトル
       check_list:
         title: タイトル
       list_item:

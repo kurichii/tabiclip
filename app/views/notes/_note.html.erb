@@ -1,0 +1,6 @@
+<%= link_to note_path(note), data: { turbo: false }, class: "block" do %>
+  <div class="bg-base-100 flex items-center my-5 p-5 rounded-lg hover:opacity-50">
+    <i class="fa-solid fa-book-open"></i>
+    <div class="ml-3"><%= note.title %></div>
+  </div>
+<% end %>

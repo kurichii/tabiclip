@@ -115,6 +115,18 @@ ja:
         none_icon: なし
     helpers:
       no_memo: メモは登録されていません
+  notes:
+    index:
+      note_link: ノート
+      check_list_link: チェックリスト
+      new_button: ノート作成
+      no_data: ノートは登録されていません
+    new:
+      title: ノート作成
+    form:
+      placeholder:
+        title: ノートのタイトルを記入
+        body: サイトのURLも貼ることができます
   check_lists:
     index:
       note_link: ノート
@@ -130,11 +142,6 @@ ja:
     form:
       placeholder:
         title: チェックリストのタイトルを記入
-  notes:
-    index:
-      note_link: ノート
-      check_list_link: チェックリスト
-      no_data: ノートは登録されていません
   list_items:
     form:
       placeholder:
