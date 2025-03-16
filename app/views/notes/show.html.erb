@@ -19,7 +19,7 @@
     </div>
 
     <div class="mx-10 my-5">
-      <%= simple_format(@note.body) %>
+      <%= raw Rinku.auto_link(simple_format(@note.body), :urls, "target='_blank' rel='noopener noreferrer'") %>
     </div>
 
   </div>
