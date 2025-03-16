@@ -119,6 +119,7 @@ ja:
     index:
       note_link: ノート
       check_list_link: チェックリスト
+      new_button: ノート作成
       no_data: ノートは登録されていません
     new:
       title: ノート作成
