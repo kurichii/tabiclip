@@ -334,6 +334,7 @@ GEM
     rake (13.2.1)
     rdoc (6.10.0)
       psych (>= 4.0.0)
+    redcarpet (3.6.1)
     redis-client (0.23.2)
       connection_pool
     regexp_parser (2.10.0)
@@ -472,6 +473,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.2.1)
   rails-i18n (~> 7.0.0)
+  redcarpet
   rinku
   rubocop-rails-omakase
   selenium-webdriver
