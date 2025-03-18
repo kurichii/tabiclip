@@ -1,5 +1,6 @@
 class TravelBooksController < ApplicationController
-  before_action :authenticate_user!, only: %i[ index new edit update destroy ]
+  before_action :authenticate_user!, except: %i[ show public_travel_books ]
+  before_action :set_travel_book, only: %i[ edit update destroy delete_image share delete_owner ]
 
   def index
     @travel_books = current_user.travel_books.order(:created_at).page(params[:page])
@@ -27,13 +28,9 @@ class TravelBooksController < ApplicationController
     @travel_book = TravelBook.find(params[:id])
   end
 
-  def edit
-    @travel_book = current_user.travel_books.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @travel_book = current_user.travel_books.find(params[:id])
-
     if @travel_book.update(travel_book_param)
       redirect_to travel_books_path(@travel_book), notice: t("defaults.flash_message.updated", item: TravelBook.model_name.human)
     else
@@ -43,13 +40,11 @@ class TravelBooksController < ApplicationController
   end
 
   def destroy
-    travel_book = current_user.travel_books.find(params[:id])
-    travel_book.destroy!
+    @travel_book.destroy!
     redirect_to travel_books_path, notice: t("defaults.flash_message.deleted", item: TravelBook.model_name.human)
   end
 
   def delete_image
-    @travel_book = TravelBook.find(params[:id])
     @travel_book.remove_travel_book_image! # CarrierWaveのメソッドを使って画像を削除
     @travel_book.save
     redirect_to edit_travel_book_path(@travel_book), notice: "しおりの画像を削除しました"
@@ -60,12 +55,10 @@ class TravelBooksController < ApplicationController
   end
 
   def share
-    @travel_book = TravelBook.find(params[:id])
     @users = @travel_book.users
   end
 
   def delete_owner
-    @travel_book = TravelBook.find(params[:id])
     user = User.find(params[:user_id])
     # しおりの作成者でない場合のみ削除
     if user != @travel_book.creator
@@ -77,6 +70,10 @@ class TravelBooksController < ApplicationController
   end
 
   private
+
+  def set_travel_book
+    @travel_book = current_user.travel_books.find(params[:id])
+  end
 
   def travel_book_param
     params.require(:travel_book).permit(:title, :description, :is_public, :area_id, :traveler_type_id, :start_date, :end_date, :travel_book_image, :travel_book_image_cache)
