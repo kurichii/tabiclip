@@ -68,8 +68,12 @@ ja:
         title: プロフィール編集
     passwords:
       new:
+        title: パスワードの再設定
+        send: 確認メールを送信する
+        login_page: ログインページはこちら
+      edit:
         title: パスワード再設定
-        send: 送信
+        change_password: パスワードを再設定する
         login_page: ログインページはこちら
     show:
       profile_button: プロフィールを編集
