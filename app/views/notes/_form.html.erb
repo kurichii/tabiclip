@@ -1,4 +1,4 @@
-<%= form_with model: note, url: travel_book_notes_path(travel_book) do |f| %>
+<%= form_with model: note, url: note.new_record?  ? travel_book_notes_path(travel_book) : note_path(note) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
   <div class="space-y-4">
