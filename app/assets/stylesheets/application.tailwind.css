@@ -39,6 +39,11 @@ h3 {
   @apply link link-primary;
 }
 
+/* 連続で入力した空白や改行がブラウザでの表示に反映・要素のボックス端で自動で折り返し */
+.note-body {
+  white-space: pre-wrap;
+}
+
 .bg-image {
   background-image: url('map.webp');
   background-repeat: no-repeat;

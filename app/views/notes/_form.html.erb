@@ -10,7 +10,8 @@
     </div>
 
     <div class="field">
-      <%= f.text_area :body, placeholder: t(".placeholder.body"), rows: "5", class: "textarea textarea-bordered w-full" %>
+      <%= f.label :title, Note.human_attribute_name(:body), class: "label" %>
+      <%= f.text_area :body, placeholder: t(".placeholder.body"), rows: "10", class: "textarea textarea-bordered w-full" %>
     </div>
 
     <%= f.submit nil, class: "btn btn-primary w-full mt-6 mx-auto" %>

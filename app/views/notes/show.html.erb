@@ -18,8 +18,8 @@
       </div>
     </div>
 
-    <div class="note-body mx-10 my-5">
-      <%= safe_join(@note.body.split("\n").map { |line| raw Rinku.auto_link(line, :urls, "target='_blank' rel='noopener noreferrer'") }, tag.br) %>
+    <div class="note-body mx-10">
+      <%= markdown(@note.body) %>
     </div>
   </div>
 </div>
