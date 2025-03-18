@@ -52,7 +52,7 @@ class TravelBooksController < ApplicationController
     @travel_book = TravelBook.find(params[:id])
     @travel_book.remove_travel_book_image! # CarrierWaveのメソッドを使って画像を削除
     @travel_book.save
-    redirect_to edit_travel_book_path(@travel_book), success: t("defaults.flash_message.deleted", item: TravelBook.model_name.human)
+    redirect_to edit_travel_book_path(@travel_book), notice: "しおりの画像を削除しました"
   end
 
   def public_travel_books
