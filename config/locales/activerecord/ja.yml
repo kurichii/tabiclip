@@ -38,6 +38,7 @@ ja:
         address: 住所
       note:
         title: タイトル
+        body: ノート本文
       check_list:
         title: タイトル
       list_item:
