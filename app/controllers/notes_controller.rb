@@ -16,7 +16,7 @@ class NotesController < ApplicationController
 
     @note = @travel_book.notes.build(note_params)
     if @note.save
-      redirect_to travel_book_notes_path(@travel_book), success: t("defaults.flash_message.created")
+      redirect_to travel_book_notes_path(@travel_book), notice: t("defaults.flash_message.created")
     else
       flash.now[:alert] = t("defaults.flash_message.not_created")
       render :new
@@ -26,6 +26,22 @@ class NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
     @travel_book = @note.travel_book
+  end
+
+  def edit
+    @note = Note.find(params[:id])
+    @travel_book = @note.travel_book
+  end
+
+  def update
+    @note = Note.find(params[:id])
+    @travel_book = @note.travel_book
+    if @note.update(note_params)
+      redirect_to note_path(@note), notice: t("defaults.flash_message.updated", item: Note.model_name.human)
+    else
+      flash.now[:alert] = t("defaults.flash_message.not_updated", item: Note.model_name.human)
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
