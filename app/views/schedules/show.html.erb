@@ -36,7 +36,11 @@
 
       <div class="mt-5 flex items-start">
         <i class="fa-solid fa-file-pen mt-1"></i>
-        <p class="ml-2"><%= schedule_memo(@schedule.memo) %></p>
+        <% if @schedule.memo.blank? %>
+          <div class="ml-2"><%= t("schedules.helpers.no_memo") %></div>
+        <% else %>
+          <div class="ml-2 note-body"><%= markdown(@schedule.memo) %></div>
+        <% end %>
       </div>
     </div>
   </div>

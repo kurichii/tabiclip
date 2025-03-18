@@ -107,7 +107,7 @@ ja:
     form:
       placeholder:
         title: スケジュールのタイトルを記入
-        memo: 移動手段や観光地の情報などのメモを記入
+        memo: 移動手段や観光地の情報などのメモやURLを記入
       is_public:
         true: 公開
         false: 非公開
