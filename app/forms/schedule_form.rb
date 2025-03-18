@@ -91,7 +91,7 @@ class ScheduleForm
       telephone: spot.telephone,
       post_code: spot.post_code,
       address: spot.address,
-      schedule_icon_id: 1
+      schedule_icon_id: schedule.schedule_icon_id || 1
     }
   end
 
