@@ -16,32 +16,20 @@
       <% end %>
     </div>
 
-    <div class="mx-10 mb-5">
-      <div class="mt-5 flex items-center">
-        <i class="fa-regular fa-clock"></i>
-        <p class="ml-2"><%= fmt_schedule_duration(@schedule) %></p>
-      </div>
-
-      <div class="mt-5 flex">
-        <i class="fa-solid fa-location-dot mt-1"></i>
-        <div class="ml-2">
-          <ul><%= schedule_spot_info(@schedule.spot) %></ul>
-        </div>
-      </div>
-
-      <div class="mt-5 flex items-center">
-        <i class="fa-solid fa-wallet"></i>
-        <p class="ml-2"><%= @schedule.budged %><%= t("helpers.currency_unit") %></p>
-      </div>
-
-      <div class="mt-5 flex items-start">
-        <i class="fa-solid fa-file-pen mt-1"></i>
-        <% if @schedule.memo.blank? %>
-          <div class="ml-2"><%= t("schedules.helpers.no_memo") %></div>
-        <% else %>
-          <div class="ml-2 note-body"><%= markdown(@schedule.memo) %></div>
-        <% end %>
-      </div>
+    <div class="m-10">
+      <ul class="fa-ul space-y-5">
+        <li><span class="fa-li"><i class="fa-regular fa-clock"></i></span><%= fmt_schedule_duration(@schedule) %></li>
+        <li><span class="fa-li"><i class="fa-solid fa-location-dot"></i></span><%= schedule_spot_info(@schedule.spot) %></li>
+        <li><span class="fa-li"><i class="fa-solid fa-wallet"></i></span><%= @schedule.budged %><%= t("helpers.currency_unit") %></li>
+        <li>
+          <span class="fa-li"><i class="fa-solid fa-file-pen"></i></span>
+          <% if @schedule.memo.blank? %>
+            <%= t("schedules.helpers.no_memo") %>
+          <% else %>
+            <div class="note-body"><%= markdown(@schedule.memo) %></div>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
