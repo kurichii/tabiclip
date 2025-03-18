@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_travel_book, %i[ index new create ]
-  before_action :set_note, %i[ shoe edit update destroy ]
+  before_action :set_travel_book, only: %i[ index new create ]
+  before_action :set_note, only: %i[ show edit update destroy ]
 
   def index
     @notes = @travel_book.notes
@@ -14,7 +14,7 @@ class NotesController < ApplicationController
   def create
     @note = @travel_book.notes.build(note_params)
     if @note.save
-      redirect_to travel_book_notes_path(@travel_book), notice: t("defaults.flash_message.created")
+      redirect_to travel_book_notes_path(@travel_book), notice: t("defaults.flash_message.created", item: Note.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_created")
       render :new
