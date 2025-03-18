@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule_form = ScheduleForm.new(schedule_params)
     if @schedule_form.save
-      redirect_to travel_book_schedules_path(@travel_book), success: t("defaults.flash_message.created", item: Schedule.model_name.human)
+      redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.created", item: Schedule.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_created", item: Schedule.model_name.human)
       render :new, status: :unprocessable_entity
@@ -34,7 +34,7 @@ class SchedulesController < ApplicationController
     @spot = @schedule.spot
     @schedule_form = ScheduleForm.new(schedule_params, schedule: @schedule, spot: @spot)
     if @schedule_form.update(schedule_params)
-      redirect_to travel_book_schedules_path(@travel_book), success: t("defaults.flash_message.updated", item: Schedule.model_name.human)
+      redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.updated", item: Schedule.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_updated", item: Schedule.model_name.human)
       render :edit, status: :unprocessable_entity
@@ -43,7 +43,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy!
-    redirect_to travel_book_schedules_path(@travel_book), success: t("defaults.flash_message.deleted", item: Schedule.model_name.human)
+    redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.deleted", item: Schedule.model_name.human)
   end
 
   def map
