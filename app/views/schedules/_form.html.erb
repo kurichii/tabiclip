@@ -50,7 +50,7 @@
     <div class="flex flex-wrap gap-x-3 gap-y-2">
       <% ScheduleIcon.all.each do |icon| %>
         <div class="flex items-center gap-1">
-          <%= f.radio_button :schedule_icon_id, icon.id, id: "schedule_icon_#{icon.id}", class: "radio radio-primary", checked: (icon.name == "none") %>
+          <%= f.radio_button :schedule_icon_id, icon.id, id: "schedule_icon_#{icon.id}", class: "radio radio-primary" %>
           <%= f.label "schedule_icon_#{icon.id}", for: "schedule_icon_#{icon.id}", class: "cursor-pointer" do %>
             <% if icon.name == "none" %>
               <span class="text-base"><%= t(".schedule_icon.none_icon") %></span>
