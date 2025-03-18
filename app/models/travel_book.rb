@@ -9,7 +9,7 @@ class TravelBook < ApplicationRecord
   has_many :users, through: :user_travel_books
   has_many :schedules, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
   has_many :check_lists, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
-  has_many :notes, dependent: :destroy
+  has_many :notes, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 65_535 }
