@@ -49,11 +49,6 @@ module SchedulesHelper
     safe_join(content)
   end
 
-
-  def schedule_memo(data)
-    data.blank? ? t("schedules.helpers.no_memo") : data
-  end
-
   def total_budget(schedules)
     schedules.sum { |schedule| schedule.budged.to_i }
   end
