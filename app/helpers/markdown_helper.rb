@@ -6,12 +6,12 @@ module MarkdownHelper
     render_options = {
       filter_html:     true, # htmlを出力しない
       safe_links_only: true, # 安全であると見なされるプロトコルのリンクのみを生成
-      link_attributes: { rel: 'nofollow', target: "_blank" },
+      link_attributes: { rel: "nofollow", target: "_blank" }
     }
 
     extensions = {
       autolink:           true, # <>で囲まれてなくてもリンクを認識
-      no_intra_emphasis:  true, # 単語中の強調を認識しない
+      no_intra_emphasis:  true # 単語中の強調を認識しない
     }
 
     renderer = Redcarpet::Render::HTML.new(render_options)
