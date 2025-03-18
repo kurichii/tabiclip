@@ -74,9 +74,6 @@ gem "dotenv-rails"
 # Geocoding
 gem "geocoder"
 
-# テキスト内のURLをリンク化
-gem "rinku"
-
 # Markdownのパーサー
 gem "redcarpet"
 
