@@ -44,6 +44,13 @@ class NotesController < ApplicationController
     end
   end
 
+  def destroy
+    @note = Note.find(params[:id])
+    @travel_book = @note.travel_book
+    @note.destroy
+    redirect_to travel_book_notes_path(@travel_book), notice: t("defaults.flash_message.deleted", item: Note.model_name.human)
+  end
+
   private
 
   def note_params
