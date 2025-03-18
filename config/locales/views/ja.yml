@@ -123,6 +123,8 @@ ja:
       no_data: ノートは登録されていません
     new:
       title: ノート作成
+    edit:
+      title: ノート編集
     form:
       placeholder:
         title: ノートのタイトルを記入
