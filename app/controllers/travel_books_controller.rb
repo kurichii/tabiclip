@@ -51,7 +51,8 @@ class TravelBooksController < ApplicationController
   end
 
   def public_travel_books
-    @travel_books = TravelBook.where(is_public: true).includes(:users).order(:created_at).page(params[:page])
+    @q = TravelBook.ransack(params[:q])
+    @travel_books = @q.result.where(is_public: true).includes(:users).order(created_at: :desc).page(params[:page])
   end
 
   def share
@@ -67,6 +68,11 @@ class TravelBooksController < ApplicationController
     else
       redirect_to share_travel_book_path(@travel_book), alert: "しおりの作成者は削除できません"
     end
+  end
+
+  def search
+    @q = TravelBook.ransack(params[:q])
+    @results = @q.result
   end
 
   private
