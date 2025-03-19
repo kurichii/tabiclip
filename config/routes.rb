@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :travel_books do
     collection do
       get "public", action: :public_travel_books
+      get "search"
     end
     member do
       get :share

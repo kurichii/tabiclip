@@ -26,6 +26,11 @@ class TravelBook < ApplicationRecord
     schedules.sort_by { |schedule| schedule.start_date || DateTime.new(0) }
   end
 
+  # ransackで検索に使用するカラムを記述
+  def self.ransackable_attributes(auth_object = nil)
+    [ "area_id", "traveler_type_id" ]
+  end
+
   private
 
   def end_date_after_start_date
