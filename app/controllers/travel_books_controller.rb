@@ -3,7 +3,7 @@ class TravelBooksController < ApplicationController
   before_action :set_travel_book, only: %i[ edit update destroy delete_image share delete_owner ]
 
   def index
-    @travel_books = current_user.travel_books.order(:created_at).page(params[:page])
+    @travel_books = current_user.travel_books.order(created_at: :desc).page(params[:page])
   end
 
   def new
