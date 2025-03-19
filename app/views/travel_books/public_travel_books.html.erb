@@ -1,12 +1,13 @@
 <div class="container">
-
-  <%= search_form_for @q, url: public_travel_books_path, method: :get do |f| %>
-    <%= f.label :area_name_eq, "エリア" %>
-    <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name, @q.area_id_eq), { include_blank: "選択してください" } %>
-    <%= f.label :traveler_type_name_eq, "旅行スタイル" %>
-    <%= f.select :traveler_type_id_eq, options_from_collection_for_select(TravelerType.all, :id, :name, @q.traveler_type_id_eq), { include_blank: "選択してください" } %>
-    <%= f.submit %>
-  <% end %>
+  <div class="my-5 flex items-center">
+    <%= search_form_for @q, url: public_travel_books_path, method: :get do |f| %>
+      <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name, @q.area_id_eq), { include_blank: "エリア" }, { class: "select select-bordered select-sm md:select-md" } %>
+      <%= f.select :traveler_type_id_eq, options_from_collection_for_select(TravelerType.all, :id, :name, @q.traveler_type_id_eq), { include_blank: "旅行スタイル" }, { class: "select select-bordered select-sm md:select-md" } %>
+      <%= button_tag type: "submit", class: "btn btn-primary btn-sm md:btn-md" do %>
+        <span class="text-xs"><i class="text-xs fa-solid fa-magnifying-glass"></i></span>
+      <% end %>
+    <% end %>
+  </div>
 
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <%= render partial: "travel_books/travel_book", collection: @travel_books, as: :travel_book %>
