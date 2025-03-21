@@ -7,6 +7,6 @@ class CreateBookmarks < ActiveRecord::Migration[7.2]
     end
 
     add_foreign_key :bookmarks, :travel_books, column: :travel_book_uuid, primary_key: :uuid
-    add_index :bookmarks, [:user_id, :travel_book_uuid], unique: true
+    add_index :bookmarks, [ :user_id, :travel_book_uuid ], unique: true
   end
 end
