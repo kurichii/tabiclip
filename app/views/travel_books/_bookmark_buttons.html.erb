@@ -10,8 +10,20 @@
       <% end %>
     <% end %>
   <% else %>
-    <div class="tooltip" data-tip="ブックマーク機能を使用するにはログインする必要があります">
-      <button><i class="fa-regular fa-bookmark"></i></button>
-    </div>
+    <button onclick="document.getElementById('bookmark_button_on_login_modal_<%= travel_book.uuid %>').showModal()">
+      <i class="fa-regular fa-bookmark"></i>
+    </button>
+    <dialog id="bookmark_button_on_login_modal_<%= travel_book.uuid %>" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="text-lg font-bold">しおりのブックマーク機能</h3>
+        <p class="py-4 text-center">ログインするとしおりのブックマークを利用できます</p>
+        <div class="flex justify-end">
+          <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </dialog>
   <% end %>
 </div>
