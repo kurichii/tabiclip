@@ -75,6 +75,10 @@ class TravelBooksController < ApplicationController
     @results = @q.result
   end
 
+  def bookmarks
+    @bookmark_travel_books = current_user.bookmark_travel_books.order(created_at: :desc)
+  end
+
   private
 
   def set_travel_book
