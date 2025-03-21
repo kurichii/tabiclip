@@ -25,7 +25,11 @@ ja:
       confirmation_instructions:
         subject: "確認手順"
       reset_password_instructions:
-        subject: "パスワードリセット手順"
+        subject: "パスワードリセット"
+        hello: "%{name} 様"
+        thanks: "たびくりっぷをご利用いただきありがとうございます。"
+        password_reset: "パスワード再設定用のURLを送付いたします。以下のURLより、パスワードの変更をお願いいたします。"
+        password_reset_link: "再設定用URL"
       unlock_instructions:
         subject: "ロック解除手順"
       email_changed:
