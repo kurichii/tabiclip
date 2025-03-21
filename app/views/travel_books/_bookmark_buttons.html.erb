@@ -1,11 +1,17 @@
 <div class="flex justify-end">
-  <% if current_user.bookmark?(travel_book) %>
-    <%= link_to bookmark_path(current_user.bookmarks.find_by(travel_book_uuid: travel_book.uuid)), data: { turbo_method: :delete } do %>
-      <i class="fa-solid fa-bookmark"></i>
+  <% if user_signed_in? %>
+    <% if current_user.bookmark?(travel_book) %>
+      <%= link_to bookmark_path(current_user.bookmarks.find_by(travel_book_uuid: travel_book.uuid)), data: { turbo_method: :delete } do %>
+        <i class="fa-solid fa-bookmark"></i>
+      <% end %>
+    <% else %>
+      <%= link_to bookmarks_path(travel_book_uuid: travel_book.uuid), data: { turbo_method: :post } do %>
+        <i class="fa-regular fa-bookmark"></i>
+      <% end %>
     <% end %>
   <% else %>
-    <%= link_to bookmarks_path(travel_book_uuid: travel_book.uuid), data: { turbo_method: :post } do %>
-      <i class="fa-regular fa-bookmark"></i>
-    <% end %>
+    <div class="tooltip" data-tip="ブックマーク機能を使用するにはログインする必要があります">
+      <button><i class="fa-regular fa-bookmark"></i></button>
+    </div>
   <% end %>
 </div>
