@@ -40,4 +40,16 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
+
+  def bookmark(travel_book)
+    bookmark_travel_books << travel_book
+  end
+
+  def unbookmark(travel_book)
+    bookmark_travel_books.destroy(travel_book)
+  end
+
+  def bookmark?(travel_book)
+    bookmark_travel_books.include?(travel_book)
+  end
 end
