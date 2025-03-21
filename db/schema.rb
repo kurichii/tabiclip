@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_18_073008) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_20_005047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_073008) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.uuid "travel_book_uuid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "travel_book_uuid"], name: "index_bookmarks_on_user_id_and_travel_book_uuid", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "check_lists", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -153,6 +162,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_073008) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "check_lists", "travel_books", column: "travel_book_uuid", primary_key: "uuid"
   add_foreign_key "list_items", "check_lists", column: "check_list_uuid", primary_key: "uuid"
   add_foreign_key "notes", "travel_books", column: "travel_book_uuid", primary_key: "uuid"

@@ -7,7 +7,7 @@
   <div class="flex flex-1 justify-end px-2">
     <div class="flex items-stretch">
       <% if user_signed_in? %>
-            <div class="dropdown dropdown-end">
+        <div class="dropdown dropdown-end">
         <div class="flex-none">
           <button>
             <%= image_tag current_user.icon_image_url, class: "mx-auto rounded-full w-10 h-10 object-cover shadow-sm border border-gray-200 mr-2 hover:opacity-50" %>
@@ -20,6 +20,11 @@
             </li>
             <li>
               <%= link_to t("header.how_to_use"), "#" %>
+            </li>
+            <li>
+              <%= link_to bookmarks_travel_books_path do %>
+                <i class="fa-solid fa-bookmark"></i>ブックマーク
+              <% end %>
             </li>
             <li>
               <%= link_to t("header.logout"), destroy_user_session_path, data: { turbo_method: :delete } %>

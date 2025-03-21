@@ -1,0 +1,29 @@
+<div class="flex justify-end">
+  <% if user_signed_in? %>
+    <% if current_user.bookmark?(travel_book) %>
+      <%= link_to bookmark_path(current_user.bookmarks.find_by(travel_book_uuid: travel_book.uuid)), data: { turbo_method: :delete } do %>
+        <i class="fa-solid fa-bookmark"></i>
+      <% end %>
+    <% else %>
+      <%= link_to bookmarks_path(travel_book_uuid: travel_book.uuid), data: { turbo_method: :post } do %>
+        <i class="fa-regular fa-bookmark"></i>
+      <% end %>
+    <% end %>
+  <% else %>
+    <button onclick="document.getElementById('bookmark_button_on_login_modal_<%= travel_book.uuid %>').showModal()">
+      <i class="fa-regular fa-bookmark"></i>
+    </button>
+    <dialog id="bookmark_button_on_login_modal_<%= travel_book.uuid %>" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="text-lg font-bold">しおりのブックマーク機能</h3>
+        <p class="py-4 text-center">ログインするとしおりのブックマークを利用できます</p>
+        <div class="flex justify-end">
+          <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </dialog>
+  <% end %>
+</div>

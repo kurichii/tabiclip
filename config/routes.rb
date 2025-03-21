@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     collection do
       get "public", action: :public_travel_books
       get "search"
+      get :bookmarks
     end
     member do
       get :share
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
     end
     resources :notes, shallow: true
   end
+  resources :bookmarks, only: %i[ create destroy ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
