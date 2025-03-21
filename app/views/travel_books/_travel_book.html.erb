@@ -1,20 +1,30 @@
-<%= link_to travel_book_path(travel_book), class: "block" do %>
-  <div class="card bg-base-100 w-full">
-    <figure>
+<div class="card bg-base-100 w-full">
+  <figure>
+  <%= link_to travel_book_path(travel_book) do %>
     <%= image_tag travel_book.travel_book_image_url %>
-    </figure>
-    <div class="card-body flex flex-col items-center justify-center text-center">
+  <% end %>
+  </figure>
+  <div class="card-body flex flex-col">
+    <%= link_to travel_book_path(travel_book), class: "hover:opacity-50" do %>
       <h2 class="card-title"><%= travel_book.title %></h2>
-      <p><%= area_name(travel_book) %></p>
-      <p><%= traveler_type_name(travel_book) %></p>
+    <% end %>
+
+    <p class="text-sm"><span class="badge">エリア</span><%= area_name(travel_book) %></p>
+    <p class="text-sm"><span class="badge">旅行スタイル</span><%= traveler_type_name(travel_book) %></p>
+
+    <div class="flex justify-between">
       <div class="flex items-center justify-center gap-2">
         <div class="avatar">
-          <div class="w-8 rounded-full shadow-lg border border-gray-200">
+          <div class="w-8 rounded-full border border-gray-200">
             <%= image_tag travel_book.creator.icon_image_url %>
           </div>
         </div>
-        <p><%= travel_book.creator.name %></p>
+        <p class="text-sm"><%= travel_book.creator.name %></p>
       </div>
+
+      <% unless travel_book.owned_by_user?(current_user) %>
+        <%= render "bookmark_buttons", { travel_book: travel_book } %>
+      <% end %>
     </div>
   </div>
-<% end %>
+</div>
