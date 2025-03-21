@@ -32,6 +32,13 @@ ja:
         subject: "メールアドレスを変更しました"
       password_change:
         subject: "パスワードを変更しました"
+      invitation_instructions:
+        subject: "しおりへのご招待"
+        hello: "%{email} 様"
+        someone_invited_you: "たびくりっぷのしおりに招待されました。"
+        accept: "こちらのリンクからしおりに参加できます。"
+        accept_until: "この招待は %{due_date} まで有効です。"
+        accept_until_format: "%Y年%m月%d日 %H:%M"
     omniauth_callbacks:
       failure: '%{kind} アカウントでログインできませんでした: \"%{reason}\"'
       success: "%{kind} アカウントでログインしました"
