@@ -56,6 +56,9 @@ gem "sidekiq-scheduler"
 gem "carrierwave", "~> 3.0"
 gem "mini_magick"
 
+# OGP
+gem "meta-tags"
+
 # Amazon S3
 gem "fog-aws"
 
