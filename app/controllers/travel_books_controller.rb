@@ -1,6 +1,8 @@
 class TravelBooksController < ApplicationController
   before_action :authenticate_user!, except: %i[ show public_travel_books ]
   before_action :set_travel_book, only: %i[ edit update destroy delete_image share delete_owner ]
+  # 設定したprepare_meta_tagsをprivateにあってもpostコントローラー以外にも使えるようにする
+  helper_method :prepare_meta_tags
 
   def index
     @travel_books = current_user.travel_books.order(created_at: :desc).page(params[:page])
@@ -26,6 +28,8 @@ class TravelBooksController < ApplicationController
 
   def show
     @travel_book = TravelBook.find(params[:id])
+    # メタタグを設定
+    prepare_meta_tags(@travel_book)
   end
 
   def edit; end
@@ -80,6 +84,26 @@ class TravelBooksController < ApplicationController
   end
 
   private
+
+  def prepare_meta_tags(travel_book)
+    # image_url
+    image_url = "#{request.base_url}/images/ogp.png?title=#{CGI.escape(travel_book.title)}&creator=#{CGI.escape(travel_book.creator.name)}"
+
+    set_meta_tags og: {
+      site_name: "たびくりっぷ",
+      title: "#{travel_book.title} | たびくりっぷ",
+      description: "旅行のしおりの投稿です",
+      type: "website",
+      url: request.original_url,
+      image: image_url,
+      local: "ja-JP"
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@https://x.com/kuripiyoco",
+      image: image_url
+    }
+  end
 
   def set_travel_book
     @travel_book = current_user.travel_books.find(params[:id])
