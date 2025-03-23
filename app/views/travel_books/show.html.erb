@@ -26,36 +26,52 @@
           <% end %>
         </div>
 
-        <div class="mt-6">
-          <div class="font-bold"><%= TravelBook.human_attribute_name(:description) %></div>
-          <%= travel_book_description(@travel_book) %>
-        </div>
+        <div class="space-y-3">
+          <div>
+            <p class="font-bold"><%= TravelBook.human_attribute_name(:description) %></p>
+            <p><%= travel_book_description(@travel_book) %></p>
+          </div>
 
-        <div class="mt-3">
-          <div class="font-bold"><%= t(".duration") %></div>
-          <div><%= travel_book_duration(@travel_book)%></div>
-        </div>
-
-        <div class="mt-3">
-          <div class="font-bold"><%= TravelBook.human_attribute_name(:area) %></div>
-          <div><%= area_name(@travel_book) %></div>
-        </div>
-
-        <div class="mt-3">
-          <div class="font-bold"><%= TravelBook.human_attribute_name(:traveler_type) %></div>
-          <div><%= traveler_type_name(@travel_book) %></div>
-        </div>
-
-        <div class="mt-3">
-          <div class="font-bold"><%= TravelBook.human_attribute_name(:is_public) %></div>
-          <div><%= travel_book_is_public(@travel_book) %></div>
-        </div>
-
-        <% unless @travel_book.owned_by_user?(current_user) %>
-          <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary hover:opacity-50" do %>
-            スケジュールを見る
+          <% if @travel_book.owned_by_user?(current_user) %>
+          <div>
+            <p class="font-bold"><%= t(".duration") %></p>
+            <p><%= travel_book_duration(@travel_book)%></p>
+          </div>
           <% end %>
-        <% end %>
+
+          <div>
+            <p class="font-bold"><%= TravelBook.human_attribute_name(:area) %></p>
+            <p><%= area_name(@travel_book) %></p>
+          </div>
+
+          <div>
+            <p class="font-bold"><%= TravelBook.human_attribute_name(:traveler_type) %></p>
+            <p><%= traveler_type_name(@travel_book) %></p>
+          </div>
+
+          <div>
+            <p class="font-bold"><%= TravelBook.human_attribute_name(:is_public) %></p>
+            <p><%= travel_book_is_public(@travel_book) %></p>
+          </div>
+
+          <% if @travel_book.is_public %>
+            <div class="text-gray-600">
+              <% prepare_meta_tags @travel_book %>
+              <% twitter_share_url = "https://twitter.com/intent/tweet?url= #{CGI.escape(travel_book_url(@travel_book))}" %>
+              <%= link_to twitter_share_url, target: "_blank", data: { toggle: "tooltip", placement: "bottom" }, title: "Xでシェア" do %>
+                <i class="fa-brands fa-square-x-twitter fa-2xl"></i> Xでシェア
+              <% end %>
+            </div>
+          <% end %>
+
+          <div>
+            <% unless @travel_book.owned_by_user?(current_user) %>
+              <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary w-full hover:opacity-50" do %>
+                スケジュールを見る
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
