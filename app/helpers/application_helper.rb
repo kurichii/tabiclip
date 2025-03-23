@@ -1,4 +1,30 @@
 module ApplicationHelper
+  def default_meta_tags
+    {
+      site: "たびくりっぷ",
+      title: "たびくりっぷ",
+      reverse: true,
+      charset: "utf-8",
+      description: "共有できる旅のしおり作成サービスです",
+      canonical: "request.original_url",
+      separator: "|",
+      og: {
+        site_name: :site,
+        title: :title,
+        description: :description,
+        type: "website",
+        url: request.original_url,
+        image: image_url("ogp.png"),
+        local: "ja-JP"
+      },
+      twitter: {
+        card: "summary_large_image",
+        site: "@https://x.com/kuripiyoco",
+        image: image_url("ogp.png")
+      }
+    }
+  end
+
   # ボトムナビゲーションのだしわけ判定
   def display_bottom_nav_on_travel_book
     return false if current_user.nil?
