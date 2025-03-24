@@ -52,4 +52,9 @@ class User < ApplicationRecord
   def bookmark?(travel_book)
     bookmark_travel_books.include?(travel_book)
   end
+
+  # メールを非同期送信
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end
