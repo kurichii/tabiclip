@@ -20,9 +20,12 @@
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
           <h3 class="text-lg font-bold">LINEアカウント連携用トークン</h3>
-          <div class="m-5 text-center">
-            <p>以下のtokenをTabiClip公式LINEに送信してください</p>
-            <p>連携:<%= @user.token %></p>
+          <div class="space-y-2 m-5 text-center">
+            <p>以下の文字列をたびくりっぷの公式LINEに送信すると、LINEアカウントと連携されます</p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-2">
+              <input type="text" value="<%= @user.token %>" readonly class="input input-bordered w-full max-w-xs">
+              <%= button_tag "コピー", data: { controller: "clipboard", action: "clipboard#copy", clipboard_content_value: @user.token }, class: "btn btn-primary w-full md:w-auto max-w-xs" %>
+            </div>
           </div>
         </div>
       </dialog>

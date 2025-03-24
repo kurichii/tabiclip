@@ -43,24 +43,22 @@ class LinebotController < ApplicationController
     line_user_id = event["source"]["userId"]
 
     # 送信されたテキストがパターンマッチしない場合
-    return reply(event, "マイページのアカウント連携tokenをコピーして送信してください！") unless received_text.match?(/\A連携:[a-f0-9]{32}\z/)
+    return reply(event, "マイページにあるLINEアカウント連携用トークンをコピーして送信してください！") unless received_text.match?(/\A[a-f0-9]{32}\z/)
 
-    # received_textからtokenを取り出す(連携:の文字を削除)
-    token = received_text.sub("連携:", "")
     # tokenでUserを取得
-    user = User.find_by(token: token)
+    user = User.find_by(token: received_text)
 
     # tokenでuserが特定できない場合
-    return reply(event, "無効なtokenです。マイページのアカウント連携tokenを確認してください！") unless user
+    return reply(event, "無効なtokenです。マイページにあるLINEアカウント連携用トークンを確認してください！") unless user
 
     # すでにユーザーのuidが登録されている場合
-    return reply(event, "LINEアカウントとTabiClipアカウントの連携が完了しています！ぜひリマインダー設定してみてくださいね！※LINEログインを利用している場合はすでにアカウントが連携されています") if user.uid
+    return reply(event, "LINEアカウントとたびくりっぷアカウントの連携が完了しています！ぜひリマインダー設定してみてくださいね！※LINEログインを利用している場合はすでにアカウントが連携されています") if user.uid
 
     # ユーザーのuidを更新
     if user.update(uid: line_user_id)
-      reply(event, "LINEアカウントとTabiClipのアカウント連携が完了しました！")
+      reply(event, "LINEアカウントとたびくりっぷのアカウント連携が完了しました！")
     else
-      reply(event, "LINEアカウントとTabiClipのアカウント連携に失敗しました。もう一度tokenを送信してください！")
+      reply(event, "LINEアカウントとたびくりっぷのアカウント連携に失敗しました。もう一度tokenを送信してください！")
     end
   end
 
