@@ -1,13 +1,9 @@
-<div class="flex">
-  <div class="form-container bg-base-100 shadow-md p-8">
-    <div class="flex items-center justify-between">
-      <%= link_to travel_book_path(@travel_book), class: "hover:opacity-50" do %>
-        <i class="fa-solid fa-chevron-left"></i>
-      <% end %>
-      <div class="flex flex-grow flex-col items-center">
-        <h3><%= @travel_book.title %></h3>
-        <p><%= travel_book_duration(@travel_book) %></p>
-      </div>
+<div class="max-w-screen-md mx-auto flex-none md:flex md:max-w-none">
+  <div class="bg-base-100 p-8 m-5 rounded-lg md:m-0 md:rounded-none md:shadow-md md:flex-1">
+
+    <div class="flex flex-grow flex-col items-center">
+      <h2 class="text-lg font-bold"><%= @travel_book.title %></h2>
+      <p><%= travel_book_duration(@travel_book) %></p>
     </div>
     <% if @schedules.present? %>
     <div data-controller="tabs">
@@ -25,8 +21,8 @@
 
         <!-- Tab for each date -->
         <% Schedule.group_by_date(@schedules).each do |date, schedules| %>
-          <input type="radio" data-action="change->tabs#changeTab"
-            data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
+            <input type="radio" data-action="change->tabs#changeTab"
+              data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>" name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_with_day(date) %>" />
           <div role="tabpanel" class="tab-content p-3">
             <% schedules.each_with_index do |schedule, i| %>
               <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
@@ -38,20 +34,25 @@
     </div>
     <% else %>
       <% if @travel_book.owned_by_user?(current_user) %>
-        <p class="text-center my-10"><%= t(".no_data") %></p>
+        <p class="text-center mt-10"><%= t(".no_creator_no_data") %><br><%= t(".no_data") %></p>
+        <div class="flex justify-center">
+          <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn my-5" do %>
+            <i class="fa-solid fa-plus"></i> <%= t(".new_button") %>
+          <% end %>
+        </div>
       <% else %>
         <p class="text-center my-10"><%= t(".no_creator_no_data") %></p>
       <% end %>
     <% end %>
 
     <% if @travel_book.owned_by_user?(current_user) %>
-      <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn btn-primary fixed z-50 bottom-20 right-5 rounded-full cursor-pointer" do %>
-        <%= t(".new_button") %>
+      <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn btn-primary btn-circle fixed z-50 bottom-20 right-5 text-lg md:right-[calc(50%)] " do %>
+        <i class="fa-solid fa-plus"></i>
       <% end %>
     <% end %>
   </div>
 
-  <div id="map-container" class="relative w-full h-[calc(100vh-64px)]">
+  <div id="map-container" class="hidden md:block md:relative md:h-[calc(100vh-64px)] md:flex-1">
     <div id="map" class="w-full h-full"></div>
     <div id="popup" class="absolute bottom-[calc(64px+10px)] left-1/2 -translate-x-1/2"></div>
   </div>
