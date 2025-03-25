@@ -1,16 +1,17 @@
-<div class="container">
-  <div class="my-5 flex items-center">
+<div class="max-w-screen-xl mx-auto">
+  <div class="m-5 flex items-center">
     <%= search_form_for @q, url: public_travel_books_path, method: :get do |f| %>
-      <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name, @q.area_id_eq), { include_blank: "エリア" }, { class: "select select-bordered select-sm md:select-md" } %>
-      <%= f.select :traveler_type_id_eq, options_from_collection_for_select(TravelerType.all, :id, :name, @q.traveler_type_id_eq), { include_blank: "旅行スタイル" }, { class: "select select-bordered select-sm md:select-md" } %>
-      <%= button_tag type: "submit", class: "btn btn-primary btn-sm md:btn-md" do %>
+      <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name, @q.area_id_eq), { include_blank: "エリア" }, { class: "select select-bordered select-sm sm:select-md" } %>
+      <%= f.select :traveler_type_id_eq, options_from_collection_for_select(TravelerType.all, :id, :name, @q.traveler_type_id_eq), { include_blank: "旅行スタイル" }, { class: "select select-bordered select-sm sm:select-md" } %>
+      <%= button_tag type: "submit", class: "btn btn-primary btn-sm sm:btn-md" do %>
         <span class="text-xs"><i class="text-xs fa-solid fa-magnifying-glass"></i></span>
       <% end %>
     <% end %>
   </div>
 
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-5">
     <%= render partial: "travel_books/travel_book", collection: @travel_books, as: :travel_book %>
   </div>
   <%= paginate @travel_books %>
+  <div class="h-24"></div>
 </div>

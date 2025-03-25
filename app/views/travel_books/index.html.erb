@@ -1,10 +1,11 @@
-<div class="container">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <%if @travel_books.present? %>
+<div class="max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-5">
+    <% if @travel_books.present? %>
       <%= render "my_travel_book", travel_books: @travel_books %>
     <% else %>
       <%= t(".no_data") %>
     <% end %>
   </div>
   <%= paginate @travel_books %>
+  <div class="h-24"></div>
 </div>
