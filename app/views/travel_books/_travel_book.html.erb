@@ -1,30 +1,32 @@
 <div class="card bg-base-100 w-full">
   <figure>
-  <%= link_to travel_book_path(travel_book) do %>
+  <%= link_to travel_book_path(travel_book), class: "hover:scale-125 hover:duration-500" do %>
     <%= image_tag travel_book.travel_book_image_url %>
   <% end %>
   </figure>
-  <div class="card-body flex flex-col">
+  <div class="card-body flex flex-col justify-between">
     <%= link_to travel_book_path(travel_book), class: "hover:opacity-50" do %>
-      <h2 class="card-title"><%= travel_book.title %></h2>
+      <h2 class="card-title"><%= truncate(travel_book.title) %></h2>
     <% end %>
 
-    <p class="text-sm"><span class="badge">エリア</span><%= area_name(travel_book) %></p>
-    <p class="text-sm"><span class="badge">旅行スタイル</span><%= traveler_type_name(travel_book) %></p>
+    <div>
+      <p><span class="badge mr-2">エリア</span><%= area_name(travel_book) %></p>
+      <p><span class="badge mr-2">スタイル</span><%= traveler_type_name(travel_book) %></p>
 
-    <div class="flex justify-between">
-      <div class="flex items-center justify-center gap-2">
-        <div class="avatar">
-          <div class="w-8 rounded-full border border-gray-200">
-            <%= image_tag travel_book.creator.icon_image_url %>
+      <div class="flex justify-between">
+        <div class="flex items-center gap-2">
+          <div class="avatar">
+            <div class="w-8 rounded-full border border-gray-200">
+              <%= image_tag travel_book.creator.icon_image_url %>
+            </div>
           </div>
+          <p><%= travel_book.creator.name %></p>
         </div>
-        <p class="text-sm"><%= travel_book.creator.name %></p>
-      </div>
 
-      <% unless travel_book.owned_by_user?(current_user) %>
-        <%= render "bookmark_buttons", { travel_book: travel_book } %>
-      <% end %>
+        <% unless travel_book.owned_by_user?(current_user) %>
+          <%= render "bookmark_buttons", { travel_book: travel_book } %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
