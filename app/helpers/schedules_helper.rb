@@ -1,12 +1,15 @@
 module SchedulesHelper
   def fmt_schedule_date(date)
     return "" if date.nil?
-    date.strftime("%Y/%-m/%-d/(%a) %-H:%M")
+    format_date = date.strftime("%Y/%-m/%-d")
+    format_time = date.strftime("%-H:%M")
+    "#{format_date}(#{fmt_wday(date)}) #{format_time}"
   end
 
   def fmt_date_with_day(date)
     return date if date.is_a?(String)
-    date.strftime("%-m/%-d(%a)")
+    format_date = date.strftime("%-m/%-d")
+    "#{format_date}(#{fmt_wday(date)})"
   end
 
   def fmt_datetime(date)

@@ -43,8 +43,15 @@ module ApplicationHelper
 
   # 日付をフォーマットする
   def fmt_date(date)
-    return "未定" if date.nil?
-    date.strftime("%Y/%-m/%-d(%a)")
+    return "日付未定" if date.nil?
+    format_date = date.strftime("%Y/%-m/%-d")
+    "#{format_date}(#{fmt_wday(date)})"
+  end
+
+  # 曜日をフォーマットする
+  def fmt_wday(date)
+    wdays = %w[日 月 火 水 木 金 土]
+    "#{wdays[date.wday]}"
   end
 
   def flash_message_color(type)

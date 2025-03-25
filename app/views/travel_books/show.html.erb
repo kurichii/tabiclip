@@ -1,77 +1,74 @@
-<div class="container">
-  <div class="form-container">
-    <div class="card bg-base-100 shadow-md m-6">
-      <figure class="h-64 w-full">
-        <%= image_tag @travel_book.travel_book_image_url, class: "object-cover h-full w-full" %>
-      </figure>
+<div class="max-w-screen-md mx-auto">
+  <div class="card bg-base-100 shadow-md m-5">
+    <figure class="h-64 w-full">
+      <%= image_tag @travel_book.travel_book_image_url, class: "object-cover h-full w-full" %>
+    </figure>
 
-      <div class="card-body">
-        <div class="card-actions items-center justify-between">
-          <%= link_to (user_signed_in? ? travel_books_path : public_travel_books_path), class: "hover:opacity-50" do %>
-            <i class="fa-solid fa-chevron-left"></i>
-          <% end %>
-          <h3 class="flex-grow text-center"><%= @travel_book.title %></h3>
-          <% if @travel_book.owned_by_user?(current_user) %>
-            <div class="justify-end">
-              <%= link_to share_travel_book_path(@travel_book), class: "hover:opacity-50" do %>
-                <i class="fa-solid fa-share-from-square"></i>
-              <% end %>
-              <%= link_to edit_travel_book_path(@travel_book), class: "ml-3 hover:opacity-50" do %>
-                <i class="fa-solid fa-pen"></i>
-              <% end %>
-              <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-3 hover:opacity-50" do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
-            </div>
-          <% end %>
+    <div class="card-body">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="font-bold text-sm"><%= TravelBook.human_attribute_name(:title) %></p>
+          <h2 class="text-lg font-bold"><%= @travel_book.title %></h2>
         </div>
-
-        <div class="space-y-3">
-          <div>
-            <p class="font-bold"><%= TravelBook.human_attribute_name(:description) %></p>
-            <p><%= travel_book_description(@travel_book) %></p>
-          </div>
-
-          <% if @travel_book.owned_by_user?(current_user) %>
-          <div>
-            <p class="font-bold"><%= t(".duration") %></p>
-            <p><%= travel_book_duration(@travel_book)%></p>
-          </div>
-          <% end %>
-
-          <div>
-            <p class="font-bold"><%= TravelBook.human_attribute_name(:area) %></p>
-            <p><%= area_name(@travel_book) %></p>
-          </div>
-
-          <div>
-            <p class="font-bold"><%= TravelBook.human_attribute_name(:traveler_type) %></p>
-            <p><%= traveler_type_name(@travel_book) %></p>
-          </div>
-
-          <div>
-            <p class="font-bold"><%= TravelBook.human_attribute_name(:is_public) %></p>
-            <p><%= travel_book_is_public(@travel_book) %></p>
-          </div>
-
-          <% if @travel_book.is_public %>
-            <div class="text-gray-600">
-              <% prepare_meta_tags @travel_book %>
-              <% twitter_share_url = "https://twitter.com/intent/tweet?url= #{CGI.escape(travel_book_url(@travel_book))}" %>
-              <%= link_to twitter_share_url, target: "_blank", data: { toggle: "tooltip", placement: "bottom" }, title: "Xでシェア" do %>
-                <i class="fa-brands fa-square-x-twitter fa-2xl"></i> Xでシェア
-              <% end %>
-            </div>
-          <% end %>
-
-          <div>
-            <% unless @travel_book.owned_by_user?(current_user) %>
-              <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary w-full hover:opacity-50" do %>
-                スケジュールを見る
-              <% end %>
+        <% if @travel_book.owned_by_user?(current_user) %>
+          <div class="flex justify-end">
+            <%= link_to edit_travel_book_path(@travel_book), class: "btn hover:opacity-50" do %>
+              <i class="fa-solid fa-pen"></i>
+            <% end %>
+            <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "btn ml-3 hover:opacity-50" do %>
+              <i class="fa-solid fa-trash"></i>
             <% end %>
           </div>
+        <% end %>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <p class="font-bold text-sm"><%= TravelBook.human_attribute_name(:description) %></p>
+          <p><%= travel_book_description(@travel_book) %></p>
         </div>
+
+        <% if @travel_book.owned_by_user?(current_user) %>
+        <div>
+          <p class="font-bold text-sm"><%= t(".duration") %></p>
+          <p><%= travel_book_duration(@travel_book)%></p>
+        </div>
+        <% end %>
+
+        <div>
+          <p class="font-bold text-sm"><%= TravelBook.human_attribute_name(:area) %></p>
+          <p><%= area_name(@travel_book) %></p>
+        </div>
+
+        <div>
+          <p class="font-bold text-sm"><%= TravelBook.human_attribute_name(:traveler_type) %></p>
+          <p><%= traveler_type_name(@travel_book) %></p>
+        </div>
+
+        <div>
+          <p class="font-bold text-sm"><%= TravelBook.human_attribute_name(:is_public) %></p>
+          <p><%= travel_book_is_public(@travel_book) %></p>
+        </div>
+
+        <% unless @travel_book.owned_by_user?(current_user) %>
+          <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary w-full" do %>
+            <i class="fa-regular fa-clock"></i> スケジュールを見る
+          <% end %>
+        <% else %>
+          <%= link_to share_travel_book_path(@travel_book), class: "btn btn-primary w-full" do %>
+            <i class="fa-solid fa-users"></i> しおりのメンバーリスト・しおりに招待
+          <% end %>
+        <% end %>
+
+        <% if @travel_book.is_public %>
+          <% prepare_meta_tags @travel_book %>
+          <% twitter_share_url = "https://twitter.com/intent/tweet?url= #{CGI.escape(travel_book_url(@travel_book))}" %>
+          <%= link_to twitter_share_url, target: "_blank", data: { toggle: "tooltip", placement: "bottom" }, title: "Xでシェア", class: "btn w-full" do %>
+            <i class="fa-brands fa-square-x-twitter text-lg"></i> Xに投稿
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
+  <div class="h-24"></div>
+</div>

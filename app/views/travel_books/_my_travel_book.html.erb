@@ -1,20 +1,18 @@
 <% travel_books.each do |travel_book| %>
-  <%= link_to travel_book_path(travel_book), class: "block" do %>
-    <div class="card bg-base-100 w-full">
-      <figure>
-      <%= image_tag travel_book.travel_book_image_url %>
-      </figure>
-      <div class="card-body flex flex-col items-center justify-center text-center">
-        <h2 class="card-title"><%= travel_book.title %></h2>
-        <div class="flex items-center justify-center gap-2">
-          <div class="badge"><%= t(".departure") %></div>
-          <p><%= fmt_date(travel_book.start_date) %></p>
-        </div>
-        <div class="flex items-center justify-center gap-2">
-          <div class="badge"><%= t(".arrival") %></div>
-          <p><%= fmt_date(travel_book.end_date) %></p>
-        </div>
+  <div class="card bg-base-100 w-full">
+    <figure>
+      <%= link_to travel_book_path(travel_book), class: "hover:scale-125 hover:duration-500" do %>
+        <%= image_tag travel_book.travel_book_image_url %>
+      <% end %>
+    </figure>
+    <div class="card-body flex flex-col justify-between">
+      <%= link_to travel_book_path(travel_book), class: "hover:opacity-50" do %>
+        <h2 class="card-title"><%= truncate(travel_book.title) %></h2>
+      <% end %>
+      <div>
+        <p><span class="badge mr-2"><%= t(".departure") %></span><%= fmt_date(travel_book.start_date) %></p>
+        <p><span class="badge mr-2"><%= t(".arrival") %></span><%= fmt_date(travel_book.end_date) %></p>
       </div>
     </div>
-  <% end %>
+  </div>
 <% end %>
