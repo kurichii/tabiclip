@@ -1,6 +1,6 @@
 module TravelBooksHelper
   def travel_book_description(travel_book)
-    travel_book.description || ""
+    travel_book.description.blank? ? "-" : travel_book.description
   end
 
   def travel_book_duration(travel_book)
