@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="form-container rounded-lg shadow-md bg-base-100 p-8">
-    <h2>しおりへ招待する</h2>
+<div class="max-w-screen-md mx-auto">
+  <div class="bg-base-100 rounded-lg shadow-md p-8 m-5">
+    <h2 class="text-lg font-bold text-center">しおりに招待する</h2>
 
     <%= form_for(@user, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
 

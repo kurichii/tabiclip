@@ -1,12 +1,7 @@
-<div class="container">
-  <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
+<div class="max-w-screen-md mx-auto">
+  <div class="bg-base-100 rounded-lg shadow-md p-8 m-5">
 
-    <div class="flex items-center justify-between">
-      <%= link_to travel_book_path(@travel_book), data: { turbo: false }, class: "hover:opacity-50" do %>
-        <i class="fa-solid fa-chevron-left"></i>
-      <% end %>
-      <h3 class="flex-grow text-center">メンバーリスト</h3>
-    </div>
+    <h2 class="text-lg font-bold text-center">メンバーリスト</h2>
 
     <table class="table">
       <tbody>
@@ -30,9 +25,10 @@
       </tbody>
     </table>
     <div class="text-right mt-5">
-      <%= link_to new_user_invitation_path(travel_book_uuid: @travel_book.uuid), class: "btn btn-primary hover:opacity-50" do %>
-        <i class="fa-solid fa-envelope"></i>メンバーを招待
+      <%= link_to new_user_invitation_path(travel_book_uuid: @travel_book.uuid), class: "btn btn-primary" do %>
+        <i class="fa-solid fa-envelope"></i> しおりに招待
       <% end %>
     </div>
   </div>
+  <div class="h-24"></div>
 </div>
