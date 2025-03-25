@@ -1,70 +1,71 @@
 <%= form_with model: @schedule_form, url: url, data: { turbo: false } do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
-  <div class="field mt-3">
-    <%= f.label :title, class: "w-full" do %>
-      <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
-    <% end %>
-    <%= f.text_field :title, autofocus: true, placeholder: t("schedules.form.placeholder.title"), class: "input input-bordered w-full", autocomplete: "off" %>
-  </div>
-
-  <div class="mt-3 flex flex-col sm:flex-row gap-2">
-    <div class="w-full">
-      <%= f.label :start_date, Schedule.human_attribute_name(:start_date), class: "label" %>
-      <%= f.datetime_field :start_date, class: "input input-bordered w-full", autocomplete: "off" %>
-    </div>
-    <div class="w-full">
-      <%= f.label :end_date, Schedule.human_attribute_name(:end_date), class: "label" %>
-      <%= f.datetime_field :end_date, class: "input input-bordered w-full", autocomplete: "off" %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= f.label :name, Spot.human_attribute_name(:name), class: "label" %>
-    <%= f.text_field :name, id: "spotName", class: "input input-bordered w-full", autocomplete: "off" %>
-  </div>
-  <div class="field">
-    <%= f.label :telephone, Spot.human_attribute_name(:telephone), class: "label" %>
-    <%= f.text_field :telephone, id: "phoneNumber", class: "input input-bordered w-full", autocomplete: "off" %>
-  </div>
-  <div class="field">
-    <%= f.label :address, Spot.human_attribute_name(:address), class: "label" %>
-    <%= f.text_field :address, id: "address", class: "input input-bordered w-full", autocomplete: "off" %>
-  </div>
-
-  <div class="field mt-3">
-    <%= f.label :budged, Schedule.human_attribute_name(:budged), class: "label" %>
-    <div class="flex items-center">
-      <%= f.number_field :budged, class: "input input-bordered w-full", autocomplete: "off" %>
-      <span class="ml-2"><%= t("helpers.currency_unit") %></span>
-    </div>
-  </div>
-
-  <div class="field mt-3">
-    <%= f.label :memo, Schedule.human_attribute_name(:memo), class: "label" %>
-    <%= f.text_area :memo, placeholder: t("schedules.form.placeholder.memo"), rows: "3", class: "textarea textarea-bordered w-full", autocomplete: "off" %>
-  </div>
-
-  <div class="field mt-3">
-    <%= f.label :schedule_icon_id, ScheduleIcon.human_attribute_name(:name), class: "label" %>
-    <div class="flex flex-wrap gap-x-3 gap-y-2">
-      <% ScheduleIcon.all.each do |icon| %>
-        <div class="flex items-center gap-1">
-          <%= f.radio_button :schedule_icon_id, icon.id, id: "schedule_icon_#{icon.id}", class: "radio radio-primary" %>
-          <%= f.label "schedule_icon_#{icon.id}", for: "schedule_icon_#{icon.id}", class: "cursor-pointer" do %>
-            <% if icon.name == "none" %>
-              <span class="text-base"><%= t(".schedule_icon.none_icon") %></span>
-            <% else %>
-              <i class="fa-solid <%= icon.name %> text-xl"></i>
-            <% end %>
-          <% end %>
-        </div>
+  <div class="space-y-3">
+    <div>
+      <%= f.label :title, class: "w-full" do %>
+        <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
       <% end %>
+      <%= f.text_field :title, autofocus: true, placeholder: t("schedules.form.placeholder.title"), class: "input input-bordered w-full", autocomplete: "off" %>
     </div>
-  </div>
 
-  <div class="flex justify-end mt-5">
-    <%= f.button nil, type: 'button', onclick: 'submit();', data: { turbo: false }, class: "btn btn-primary w-full mt-6 mx-auto" %>
+    <div class="flex flex-col sm:flex-row sm:gap-2">
+      <div class="w-full">
+        <%= f.label :start_date, Schedule.human_attribute_name(:start_date), class: "label" %>
+        <%= f.datetime_field :start_date, class: "input input-bordered w-full", autocomplete: "off" %>
+      </div>
+      <div class="w-full">
+        <%= f.label :end_date, Schedule.human_attribute_name(:end_date), class: "label" %>
+        <%= f.datetime_field :end_date, class: "input input-bordered w-full", autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :name, Spot.human_attribute_name(:name), class: "label" %>
+      <%= f.text_field :name, id: "spotName", class: "input input-bordered w-full", autocomplete: "off" %>
+    </div>
+
+    <div>
+      <%= f.label :telephone, Spot.human_attribute_name(:telephone), class: "label" %>
+      <%= f.text_field :telephone, id: "phoneNumber", class: "input input-bordered w-full", autocomplete: "off" %>
+    </div>
+
+    <div>
+      <%= f.label :address, Spot.human_attribute_name(:address), class: "label" %>
+      <%= f.text_field :address, id: "address", class: "input input-bordered w-full", autocomplete: "off" %>
+    </div>
+
+    <div>
+      <%= f.label :budged, Schedule.human_attribute_name(:budged), class: "label" %>
+      <div class="flex items-center">
+        <%= f.number_field :budged, class: "input input-bordered w-full", autocomplete: "off" %>
+        <span class="ml-2"><%= t("helpers.currency_unit") %></span>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :memo, Schedule.human_attribute_name(:memo), class: "label" %>
+      <%= f.text_area :memo, placeholder: t("schedules.form.placeholder.memo"), rows: "3", class: "textarea textarea-bordered w-full", autocomplete: "off" %>
+    </div>
+
+    <div>
+      <%= f.label :schedule_icon_id, ScheduleIcon.human_attribute_name(:name), class: "label" %>
+      <div class="flex flex-wrap gap-x-3 gap-y-2">
+        <% ScheduleIcon.all.each do |icon| %>
+          <div class="flex items-center gap-1">
+            <%= f.radio_button :schedule_icon_id, icon.id, id: "schedule_icon_#{icon.id}", class: "radio radio-primary" %>
+            <%= f.label "schedule_icon_#{icon.id}", for: "schedule_icon_#{icon.id}", class: "cursor-pointer" do %>
+              <% if icon.name == "none" %>
+                <span class="text-base"><%= t(".schedule_icon.none_icon") %></span>
+              <% else %>
+                <i class="fa-solid <%= icon.name %> text-xl"></i>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= f.button nil, type: 'button', onclick: 'submit();', data: { turbo: false }, class: "btn btn-primary w-full" %>
   </div>
 <% end %>
 
