@@ -14,6 +14,7 @@ ja:
     total_amount: "合計金額：%{amount}"
     currency_unit: 円
     undecided: 未定
+    date_undecided: 日付未定
     public: 公開
     unpublic: 未公開
   defaults:

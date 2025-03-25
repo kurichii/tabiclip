@@ -4,7 +4,7 @@ module TravelBooksHelper
   end
 
   def travel_book_duration(travel_book)
-    return t("helpers.undecided") unless travel_book.start_date || travel_book.end_date
+    return t("helpers.date_undecided") unless travel_book.start_date || travel_book.end_date
     "#{fmt_date(travel_book.start_date)} - #{fmt_date(travel_book.end_date)}"
   end
 
