@@ -139,7 +139,7 @@ ja:
       note_link: ノート
       check_list_link: チェックリスト
       new_button: チェックリスト作成
-      no_data: チェックリストは登録されていません
+      no_data: チェックリストが登録されていません
     show:
       no_data: チェックリストに項目を追加しましょう
     new:
