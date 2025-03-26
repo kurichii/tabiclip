@@ -5,23 +5,40 @@
         <%= f.check_box :completed, onchange: "this.form.requestSubmit()", class: "checkbox" %>
         <%= list_item.title %>
       </div>
-      <div class="flex gap-5">
-        <% if list_item.persisted? %>
-          <%= link_to edit_list_item_path(list_item), data: { turbo_stream: true }, class: "hover:opacity-50" do %>
-            <i class="fa-solid fa-pen"></i>
-          <% end %>
-          <button class="hover:opacity-50" type="button" onclick="modal_<%= list_item.id %>.showModal()">
-            <% if list_item.reminder.reminder_date %>
-              <i class="fa-solid fa-bell"></i>
-            <% else %>
-              <i class="fa-solid fa-bell-slash"></i>
-            <% end %>
-          </button>
-          <%= link_to list_item_path(list_item), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "hover:opacity-50" do %>
-            <i class="fa-solid fa-trash"></i>
-          <% end %>
+      <div class="flex items-center">
+        <% if list_item.reminder.reminder_date %>
+          <div class="tooltip" data-tip="リマインダー設定済み">
+            <i class="fa-solid fa-bell text-sm md:text-base mr-2"></i>
+          </div>
         <% end %>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="m-1"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <% if list_item.persisted? %>
+              <li>
+              <%= link_to edit_list_item_path(list_item), data: { turbo_stream: true }, class: "hover:opacity-50" do %>
+                <i class="fa-solid fa-pen fa-fw text-sm md:text-base"></i> 編集
+              <% end %>
+              </li>
+              <li>
+                <button class="hover:opacity-50" type="button" onclick="modal_<%= list_item.id %>.showModal()">
+                  <% if list_item.reminder.reminder_date %>
+                    <i class="fa-solid fa-bell fa-fw text-sm md:text-base"></i> リマインダー解除
+                  <% else %>
+                    <i class="fa-solid fa-bell-slash fa-fw text-sm md:text-base"></i> リマインダー設定
+                  <% end %>
+                </button>
+              </li>
+              <li>
+                <%= link_to list_item_path(list_item), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "hover:opacity-50" do %>
+                  <i class="fa-solid fa-trash fa-fw text-sm md:text-base"></i> 削除
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
+
     </div>
   <% end %>
 
