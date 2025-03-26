@@ -1,22 +1,21 @@
-<div class="container">
-  <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
+<div class="max-w-screen-md mx-auto">
+  <div class="bg-base-100 rounded-lg shadow-md p-8 m-5">
 
     <div class="flex items-center justify-between">
-      <%= link_to travel_book_check_lists_path(@travel_book), class:"hover:opacity-50" do %>
-        <i class="fa-solid fa-chevron-left"></i>
-      <% end %>
-      <h3 class="flex-grow text-center"><%= @check_list.title %></h3>
-      <% if @travel_book.owned_by_user?(current_user) %>
-        <%= link_to edit_check_list_path(@check_list), class:"hover:opacity-50" do %>
-          <i class="fa-solid fa-pen"></i>
+      <h2 class="md:text-lg font-bold md:ml-5"><%= @check_list.title %></h2>
+      <div class="flex justify-end">
+        <% if @travel_book.owned_by_user?(current_user) %>
+          <%= link_to edit_check_list_path(@check_list), class:"hover:opacity-50" do %>
+            <i class="fa-solid fa-pen text-sm md:text-base"></i>
+          <% end %>
+          <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
+            <i class="fa-solid fa-trash text-sm md:text-base"></i>
+          <% end %>
         <% end %>
-        <%= link_to check_list_path(@check_list), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
-          <i class="fa-solid fa-trash"></i>
-        <% end %>
-      <% end %>
+      </div>
     </div>
 
-    <div class="m-10">
+    <div class="md:m-10">
       <%= turbo_frame_tag "list_item" do %>
         <% if @list_items.present? %>
           <% @list_items.each do |list_item| %>
@@ -30,13 +29,12 @@
       <div id="add_list_item_button" class="my-5">
         <%= render "list_items/add_button", check_list: @check_list %>
       </div>
-      <div id="list_item_form"></div>
+      <div id="list_item_form" class="my-5"></div>
     </div>
 
     <div role="alert" class="alert alert-vertical sm:alert-horizontal">
       <i class="fa-solid fa-circle-info text-primary"></i>
-
-      <span>LINEの友だち追加すると<i class="fa-solid fa-bell"></i>で設定した時刻にLINEでリマインダーが届きます</span>
+      <span>LINEの友だち追加をすると指定した時間にLINEでリマインド通知を受け取れます</span>
       <div>
         <div class="line-it-button" data-lang="ja" data-type="friend" data-env="REAL" data-lineId="@450oywta" style="display: none;"></div>
         <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
