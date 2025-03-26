@@ -1,13 +1,11 @@
 <%= form_with model: check_list, url: check_list.new_record? ? travel_book_check_lists_path(travel_book) : check_list_path(check_list), data: { turbo: false } do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
-  <div class="field mt-3">
+  <div class="space-y-3">
     <%= f.label :title, class: "w-full" do %>
       <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
     <% end %>
     <%= f.text_field :title, autofocus: true, placeholder: t("check_lists.form.placeholder.title"), class: "input input-bordered w-full" %>
-  </div>
-  <div class="flex justify-end mt-5">
-    <%= f.submit nil, class: "btn btn-primary w-full mt-6 mx-auto" %>
+    <%= f.submit nil, class: "btn btn-primary w-full" %>
   </div>
 <% end %>
