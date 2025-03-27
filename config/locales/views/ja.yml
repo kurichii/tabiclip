@@ -70,11 +70,11 @@ ja:
     passwords:
       new:
         title: パスワードの再設定
-        send: 確認メールを送信する
+        send: 確認メールを送信
         login_page: ログインページはこちら
       edit:
         title: パスワード再設定
-        change_password: パスワードを再設定する
+        change_password: パスワードを再設定
         login_page: ログインページはこちら
     show:
       profile_button: プロフィールを編集

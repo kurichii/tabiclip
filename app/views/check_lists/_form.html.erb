@@ -2,8 +2,10 @@
   <%= render "shared/error_messages", object: f.object %>
 
   <div class="space-y-3">
-    <%= f.label :title, class: "w-full" do %>
-      <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
+    <%= f.label :title, class: "label" do %>
+      <span class="label-text">
+        <%= Schedule.human_attribute_name(:title) %><span class="text-error">*</span>
+      </span>
     <% end %>
     <%= f.text_field :title, autofocus: true, placeholder: t("check_lists.form.placeholder.title"), class: "input input-bordered w-full" %>
     <%= f.submit nil, class: "btn btn-primary w-full" %>

@@ -3,14 +3,16 @@
 
   <div class="space-y-3">
     <div>
-      <%= f.label :title, class: "w-full" do %>
-        <span class="text-red-400">*</span><%= Note.human_attribute_name(:title) %>
+      <%= f.label :title, class: "label" do %>
+        <span class="label-text">
+          <%= Note.human_attribute_name(:title) %><span class="text-error">*</span>
+        </span>
       <% end %>
       <%= f.text_field :title, autofocus: true, placeholder: t(".placeholder.title"), class: "input input-bordered w-full" %>
     </div>
 
     <div>
-      <%= f.label :title, Note.human_attribute_name(:body), class: "label" %>
+      <%= f.label :title, Note.human_attribute_name(:body), class: "label-text" %>
       <%= f.text_area :body, placeholder: t(".placeholder.body"), rows: "10", class: "textarea textarea-bordered w-full" %>
     </div>
 

@@ -1,44 +1,50 @@
-<div class="container">
-  <div class="form-container rounded-lg shadow-md bg-base-100 p-8">
-    <h2><%= t(".title") %></h2>
+<div class="max-w-screen-md mx-auto">
+  <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
+    <h2 class="text-lg font-bold text-center"><%= t(".title") %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
 
-      <div class="field mt-3">
-        <div class="flex items-center gap-1">
-          <%= f.label :name, User.human_attribute_name(:name), class: "label" %>
-          <i class="fa-solid fa-user"></i>
+      <div class="space-y-3">
+        <div>
+          <%= f.label :name, class: "label" do %>
+            <span class="label-text">
+              <i class="fa-solid fa-user mr-1"></i><%= User.human_attribute_name(:name) %><span class="text-error">*</span>
+            </span>
+          <% end %>
+          <%= f.text_field :name, autofocus: true, placeholder: t("users.form.placeholder.name"), class: "input input-bordered w-full" %>
         </div>
-        <%= f.text_field :name, placeholder: t("users.form.placeholder.name"), class: "input input-bordered w-full" %>
-      </div>
 
-      <div class="field mt-3">
-        <div class="flex items-center gap-1">
-          <%= f.label :email, User.human_attribute_name(:email), class: "label" %>
-          <i class="fa-solid fa-envelope"></i>
+        <div>
+          <%= f.label :email, class: "label" do %>
+            <span class="label-text">
+              <i class="fa-solid fa-envelope mr-1"></i><%= User.human_attribute_name(:email) %><span class="text-error">*</span>
+            </span>
+          <% end %>
+          <%= f.email_field :email, autocomplete: "email", placeholder: t("users.form.placeholder.email"), class: "input input-bordered w-full" %>
         </div>
-        <%= f.email_field :email, autocomplete: "email", placeholder: t("users.form.placeholder.email"), class: "input input-bordered w-full" %>
-      </div>
 
-      <div class="field mt-3">
-        <div class="flex items-center gap-1">
-          <%= f.label :password, User.human_attribute_name(:password), class: "label" %>
-          <i class="fa-solid fa-key"></i>
+        <div>
+          <%= f.label :password, class: "label" do %>
+            <span class="label-text">
+              <i class="fa-solid fa-key"></i><%= User.human_attribute_name(:password) %><span class="text-error">*</span>
+            </span>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: t("users.form.placeholder.password"), class: "input input-bordered w-full" %>
         </div>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: t("users.form.placeholder.password"), class: "input input-bordered w-full" %>
-      </div>
 
-      <div class="field mt-3">
-        <div class="flex items-center gap-1">
-          <%= f.label :password_confirmation, User.human_attribute_name(:password_confirmation), class: "label" %>
-          <i class="fa-solid fa-key"></i>
+        <div>
+          <%= f.label :password_confirmation, class: "label" do %>
+            <span class="label-text">
+              <i class="fa-solid fa-key"></i><%= User.human_attribute_name(:password_confirmation) %><span class="text-error">*</span>
+            </span>
+          <% end %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered w-full" %>
         </div>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: t("users.form.placeholder.password"), class: "input input-bordered w-full" %>
-      </div>
 
-      <div class="actions">
-        <%= f.submit t(".submit"), class: "btn btn-primary w-full mt-6 mx-auto" %>
+        <div class="actions">
+          <%= f.submit t(".submit"), class: "btn btn-primary w-full" %>
+        </div>
       </div>
     <% end %>
 

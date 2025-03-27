@@ -3,41 +3,43 @@
 
   <div class="space-y-3">
     <div>
-      <%= f.label :title, class: "w-full" do %>
-        <span class="text-red-400">*</span><%= TravelBook.human_attribute_name(:title) %>
+      <%= f.label :title, class: "label" do %>
+        <span class="label-text">
+        <%= TravelBook.human_attribute_name(:title) %><span class="text-error">*</span>
+        </span>
       <% end %>
       <%= f.text_field :title, autofocus: true, placeholder: t(".placeholder.title"), class: "input input-bordered w-full" %>
     </div>
 
     <div>
-      <%= f.label :description, TravelBook.human_attribute_name(:description), class: "label" %>
+      <%= f.label :description, TravelBook.human_attribute_name(:description), class: "label-text" %>
       <%= f.text_area :description, placeholder: t(".placeholder.description"), rows: "2", class: "textarea textarea-bordered w-full" %>
     </div>
 
     <div class="flex flex-col sm:flex-row sm:gap-2">
       <div class="w-full">
-        <%= f.label :start_date, TravelBook.human_attribute_name(:start_date), class: "label" %>
+        <%= f.label :start_date, TravelBook.human_attribute_name(:start_date), class: "label-text" %>
         <%= f.date_field :start_date, class: "input input-bordered w-full" %>
       </div>
       <div class="w-full">
-        <%= f.label :end_date, TravelBook.human_attribute_name(:end_date), class: "label" %>
+        <%= f.label :end_date, TravelBook.human_attribute_name(:end_date), class: "label-text" %>
         <%= f.date_field :end_date, class: "input input-bordered w-full" %>
       </div>
     </div>
 
     <div>
-      <%= f.label :area_id, TravelBook.human_attribute_name(:area), class: "label" %>
-      <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: t("helpers.prompt.select") }, { class: "select select-bordered w-full max-w-xs" } %>
+      <%= f.label :area_id, TravelBook.human_attribute_name(:area), class: "label-text" %>
+      <%= f.collection_select :area_id, Area.all, :id, :name,{ prompt: t("helpers.prompt.select") }, { class: "select select-bordered w-full" } %>
     </div>
 
     <div>
-      <%= f.label :traveler_type_id, TravelBook.human_attribute_name(:traveler_type), class: "label" %>
-      <%= f.collection_select :traveler_type_id, TravelerType.all, :id, :name,{ prompt: t("helpers.prompt.select") }, { class: "select select-bordered w-full max-w-xs" } %>
+      <%= f.label :traveler_type_id, TravelBook.human_attribute_name(:traveler_type), class: "label-text" %>
+      <%= f.collection_select :traveler_type_id, TravelerType.all, :id, :name,{ prompt: t("helpers.prompt.select") }, { class: "select select-bordered w-full" } %>
     </div>
 
     <div>
-      <%= f.label :travel_book_image, TravelBook.human_attribute_name(:travel_book_image), class: "label" %>
-      <%= f.file_field :travel_book_image, accept: "image/*", class: "file-input file-input-bordered w-full max-w-xs" %>
+      <%= f.label :travel_book_image, TravelBook.human_attribute_name(:travel_book_image), class: "label-text" %>
+      <%= f.file_field :travel_book_image, accept: "image/*", class: "file-input file-input-bordered w-full" %>
       <%= f.hidden_field :travel_book_image_cache %>
     </div>
 
@@ -50,7 +52,7 @@
     </div>
 
     <div>
-      <%= f.label :is_public, TravelBook.human_attribute_name(:is_public), class: "label" %>
+      <%= f.label :is_public, TravelBook.human_attribute_name(:is_public), class: "label-text" %>
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-1">
           <%= f.radio_button :is_public, true, id: "is_public_true", class: "radio radio-primary", checked: f.object.is_public? %>

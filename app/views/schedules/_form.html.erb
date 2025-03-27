@@ -3,40 +3,42 @@
 
   <div class="space-y-3">
     <div>
-      <%= f.label :title, class: "w-full" do %>
-        <span class="text-red-400">*</span><%= Schedule.human_attribute_name(:title) %>
+      <%= f.label :title, class: "label" do %>
+        <span class="label-text">
+          <%= Schedule.human_attribute_name(:title) %><span class="text-error">*</span>
+        </span>
       <% end %>
       <%= f.text_field :title, autofocus: true, placeholder: t("schedules.form.placeholder.title"), class: "input input-bordered w-full", autocomplete: "off" %>
     </div>
 
     <div class="flex flex-col sm:flex-row sm:gap-2">
       <div class="w-full">
-        <%= f.label :start_date, Schedule.human_attribute_name(:start_date), class: "label" %>
+        <%= f.label :start_date, Schedule.human_attribute_name(:start_date), class: "label-text" %>
         <%= f.datetime_field :start_date, class: "input input-bordered w-full", autocomplete: "off" %>
       </div>
       <div class="w-full">
-        <%= f.label :end_date, Schedule.human_attribute_name(:end_date), class: "label" %>
+        <%= f.label :end_date, Schedule.human_attribute_name(:end_date), class: "label-text" %>
         <%= f.datetime_field :end_date, class: "input input-bordered w-full", autocomplete: "off" %>
       </div>
     </div>
 
     <div>
-      <%= f.label :name, Spot.human_attribute_name(:name), class: "label" %>
+      <%= f.label :name, Spot.human_attribute_name(:name), class: "label-text" %>
       <%= f.text_field :name, id: "spotName", class: "input input-bordered w-full", autocomplete: "off" %>
     </div>
 
     <div>
-      <%= f.label :telephone, Spot.human_attribute_name(:telephone), class: "label" %>
+      <%= f.label :telephone, Spot.human_attribute_name(:telephone), class: "label-text" %>
       <%= f.text_field :telephone, id: "phoneNumber", class: "input input-bordered w-full", autocomplete: "off" %>
     </div>
 
     <div>
-      <%= f.label :address, Spot.human_attribute_name(:address), class: "label" %>
+      <%= f.label :address, Spot.human_attribute_name(:address), class: "label-text" %>
       <%= f.text_field :address, id: "address", class: "input input-bordered w-full", autocomplete: "off" %>
     </div>
 
     <div>
-      <%= f.label :budged, Schedule.human_attribute_name(:budged), class: "label" %>
+      <%= f.label :budged, Schedule.human_attribute_name(:budged), class: "label-text" %>
       <div class="flex items-center">
         <%= f.number_field :budged, class: "input input-bordered w-full", autocomplete: "off" %>
         <span class="ml-2"><%= t("helpers.currency_unit") %></span>
@@ -44,12 +46,12 @@
     </div>
 
     <div>
-      <%= f.label :memo, Schedule.human_attribute_name(:memo), class: "label" %>
+      <%= f.label :memo, Schedule.human_attribute_name(:memo), class: "label-text" %>
       <%= f.text_area :memo, placeholder: t("schedules.form.placeholder.memo"), rows: "3", class: "textarea textarea-bordered w-full", autocomplete: "off" %>
     </div>
 
     <div>
-      <%= f.label :schedule_icon_id, ScheduleIcon.human_attribute_name(:name), class: "label" %>
+      <%= f.label :schedule_icon_id, ScheduleIcon.human_attribute_name(:name), class: "label-text" %>
       <div class="flex flex-wrap gap-x-3 gap-y-2">
         <% ScheduleIcon.all.each do |icon| %>
           <div class="flex items-center gap-1">
