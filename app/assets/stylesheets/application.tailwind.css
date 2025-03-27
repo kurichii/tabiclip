@@ -27,9 +27,9 @@
   @apply link link-primary;
 }
 
-/* 連続で入力した空白や改行がブラウザでの表示に反映・要素のボックス端で自動で折り返し */
+/* 空白や改行がブラウザでの表示に反映・要素のボックス端で自動で折り返し(連続した空白は折りたたむ) */
 .markdown-content {
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 
 .bg-image {
