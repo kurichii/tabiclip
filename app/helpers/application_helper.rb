@@ -36,9 +36,15 @@ module ApplicationHelper
     (controller_name == "list_items")
   end
 
-  # 指定したパスが現在のページであれば"active"を返す
-  def add_active_class(path)
-    current_page?(path) ? "hover:bg-base-200" : "hover:bg-base-200 opacity-50"
+  # 指定したパスが現在のコントローラーと一致する場合クラスを返す
+  def active_class_by_controller(*controllers)
+    return "text-gray-500 hover:scale-[1.1]" if action_name == "map"
+    controllers.include?(controller_name) ? "text-white hover:scale-[1.1]" : "text-gray-500 hover:scale-[1.1]"
+  end
+
+  # 指定したパスが現在のアクションと一致する場合クラスを返す
+  def active_class_by_controller_and_action(controller, action)
+    controller_name == controller && action_name == action ? "text-white hover:scale-[1.1]" : "text-gray-500 hover:scale-[1.1]"
   end
 
   # 日付をフォーマットする
