@@ -1,12 +1,12 @@
-<div class="container">
-  <div class="form-container bg-base-100 rounded-lg shadow-md p-8">
+<div class="max-w-screen-md mx-auto">
+  <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
 
-    <%= image_tag current_user.icon_image_url, class: "mx-auto rounded-full w-20 h-20 shadow-md object-cover border border-gray-200" %>
+    <%= image_tag current_user.icon_image_url, class: "mx-auto rounded-full w-20 h-20 shadow-sm object-cover border border-gray-200" %>
 
-    <h1 class="mt-2 text-center text-lg font-bold"><%= @user.name %></h2>
+    <h2 class="mt-2 text-center text-lg font-bold"><%= @user.name %></h2>
 
-    <div class="mt-5 flex justify-center gap-2">
-      <p><%= User.human_attribute_name(:email) %></p>
+    <div class="mt-5 text-center">
+      <p><i class="fa-solid fa-envelope mr-1"></i><%= User.human_attribute_name(:email) %></p>
       <p><%= @user.email %></p>
     </div>
 
@@ -19,7 +19,7 @@
           <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
-          <h3 class="text-lg font-bold">LINEアカウント連携用トークン</h3>
+          <h3 class="text-center text-lg font-bold">LINEアカウント連携用トークン</h3>
           <div class="space-y-2 m-5 text-center">
             <p>以下の文字列をたびくりっぷの公式LINEに送信すると、LINEアカウントと連携されます</p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-2">
@@ -32,7 +32,7 @@
     <% end %>
 
     <div class="mt-5">
-      <%= link_to t(".profile_button"), edit_user_registration_path, class: "btn btn-primary w-full mt-6 mx-auto" %>
+      <%= link_to t(".profile_button"), edit_user_registration_path, class: "btn btn-primary w-full" %>
     </div>
   </div>
 </div>
