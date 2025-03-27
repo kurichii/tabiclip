@@ -69,6 +69,13 @@ ja:
       send_instructions: "アカウントのロック解除手順を数分以内にメールで送信します"
       send_paranoid_instructions: "アカウントのロック解除手順を数分以内にメールで送信します"
       unlocked: "アカウントのロックを解除したため、ログインしてください"
+    invitations:
+      new:
+        title: しおりに招待する
+        submit_button: 招待メール送信
+      edit:
+        title: しおりに参加する
+        submit_button: しおりに参加
   errors:
     messages:
       already_confirmed: "すでに確認されているため、ログインをお試しください"
