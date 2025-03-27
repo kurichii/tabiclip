@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :travel_books, primary_key: :uuid, foreign_key: :travel_book_uuid, through: :user_travel_books
   has_many :created_travel_books, class_name: "TravelBook", foreign_key: "creator_id", dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :bookmark_travel_books, through: :bookmarks, source: :travel_book
+  has_many :bookmark_travel_books, through: :bookmarks, source: :travel_book, foreign_key: :travel_book_uuid
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
