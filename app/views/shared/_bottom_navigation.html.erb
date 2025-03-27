@@ -1,16 +1,16 @@
 <div class="btm-nav bg-primary">
-  <%= link_to public_travel_books_path, class: "#{add_active_class(public_travel_books_path)}" do %>
+  <%= link_to public_travel_books_path, class: active_class_by_controller_and_action('travel_books', 'public_travel_books') do %>
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.travel_books_search") %></span>
+    <span class="btm-nav-label text-xs"><%= t("btm_nav.travel_books_search") %></span>
   <% end %>
 
-  <%= link_to new_travel_book_path, class: "#{add_active_class(new_travel_book_path)}" do %>
+  <%= link_to new_travel_book_path, class: active_class_by_controller_and_action('travel_books', 'new') do %>
     <i class="fa-solid fa-plus"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.travel_book_create") %></span>
+    <span class="btm-nav-label text-xs"><%= t("btm_nav.travel_book_create") %></span>
   <% end %>
 
-  <%= link_to travel_books_path, class: "#{add_active_class(travel_books_path)}" do %>
+  <%= link_to travel_books_path, class: active_class_by_controller_and_action('travel_books', 'index') do %>
     <i class="fa-solid fa-map-location-dot"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.my_travel_book") %></span>
+    <span class="btm-nav-label text-xs"><%= t("btm_nav.my_travel_book") %></span>
   <% end %>
 </div>

@@ -1,24 +1,26 @@
 <div class="btm-nav bg-primary shadow-sm">
-  <%= link_to travel_book_path(@travel_book.id), class: "#{add_active_class(travel_book_path(@travel_book))}" do %>
+  <%= link_to travel_book_path(@travel_book.id), class: active_class_by_controller('travel_books') do %>
     <i class="fa-regular fa-map"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.travel_book_info") %></span>
+    <span class="btm-nav-label text-xs"><%= t("btm_nav.travel_book_info") %></span>
   <% end %>
-  <%= link_to travel_book_schedules_path(@travel_book), data: { turbo: false }, class: "#{add_active_class(travel_book_schedules_path(@travel_book))}" do %>
+  <%= link_to travel_book_schedules_path(@travel_book), data: { turbo: false }, class: active_class_by_controller('schedules') do %>
     <i class="fa-regular fa-clock"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.schedule") %></span>
+    <span class="btm-nav-label text-xs"><%= t("btm_nav.schedule") %></span>
   <% end %>
-  <%= link_to map_travel_book_schedules_path(@travel_book), data: { turbo: false }, class: "#{add_active_class(map_travel_book_schedules_path(@travel_book))}" do %>
+  <%= link_to map_travel_book_schedules_path(@travel_book), data: { turbo: false }, class: active_class_by_controller_and_action('schedules', 'map') do %>
   <i class="fa-solid fa-location-dot"></i>
-    <span class="btm-nav-label"><%= t("btm_nav.map") %></span>
+    <span class="btm-nav-label text-xs"><%= t("btm_nav.map") %></span>
   <% end %>
   <% if @travel_book.owned_by_user?(current_user) %>
-    <%= link_to travel_book_notes_path(@travel_book), class: "#{add_active_class(travel_book_check_lists_path(@travel_book))}" do %>
+    <%= link_to travel_book_notes_path(@travel_book), class: active_class_by_controller('notes','check_lists') do %>
       <i class="fa-solid fa-file-pen"></i>
-      <span class="btm-nav-label"><%= t("btm_nav.note") %></span>
+      <span class="btm-nav-label text-xs"><%= t("btm_nav.note") %></span>
     <% end %>
-    <%= link_to "#", class: "opacity-50" do %>
+    <%= link_to "#", class: "text-gray-500" do %>
+    <span class="tooltip flex flex-col items-center gap-1" data-tip="今後実装予定です">
       <i class="fa-solid fa-image"></i>
-      <span class="btm-nav-label"><%= t("btm_nav.album") %></span>
+      <span class="btm-nav-label text-xs"><%= t("btm_nav.album") %></span>
+    </span>
     <% end %>
   <% end %>
 </div>
