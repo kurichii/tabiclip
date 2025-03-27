@@ -3,22 +3,30 @@
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-    <h3 class="text-lg font-bold">リマインダー設定</h3>
-    <div class="m-5 text-center">
-      <p><%= list_item.title %></p>
+
+    <h3 class="text-center text-lg font-bold">リマインダー設定</h3>
+
+    <div class="space-y-3 text-center">
+
+      <p>「<%= list_item.title %>」</p>
+
       <% if reminder&.reminder_date %>
         <p><%= fmt_schedule_date(list_item.reminder.reminder_date) %>にリマインダーの設定があります</p>
       <% else %>
         <p>リマインダーの設定はされていません</p>
       <% end %>
-      <div id="reminder_form_<%= list_item.id %>" class="w-full mt-5">
+
+      <div id="reminder_form_<%= list_item.id %>" class="w-full">
         <%= render "reminders/form", list_item: list_item, reminder: reminder %>
       </div>
-      <div class="mt-5">
+
+      <div>
         <% if reminder&.reminder_date %>
           <%= link_to "リマインダー解除", clear_reminder_reminder_path(reminder), data: { turbo_method: :patch }, class: "btn w-full" %>
         <% end %>
       </div>
+
     </div>
+
   </div>
 </dialog>
