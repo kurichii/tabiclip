@@ -20,13 +20,6 @@
   white-space: pre-line;
 }
 
-.bg-image {
-  background-image: url('map.webp');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
-}
-
 .field_with_errors {
   display: contents;
 }

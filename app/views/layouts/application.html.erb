@@ -23,15 +23,20 @@
     <%= display_meta_tags(default_meta_tags) %>
   </head>
 
-  <body class="bg-base-200 min-h-screen">
+  <body class="flex flex-col min-h-screen <%= backgtound_color_class %>">
     <%= render "shared/header" %>
     <div id="flash_messages"></div>
     <%= render "shared/flash_message" %>
-    <%= yield %>
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
     <% if user_signed_in? && display_bottom_nav_on_travel_book %>
       <%= render "shared/bottom_navigation_on_travel_book", travel_book: @travel_book %>
     <% elsif controller_name != "home" %>
       <%= render "shared/bottom_navigation" %>
+    <% end %>
+    <% if controller_name == "home" %>
+      <%= render "shared/footer" %>
     <% end %>
   </body>
 </html>

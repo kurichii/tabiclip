@@ -25,6 +25,9 @@ module ApplicationHelper
     }
   end
 
+  def backgtound_color_class
+    controller_name == "home" ? "bg-primary" : "bg-base-200"
+  end
   # ボトムナビゲーションのだしわけ判定
   def display_bottom_nav_on_travel_book
     return false if current_user.nil?
