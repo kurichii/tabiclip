@@ -12,11 +12,11 @@
         </div>
         <% if @travel_book.owned_by_user?(current_user) %>
           <div class="flex justify-end">
-            <%= link_to edit_travel_book_path(@travel_book), class: "btn hover:opacity-50" do %>
-              <i class="fa-solid fa-pen"></i>
+            <%= link_to edit_travel_book_path(@travel_book), class: "hover:opacity-50" do %>
+              <i class="fa-solid fa-pen text-sm md:text-base"></i>
             <% end %>
-            <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "btn ml-3 hover:opacity-50" do %>
-              <i class="fa-solid fa-trash"></i>
+            <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
+              <i class="fa-solid fa-trash text-sm md:text-base"></i>
             <% end %>
           </div>
         <% end %>
