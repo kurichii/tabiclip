@@ -32,8 +32,15 @@ ja:
       canceled: "%{item}設定を解除しました"
       not_canceled: "%{item}設定を解除できませんでした"
   header:
+    login: ログイン
     logout: ログアウト
-    how_to_use: 使い方
+    signup: 新規登録
+    mypage: マイページ
+    how_to_use: アプリの使い方
+    travel_books_search: しおり検索
+    travel_book_create: しおり作成
+    my_travel_book: マイしおり
+    bookmark: ブックマーク
     terms_of_service: 利用規約
     contact: お問い合わせ
     privacy_policy: プライバシーポリシー

@@ -1,39 +1,100 @@
 <div class="navbar bg-primary shadow-sm">
   <div class="flex-1 px-2 lg:flex-none">
-    <%= link_to (user_signed_in? ? travel_books_path : home_index_path), class: "hover:opacity-50" do %>
-        <%= image_tag "logo.svg", class: "w-40", alt: "logo" %>
+    <%= link_to home_index_path, class: "hover:opacity-50" do %>
+      <%= image_tag "logo.svg", class: "w-40", alt: "logo" %>
     <% end %>
   </div>
   <div class="flex flex-1 justify-end px-2">
     <div class="flex items-stretch">
-      <% if user_signed_in? %>
-        <div class="dropdown dropdown-end">
-        <div class="flex-none">
-          <button>
-            <%= image_tag current_user.icon_image_url, class: "mx-auto rounded-full w-10 h-10 object-cover shadow-sm border border-gray-200 mr-2 hover:opacity-50" %>
+      <div class="drawer drawer-end z-50">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <label for="my-drawer" class="drawer-button btn btn-primary text-gray-500 hover:text-white"><i class="fa-solid fa-bars"></i></label>
         </div>
-        <ul
-          tabindex="0"
-          class="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-52 p-2">
+        <div class="drawer-side">
+          <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+          <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to users_profile_path do %>
+                  <%= image_tag current_user.icon_image_url, class: "rounded-full w-10 h-10 object-cover border" %><%= current_user.name %>
+                <% end %>
+              </li>
+              <div class="divider"></div>
+              <li>
+                <%= link_to users_profile_path do %>
+                  <i class="fa-regular fa-user"></i><%= t("header.mypage") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to "#" do %>
+                  <i class="fa-regular fa-circle-question"></i><%= t("header.how_to_use") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i><%= t("header.logout") %>
+                <% end %>
+              </li>
+              <div class="divider"></div>
+              <li>
+                <%= link_to public_travel_books_path do %>
+                  <i class="fa-solid fa-magnifying-glass"></i><%= t("header.travel_books_search") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_travel_book_path do %>
+                  <i class="fa-solid fa-plus"></i><%= t("header.travel_book_create") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to travel_books_path do %>
+                  <i class="fa-solid fa-map-location-dot"></i><%= t("header.my_travel_book") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to bookmarks_travel_books_path do %>
+                  <i class="fa-solid fa-bookmark"></i><%= t("header.bookmark") %>
+                <% end %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to new_user_session_path do %>
+                  <i class="fa-solid fa-arrow-right-to-bracket"></i><%= t("header.login") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa-solid fa-user-plus"></i></i><%= t("header.signup") %>
+                <% end %>
+              </li>
+            <div class="divider"></div>
+              <li>
+                <%= link_to "#" do %>
+                  <i class="fa-regular fa-circle-question"></i><%= t("header.how_to_use") %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to public_travel_books_path do %>
+                  <i class="fa-solid fa-magnifying-glass"></i><%= t("header.travel_books_search") %>
+                <% end %>
+              </li>
+            <% end %>
+            <div class="divider"></div>
             <li>
-              <%= link_to "#{current_user.name}", users_profile_path %>
+              <%= link_to t("header.terms_of_service"), "#" %>
             </li>
             <li>
-              <%= link_to t("header.how_to_use"), "#" %>
+              <%= link_to t("header.privacy_policy"), "#" %>
             </li>
             <li>
-              <%= link_to bookmarks_travel_books_path do %>
-                <i class="fa-solid fa-bookmark"></i>ブックマーク
-              <% end %>
+              <%= link_to t("header.contact"), "#" %>
             </li>
-            <li>
-              <%= link_to t("header.logout"), destroy_user_session_path, data: { turbo_method: :delete } %>
-            </li>
-        </ul>
+            <p class="text-center mt-auto">Copyright © 2025 TabiClip</p>
+          </ul>
+        </div>
       </div>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-ghoast" %>
-      <% end %>
+
     </div>
   </div>
 </div>
