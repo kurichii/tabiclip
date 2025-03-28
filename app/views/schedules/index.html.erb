@@ -46,7 +46,7 @@
     <% end %>
 
     <% if @travel_book.owned_by_user?(current_user) %>
-      <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn btn-primary btn-circle fixed z-50 bottom-20 right-5 text-lg md:right-[calc(50%)] " do %>
+      <%= link_to new_travel_book_schedule_path(@travel_book), data: { turbo: false }, class: "btn btn-primary btn-circle fixed z-20 bottom-20 right-5 text-lg md:right-[calc(50%)] " do %>
         <i class="fa-solid fa-plus"></i>
       <% end %>
     <% end %>
