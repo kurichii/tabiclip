@@ -1,4 +1,4 @@
-<div class="overflow-x-auto">
+<div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
   <table class="table">
     <tbody>
       <tr class="hover cursor-pointer" data-controller="link" data-action="click->link#go" data-url="<%= schedule_path(schedule) %>">
@@ -18,11 +18,9 @@
           <span class="ml-2"><%= link_to schedule.title, schedule_path(schedule) %></span>
         </td>
         <td class="w-1/6">
-          <% index = index +1 if defined?(index) && index %>
           <% if schedule.spot&.latitude %>
             <div class="relative inline-block">
               <i class="fa-solid fa-location-pin text-2xl text-red-500"></i>
-              <p class="absolute top-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs text-white"><%= index %></p>
             </div>
           <% end %>
         </td>

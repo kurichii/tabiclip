@@ -20,21 +20,21 @@ function initMap() {
 
   spots.forEach((spot,i) =>{
     // markerの設定
-    //  const marker = new google.maps.marker.AdvancedMarkerElement({
-      // position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
-      // map: map,
-      // title: spot.name
-    // });
-    // markerに登録された場所のindex番号を表示
-    const pinTextGlyph = new google.maps.marker.PinElement({
-      glyph: `${i+1}`,
-      glyphColor: "white",
+    const marker = new google.maps.marker.AdvancedMarkerElement({
+      position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
+      map: map,
+      title: spot.name
     });
+    // markerに登録された場所のindex番号を表示
+    // const pinTextGlyph = new google.maps.marker.PinElement({
+      // glyph: `${i+1}`,
+      // glyphColor: "white",
+    // });
     // markerを表示
     const markerViewGlyphText = new google.maps.marker.AdvancedMarkerElement({
       map,
       position: {lat: parseFloat(spot.latitude), lng: parseFloat(spot.longitude)},
-      content: pinTextGlyph.element,
+      // content: pinTextGlyph.element,
     });
 
     // markerがクリックされた時に地図の詳細情報を表示
