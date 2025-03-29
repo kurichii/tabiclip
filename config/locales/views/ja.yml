@@ -91,6 +91,7 @@ ja:
       new_button: しおり作成
     show:
       duration: 期間
+      total_amount: 合計金額
     new:
       title: しおり作成
     edit:

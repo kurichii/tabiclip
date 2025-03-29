@@ -50,6 +50,11 @@
           <p><%= travel_book_is_public(@travel_book) %></p>
         </div>
 
+        <div>
+          <p class="font-bold text-sm"><%= t(".total_amount") %></p>
+          <p><%= total_budget(@travel_book.schedules) %><%= t("helpers.currency_unit") %></p>
+        </div>
+
         <% unless @travel_book.owned_by_user?(current_user) %>
           <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary w-full" do %>
             <i class="fa-regular fa-clock"></i> スケジュールを見る
