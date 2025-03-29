@@ -1,14 +1,13 @@
 <div class="card bg-base-100 w-full">
-  <figure>
-  <%= link_to travel_book_path(travel_book), class: "hover:scale-125 hover:duration-500" do %>
-    <%= image_tag travel_book.travel_book_image_url %>
-  <% end %>
+  <figure class="h-48 w-full">
+    <%= link_to travel_book_path(travel_book), class: "hover:scale-[1.1] hover:duration-500" do %>
+      <%= image_tag travel_book.travel_book_image_url, class: "object-cover h-full w-full" %>
+    <% end %>
   </figure>
   <div class="card-body flex flex-col justify-between">
     <%= link_to travel_book_path(travel_book), class: "hover:opacity-50" do %>
       <h2 class="card-title"><%= truncate(travel_book.title) %></h2>
     <% end %>
-
     <div>
       <p><span class="badge mr-2">エリア</span><%= area_name(travel_book) %></p>
       <p><span class="badge mr-2">スタイル</span><%= traveler_type_name(travel_book) %></p>
