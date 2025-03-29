@@ -4,9 +4,15 @@ class SchedulesController < ApplicationController
   before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
+    # scheduleには0以上のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
+    # スケジュール一覧では初日を初期表示するためindexでは初日のデータのみ取得する
     @schedules = @travel_book.sorted_schedules
-    # scheduleには0もしくは1のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
-    @spots = @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }
+    first_date = @schedules.map { |s| s.start_date.to_date }.min
+    @spots = @schedules
+             .select { |s| s.start_date.to_date == first_date }
+             .map(&:spot)
+             .compact
+             .select { |spot| spot.latitude.present? }
   end
 
   def new
