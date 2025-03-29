@@ -7,9 +7,9 @@ class SchedulesController < ApplicationController
     # scheduleには0以上のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
     # スケジュール一覧では初日を初期表示するためindexでは初日のデータのみ取得する
     @schedules = @travel_book.sorted_schedules
-    first_date = @schedules.map { |s| s.start_date.to_date }.min
+    first_date = @schedules.map { |s| s.start_date&.to_date }.compact.min
     @spots = @schedules
-             .select { |s| s.start_date.to_date == first_date }
+             .select { |s| s.start_date&.to_date == first_date }
              .map(&:spot)
              .compact
              .select { |spot| spot.latitude.present? }
