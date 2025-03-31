@@ -1,4 +1,12 @@
 ja:
+  date:
+    formats:
+      default: "%Y/%-m/%-d(%a)"
+      short: "%-m/%-d(%a)"
+  time:
+    formats:
+      default: "%Y/%-m/%-d(%a) %H:%M"
+      short: "%H:%M"
   views:
     pagination:
       previous: "前へ"
