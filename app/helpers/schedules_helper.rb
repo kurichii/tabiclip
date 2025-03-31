@@ -5,9 +5,13 @@ module SchedulesHelper
   end
 
   def fmt_datetime_range(schedule, format)
+    Rails.logger.info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    Rails.logger.info "#{schedule.start_date}"
+    Rails.logger.info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     return t("helpers.undecided") if schedule.start_date.nil? && schedule.end_date.nil?
-    start_date = schedule.start_date.present? ? I18n.l(schedule.start_date, format: format) : ""
-    end_date = schedule.end_date.present? ? I18n.l(schedule.end_date, format: format) : ""
+    start_date = schedule.start_date.present? ? I18n.l(schedule.start_date.in_time_zone("Tokyo"), format: format) : ""
+    end_date = schedule.end_date.present? ? I18n.l(schedule.end_date.in_time_zone("Tokyo"), format: format) : ""
+    Rails.logger.info "#{start_date} - #{end_date}"
     "#{start_date} - #{end_date}"
   end
 
