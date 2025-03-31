@@ -12,36 +12,12 @@ module SchedulesHelper
     "#{format_date}(#{fmt_wday(date)})"
   end
 
-  def fmt_datetime(date)
-    return "" if date.nil?
-    date.strftime("%-H:%M")
+  def fmt_datetime_range(schedule)
+    return t("helpers.undecided") if schedule.start_date.nil? && schedule.end_date.nil?
+    start_date = schedule.start_date&.strftime("%H:%M")
+    end_date = schedule.end_date&.strftime("%H:%M")
+    "#{start_date} - #{end_date}"
   end
-
-  def fmt_date_with_datetime(date)
-    return "" if date.nil?
-    date.strftime("%-m/%-d %-H:%M")
-  end
-
-  def fmt_schedule_duration(schedule)
-    if schedule.start_date && schedule.end_date
-      "#{fmt_schedule_date(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}"
-    elsif schedule.start_date || schedule.end_date
-      "#{fmt_schedule_date(schedule.start_date)} - #{fmt_schedule_date(schedule.end_date)}".strip
-    else
-      t("helpers.undecided")
-    end
-  end
-
-  def fmt_schedule_datetime_duration(schedule)
-    return t("helpers.undecided") unless schedule.start_date || schedule.end_date
-    "#{fmt_datetime(schedule.start_date)} - #{fmt_datetime(schedule.end_date)}"
-  end
-
-  def fmt_all_day_schedule_datetime_duration(schedule)
-    return t("helpers.undecided") unless schedule.start_date || schedule.end_date
-    "#{fmt_date_with_datetime(schedule.start_date)} - #{fmt_date_with_datetime(schedule.end_date)}"
-  end
-
 
   def schedule_spot_info(data)
     return content_tag(:li, t(".no_data")) if data.nil?
