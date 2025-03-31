@@ -4,8 +4,14 @@ module TravelBooksHelper
   end
 
   def travel_book_duration(travel_book)
-    return t("helpers.date_undecided") unless travel_book.start_date || travel_book.end_date
+    return t("helpers.date_undecided") if travel_book.start_date.nil? && travel_book.end_date.nil?
     "#{fmt_date(travel_book.start_date)} - #{fmt_date(travel_book.end_date)}"
+  end
+
+  # 日付をフォーマットする
+  def fmt_date(date)
+    return t("helpers.undecided") if date.nil?
+    format_date = I18n.l(date.to_date, format: :default)
   end
 
   def area_name(travel_book)
