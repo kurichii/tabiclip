@@ -56,7 +56,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # アカウント登録後のリダイレクト先
   def after_sign_up_path_for(resource)
-    travel_books_path
+    public_travel_books_path
   end
 
   # The path used after sign up for inactive accounts.
