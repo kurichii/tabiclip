@@ -50,12 +50,6 @@ module ApplicationHelper
     controller_name == controller && action_name == action ? "text-white hover:scale-[1.1]" : "text-gray-500 hover:scale-[1.1]"
   end
 
-  # 日付をフォーマットする
-  def fmt_date(date)
-    return "日付未定" if date.nil?
-    format_date = date.strftime("%Y/%-m/%-d")
-    "#{format_date}(#{fmt_wday(date)})"
-  end
 
   # 曜日をフォーマットする
   def fmt_wday(date)

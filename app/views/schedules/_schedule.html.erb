@@ -3,7 +3,7 @@
     <tbody>
       <tr class="hover cursor-pointer" data-controller="link" data-action="click->link#go" data-url="<%= schedule_path(schedule) %>">
         <td class="w-2/6">
-          <%= fmt_datetime_range(schedule) %>
+          <%= fmt_datetime_range(schedule, :short) %>
         </td>
         <td class="w-3/6">
           <% if schedule.schedule_icon.name == "none" %>
