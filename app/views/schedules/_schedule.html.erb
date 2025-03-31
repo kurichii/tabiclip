@@ -3,11 +3,7 @@
     <tbody>
       <tr class="hover cursor-pointer" data-controller="link" data-action="click->link#go" data-url="<%= schedule_path(schedule) %>">
         <td class="w-2/6">
-          <% if defined?(all_day) && all_day %>
-            <%= fmt_all_day_schedule_datetime_duration(schedule) %>
-          <% else %>
-            <%= fmt_schedule_datetime_duration(schedule) %>
-          <% end %>
+          <%= fmt_datetime_range(schedule) %>
         </td>
         <td class="w-3/6">
           <% if schedule.schedule_icon.name == "none" %>
