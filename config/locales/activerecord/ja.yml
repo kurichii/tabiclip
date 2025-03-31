@@ -1,4 +1,8 @@
 ja:
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      extension_whitelist_error: "は許可されている拡張子(jpg, jpeg, gif, png, heic, webp)のみアップロード可能です"
   activerecord:
     models:
       travel_book: しおり

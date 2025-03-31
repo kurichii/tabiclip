@@ -27,7 +27,7 @@ class UserUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
-  process resize_to_fit: [ 80, 80 ]
+  process resize_to_fill: [ 160, 160, "Center" ]
 
   # def scale(width, height)
   #   # do something
@@ -51,16 +51,5 @@ class UserUploader < CarrierWave::Uploader::Base
   # end
 
   # WebPに変換
-  process :convert_to_webp
-
-  def convert_to_webp
-    manipulate! do |img|
-      img.format "webp"
-      img
-    end
-  end
-
-  def filename
-    super.chomp(File.extname(super)) + ".webp" if original_filename.present?
-  end
+  process convert: "webp"
 end

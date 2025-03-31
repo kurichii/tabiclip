@@ -1,7 +1,7 @@
 <div class="card bg-base-100 w-full">
-  <figure class="h-48 w-full">
+  <figure>
     <%= link_to travel_book_path(travel_book), class: "hover:scale-[1.1] hover:duration-500" do %>
-      <%= image_tag travel_book.travel_book_image_url, class: "object-cover h-full w-full" %>
+      <%= image_tag travel_book.travel_book_image_url %>
     <% end %>
   </figure>
   <div class="card-body flex flex-col justify-between">
