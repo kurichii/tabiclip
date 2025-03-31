@@ -27,8 +27,7 @@ class UserUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
-  # process resize_to_fit: [ 80, 80 ]
-  process resize_to_fill: [ 80, 80, "Center" ]
+  process resize_to_fill: [ 160, 160, "Center" ]
 
   # def scale(width, height)
   #   # do something
