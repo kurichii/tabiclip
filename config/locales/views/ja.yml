@@ -26,6 +26,9 @@ ja:
     public: 公開
     unpublic: 未公開
   defaults:
+    policy: プライバシーポリシー
+    terms: 利用規約
+    form: お問い合わせ
     delete_confirm: 削除しますか？
     flash_message:
       created: "%{item}を作成しました"
@@ -49,9 +52,6 @@ ja:
     travel_book_create: しおり作成
     my_travel_book: マイしおり
     bookmark: ブックマーク
-    terms_of_service: 利用規約
-    contact: お問い合わせ
-    privacy_policy: プライバシーポリシー
   btm_nav:
     travel_books_search: しおり検索
     travel_book_create: しおり作成
@@ -171,3 +171,10 @@ ja:
         title: 項目名を記入
     add_button:
       new_button: 項目を追加
+  static_pages:
+    form:
+      title: お問い合わせフォーム
+    policy:
+      title: プライバシーポリシー
+    terms:
+      title: 利用規約
