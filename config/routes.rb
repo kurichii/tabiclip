@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post "/callback" => "linebot#callback"
   get "users/profile" => "users#show"
   get "home/index"
+  get "form", to: "static_pages#form"
   get "images/ogp.png", to: "images#ogp", as: "images_ogp"
   resources :travel_books do
     collection do
