@@ -11,7 +11,7 @@
       <p>「<%= list_item.title %>」</p>
 
       <% if reminder&.reminder_date %>
-        <p><%= fmt_schedule_date(list_item.reminder.reminder_date) %>にリマインダーの設定があります</p>
+        <p><%= l(list_item.reminder.reminder_date, format: :default) %>にリマインダーの設定があります</p>
       <% else %>
         <p>リマインダーの設定はされていません</p>
       <% end %>
