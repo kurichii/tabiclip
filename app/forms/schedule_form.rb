@@ -106,10 +106,10 @@ class ScheduleForm
   end
 
   def convert_to_jst
-    self.start_date = start_date.in_time_zone("Tokyo").utc if start_date.present?
+    self.start_date = Time.zone.parse(start_date.to_s).in_time_zone("Tokyo") if start_date.present?
     Rails.logger.info "================"
     Rails.logger.info "#{start_date}"
     Rails.logger.info "================"
-    self.end_date = end_date.in_time_zone("Tokyo").utc if end_date.present?
+    self.end_date = Time.zone.parse(end_date.to_s).in_time_zone("Tokyo") if end_date.present?
   end
 end
