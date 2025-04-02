@@ -112,8 +112,8 @@ class ScheduleForm
     if start_date.is_a?(String)
       Rails.logger.info "String"
       self.start_date = Time.zone.parse(start_date)
-    elsif start_date.is_a?(DateTime)
-      Rails.logger.info "DateTime"
+    elsif start_date.is_a?(Time) || start_date.is_a?(DateTime)
+      Rails.logger.info "Time or DateTime"
       self.start_date = start_date.in_time_zone("Asia/Tokyo")
     end
 
@@ -122,7 +122,7 @@ class ScheduleForm
 
     if end_date.is_a?(String)
       self.end_date = Time.zone.parse(end_date)
-    elsif end_date.is_a?(DateTime)
+    elsif start_date.is_a?(Time) || end_date.is_a?(DateTime)
       self.end_date = end_date.in_time_zone("Asia/Tokyo")
     end
   end
