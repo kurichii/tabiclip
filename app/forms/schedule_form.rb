@@ -109,6 +109,7 @@ class ScheduleForm
     Rails.logger.info "================"
     Rails.logger.info "#{start_date}"
     Rails.logger.info "#{start_date.to_s}"
+    Rails.logger.info "#{start_date.in_time_zone("Asia/Tokyo")}"
     self.start_date = Time.zone.parse(start_date.to_s) if start_date.present?
     Rails.logger.info "================"
     Rails.logger.info "#{Time.zone.name}"
