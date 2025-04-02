@@ -88,8 +88,8 @@ class ScheduleForm
       title: schedule.title,
       budged: schedule.budged,
       memo: schedule.memo,
-      start_date: schedule.start_date || travel_book&.start_date&.to_datetime || nil,
-      end_date: schedule.start_date || travel_book&.start_date&.to_datetime || nil,
+      start_date: schedule.start_date,
+      end_date: schedule.start_date,
       name: spot.name,
       telephone: spot.telephone,
       post_code: spot.post_code,
@@ -107,23 +107,11 @@ class ScheduleForm
 
   def convert_to_jst
     Rails.logger.info "================"
-    Rails.logger.info "Before conversion: #{start_date} (#{start_date.class})"
-
-    if start_date.is_a?(String)
-      Rails.logger.info "String"
-      self.start_date = Time.zone.parse(start_date)
-    elsif start_date.is_a?(Time) || start_date.is_a?(DateTime)
-      Rails.logger.info "Time or DateTime"
-      self.start_date = start_date.in_time_zone("Asia/Tokyo")
-    end
-
-    Rails.logger.info "After conversion: #{self.start_date} (#{self.start_date.class})"
+    Rails.logger.info "#{Time.zone}"
+    Rails.logger.info "Before : #{start_date} (#{start_date.class})"
+    self.start_date = start_date.in_time_zone("Asia/Tokyo") unless start_date.nil?
+    self.end_date = end_date.in_time_zone("Asia/Tokyo") unless end_date.nil?
+    Rails.logger.info "After : #{start_date} (#{start_date.class})"
     Rails.logger.info "================"
-
-    if end_date.is_a?(String)
-      self.end_date = Time.zone.parse(end_date)
-    elsif start_date.is_a?(Time) || end_date.is_a?(DateTime)
-      self.end_date = end_date.in_time_zone("Asia/Tokyo")
-    end
   end
 end
