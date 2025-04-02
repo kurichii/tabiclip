@@ -21,6 +21,9 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule_form = ScheduleForm.new(schedule_params)
+    # config.time_zoneで設定されたタイムゾーンに変換
+    @schedule_form.start_date = Time.zone.parse(schedule_params[:start_date]) unless schedule_params[:start_date].nil?
+    @schedule_form.end_date = Time.zone.parse(schedule_params[:end_date]) unless schedule_params[:end_date].nil?
     if @schedule_form.save
       redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.created", item: Schedule.model_name.human)
     else
