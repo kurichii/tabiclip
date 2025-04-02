@@ -34,6 +34,7 @@ class ScheduleForm
     @spot = spot || @schedule.build_spot
     @travel_book = travel_book
 
+    # attributesがfalseもしくは未定義ならdefault_attributesを代入
     attributes ||= default_attributes(@travel_book)
     super(attributes)
     # convert_to_jst
@@ -42,7 +43,7 @@ class ScheduleForm
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
-      convert_to_jst
+      # convert_to_jst
       @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid, schedule_icon_id: schedule_icon_id)
 
       # Spot のデータが存在する場合のみ作成
@@ -61,7 +62,7 @@ class ScheduleForm
   def update(attributes)
     return false if invalid?
     ActiveRecord::Base.transaction do
-      convert_to_jst
+      # convert_to_jst
       @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_uuid: travel_book_uuid, schedule_icon_id: schedule_icon_id)
 
       # Spot のデータが存在する場合のみ作成
@@ -109,7 +110,7 @@ class ScheduleForm
     Rails.logger.info "================"
     Rails.logger.info "#{Time.zone}"
     Rails.logger.info "Before : #{start_date} (#{start_date.class})"
-    self.start_date = start_date.in_time_zone("Asia/Tokyo") unless start_date.nil?
+    self.start_date = Time.zone.parse(start_date) unless start_date.nil?
     self.end_date = end_date.in_time_zone("Asia/Tokyo") unless end_date.nil?
     Rails.logger.info "After : #{start_date} (#{start_date.class})"
     Rails.logger.info "================"
