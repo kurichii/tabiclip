@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    travel_book = TravelBook.find(params[:travel_book_uuid])
+    travel_book = TravelBook.find(params[:travel_book_id])
     current_user.bookmark(travel_book)
     redirect_to public_travel_books_path, notice: "ブックマークしました"
   end

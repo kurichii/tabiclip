@@ -14,7 +14,7 @@
                   <%= user.name %>
                 </div>
                 <% unless user == @travel_book.creator %>
-                  <%= link_to delete_owner_travel_book_path(@travel_book, user_id: user.id), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "btn" do %>
+                  <%= link_to delete_owner_travel_book_path(@travel_book.uuid, user_id: user.id), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "btn" do %>
                     <i class="fa-solid fa-minus"></i>
                   <% end %>
                 <% end %>

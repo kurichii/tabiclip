@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "home/index"
   get "form", to: "static_pages#form"
   get "images/ogp.png", to: "images#ogp", as: "images_ogp"
-  resources :travel_books do
+  resources :travel_books, param: :uuid do
     collection do
       get "public", action: :public_travel_books
       get "search"

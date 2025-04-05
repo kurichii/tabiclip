@@ -1,5 +1,5 @@
 class Schedule < ApplicationRecord
-  belongs_to :travel_book, foreign_key: :travel_book_uuid
+  belongs_to :travel_book
   has_one :spot, primary_key: :uuid, foreign_key: :schedule_uuid, dependent: :destroy
   belongs_to :schedule_icon, optional: true
 

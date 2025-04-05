@@ -25,7 +25,7 @@ class SchedulesController < ApplicationController
     convert_to_jst(schedule_params[:start_date], schedule_params[:end_date])
 
     if @schedule_form.save
-      redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.created", item: Schedule.model_name.human)
+      redirect_to travel_book_schedules_path(@travel_book.uuid), notice: t("defaults.flash_message.created", item: Schedule.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_created", item: Schedule.model_name.human)
       render :new, status: :unprocessable_entity
@@ -46,7 +46,7 @@ class SchedulesController < ApplicationController
     convert_to_jst(schedule_params[:start_date], schedule_params[:end_date])
 
     if @schedule_form.update(schedule_params)
-      redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.updated", item: Schedule.model_name.human)
+      redirect_to travel_book_schedules_path(@travel_book.uuid), notice: t("defaults.flash_message.updated", item: Schedule.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_updated", item: Schedule.model_name.human)
       render :edit, status: :unprocessable_entity
@@ -55,7 +55,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy!
-    redirect_to travel_book_schedules_path(@travel_book), notice: t("defaults.flash_message.deleted", item: Schedule.model_name.human)
+    redirect_to travel_book_schedules_path(@travel_book.uuid), notice: t("defaults.flash_message.deleted", item: Schedule.model_name.human)
   end
 
   def map
@@ -79,12 +79,12 @@ class SchedulesController < ApplicationController
       :address,
       :schedule_icon_id
     ).merge(
-      travel_book_uuid: @travel_book.id
+      travel_book_id: @travel_book.id
     )
   end
 
   def set_travel_book
-    @travel_book = TravelBook.find(params[:travel_book_id])
+    @travel_book = TravelBook.find_by(uuid: params[:travel_book_uuid])
   end
 
   def set_schedule
