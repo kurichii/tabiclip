@@ -41,10 +41,13 @@ class Users::InvitationsController < Devise::InvitationsController
     resource = self.resource
 
     if resource.errors.empty? && resource.invited_by_travel_book_id.present?
+      # 招待されたしおりを特定
+      travel_book_id = TravelBook.find_by(uuid: resource.invited_by_travel_book_id).id
+
       # 中間テーブルに招待ユーザーと対象のしおりのidを保存
       user_travel_book = UserTravelBook.new(
         user_id: resource.id,
-        travel_book_uuid: resource.invited_by_travel_book_id
+        travel_book_id: travel_book_id
       )
       if user_travel_book.save
         flash[:notice] = "しおりのメンバーに追加されました"
