@@ -14,7 +14,7 @@ class NotesController < ApplicationController
   def create
     @note = @travel_book.notes.build(note_params)
     if @note.save
-      redirect_to travel_book_notes_path(@travel_book), notice: t("defaults.flash_message.created", item: Note.model_name.human)
+      redirect_to travel_book_notes_path(@travel_book.uuid), notice: t("defaults.flash_message.created", item: Note.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_created")
       render :new
@@ -36,13 +36,13 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    redirect_to travel_book_notes_path(@travel_book), notice: t("defaults.flash_message.deleted", item: Note.model_name.human)
+    redirect_to travel_book_notes_path(@travel_book.uuid), notice: t("defaults.flash_message.deleted", item: Note.model_name.human)
   end
 
   private
 
   def set_travel_book
-    @travel_book = current_user.travel_books.find(params[:travel_book_id])
+    @travel_book = current_user.travel_books.find_by(uuid: params[:travel_book_uuid])
   end
 
   def set_note
