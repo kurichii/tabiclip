@@ -5,12 +5,12 @@ class TravelBook < ApplicationRecord
   belongs_to :traveler_type, optional: true
   belongs_to :creator, class_name: "User"
 
-  has_many :user_travel_books, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
+  has_many :user_travel_books, dependent: :destroy
   has_many :users, through: :user_travel_books
-  has_many :schedules, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
-  has_many :check_lists, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
-  has_many :notes, primary_key: :uuid, foreign_key: :travel_book_uuid, dependent: :destroy
-  has_many :bookmarks, foreign_key: :travel_book_uuid, dependent: :destroy
+  has_many :schedules, dependent: :destroy
+  has_many :check_lists, dependent: :destroy
+  has_many :notes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 65_535 }

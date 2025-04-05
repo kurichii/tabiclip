@@ -1,10 +1,10 @@
 class User < ApplicationRecord
   mount_uploader :icon_image, UserUploader
   has_many :user_travel_books, dependent: :destroy
-  has_many :travel_books, primary_key: :uuid, foreign_key: :travel_book_uuid, through: :user_travel_books
+  has_many :travel_books, through: :user_travel_books
   has_many :created_travel_books, class_name: "TravelBook", foreign_key: "creator_id", dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :bookmark_travel_books, through: :bookmarks, source: :travel_book, foreign_key: :travel_book_uuid
+  has_many :bookmark_travel_books, through: :bookmarks, source: :travel_book
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
