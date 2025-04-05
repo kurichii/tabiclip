@@ -1,6 +1,6 @@
 class Schedule < ApplicationRecord
   belongs_to :travel_book
-  has_one :spot, primary_key: :uuid, foreign_key: :schedule_uuid, dependent: :destroy
+  has_one :spot, dependent: :destroy
   belongs_to :schedule_icon, optional: true
 
   def self.group_by_date(schedules)
