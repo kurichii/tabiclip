@@ -14,7 +14,7 @@ class CheckListsController < ApplicationController
     @check_list = @travel_book.check_lists.build(check_list_param)
 
     if @check_list.save
-      redirect_to travel_book_check_lists_path(@travel_book), notice: t("defaults.flash_message.created", item: CheckList.model_name.human)
+      redirect_to travel_book_check_lists_path(@travel_book.uuid), notice: t("defaults.flash_message.created", item: CheckList.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_created", item: CheckList.model_name.human)
       render :new, status: :unprocessable_entity
@@ -43,13 +43,13 @@ class CheckListsController < ApplicationController
 
   def destroy
     @check_list.destroy!
-    redirect_to travel_book_check_lists_path(@travel_book), notice: t("defaults.flash_message.deleted", item: CheckList.model_name.human)
+    redirect_to travel_book_check_lists_path(@travel_book.uuid), notice: t("defaults.flash_message.deleted", item: CheckList.model_name.human)
   end
 
   private
 
   def set_travel_book
-    @travel_book = current_user.travel_books.find(params[:travel_book_id])
+    @travel_book = current_user.travel_books.find_by(uuid: params[:travel_book_uuid])
   end
 
   def set_check_list
