@@ -12,10 +12,10 @@
         </div>
         <% if @travel_book.owned_by_user?(current_user) %>
           <div class="flex justify-end">
-            <%= link_to edit_travel_book_path(@travel_book), class: "hover:opacity-50" do %>
+            <%= link_to edit_travel_book_path(@travel_book.uuid), class: "hover:opacity-50" do %>
               <i class="fa-solid fa-pen text-sm md:text-base"></i>
             <% end %>
-            <%= link_to travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
+            <%= link_to travel_book_path(@travel_book.uuid), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
               <i class="fa-solid fa-trash text-sm md:text-base"></i>
             <% end %>
           </div>
@@ -56,11 +56,11 @@
         </div>
 
         <% unless @travel_book.owned_by_user?(current_user) %>
-          <%= link_to travel_book_schedules_path(@travel_book), class: "btn btn-primary w-full" do %>
+          <%= link_to travel_book_schedules_path(@travel_book.uuid), class: "btn btn-primary w-full" do %>
             <i class="fa-regular fa-clock"></i> スケジュールを見る
           <% end %>
         <% else %>
-          <%= link_to share_travel_book_path(@travel_book), class: "btn btn-primary w-full" do %>
+          <%= link_to share_travel_book_path(@travel_book.uuid), class: "btn btn-primary w-full" do %>
             <i class="fa-solid fa-users"></i> しおりのメンバーリスト・しおりに招待
           <% end %>
         <% end %>

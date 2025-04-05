@@ -27,7 +27,7 @@ class TravelBooksController < ApplicationController
   end
 
   def show
-    @travel_book = TravelBook.find(params[:id])
+    @travel_book = TravelBook.find_by(uuid: params[:uuid])
     # メタタグを設定
     prepare_meta_tags(@travel_book)
   end
@@ -66,11 +66,13 @@ class TravelBooksController < ApplicationController
   def delete_owner
     user = User.find(params[:user_id])
     # しおりの作成者でない場合のみ削除
-    if user != @travel_book.creator
-      @travel_book.users.destroy(user)
-      redirect_to share_travel_book_path(@travel_book), notice: "しおりのメンバーから削除しました"
+    return redirect_to share_travel_book_path(@travel_book.uuid), alert: "しおりの作成者は削除できません" if user == @travel_book.creator
+
+    @travel_book.users.destroy(user)
+    if user == current_user
+      redirect_to public_travel_books_path, notice: "しおりのメンバーから削除しました"
     else
-      redirect_to share_travel_book_path(@travel_book), alert: "しおりの作成者は削除できません"
+      redirect_to share_travel_book_path(@travel_book.uuid), notice: "しおりのメンバーから削除しました"
     end
   end
 
@@ -106,7 +108,7 @@ class TravelBooksController < ApplicationController
   end
 
   def set_travel_book
-    @travel_book = current_user.travel_books.find(params[:id])
+    @travel_book = current_user.travel_books.find_by(uuid: params[:uuid])
   end
 
   def travel_book_param
