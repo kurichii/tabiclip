@@ -5,10 +5,10 @@
       <h2 class="text-lg font-bold ml-5"><%= @schedule.title %></h2>
       <div class="flex justify-end">
         <% if @travel_book.owned_by_user?(current_user) %>
-          <%= link_to edit_schedule_path(@schedule), data: { turbo: false }, class: "hover:opacity-50" do %>
+          <%= link_to edit_schedule_path(@schedule.uuid), data: { turbo: false }, class: "hover:opacity-50" do %>
             <i class="fa-solid fa-pen text-sm md:text-base"></i>
           <% end %>
-          <%= link_to schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
+          <%= link_to schedule_path(@schedule.uuid), data: { turbo_method: :delete, turbo_confirm: t("defaults.delete_confirm") }, class: "ml-5 hover:opacity-50" do %>
             <i class="fa-solid fa-trash text-sm md:text-base"></i>
           <% end %>
         <% end %>

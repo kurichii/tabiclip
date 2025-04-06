@@ -2,7 +2,7 @@
   <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
     <h2 class="text-lg font-bold text-center"><%= t(".title")%></h2>
 
-    <%= render "form", schedule_form: @schedule_form, url: schedule_path(@schedule) %>
+    <%= render "form", schedule_form: @schedule_form, url: schedule_path(@schedule.uuid) %>
   </div>
   <div class="h-24"></div>
 </div>
