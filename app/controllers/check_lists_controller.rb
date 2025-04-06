@@ -34,7 +34,7 @@ class CheckListsController < ApplicationController
 
   def update
     if @check_list.update(check_list_param)
-      redirect_to check_list_path(@check_list), notice: t("defaults.flash_message.updated", item: CheckList.model_name.human)
+      redirect_to check_list_path(@check_list.uuid), notice: t("defaults.flash_message.updated", item: CheckList.model_name.human)
     else
       flash.now[:alert] = t("defaults.flash_message.not_updated", item: CheckList.model_name.human)
       render :edit, status: :unprocessable_entity
@@ -53,7 +53,7 @@ class CheckListsController < ApplicationController
   end
 
   def set_check_list
-    @check_list = CheckList.find(params[:id])
+    @check_list = CheckList.find_by(uuid: params[:uuid])
     @travel_book = @check_list.travel_book
   end
 

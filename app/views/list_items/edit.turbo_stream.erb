@@ -1,5 +1,5 @@
 <%= turbo_stream.update "flash_messages", partial: "shared/flash_message" %>
 
 <%= turbo_stream.replace "list_item_#{@list_item.id}" do %>
-  <%= render "list_items/form", list_item: @list_item %>
+  <%= render "list_items/form", list_item: @list_item, url: list_item_path(@list_item) %>
 <% end %>

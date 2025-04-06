@@ -1,7 +1,7 @@
 <%= turbo_stream.update "flash_messages", partial: "shared/flash_message" %>
 
 <%= turbo_stream.append "list_item_form" do %>
-  <%= render "list_items/form", list_item: @list_item %>
+  <%= render "list_items/form", list_item: @list_item, url: check_list_list_items_path(@check_list.uuid) %>
 <% end %>
 
 <%= turbo_stream.update "add_list_item_button", "" %>

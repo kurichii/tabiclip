@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "list_item_#{list_item.id}" do %>
-  <%= form_with model: @list_item, url: @list_item.new_record? ? check_list_list_items_path(@check_list): list_item_path(@list_item) do |f| %>
+  <%= form_with model: @list_item, url: url do |f| %>
     <%= render "shared/error_messages", object: f.object %>
     <div class="flex gap-2 items-center">
       <%= f.text_field :title, autofocus: true, placeholder: t("list_items.form.placeholder.title"), class: "input input-bordered w-full" %>
       <div class="flex gap-2 items-center">
-        <%= link_to @list_item.new_record? ? cancel_check_list_list_items_path(@check_list) : cancel_list_item_path(@list_item), class: "btn btn-ghoast", data: { turbo_method: :post } do %>
+        <%= link_to @list_item.new_record? ? cancel_check_list_list_items_path(@check_list.uuid) : cancel_list_item_path(@list_item), class: "btn btn-ghoast", data: { turbo_method: :post } do %>
           <i class="fa-solid fa-xmark"></i>
         <% end %>
         <%= f.submit nil, class: "btn btn-primary" %>
