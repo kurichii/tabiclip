@@ -32,6 +32,12 @@ class TravelBook < ApplicationRecord
     [ "area_id", "traveler_type_id" ]
   end
 
+  # トークン生成のためのメソッド
+  def generate_token
+    self.invitation_token = Devise.friendly_token
+    update(invitation_token: self.invitation_token)
+  end
+
   private
 
   def end_date_after_start_date
