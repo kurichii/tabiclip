@@ -50,7 +50,7 @@ Rails.application.routes.draw do
         end
       end
     end
-    resources :notes, shallow: true
+    resources :notes, param: :uuid, shallow: true
   end
   resources :bookmarks, only: %i[ create destroy ]
 

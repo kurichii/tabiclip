@@ -1,4 +1,4 @@
-<%= link_to note_path(note), data: { turbo: false }, class: "block" do %>
+<%= link_to note_path(note.uuid), data: { turbo: false }, class: "block" do %>
   <div class="bg-base-100 flex items-center  my-2 md:my-5 p-2 md:p-5 rounded-full shadow-sm hover:scale-[1.03]">
     <i class="fa-solid fa-book-open ml-3"></i>
     <div class="ml-3"><%= note.title %></div>
