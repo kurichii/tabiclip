@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "invite-link" do %>
+  <div id="invite-link">
+    <div class="flex flex-col" data-controller="clipboard">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-1">
+        <input type="text" value="<%= @invite_link %>" readonly class="input input-bordered w-full">
+        <%= button_tag "コピー", data: { controller: "clipboard", action: "clipboard#copy", clipboard_content_value: @invite_link }, class: "btn btn-primary w-full sm:w-auto" %>
+      </div>
+    </div>
+  </div>
+<% end %>

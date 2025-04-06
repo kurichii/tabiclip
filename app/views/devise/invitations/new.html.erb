@@ -1,28 +1,19 @@
-<div class="max-w-screen-md mx-auto">
-  <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
-    <h2 class="text-lg font-bold text-center"><%= t(".title") %></h2>
+<p>招待メールを送る場合は、招待したいメンバーのメールアドレスを入力して送信してください</p>
+<%= form_for(@user, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
 
-    <%= form_for(@user, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "shared/error_messages", object: resource %>
 
-      <%= render "shared/error_messages", object: resource %>
-
-      <div class="space-y-3">
+  <div class="space-y-3">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-1">
+      <div class="w-full">
         <% resource.class.invite_key_fields.each do |field| -%>
-          <div>
-            <div class="flex items-center gap-1">
-              <%= f.label :email, class: "label" %>
-              <i class="fa-solid fa-envelope"></i>
-            </div>
             <%= f.email_field field, autocomplete: "email", placeholder: t("users.form.placeholder.email"), class: "input input-bordered w-full" %>
-
-            <%= f.hidden_field :travel_book_uuid, value: params[:travel_book_uuid] || travel_book_uuid %>
-          </div>
+            <%= f.hidden_field :travel_book_uuid, value: @travel_book.uuid %>
         <% end -%>
-
-        <div class="actions">
-          <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary w-full" %>
-        </div>
-      <% end %>
+      </div>
+      <div class="w-full sm:w-auto">
+        <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary w-full sm:w-auto" %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

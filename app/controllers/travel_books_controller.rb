@@ -61,6 +61,9 @@ class TravelBooksController < ApplicationController
 
   def share
     @users = @travel_book.users
+    @user = User.new
+    @resource_name = @user.class.name.underscore
+    @invite_link = accept_travel_book_url(invitation_token: @travel_book.invitation_token) if @travel_book.invitation_token.present?
   end
 
   def delete_owner
@@ -83,6 +86,47 @@ class TravelBooksController < ApplicationController
 
   def bookmarks
     @bookmark_travel_books = current_user.bookmark_travel_books.order(created_at: :desc)
+  end
+
+  def invitation
+    @travel_book = TravelBook.find_by(uuid: params[:uuid])
+    if @travel_book.generate_token
+      @invite_link = accept_travel_book_url(invitation_token: @travel_book.invitation_token)
+    else
+      redirect_to share_travel_book_path(@travel_book.uuid), alert: "招待リンクが作成できませんでした"
+    end
+  end
+
+  def accept
+    @travel_book = TravelBook.find_by(invitation_token: params[:invitation_token])
+    # しおりがない場合、公開しおり一覧にリダイレクト
+    return redirect_to public_travel_books_path, alert: "招待されたしおりが存在しません" unless @travel_book
+    # ログインしていない場合に招待されたしおりを特定するためにセッションにしおりのuuidを保存
+    session[:travel_book_uuid] = @travel_book.uuid
+
+    if user_signed_in?
+      # ログインしている場合
+      # すでにしおりのメンバーに参加している場合
+      if @travel_book.owned_by_user?(current_user)
+        redirect_to travel_book_path(@travel_book.uuid), notice: "すでにしおりに参加しています"
+      else
+        # しおりのメンバーに参加していない場合
+        # 中間テーブルに招待ユーザーと対象のしおりのidを保存
+        user_travel_book = UserTravelBook.new(user_id: current_user.id, travel_book_id: travel_book.id)
+        if user_travel_book.save
+          redirect_to travel_book_path(travel_book.uuid), notice: "しおりのメンバーに追加されました"
+        else
+          redirect_to public_travel_books_path, alert: "しおりのメンバーに追加できませんでした"
+        end
+      end
+      # セッションと招待tokenを無効にする
+      session[:travel_book_uuid] = nil
+      @travel_book.update(invitation_token: nil)
+    else
+      # ログインしていない場合
+      session[:after_sign_in_path] = accept_plan_url(invitation_token: params[:invitation_token])
+      redirect_to new_user_session_path, alert: "ログインしてください"
+    end
   end
 
   private

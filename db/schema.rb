@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_06_034234) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_06_095246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -116,8 +116,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_06_034234) do
     t.bigint "traveler_type_id"
     t.string "travel_book_image"
     t.bigint "creator_id", null: false
+    t.string "invitation_token"
     t.index ["area_id"], name: "index_travel_books_on_area_id"
     t.index ["creator_id"], name: "index_travel_books_on_creator_id"
+    t.index ["invitation_token"], name: "index_travel_books_on_invitation_token", unique: true
     t.index ["traveler_type_id"], name: "index_travel_books_on_traveler_type_id"
     t.index ["uuid"], name: "index_travel_books_on_uuid", unique: true
   end
