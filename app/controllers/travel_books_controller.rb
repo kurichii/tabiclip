@@ -112,9 +112,9 @@ class TravelBooksController < ApplicationController
       else
         # しおりのメンバーに参加していない場合
         # 中間テーブルに招待ユーザーと対象のしおりのidを保存
-        user_travel_book = UserTravelBook.new(user_id: current_user.id, travel_book_id: travel_book.id)
+        user_travel_book = UserTravelBook.new(user_id: current_user.id, travel_book_id: @travel_book.id)
         if user_travel_book.save
-          redirect_to travel_book_path(travel_book.uuid), notice: "しおりのメンバーに追加されました"
+          redirect_to travel_book_path(@travel_book.uuid), notice: "しおりのメンバーに追加されました"
         else
           redirect_to public_travel_books_path, alert: "しおりのメンバーに追加できませんでした"
         end
