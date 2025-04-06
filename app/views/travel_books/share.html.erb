@@ -1,6 +1,25 @@
 <div class="max-w-screen-md mx-auto">
   <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
 
+    <h2 class="text-lg font-bold text-center">メンバー招待</h2>
+    <div class="mt-5">
+      <%= turbo_frame_tag "invite-link" do %>
+        <% if @invite_link.present? %>
+          <%= render template: 'travel_books/invitation' %>
+        <% else %>
+          <div class="flex justify-center">
+            <%= button_to "招待リンクを生成", invitation_travel_book_path(uuid: params[:uuid]), class:"btn btn-primary w-full" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- しおりに招待のフォームを表示 -->
+    <div class="mt-5">
+      <%= render template: 'devise/invitations/new', locals: { resource: @user, resource_name: @resource_name } %>
+    </div>
+  </div>
+  <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
+
     <h2 class="text-lg font-bold text-center">メンバーリスト</h2>
 
     <table class="table">
@@ -24,11 +43,6 @@
         <% end %>
       </tbody>
     </table>
-    <div class="text-right mt-5">
-      <%= link_to new_user_invitation_path(travel_book_uuid: @travel_book.uuid), class: "btn btn-primary" do %>
-        <i class="fa-solid fa-envelope"></i> しおりに招待
-      <% end %>
-    </div>
   </div>
   <div class="h-24"></div>
 </div>

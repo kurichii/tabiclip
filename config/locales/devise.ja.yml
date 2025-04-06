@@ -72,7 +72,7 @@ ja:
     invitations:
       new:
         title: しおりに招待する
-        submit_button: 招待メール送信
+        submit_button: 送信
       edit:
         title: しおりに参加する
         submit_button: しおりに参加
