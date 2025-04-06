@@ -2,7 +2,7 @@ class ScheduleForm
   include ActiveModel::Model # 通常のモデルのようにvalidationなどを使えるようにする
   include ActiveModel::Attributes # ActiveRecordのカラムのような属性を加えられるようにする
   # パラメータの読み書きを許可する
-  attribute :travel_book_id, :string
+  attribute :travel_book_id, :integer
   attribute :title, :string
   attribute :start_date, :datetime
   attribute :end_date, :datetime
@@ -46,7 +46,7 @@ class ScheduleForm
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
-        @spot = Spot.create!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_uuid: schedule.id)
+        @spot = Spot.create!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_id: schedule.id)
       end
       true
     end
@@ -64,7 +64,7 @@ class ScheduleForm
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
-        @spot.update!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_uuid: @schedule.id)
+        @spot.update!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_id: @schedule.id)
       else
         @schedule.spot.destroy
       end
