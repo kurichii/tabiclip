@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     end
     member do
       get :share
+      post "invitation"
+      get "invitation/accept/:invitation_token", to: "travel_books#accept", as: "accept"
       delete "delete_owner"
     end
     delete "delete_image", on: :member
