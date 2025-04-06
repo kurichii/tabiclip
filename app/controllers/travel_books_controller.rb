@@ -100,7 +100,7 @@ class TravelBooksController < ApplicationController
   def accept
     @travel_book = TravelBook.find_by(invitation_token: params[:invitation_token])
     # しおりがない場合、公開しおり一覧にリダイレクト
-    return redirect_to public_travel_books_path, alert: "招待されたしおりが存在しません" unless @travel_book
+    return redirect_to public_travel_books_path, alert: "招待URLが無効です" unless @travel_book
     # ログインしていない場合に招待されたしおりを特定するためにセッションにしおりのuuidを保存
     session[:travel_book_uuid] = @travel_book.uuid
 
@@ -119,12 +119,11 @@ class TravelBooksController < ApplicationController
           redirect_to public_travel_books_path, alert: "しおりのメンバーに追加できませんでした"
         end
       end
-      # セッションと招待tokenを無効にする
+      # セッションを無効にする
       session[:travel_book_uuid] = nil
-      @travel_book.update(invitation_token: nil)
     else
       # ログインしていない場合
-      session[:after_sign_in_path] = accept_plan_url(invitation_token: params[:invitation_token])
+      session[:after_sign_in_path] = accept_travel_book_url(invitation_token: params[:invitation_token])
       redirect_to new_user_session_path, alert: "ログインしてください"
     end
   end
