@@ -34,7 +34,7 @@ Rails.application.routes.draw do
         get :map
       end
     end
-    resources :check_lists, shallow: true do
+    resources :check_lists, param: :uuid, shallow: true do
       resources :list_items, only: %i[ new create edit update destroy toggle ] do
         resources :reminders, only: %i[ create update clear_reminder ] do
           member do
