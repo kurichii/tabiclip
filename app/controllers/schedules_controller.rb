@@ -9,10 +9,8 @@ class SchedulesController < ApplicationController
     @schedules = @travel_book.sorted_schedules
     first_date = @schedules.map { |s| s.start_date&.to_date }.compact.min
     @spots = @schedules
-             .select { |s| s.start_date&.to_date == first_date }
-             .map(&:spot)
-             .compact
-             .select { |spot| spot.latitude.present? }
+    .select { |s| s.start_date&.to_date == first_date && s.spot&.latitude.present? }
+    .map { |s| { id: s.spot.id, latitude: s.spot.latitude, longitude: s.spot.longitude, name: s.spot.name, schedule_uuid: s.uuid } }
   end
 
   def new
@@ -61,7 +59,9 @@ class SchedulesController < ApplicationController
   def map
     @schedules = @travel_book.sorted_schedules
     # scheduleには0もしくは1のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
-    @spots = @schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }
+    @spots = @schedules
+    .select { |s| s.spot&.latitude.present? }
+    .map { |s| { id: s.spot.id, latitude: s.spot.latitude, longitude: s.spot.longitude, name: s.spot.name, schedule_uuid: s.uuid } }
   end
 
   private
@@ -88,7 +88,7 @@ class SchedulesController < ApplicationController
   end
 
   def set_schedule
-    @schedule = Schedule.find(params[:id])
+    @schedule = Schedule.find_by(uuid: params[:uuid])
     @travel_book = @schedule.travel_book
   end
 
