@@ -21,6 +21,17 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <!-- meta_tag -->
     <%= display_meta_tags(default_meta_tags) %>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVH4E5913C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-SVH4E5913C');
+    </script>
+    <!-- Google tag 終了 -->
   </head>
 
   <body class="flex flex-col min-h-screen <%= backgtound_color_class %>">
