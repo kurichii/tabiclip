@@ -47,7 +47,7 @@ function initMap() {
         <div class="card-body">
           <div class="flex items-center justify-between">
             <a href="${scheduleUrl}" class="text-blue-500 underline">${spot.name}</a>
-            <button id="close-btn" class="btn btn-square btn-sm">
+            <button id="close-btn-${spot.schedule_uuid}" class="btn btn-square btn-sm">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -55,7 +55,7 @@ function initMap() {
       </div>`;
 
       // 削除ボタンクリック時にpopupを削除
-      document.querySelector("#close-btn").addEventListener("click", () => {
+      document.getElementById(`close-btn-${spot.schedule_uuid}`).addEventListener("click", () => {
         document.getElementById("popup").innerHTML = "";
       });
     });

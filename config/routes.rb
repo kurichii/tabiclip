@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       delete "delete_owner"
     end
     delete "delete_image", on: :member
-    resources :schedules, shallow: true do
+    resources :schedules, param: :uuid, shallow: true do
       collection do
         get :map
       end
