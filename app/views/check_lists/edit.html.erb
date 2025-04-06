@@ -1,6 +1,6 @@
 <div class="max-w-screen-md mx-auto">
   <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
     <h2 class="text-lg font-bold text-center"><%= t(".title")%></h2>
-    <%= render "form", check_list: @check_list, travel_book: @travel_book, url: check_list_path(@check_list) %>
+    <%= render "form", check_list: @check_list, travel_book: @travel_book, url: check_list_path(@check_list.uuid) %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div id="add_list_item_button">
-  <%= link_to new_check_list_list_item_path(@check_list), class: "btn btn-primary", data: { turbo_stream: true } do %>
+  <%= link_to new_check_list_list_item_path(@check_list.uuid), class: "btn btn-primary", data: { turbo_stream: true } do %>
     <i class="fa-solid fa-plus"></i><%= t(".new_button") %>
   <% end %>
 </div>

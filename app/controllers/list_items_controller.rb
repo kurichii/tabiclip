@@ -42,7 +42,7 @@ class ListItemsController < ApplicationController
       @reminder = @list_item.reminder || @list_item.build_reminder
     else
       # 新規作成時（new）のキャンセル
-      @check_list = CheckList.find(params[:check_list_id])
+      @check_list = CheckList.find_by(uuid: params[:check_list_uuid])
       render "cancel_new"
     end
   end
@@ -56,7 +56,7 @@ class ListItemsController < ApplicationController
   private
 
   def set_check_list
-    @check_list = CheckList.find(params[:check_list_id])
+    @check_list = CheckList.find_by(uuid: params[:check_list_uuid])
   end
 
   def set_list_item
