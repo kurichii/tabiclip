@@ -36,8 +36,7 @@
 
   <body class="flex flex-col min-h-screen <%= backgtound_color_class %>">
     <%= render "shared/header" %>
-    <div id="flash_messages"></div>
-    <%= render "shared/flash_message" %>
+    <div id="flash_messages"><%= render "shared/flash_message" %></div>
     <main class="flex-grow">
       <%= yield %>
     </main>
