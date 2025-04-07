@@ -3,4 +3,6 @@ class StaticPagesController < ApplicationController
   def form; end
 
   def policy; end
+
+  def terms; end
 end
