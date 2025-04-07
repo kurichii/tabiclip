@@ -43,9 +43,12 @@
       <%= f.hidden_field :travel_book_image_cache %>
     </div>
 
-    <div class="flex flex-row-reverse">
-      <% if @travel_book.persisted? && @travel_book.travel_book_image %>
-        <%= link_to delete_image_travel_book_path(@travel_book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "hover:opacity-50" do %>
+    <div class="flex justify-between">
+      <% if @travel_book.persisted? && @travel_book.travel_book_image.present? %>
+        <%= @travel_book.travel_book_image_identifier %>
+        <%= link_to delete_image_travel_book_path(@travel_book.uuid),
+        data: { turbo_method: :delete, turbo_confirm: "しおりの画像を削除しますか？" },
+        class: "hover:opacity-50" do %>
           <i class="fa-solid fa-trash"></i>
         <% end %>
       <% end %>

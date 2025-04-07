@@ -51,7 +51,7 @@ class TravelBooksController < ApplicationController
   def delete_image
     @travel_book.remove_travel_book_image! # CarrierWaveのメソッドを使って画像を削除
     @travel_book.save
-    redirect_to edit_travel_book_path(@travel_book), notice: "しおりの画像を削除しました"
+    redirect_to edit_travel_book_path(@travel_book.uuid), notice: "しおりの画像を削除しました"
   end
 
   def public_travel_books
