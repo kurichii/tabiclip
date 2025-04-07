@@ -8,8 +8,4 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource_or_scope)
     session.delete(:after_sign_in_path) || public_travel_books_path
   end
-
-  def set_travel_book
-    @travel_book = TravelBook.find(params[:id])
-  end
 end
