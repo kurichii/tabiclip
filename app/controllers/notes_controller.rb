@@ -15,8 +15,8 @@ class NotesController < ApplicationController
     if @note.save
       redirect_to travel_book_notes_path(@travel_book.uuid), notice: t("defaults.flash_message.created", item: Note.model_name.human)
     else
-      flash.now[:alert] = t("defaults.flash_message.not_created")
-      render :new
+      flash.now[:alert] = t("defaults.flash_message.not_created", item: Note.model_name.human)
+      render :new, status: :unprocessable_entity
     end
   end
 
