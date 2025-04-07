@@ -66,8 +66,8 @@
         <% end %>
 
         <% if @travel_book.is_public %>
-          <% prepare_meta_tags @travel_book %>
-          <% twitter_share_url = "https://twitter.com/intent/tweet?url= #{CGI.escape(travel_book_url(@travel_book))}" %>
+          <% prepare_meta_tags(@travel_book) %>
+          <% twitter_share_url = "https://twitter.com/intent/tweet?url= #{CGI.escape(travel_book_url(@travel_book.uuid))}" %>
           <%= link_to twitter_share_url, target: "_blank", data: { toggle: "tooltip", placement: "bottom" }, title: "Xでシェア", class: "btn w-full" do %>
             <i class="fa-brands fa-square-x-twitter text-lg"></i> Xに投稿
           <% end %>
