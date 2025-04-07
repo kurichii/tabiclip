@@ -1,5 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
   before_action :configure_permitted_parameters
+  skip_before_action :authenticate_user!, only: %i[ edit update ]
 
   def new
     super

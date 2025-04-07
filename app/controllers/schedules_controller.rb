@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
+  skip_before_action :authenticate_user!, only: %i[ index show map ]
   before_action :set_travel_book, only: %i[ index new create map ]
   before_action :set_schedule, only: %i[ show edit update destroy ]
 

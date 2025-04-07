@@ -1,6 +1,6 @@
 class TravelBooksController < ApplicationController
-  before_action :authenticate_user!, except: %i[ show public_travel_books accept ]
-  before_action :set_travel_book, only: %i[ edit update destroy delete_image share delete_owner ]
+  skip_before_action :authenticate_user!, only: %i[ show public_travel_books accept ]
+  before_action :set_travel_book, only: %i[ edit update destroy delete_image share delete_owner invitation ]
   # 設定したprepare_meta_tagsをprivateにあってもpostコントローラー以外にも使えるようにする
   helper_method :prepare_meta_tags
 
@@ -51,7 +51,7 @@ class TravelBooksController < ApplicationController
   def delete_image
     @travel_book.remove_travel_book_image! # CarrierWaveのメソッドを使って画像を削除
     @travel_book.save
-    redirect_to edit_travel_book_path(@travel_book), notice: "しおりの画像を削除しました"
+    redirect_to edit_travel_book_path(@travel_book.uuid), notice: "しおりの画像を削除しました"
   end
 
   def public_travel_books
@@ -89,7 +89,6 @@ class TravelBooksController < ApplicationController
   end
 
   def invitation
-    @travel_book = TravelBook.find_by(uuid: params[:uuid])
     if @travel_book.generate_token
       @invite_link = accept_travel_book_url(invitation_token: @travel_book.invitation_token)
     else
