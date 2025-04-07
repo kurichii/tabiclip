@@ -58,6 +58,9 @@ module ApplicationHelper
   end
 
   def flash_message_color(type)
-    type.to_sym == :notice ? "alert-success" : "alert-error"
+    case type.to_sym
+    when :notice then "bg-green-300 text-green-600 border-green-500"
+    when :alert then "bg-red-200 text-red-600 boder border-red-500"
+    end
   end
 end
