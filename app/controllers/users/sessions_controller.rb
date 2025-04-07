@@ -20,11 +20,6 @@ class Users::SessionsController < Devise::SessionsController
 
   # protected
 
-  # ログイン後のリダイレクト先
-  def after_sign_in_path_for(resource)
-    session.delete(:after_sign_in_path) || public_travel_books_path
-  end
-
   # ログアウト後のリダイレクト先
   def after_sign_out_path_for(resource)
     home_index_path
