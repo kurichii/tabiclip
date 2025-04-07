@@ -43,7 +43,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in(:user, @profile)
 
       flash[:notice] = "ログインしました"
-      redirect_to public_travel_books_path
+      redirect_to session.delete(:after_sign_in_path) || public_travel_books_path
     else
       flash[:alert] = "認証に失敗しました"
       redirect_to user_session_path
