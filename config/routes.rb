@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "users/profile" => "users#show"
   get "home/index"
   get "form", to: "static_pages#form"
+  get "policy", to: "static_pages#policy"
   get "images/ogp.png", to: "images#ogp", as: "images_ogp"
   resources :travel_books, param: :uuid do
     collection do
