@@ -1,5 +1,5 @@
 class TravelBooksController < ApplicationController
-  before_action :authenticate_user!, except: %i[ show public_travel_books accept ]
+  skip_before_action :authenticate_user!, only: %i[ show public_travel_books accept ]
   before_action :set_travel_book, only: %i[ edit update destroy delete_image share delete_owner ]
   # 設定したprepare_meta_tagsをprivateにあってもpostコントローラー以外にも使えるようにする
   helper_method :prepare_meta_tags

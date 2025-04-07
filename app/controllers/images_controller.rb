@@ -1,4 +1,6 @@
 class ImagesController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def ogp
     title = ogp_params[:title]
     creator = ogp_params[:creator]

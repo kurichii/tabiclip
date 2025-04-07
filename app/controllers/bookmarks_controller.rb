@@ -1,6 +1,4 @@
 class BookmarksController < ApplicationController
-  before_action :authenticate_user!
-
   def create
     travel_book = TravelBook.find(params[:travel_book_id])
     current_user.bookmark(travel_book)
