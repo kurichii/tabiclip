@@ -54,11 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :icon_image, :icon_image_cache ])
   end
 
-  # アカウント登録後のリダイレクト先
-  def after_sign_up_path_for(resource)
-    session.delete(:after_sign_in_path) || public_travel_books_path
-  end
-
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
