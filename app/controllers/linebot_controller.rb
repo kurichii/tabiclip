@@ -1,4 +1,5 @@
 class LinebotController < ApplicationController
+  skip_before_action :authenticate_user!
   # gem 'line-bot-api'
   require "line/bot"
 
