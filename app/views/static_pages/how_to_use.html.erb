@@ -1,0 +1,51 @@
+<% content_for(:title, t(".title")) %>
+<div class="max-w-screen-md mx-auto">
+  <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
+    <h1 class="text-lg font-bold text-center mb-4"><%= t(".title")%></h1>
+
+    <div data-controller="how-to-use-tabs">
+
+      <p class="text-xs text-center text-gray-500 sm:hidden">スクロールできます→</p>
+
+      <div class="overflow-x-auto">
+        <div class="bg-base-200 rounded-full p-1 flex justify-between items-center flex-nowrap min-w-max md:min-w-0">
+          <a class="is-active" aria-current="page" data-how-to-use-tabs-target="tab" data-action="how-to-use-tabs#tabClick">しおり</a>
+          <a class="not-active" data-how-to-use-tabs-target="tab" data-action="how-to-use-tabs#tabClick">スケジュール</a>
+          <a class="not-active" data-how-to-use-tabs-target="tab" data-action="how-to-use-tabs#tabClick">マップ</a>
+          <a class="not-active" data-how-to-use-tabs-target="tab" data-action="how-to-use-tabs#tabClick">ノート</a>
+          <a class="not-active" data-how-to-use-tabs-target="tab" data-action="how-to-use-tabs#tabClick">チェックリスト</a>
+          <a class="not-active" data-how-to-use-tabs-target="tab" data-action="how-to-use-tabs#tabClick">アルバム</a>
+        </div>
+      </div>
+
+      <div class="m-3 md:m-5">
+        <div data-how-to-use-tabs-target="content">
+          <%= render "travel_book" %>
+        </div>
+
+        <div class="hidden" data-how-to-use-tabs-target="content">
+          <%= render "schedule" %>
+        </div>
+
+        <div class="hidden" data-how-to-use-tabs-target="content">
+          <%= render "map" %>
+        </div>
+
+        <div class="hidden" data-how-to-use-tabs-target="content">
+          <%= render "note" %>
+        </div>
+
+        <div class="hidden" data-how-to-use-tabs-target="content">
+          <%= render "check_list" %>
+        </div>
+
+        <div class="hidden" data-how-to-use-tabs-target="content">
+          <%= render "album" %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="h-24"></div>
+</div>
