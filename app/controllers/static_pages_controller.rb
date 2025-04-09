@@ -5,4 +5,6 @@ class StaticPagesController < ApplicationController
   def policy; end
 
   def terms; end
+
+  def how_to_use; end
 end
