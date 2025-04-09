@@ -23,3 +23,11 @@
 .field_with_errors {
   display: contents;
 }
+
+.is-active {
+  @apply rounded-full bg-primary text-sm py-2 px-5 cursor-pointer
+}
+
+.not-active {
+  @apply text-sm py-2 px-5 cursor-pointer
+}
