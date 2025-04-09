@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def page_title(title = "")
+    base_title = "たびくりっぷ"
+    title.present? ? "#{title} | #{base_title}" : base_title
+  end
+
   def default_meta_tags
     {
       site: "たびくりっぷ",
