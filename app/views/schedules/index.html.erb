@@ -2,28 +2,33 @@
 <div class="max-w-screen-md mx-auto flex-none md:flex md:max-w-none">
   <div class="bg-base-100 p-4 md:p-8 m-3 rounded-lg md:m-0 md:rounded-none md:shadow-md md:flex-1">
 
-    <div class="flex flex-grow flex-col items-center">
+    <div class="flex flex-grow flex-col items-center mb-5">
       <h2 class="text-lg font-bold"><%= @travel_book.title %></h2>
       <p><%= travel_book_duration(@travel_book) %></p>
     </div>
     <% if @schedules.present? %>
-    <div data-controller="tabs">
-      <div role="tablist" class="tabs tabs-bordered overflow-x-scroll">
-        <% Schedule.group_by_date(@schedules).each_with_index do |(date, schedules),i| %>
-          <input type="radio" data-action="change->tabs#changeTab"
+
+    <div data-controller="tabs" id="schedule_index">
+      <div class="overflow-x-auto">
+        <div class="flex items-center flex-nowrap gap-1 min-w-max md:min-w-0">
+          <% Schedule.group_by_date(@schedules).each_with_index do |(date, schedules),i| %>
+            <a class="<%= i == 0 ? 'is-active' : 'not-active' %>" aria-current="page" data-tabs-target="tab"
             data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
-            name="my_tabs_1" role="tab" class="tab" aria-label="<%= fmt_date_label(date) %>" <%= 'checked' if i == 0 %> />
-          <div role="tabpanel" class="tab-content md:p-3">
-            <% schedules.each_with_index do |schedule, i| %>
-              <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
-            <% end %>
-            <div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-              <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(schedules)) %><%= t("helpers.currency_unit") %></p>
-            </div>
-          </div>
-        <% end %>
+            data-action="tabs#tabClick"><%= fmt_date_label(date) %></a>
+          <% end %>
+        </div>
       </div>
+
+      <% Schedule.group_by_date(@schedules).each_with_index do |(date, schedules),i| %>
+        <div class="m-3 md:m-5" data-tabs-target="content" style="<%= i == 0 ? 'display: block;' : 'display: none;' %>">
+          <% schedules.each_with_index do |schedule, i| %>
+            <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
+          <% end %>
+          <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(schedules)) %><%= t("helpers.currency_unit") %></p>
+        </div>
+      <% end %>
     </div>
+
     <% else %>
       <% if @travel_book.owned_by_user?(current_user) %>
         <p class="text-center mt-10"><%= t(".no_creator_no_data") %><br><%= t(".no_data") %></p>
