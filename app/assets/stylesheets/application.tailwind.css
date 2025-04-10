@@ -24,10 +24,20 @@
   display: contents;
 }
 
+/* アプリの使い方のタブ */
 .is-active {
   @apply rounded-full bg-primary text-sm py-2 px-5 cursor-pointer
 }
 
 .not-active {
   @apply text-sm py-2 px-5 cursor-pointer
+}
+
+/* スケジュールのタブ */
+#schedule_index .is-active {
+  @apply rounded-full bg-primary text-white text-sm py-2 px-5 cursor-pointer
+}
+
+#schedule_index .not-active {
+  @apply rounded-full bg-base-200 text-sm py-2 px-5 cursor-pointer
 }
