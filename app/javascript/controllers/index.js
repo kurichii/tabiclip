@@ -13,6 +13,9 @@ application.register("hello", HelloController)
 import HowToUseTabsController from "./how_to_use_tabs_controller"
 application.register("how-to-use-tabs", HowToUseTabsController)
 
+import InputDatetimeController from "./input_datetime_controller"
+application.register("input-datetime", InputDatetimeController)
+
 import LinkController from "./link_controller"
 application.register("link", LinkController)
 
