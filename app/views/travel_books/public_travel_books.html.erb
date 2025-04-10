@@ -1,3 +1,4 @@
+<% content_for(:title, t(".title")) %>
 <div class="max-w-screen-xl mx-auto">
   <div class="m-5 flex items-center">
     <%= search_form_for @q, url: public_travel_books_path, method: :get do |f| %>

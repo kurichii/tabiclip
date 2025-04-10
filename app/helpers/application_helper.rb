@@ -1,4 +1,11 @@
 module ApplicationHelper
+  # タイトルの動的な変更
+  def page_title(title = "")
+    base_title = "たびくりっぷ"
+    title.present? ? "#{title} | #{base_title}" : base_title
+  end
+
+  # デフォルトのメタタグを設定
   def default_meta_tags
     {
       site: "たびくりっぷ",
@@ -6,7 +13,7 @@ module ApplicationHelper
       reverse: true,
       charset: "utf-8",
       description: "共有できる旅のしおり作成サービスです",
-      canonical: "request.original_url",
+      canonical: request.original_url,
       separator: "|",
       og: {
         site_name: :site,
@@ -25,9 +32,11 @@ module ApplicationHelper
     }
   end
 
+  # 背景色の出しわけ
   def backgtound_color_class
     controller_name == "home" ? "bg-primary" : "bg-base-200"
   end
+
   # ボトムナビゲーションのだしわけ判定
   def display_bottom_nav_on_travel_book
     return false if current_user.nil?
@@ -50,13 +59,13 @@ module ApplicationHelper
     controller_name == controller && action_name == action ? "text-white hover:scale-[1.1]" : "text-gray-500 hover:scale-[1.1]"
   end
 
-
   # 曜日をフォーマットする
   def fmt_wday(date)
     wdays = %w[日 月 火 水 木 金 土]
     "#{wdays[date.wday]}"
   end
 
+  # フラッシュメッセージの色変更
   def flash_message_color(type)
     case type.to_sym
     when :notice then "bg-green-300 text-green-600 border-green-500"

@@ -92,12 +92,17 @@ ja:
         change_password: パスワードを再設定
         login_page: ログインページはこちら
     show:
+      title: マイページ
       profile_button: プロフィールを編集
   travel_books:
     index:
+      title: マイしおり一覧
       no_data: しおりがありません
       new_button: しおり作成
+    public_travel_books:
+      title: しおり検索
     show:
+      title: しおり情報
       duration: 期間
       total_amount: 合計金額
     new:
@@ -107,6 +112,10 @@ ja:
     my_travel_book:
       departure: 出発
       arrival: 到着
+    share:
+      title: メンバー招待
+    bookmarks:
+      title: ブックマーク一覧
     form:
       placeholder:
         title: 旅行のタイトルを記入
@@ -116,15 +125,19 @@ ja:
         false: 非公開
   schedules:
     index:
+      title: スケジュール
       new_button: スケジュール作成
       no_data: スケジュールを登録しましょう
       no_creator_no_data: スケジュールが登録されていません
     show:
+      title: スケジュール情報
       no_data: 場所が登録されていません
     new:
       title: スケジュール作成
     edit:
       title: スケジュール編集
+    map:
+      title: マップ
     form:
       placeholder:
         title: スケジュールのタイトルを記入
@@ -138,6 +151,7 @@ ja:
       no_memo: メモは登録されていません
   notes:
     index:
+      title: ノート一覧
       note_link: ノート
       check_list_link: チェックリスト
       new_button: ノート作成
@@ -152,6 +166,7 @@ ja:
         body: サイトのURLも貼ることができます
   check_lists:
     index:
+      title: チェックリスト一覧
       note_link: ノート
       check_list_link: チェックリスト
       new_button: チェックリスト作成
