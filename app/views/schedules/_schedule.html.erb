@@ -1,26 +1,24 @@
-<div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-  <table class="table">
-    <tbody>
-      <tr class="hover cursor-pointer" data-controller="link" data-action="click->link#go" data-url="<%= schedule_path(schedule.uuid) %>">
-        <td class="w-2/6">
-          <%= fmt_datetime_range(schedule, :short) %>
-        </td>
-        <td class="w-3/6">
-          <% if schedule.schedule_icon.name == "none" %>
-            <i class="fa-solid fa-circle" style="visibility: hidden;"></i>
-          <% else %>
-            <i class="fa-solid <%= schedule.schedule_icon.name %>"></i>
-          <% end %>
-          <span class="ml-2"><%= link_to schedule.title, schedule_path(schedule.uuid) %></span>
-        </td>
-        <td class="w-1/6">
-          <% if schedule.spot&.latitude %>
-            <div class="relative inline-block">
-              <i class="fa-solid fa-location-pin text-2xl text-red-500"></i>
-            </div>
-          <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table class="table">
+  <tbody>
+    <tr class="hover cursor-pointer" data-controller="link" data-action="click->link#go" data-url="<%= schedule_path(schedule.uuid) %>">
+      <td class="w-2/6">
+        <%= fmt_datetime_range(schedule, :short) %>
+      </td>
+      <td class="w-3/6">
+        <% if schedule.schedule_icon.name == "none" %>
+          <i class="fa-solid fa-circle" style="visibility: hidden;"></i>
+        <% else %>
+          <i class="fa-solid <%= schedule.schedule_icon.name %>"></i>
+        <% end %>
+        <span class="ml-2"><%= link_to schedule.title, schedule_path(schedule.uuid) %></span>
+      </td>
+      <td class="w-1/6">
+        <% if schedule.spot&.latitude %>
+          <div class="relative inline-block">
+            <i class="fa-solid fa-location-pin text-2xl text-red-500"></i>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
