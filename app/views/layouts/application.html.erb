@@ -42,10 +42,10 @@
     </main>
     <% if user_signed_in? && display_bottom_nav_on_travel_book %>
       <%= render "shared/bottom_navigation_on_travel_book", travel_book: @travel_book %>
-    <% elsif controller_name != "home" %>
+    <% elsif request.path != root_path %>
       <%= render "shared/bottom_navigation" %>
     <% end %>
-    <% if controller_name == "home" %>
+    <% if request.path == root_path %>
       <%= render "shared/footer" %>
     <% end %>
   </body>

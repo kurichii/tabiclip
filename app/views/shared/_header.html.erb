@@ -1,6 +1,6 @@
 <div class="navbar bg-primary shadow-sm">
   <div class="flex-1 px-2 lg:flex-none">
-    <%= link_to home_index_path, class: "hover:opacity-50" do %>
+    <%= link_to user_signed_in? ? travel_books_path : root_path, class: "hover:opacity-50" do %>
       <%= image_tag "logo.svg", class: "w-40", alt: "logo" %>
     <% end %>
   </div>
@@ -16,13 +16,13 @@
           <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col">
             <% if user_signed_in? %>
               <li>
-                <%= link_to users_profile_path do %>
+                <%= link_to profile_path do %>
                   <%= image_tag current_user.icon_image_url, class: "rounded-full w-10 h-10 object-cover border" %><%= current_user.name %>
                 <% end %>
               </li>
               <div class="divider"></div>
               <li>
-                <%= link_to users_profile_path do %>
+                <%= link_to profile_path do %>
                   <i class="fa-regular fa-user"></i><%= t("header.mypage") %>
                 <% end %>
               </li>

@@ -34,13 +34,13 @@ module ApplicationHelper
 
   # 背景色の出しわけ
   def backgtound_color_class
-    controller_name == "home" ? "bg-primary" : "bg-base-200"
+    request.path == root_path ? "bg-primary" : "bg-base-200"
   end
 
   # ボトムナビゲーションのだしわけ判定
   def display_bottom_nav_on_travel_book
     return false if current_user.nil?
-    return false if controller_name == "home"
+    return false if request.path == root_path
     (controller_name == "travel_books" && action_name == "show" && current_user.travel_books.exists?(uuid: params[:uuid]))||
     (controller_name == "schedules")||
     (controller_name == "notes") ||
