@@ -61,6 +61,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # プロフィール編集後にマイページにリダイレクトする
   def after_update_path_for(resource)
-    users_profile_path
+    profile_path
   end
 end

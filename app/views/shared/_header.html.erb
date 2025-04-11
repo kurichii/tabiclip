@@ -16,13 +16,13 @@
           <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col">
             <% if user_signed_in? %>
               <li>
-                <%= link_to users_profile_path do %>
+                <%= link_to profile_path do %>
                   <%= image_tag current_user.icon_image_url, class: "rounded-full w-10 h-10 object-cover border" %><%= current_user.name %>
                 <% end %>
               </li>
               <div class="divider"></div>
               <li>
-                <%= link_to users_profile_path do %>
+                <%= link_to profile_path do %>
                   <i class="fa-regular fa-user"></i><%= t("header.mypage") %>
                 <% end %>
               </li>

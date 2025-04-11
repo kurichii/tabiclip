@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     invitations: "users/invitations"
   }
   post "/callback" => "linebot#callback"
-  get "users/profile" => "users#show"
+  get "profile" to: "users#show"
   get "home/index"
   get "form", to: "static_pages#form"
   get "policy", to: "static_pages#policy"
