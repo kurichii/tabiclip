@@ -1,4 +1,58 @@
-<div class="flex flex-col items-center justify-center min-h-[calc(100vh-64px-100px)] bg-primary">
+<div class="flex flex-col items-center justify-center min-h-screen bg-primary">
   <%= image_tag "logo.svg", class: "w-[400px] md:w-[500px] lg:w-[600px]", alt: "logo" %>
-  <p class="text-white mb-10">共有できる旅行のしおり投稿サービスです</p>
+  <p class="text-white mb-10">共有できる旅行のしおり投稿サービス</p>
+  <%= link_to new_user_registration_path, class: "btn btn-white" do %>
+    <i class="fa-solid fa-user-plus"></i>新規登録して使ってみる
+  <% end %>
+  <p class="mt-5">scroll</p>
+  <p class="animate-bounce"><i class="fa-solid fa-angles-down"></i></p>
+</div>
+
+<div class="min-h-screen flex flex-col bg-base-100">
+  <div class="flex-grow flex flex-col justify-center">
+    <div class="my-5">
+      <h2 class="text-center md:text-xl">たびの思い出をくりっぷしよう！</h2>
+      <%= image_tag "top_plane_line.png", class: "w-64 md:w-80 mx-auto" %>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center justify-center gap-4 p-5">
+      <div class="card bg-white border border-gray-200 rounded-box min-h-60 w-full md:w-1/3">
+        <div class="flex flex-col h-full items-center justify-around p-4">
+          <%= image_tag "top_illust_1.png", class: "w-20" %>
+          <div class="text-center space-y-2">
+            <p class="font-bold">みんなのしおりを見る</p>
+            <p>他のユーザーが公開しているしおりを参考に<br>旅行プランを立てることができます！</p>
+            <%= link_to public_travel_books_path, class: "btn btn-primary" do %>
+              <i class="fa-solid fa-magnifying-glass"></i>みんなのしおりを見る
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-white border border-gray-200 rounded-box min-h-60 w-full md:w-1/3">
+        <div class="flex flex-col h-full items-center justify-around p-4">
+          <%= image_tag "top_illust_2.png", class: "w-20" %>
+          <div class="text-center space-y-2">
+            <p class="font-bold">しおりを共同編集</p>
+            <p>作成したしおりに招待することで<br>しおりを一緒に編集することができます！</p>
+            <%= link_to new_user_registration_path, class: "btn btn-secondary" do %>
+              <i class="fa-solid fa-user-plus"></i>ログインして作成
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-white border border-gray-200 rounded-box min-h-60 w-full md:w-1/3">
+        <div class="flex flex-col h-full items-center justify-around p-4">
+          <%= image_tag "top_illust_3.png", class: "w-20" %>
+          <div class="text-center space-y-2">
+            <p class="font-bold">旅の情報をまとめて管理</p>
+            <p>スケジュールや旅行のメモや写真など<br>旅行に関する情報をまとめて管理できます！</p>
+            <%= link_to how_to_use_path, class: "btn btn-accent" do %>
+              <i class="fa-regular fa-circle-question"></i>アプリの使い方
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render "shared/footer" %>
 </div>
