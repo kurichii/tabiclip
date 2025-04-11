@@ -14,8 +14,7 @@ Rails.application.routes.draw do
     invitations: "users/invitations"
   }
   post "/callback" => "linebot#callback"
-  get "profile" to: "users#show"
-  get "home/index"
+  get "profile", to: "users#show"
   get "form", to: "static_pages#form"
   get "policy", to: "static_pages#policy"
   get "terms", to: "static_pages#terms"
@@ -70,5 +69,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "home#index"
+  root "static_pages#top"
 end
