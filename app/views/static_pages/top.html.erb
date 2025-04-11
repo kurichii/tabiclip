@@ -1,11 +1,11 @@
 <div class="flex flex-col items-center justify-center min-h-screen bg-primary">
   <%= image_tag "logo.svg", class: "w-[400px] md:w-[500px] lg:w-[600px]", alt: "logo" %>
   <p class="text-white mb-10">共有できる旅行のしおり投稿サービス</p>
-  <%= link_to new_user_registration_path, class: "btn btn-white" do %>
+  <%= link_to new_user_registration_path, class: "btn text-gray-500" do %>
     <i class="fa-solid fa-user-plus"></i>新規登録して使ってみる
   <% end %>
-  <p class="mt-5">scroll</p>
-  <p class="animate-bounce"><i class="fa-solid fa-angles-down"></i></p>
+  <p class="text-gray-500 mt-5">scroll</p>
+  <p class="text-gray-500 animate-bounce"><i class="fa-solid fa-angles-down"></i></p>
 </div>
 
 <div class="min-h-screen flex flex-col bg-base-100">
@@ -22,7 +22,7 @@
           <div class="text-center space-y-2">
             <p class="font-bold">みんなのしおりを見る</p>
             <p>他のユーザーが公開しているしおりを参考に<br>旅行プランを立てることができます！</p>
-            <%= link_to public_travel_books_path, class: "btn btn-primary" do %>
+            <%= link_to public_travel_books_path, class: "btn btn-primary text-white " do %>
               <i class="fa-solid fa-magnifying-glass"></i>みんなのしおりを見る
             <% end %>
           </div>

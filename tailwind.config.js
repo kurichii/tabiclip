@@ -7,6 +7,16 @@ module.exports = {
   ],
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["cupcake"],
-  },
+    themes: [
+      {
+        cupcake: {
+          ...require("daisyui/src/theming/themes")["cupcake"],
+          "base-content": "#555555",
+          "primary-content": "#555555",
+          "secondary-content": "#ffffff",
+          "accent-content": "#ffffff",
+        },
+      },
+    ],
+  }
 }
