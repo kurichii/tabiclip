@@ -50,13 +50,13 @@ module ApplicationHelper
 
   # 指定したパスが現在のコントローラーと一致する場合クラスを返す
   def active_class_by_controller(*controllers)
-    return "text-gray-500 hover:scale-[1.1]" if action_name == "map"
-    controllers.include?(controller_name) ? "text-white hover:scale-[1.1]" : "text-gray-500 hover:scale-[1.1]"
+    return "hover:scale-[1.1]" if action_name == "map"
+    controllers.include?(controller_name) ? "text-white hover:scale-[1.1]" : "hover:scale-[1.1]"
   end
 
   # 指定したパスが現在のアクションと一致する場合クラスを返す
   def active_class_by_controller_and_action(controller, action)
-    controller_name == controller && action_name == action ? "text-white hover:scale-[1.1]" : "text-gray-500 hover:scale-[1.1]"
+    controller_name == controller && action_name == action ? "text-white hover:scale-[1.1]" : "hover:scale-[1.1]"
   end
 
   # 曜日をフォーマットする
