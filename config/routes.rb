@@ -13,48 +13,42 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks",
     invitations: "users/invitations"
   }
-  post "/callback" => "linebot#callback"
+
+  post "/callback", to: "linebot#callback"
   get "profile", to: "users#show"
   get "form", to: "static_pages#form"
   get "policy", to: "static_pages#policy"
   get "terms", to: "static_pages#terms"
   get "how_to_use", to: "static_pages#how_to_use"
   get "images/ogp.png", to: "images#ogp", as: "images_ogp"
+
   resources :travel_books, param: :uuid do
     collection do
       get "public", action: :public_travel_books
-      get "search"
+      get :search
       get :bookmarks
     end
     member do
       get :share
-      post "invitation"
+      post :invitation
       get "invitation/accept/:invitation_token", to: "travel_books#accept", as: "accept"
-      delete "delete_owner"
+      delete :delete_owner
+      delete :delete_image
     end
-    delete "delete_image", on: :member
     resources :schedules, param: :uuid, shallow: true do
-      collection do
-        get :map
-      end
+      get :map, on: :collection
     end
+    resources :notes, param: :uuid, shallow: true
     resources :check_lists, param: :uuid, shallow: true do
       resources :list_items, only: %i[ new create edit update destroy toggle ] do
         resources :reminders, only: %i[ create update clear_reminder ] do
-          member do
-            patch :clear_reminder
-          end
+          patch :clear_reminder, on: :member
         end
-        collection do
-          post :cancel # new 用
-        end
-        member do
-          post :cancel # edit 用
-          patch :toggle
-        end
+        post :cancel, on: :collection
+        post :cancel, on: :member
+        patch :toggle, on: :member
       end
     end
-    resources :notes, param: :uuid, shallow: true
   end
   resources :bookmarks, only: %i[ create destroy ]
 
