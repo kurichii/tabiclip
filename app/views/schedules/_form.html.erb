@@ -58,9 +58,6 @@
       <%= f.label :schedule_image, Schedule.human_attribute_name(:schedule_image), class: "label-text" %>
       <%= f.file_field :schedule_image, accept: "image/*", class: "file-input file-input-bordered w-full" %>
       <%= f.hidden_field :schedule_image_cache %>
-      <% if @schedule.persisted? && @schedule.schedule_image.present? %>
-        <%= @schedule.schedule_image_identifier %>
-      <% end %>
     </div>
 
     <div>
