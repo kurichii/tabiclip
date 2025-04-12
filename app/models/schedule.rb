@@ -1,4 +1,5 @@
 class Schedule < ApplicationRecord
+  mount_uploader :schedule_image, ScheduleUploader
   belongs_to :travel_book
   has_one :spot, dependent: :destroy
   belongs_to :schedule_icon, optional: true

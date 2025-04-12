@@ -1,6 +1,8 @@
 class ScheduleForm
   include ActiveModel::Model # 通常のモデルのようにvalidationなどを使えるようにする
   include ActiveModel::Attributes # ActiveRecordのカラムのような属性を加えられるようにする
+  extend CarrierWave::Mount # モデル以外でCarrierWaveを使用するため
+
   # パラメータの読み書きを許可する
   attribute :travel_book_id, :integer
   attribute :title, :string
@@ -13,6 +15,8 @@ class ScheduleForm
   attribute :post_code, :string
   attribute :address, :string
   attribute :schedule_icon_id, :integer
+  attribute :schedule_image, :string
+  attribute :schedule_image_cache, :string
 
   validates :travel_book_id, presence: true
   validates :title, presence: true, length: { maximum: 255 }
@@ -24,6 +28,9 @@ class ScheduleForm
   validates :post_code, length: { maximum: 10 }
   validates :address, length: { maximum: 255 }
   validates :schedule_icon_id, inclusion: { in: ScheduleIcon.pluck(:id) }
+
+  # CarrierWaveで使用するuploaderをマウントする
+  mount_uploader :schedule_image, ScheduleUploader
 
   # フォームのアクションをPOST/PUTCHに切り替える
   # ScheduleFormオブジェクトがpersisted?メソッドを呼ぶと、Scheduleオブジェクトのpersisted?メソッドが呼び出される
@@ -42,8 +49,7 @@ class ScheduleForm
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id)
-
+      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id, schedule_image: schedule_image)
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
         @spot = Spot.create!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_id: schedule.id)
@@ -60,7 +66,7 @@ class ScheduleForm
   def update(attributes)
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id)
+      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id, schedule_image: schedule_image)
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
@@ -92,7 +98,9 @@ class ScheduleForm
       telephone: spot.telephone,
       post_code: spot.post_code,
       address: spot.address,
-      schedule_icon_id: schedule.schedule_icon_id || 1
+      schedule_icon_id: schedule.schedule_icon_id || 1,
+      schedule_image: schedule.schedule_image,
+      schedule_image_cache: schedule.schedule_image_cache
     }
   end
 

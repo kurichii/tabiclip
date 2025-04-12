@@ -31,5 +31,10 @@
         </li>
       </ul>
     </div>
+
+    <% if @schedule.schedule_image_url.present? %>
+      <%= image_tag @schedule.schedule_image_url, class: "max-h-96 mx-auto md:mx-0" %>
+    <% end %>
   </div>
+  <div class="h-24"></div>
 </div>

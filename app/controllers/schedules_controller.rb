@@ -77,7 +77,9 @@ class SchedulesController < ApplicationController
       :telephone,
       :post_code,
       :address,
-      :schedule_icon_id
+      :schedule_icon_id,
+      :schedule_image,
+      :schedule_image_cache
     ).merge(
       travel_book_id: @travel_book.id
     )
