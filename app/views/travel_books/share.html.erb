@@ -6,18 +6,16 @@
     <div class="mt-5">
       <%= turbo_frame_tag "invite-link" do %>
         <% if @invite_link.present? %>
-          <%= render template: 'travel_books/invitation' %>
+          <%= render template: "travel_books/invitation" %>
         <% else %>
           <div class="flex justify-center">
-            <%= button_to "招待リンクを生成", invitation_travel_book_path(uuid: params[:uuid]), class:"btn btn-primary w-full" %>
+            <%= button_to "招待リンクを生成", invitation_travel_book_path(uuid: @travel_book.uuid), class:"btn btn-primary w-full" %>
           </div>
         <% end %>
       <% end %>
     </div>
     <!-- しおりに招待のフォームを表示 -->
-    <div class="mt-5">
-      <%= render template: 'devise/invitations/new', locals: { resource: @user, resource_name: @resource_name } %>
-    </div>
+    <%= render "travel_books/invitation_mail_form", locals: { travel_book: @travel_book } %>
   </div>
   <div class="bg-base-100 rounded-lg shadow-md p-4 md:p-8 m-3 md:m-5">
 
