@@ -75,6 +75,9 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: bin/rails db:prepare
 
+      - name: Build CSS
+        run: bin/rails css:build
+
       - name: Run tests
         env:
           RAILS_ENV: test
