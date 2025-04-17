@@ -75,8 +75,19 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: bin/rails db:prepare
 
-      - name: Build assets (CSS + JS)
-        run: bin/rails bin/rails assets:build
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node packages
+        run: yarn install
+
+      - name: Build JavaScript with esbuild
+        run: yarn build
+
+      - name: Build CSS with tailwindcss
+        run: yarn build:css
 
       - name: Run tests
         env:
