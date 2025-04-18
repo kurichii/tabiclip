@@ -88,4 +88,8 @@ RSpec.configure do |config|
       driven_by :selenium_chrome_headless
     end
   end
+
+  config.before(:suite) do
+    Rails.application.load_seed
+  end
 end
