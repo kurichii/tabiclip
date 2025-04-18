@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ScheduleForm, type: :model do
-  let(:schedule_icon) { ScheduleIcon.find(1) }
+  let(:schedule_icon) { ScheduleIcon.first }
   let(:travel_book) { create(:travel_book) }
   let(:attributes) do
     {
