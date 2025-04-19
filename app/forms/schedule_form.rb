@@ -27,7 +27,8 @@ class ScheduleForm
   validates :telephone, length: { maximum: 15 }
   validates :post_code, length: { maximum: 10 }
   validates :address, length: { maximum: 255 }
-  validates :schedule_icon_id, inclusion: { in: ScheduleIcon.pluck(:id) }
+  validates :schedule_icon_id, presence: true
+  validate  :schedule_icon_id_must_exist
 
   # CarrierWaveで使用するuploaderをマウントする
   mount_uploader :schedule_image, ScheduleUploader
@@ -108,6 +109,13 @@ class ScheduleForm
     if start_date.present? && end_date.present? && end_date < start_date
       errors.add(:end_date, :after_start_date)
       false
+    end
+  end
+
+  def schedule_icon_id_must_exist
+    return if schedule_icon_id.blank?
+    unless ScheduleIcon.exists?(schedule_icon_id)
+      errors.add(:schedule_icon_id, "は一覧にありません")
     end
   end
 end

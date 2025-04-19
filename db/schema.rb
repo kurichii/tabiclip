@@ -30,10 +30,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_11_220032) do
   end
 
   create_table "check_lists", force: :cascade do |t|
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.bigint "travel_book_id", null: false
     t.index ["travel_book_id"], name: "index_check_lists_on_travel_book_id"
     t.index ["uuid"], name: "index_check_lists_on_uuid", unique: true
@@ -76,7 +76,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_11_220032) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "title", null: false
     t.integer "budged", default: 0
     t.text "memo"
@@ -84,6 +83,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_11_220032) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.integer "schedule_icon_id"
     t.bigint "travel_book_id", null: false
     t.string "schedule_image"
@@ -105,7 +105,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_11_220032) do
   end
 
   create_table "travel_books", force: :cascade do |t|
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "title", null: false
     t.text "description"
     t.boolean "is_public", default: false, null: false
@@ -117,6 +116,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_11_220032) do
     t.bigint "traveler_type_id"
     t.string "travel_book_image"
     t.bigint "creator_id", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "invitation_token"
     t.index ["area_id"], name: "index_travel_books_on_area_id"
     t.index ["creator_id"], name: "index_travel_books_on_creator_id"
