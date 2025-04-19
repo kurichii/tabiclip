@@ -96,5 +96,15 @@ RSpec.describe "Users", type: :system do
         end
       end
     end
+
+    describe "マイページ" do
+      context "ログインしている状態" do
+        it "マイページへのアクセスが成功する" do
+          visit "/profile"
+          expect(page).to have_content user.name
+          expect(current_path).to eq profile_path
+        end
+      end
+    end
   end
 end
