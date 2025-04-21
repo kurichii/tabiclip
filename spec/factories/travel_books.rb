@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :travel_book do
     title { "title" }
     is_public { false }
+    uuid { SecureRandom.uuid }
 
     # オプション
     description { nil }
