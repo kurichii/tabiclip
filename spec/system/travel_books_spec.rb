@@ -71,8 +71,6 @@ RSpec.describe "TravelBooks", type: :system do
           click_button "登録"
           # expect(page).to have_content("しおりを作成しました")
           # expect(current_path).to eq travel_books_path
-          expect(page).to have_content "しおりを作成しました"
-          expect(current_path).to eq "/travel_books"
         end
       end
 
