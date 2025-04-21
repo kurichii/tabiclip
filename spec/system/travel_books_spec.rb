@@ -69,7 +69,7 @@ RSpec.describe "TravelBooks", type: :system do
           expect(page).to have_content("タイトル")
           fill_in "タイトル", with: "タイトル"
           click_button "登録"
-          expect(page).to have_content("しおりを作成しました")
+          expect(page).to have_content("しおりを作成しました", wait: 5)
           expect(current_path).to eq travel_books_path
         end
       end
