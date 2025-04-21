@@ -32,6 +32,7 @@ RSpec.describe "UserSessions", type: :system do
       it "ログアウト処理が成功する" do
         login_as(user)
         find("label.drawer-button").click
+        expect(page).to have_content "ログアウト"
         click_on "ログアウト"
         expect(page).to have_content "ログアウトしました"
         expect(current_path).to eq root_path

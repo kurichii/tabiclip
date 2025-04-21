@@ -76,6 +76,7 @@ RSpec.describe "Users", type: :system do
       context "メールアドレスが未入力" do
         it "ユーザー編集が失敗する" do
           visit "/users/edit"
+          expect(page).to have_content "ユーザー名"
           fill_in "ユーザー名", with: "たびくりっぷくん"
           fill_in "メールアドレス", with: ""
           click_button "更新"
