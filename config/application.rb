@@ -32,6 +32,7 @@ module Myapp
     config.generators do |g|
       g.skip_routes true
       g.helper false
+      g.decorator false
       g.test_framework nil
     end
 
