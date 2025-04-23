@@ -7,9 +7,6 @@ import { application } from "./application"
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import HowToUseTabsController from "./how_to_use_tabs_controller"
 application.register("how-to-use-tabs", HowToUseTabsController)
 
