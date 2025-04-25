@@ -18,9 +18,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule_form = ScheduleForm.new(schedule_params)
-    # parsed_schedule_params = parse_datetime(schedule_params)
-    # @schedule_form = ScheduleForm.new(parsed_schedule_params)
+    parsed_schedule_params = parse_datetime(schedule_params)
+    @schedule_form = ScheduleForm.new(parsed_schedule_params)
 
     if @schedule_form.save
       redirect_to travel_book_schedules_path(@travel_book.uuid), notice: t("defaults.flash_message.created", item: Schedule.model_name.human)
@@ -38,9 +37,9 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    # parsed_schedule_params = parse_datetime(schedule_params)
+    parsed_schedule_params = parse_datetime(schedule_params)
     @spot = @schedule.spot
-    @schedule_form = ScheduleForm.new(schedule_params, schedule: @schedule, spot: @spot)
+    @schedule_form = ScheduleForm.new(parsed_schedule_params, schedule: @schedule, spot: @spot)
 
     if @schedule_form.update(schedule_params)
       redirect_to travel_book_schedules_path(@travel_book.uuid), notice: t("defaults.flash_message.updated", item: Schedule.model_name.human)
@@ -66,12 +65,12 @@ class SchedulesController < ApplicationController
   private
 
   # paramsで受け取った日時をconfig.time_zoneで設定されたタイムゾーンに変換
-  # def parse_datetime(params)
-  #   params.merge(
-  #     start_date: params[:start_date].present? ? Time.zone.parse(params[:start_date]) : nil,
-  #     end_date: params[:end_date].present? ? Time.zone.parse(params[:end_date]) : nil,
-  #   )
-  # end
+  def parse_datetime(params)
+    params.merge(
+      start_date: params[:start_date].present? ? Time.zone.parse(params[:start_date]) : nil,
+      end_date: params[:end_date].present? ? Time.zone.parse(params[:end_date]) : nil,
+    )
+  end
 
   def schedule_params
     params.require(:schedule_form).permit(
