@@ -2,9 +2,6 @@ class ScheduleForm
   include ActiveModel::Model # 通常のモデルのようにvalidationなどを使えるようにする
   include ActiveModel::Attributes # ActiveRecordのカラムのような属性を加えられるようにする
   extend CarrierWave::Mount # モデル以外でCarrierWaveを使用するため
-  include ActiveModel::Validations::Callbacks # コールバック(before_validation)を使えるようにする
-
-  before_validation :convert_to_local_timezone
 
   # パラメータの読み書きを許可する
   attribute :travel_book_id, :integer
@@ -106,12 +103,6 @@ class ScheduleForm
       schedule_image: schedule.schedule_image,
       schedule_image_cache: schedule.schedule_image_cache
     }
-  end
-
-  # config.time_zoneで設定されたタイムゾーンに変換
-  def convert_to_local_timezone
-    self.start_date = Time.zone.parse(start_date.to_s) if start_date.present?
-    self.end_date = Time.zone.parse(end_date.to_s) if end_date.present?
   end
 
   def end_date_after_start_date
