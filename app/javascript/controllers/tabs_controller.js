@@ -8,6 +8,8 @@ export default class extends Controller {
   tabClick(event){
     // GoogleMapにspot情報を渡す
     this.spotsValue = JSON.parse(event.target.getAttribute("data-tabs-spots-value"));
+    console.log("click")
+    console.log(this.spotsValue)
     window.spots = this.spotsValue;
     initMap();
 

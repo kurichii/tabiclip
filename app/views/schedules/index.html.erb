@@ -1,6 +1,6 @@
 <% content_for(:title, t(".title")) %>
-<div class="max-w-screen-md mx-auto flex-none md:flex md:max-w-none">
-  <div class="bg-base-100 p-4 md:p-8 m-3 rounded-lg md:m-0 md:rounded-none md:shadow-md md:flex-1">
+<div class="max-w-screen-md mx-auto flex-none md:flex md:max-w-none md:h-[calc(100vh-64px)]">
+  <div class="bg-base-100 p-4 md:p-8 m-3 rounded-lg md:m-0 md:rounded-none md:shadow-md md:basis-1/2 md:overflow-y-auto">
 
     <div class="flex flex-grow flex-col items-center mb-5">
       <h2 class="text-lg font-bold"><%= @travel_book.title %></h2>
@@ -13,7 +13,7 @@
         <div class="flex items-center flex-nowrap gap-1 min-w-max md:min-w-0">
           <% Schedule.group_by_date(@schedules).each_with_index do |(date, schedules),i| %>
             <a class="<%= i == 0 ? 'is-active' : 'not-active' %>" aria-current="page" data-tabs-target="tab"
-            data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
+            data-tabs-spots-value="<%= schedules.select { |s| s.start_date&.to_date == date && s.spot&.latitude.present? }.map { |s| { id: s.spot.id, latitude: s.spot.latitude, longitude: s.spot.longitude, name: s.spot.name, schedule_uuid: s.uuid } }.to_json %>"
             data-action="tabs#tabClick"><%= fmt_date_label(date) %></a>
           <% end %>
         </div>
@@ -47,9 +47,10 @@
         <i class="fa-solid fa-plus"></i>
       <% end %>
     <% end %>
+    <div class="h-24"></div>
   </div>
 
-  <div id="map-container" class="hidden md:block md:relative md:h-[calc(100vh-64px)] md:flex-1">
+  <div id="map-container" class="hidden md:block md:relative md:h-full md:basis-1/2">
     <div id="map" class="w-full h-full"></div>
     <div id="popup" class="absolute bottom-[calc(64px+10px)] left-1/2 -translate-x-1/2"></div>
   </div>
