@@ -13,7 +13,7 @@
         <div class="flex items-center flex-nowrap gap-1 min-w-max md:min-w-0">
           <% Schedule.group_by_date(@schedules).each_with_index do |(date, schedules),i| %>
             <a class="<%= i == 0 ? 'is-active' : 'not-active' %>" aria-current="page" data-tabs-target="tab"
-            data-tabs-spots-value="<%= schedules.map(&:spot).compact.select { |spot| spot.latitude.present? }.to_json %>"
+            data-tabs-spots-value="<%= schedules.select { |s| s.start_date&.to_date == date && s.spot&.latitude.present? }.map { |s| { id: s.spot.id, latitude: s.spot.latitude, longitude: s.spot.longitude, name: s.spot.name, schedule_uuid: s.uuid } }.to_json %>"
             data-action="tabs#tabClick"><%= fmt_date_label(date) %></a>
           <% end %>
         </div>
