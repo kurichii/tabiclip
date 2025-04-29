@@ -86,6 +86,15 @@ class ScheduleForm
     false
   end
 
+  # attributeのオーバーライド
+  def start_date=(value)
+    super(value.present? ? Time.zone.parse(value.to_s) : nil)
+  end
+
+  def end_date=(value)
+    super(value.present? ? Time.zone.parse(value.to_s) : nil)
+  end
+
   private
 
   def default_attributes(travel_book)
