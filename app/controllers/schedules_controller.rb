@@ -4,6 +4,7 @@ class SchedulesController < ApplicationController
   before_action :set_schedule, only: %i[ show edit update destroy ]
 
   def index
+    authorize(@travel_book, policy_class: SchedulePolicy)
     # scheduleには0以上のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
     # スケジュール一覧では初日を初期表示するためindexでは初日のデータのみ取得する
     @schedules = @travel_book.sorted_schedules
@@ -14,6 +15,7 @@ class SchedulesController < ApplicationController
   end
 
   def new
+    authorize(@travel_book, policy_class: SchedulePolicy)
     @schedule_form = ScheduleForm.new(travel_book: @travel_book)
   end
 
@@ -28,14 +30,18 @@ class SchedulesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
+  end
 
   def edit
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
     @spot = @schedule.spot
     @schedule_form = ScheduleForm.new(schedule: @schedule, spot: @spot)
   end
 
   def update
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
     @spot = @schedule.spot
     @schedule_form = ScheduleForm.new(schedule_params, schedule: @schedule, spot: @spot)
 
@@ -48,11 +54,13 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
     @schedule.destroy!
     redirect_to travel_book_schedules_path(@travel_book.uuid), notice: t("defaults.flash_message.deleted", item: Schedule.model_name.human)
   end
 
   def map
+    authorize(@travel_book, policy_class: SchedulePolicy)
     @schedules = @travel_book.sorted_schedules
     # scheduleには0もしくは1のspotがひも付くため、spotが紐づいていて緯度情報が存在するもののみ格納する
     @spots = @schedules
@@ -82,11 +90,11 @@ class SchedulesController < ApplicationController
   end
 
   def set_travel_book
-    @travel_book = TravelBook.find_by(uuid: params[:travel_book_uuid])
+    @travel_book = TravelBook.find_by!(uuid: params[:travel_book_uuid])
   end
 
   def set_schedule
-    @schedule = Schedule.find_by(uuid: params[:uuid])
+    @schedule = Schedule.find_by!(uuid: params[:uuid])
     @travel_book = @schedule.travel_book
   end
 end
