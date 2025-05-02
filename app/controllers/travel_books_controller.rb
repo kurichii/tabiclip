@@ -27,14 +27,18 @@ class TravelBooksController < ApplicationController
   end
 
   def show
-    @travel_book = TravelBook.find_by(uuid: params[:uuid])
+    @travel_book = TravelBook.find_by!(uuid: params[:uuid])
+    authorize(@travel_book)
     # メタタグを設定
     prepare_meta_tags(@travel_book)
   end
 
-  def edit; end
+  def edit
+    authorize(@travel_book)
+  end
 
   def update
+    authorize(@travel_book)
     if @travel_book.update(travel_book_param)
       redirect_to travel_books_path(@travel_book), notice: t("defaults.flash_message.updated", item: TravelBook.model_name.human)
     else
@@ -44,12 +48,15 @@ class TravelBooksController < ApplicationController
   end
 
   def destroy
+    authorize(@travel_book)
     @travel_book.destroy!
     redirect_to travel_books_path, notice: t("defaults.flash_message.deleted", item: TravelBook.model_name.human)
   end
 
   def delete_image
-    @travel_book.remove_travel_book_image! # CarrierWaveのメソッドを使って画像を削除
+    authorize(@travel_book)
+    # CarrierWaveのメソッドを使って画像を削除
+    @travel_book.remove_travel_book_image!
     @travel_book.save
     redirect_to edit_travel_book_path(@travel_book.uuid), notice: "しおりの画像を削除しました"
   end
@@ -60,6 +67,7 @@ class TravelBooksController < ApplicationController
   end
 
   def share
+    authorize(@travel_book)
     @users = @travel_book.users
     @user = User.new
     @resource_name = @user.class.name.underscore
@@ -67,6 +75,7 @@ class TravelBooksController < ApplicationController
   end
 
   def delete_owner
+    authorize(@travel_book)
     user = User.find(params[:user_id])
     # しおりの作成者でない場合のみ削除
     return redirect_to share_travel_book_path(@travel_book.uuid), alert: "しおりの作成者は削除できません" if user == @travel_book.creator
@@ -89,6 +98,7 @@ class TravelBooksController < ApplicationController
   end
 
   def invitation
+    authorize(@travel_book)
     if @travel_book.generate_token
       @invite_link = accept_travel_book_url(invitation_token: @travel_book.invitation_token)
     else
@@ -130,7 +140,6 @@ class TravelBooksController < ApplicationController
   private
 
   def prepare_meta_tags(travel_book)
-    # image_url
     image_url = "#{request.base_url}/images/ogp.png?title=#{CGI.escape(travel_book.title)}&creator=#{CGI.escape(travel_book.creator.name)}"
 
     set_meta_tags og: {
@@ -150,7 +159,7 @@ class TravelBooksController < ApplicationController
   end
 
   def set_travel_book
-    @travel_book = current_user.travel_books.find_by(uuid: params[:uuid])
+    @travel_book = current_user.travel_books.find_by!(uuid: params[:uuid])
   end
 
   def travel_book_param

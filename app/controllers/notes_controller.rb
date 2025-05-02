@@ -20,11 +20,16 @@ class NotesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
+  end
 
-  def edit; end
+  def edit
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
+  end
 
   def update
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
     if @note.update(note_params)
       redirect_to note_path(@note.uuid), notice: t("defaults.flash_message.updated", item: Note.model_name.human)
     else
@@ -34,6 +39,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
+    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
     @note.destroy
     redirect_to travel_book_notes_path(@travel_book.uuid), notice: t("defaults.flash_message.deleted", item: Note.model_name.human)
   end
@@ -41,11 +47,11 @@ class NotesController < ApplicationController
   private
 
   def set_travel_book
-    @travel_book = current_user.travel_books.find_by(uuid: params[:travel_book_uuid])
+    @travel_book = current_user.travel_books.find_by!(uuid: params[:travel_book_uuid])
   end
 
   def set_note
-    @note = Note.find_by(uuid: params[:uuid])
+    @note = Note.find_by!(uuid: params[:uuid])
     @travel_book = @note.travel_book
   end
 

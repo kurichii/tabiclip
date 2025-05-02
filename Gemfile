@@ -41,6 +41,9 @@ gem "devise"
 # 招待機能
 gem "devise_invitable"
 
+# 認可
+gem "pundit"
+
 # LINEログイン
 gem "omniauth-line"
 gem "omniauth-rails_csrf_protection"
