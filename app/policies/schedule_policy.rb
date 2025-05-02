@@ -4,6 +4,10 @@ class SchedulePolicy < ApplicationPolicy
     record.is_public || record.owned_by_user?(user)
   end
 
+  def show?
+    index?
+  end
+
   def new?
     # しおりの所有者のみ操作可能
     record.owned_by_user?(user)

@@ -31,7 +31,7 @@ class SchedulesController < ApplicationController
   end
 
   def show
-    authorize(@travel_book, policy_class: TravelBookOwnerPolicy)
+    authorize(@travel_book, policy_class: SchedulePolicy)
   end
 
   def edit
