@@ -63,7 +63,7 @@
     <div>
       <%= f.label :schedule_icon_id, ScheduleIcon.human_attribute_name(:name), class: "label-text" %>
       <div class="flex flex-wrap gap-x-3 gap-y-2">
-        <% ScheduleIcon.all.each do |icon| %>
+        <% ScheduleIcon.order(:display_order).each do |icon| %>
           <div class="flex items-center gap-1">
             <%= f.radio_button :schedule_icon_id, icon.id, id: "schedule_icon_#{icon.id}", class: "radio radio-primary" %>
             <%= f.label "schedule_icon_#{icon.id}", for: "schedule_icon_#{icon.id}", class: "cursor-pointer" do %>
