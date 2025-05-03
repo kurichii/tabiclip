@@ -48,27 +48,30 @@ areas = [
   end
 
   schedule_icons = [
-    { id: 1, name: "none" },
-    { id: 2, name: "fa-person-walking" },
-    { id: 3, name: "fa-bicycle" },
-    { id: 4, name: "fa-car" },
-    { id: 5, name: "fa-train-subway" },
-    { id: 6, name: "fa-plane-up" },
-    { id: 7, name: "fa-ship" },
-    { id: 8, name: "fa-hotel" },
-    { id: 9, name: "fa-utensils" },
-    { id: 10, name: "fa-mug-saucer" },
-    { id: 11, name: "fa-cart-shopping" },
-    { id: 12, name: "fa-star" },
-    { id: 13, name: "fa-torii-gate" },
-    { id: 14, name: "fa-guitar" },
-    { id: 15, name: "fa-heart" },
-    { id: 16, name: "fa-baby-carriage" }
+    { id: 1, name: "none", display_order: 1 },
+    { id: 2, name: "fa-person-walking", display_order: 2 },
+    { id: 3, name: "fa-bicycle", display_order: 3 },
+    { id: 4, name: "fa-car", display_order: 4 },
+    { id: 5, name: "fa-train-subway", display_order: 6 },
+    { id: 6, name: "fa-plane-up", display_order: 7 },
+    { id: 7, name: "fa-ship", display_order: 8 },
+    { id: 8, name: "fa-hotel", display_order: 9 },
+    { id: 9, name: "fa-utensils", display_order: 10 },
+    { id: 10, name: "fa-mug-saucer", display_order: 11 },
+    { id: 11, name: "fa-cart-shopping", display_order: 12 },
+    { id: 12, name: "fa-star", display_order: 13 },
+    { id: 13, name: "fa-torii-gate", display_order: 14 },
+    { id: 14, name: "fa-guitar", display_order: 15 },
+    { id: 15, name: "fa-heart", display_order: 16 },
+    { id: 16, name: "fa-baby-carriage", display_order: 17 },
+    { id: 17, name: "fa-bus-simple", display_order: 5 },
+    { id: 18, name: "fa-paw", display_order: 18 }
   ]
 
   schedule_icons.each do |schedule_icon|
-    ScheduleIcon.find_or_create_by(id: schedule_icon[:id]) do |t|
-      t.name = schedule_icon[:name]
-    end
+    icon = ScheduleIcon.find_or_initialize_by(id: schedule_icon[:id])
+    icon.name ||= schedule_icon[:name]
+    icon.display_order = schedule_icon[:display_order]
+    icon.save!
   end
 end
