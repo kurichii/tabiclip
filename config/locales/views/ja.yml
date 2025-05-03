@@ -24,7 +24,7 @@ ja:
     undecided: 未定
     date_undecided: 日付未定
     public: 公開
-    unpublic: 未公開
+    unpublic: 非公開
   defaults:
     policy: プライバシーポリシー
     terms: 利用規約
