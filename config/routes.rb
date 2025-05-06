@@ -64,4 +64,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "static_pages#top"
+  # エラーページ
+  get "*path", to: "application#render404"
 end
