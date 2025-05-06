@@ -38,8 +38,5 @@ module Myapp
 
     config.i18n.default_locale = :ja
     config.time_zone = "Tokyo"
-
-    # 例外を403にする(デフォルトでは500になる)
-    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
   end
 end
