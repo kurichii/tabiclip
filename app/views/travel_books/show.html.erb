@@ -1,6 +1,16 @@
 <% content_for(:title, @travel_book.title) %>
 <div class="max-w-screen-md mx-auto">
-  <div class="card bg-base-100 shadow-md m-3 md:m-5">
+  <% if @travel_book.owned_by_user?(current_user) %>
+    <div class="flex justify-between mt-2 mx-3 md:mx-5">
+      <%= link_to public_travel_books_path, class: "text-sm underline hover:opacity-50" do %>
+        <i class="fa-solid fa-chevron-left"></i> しおり検索へ
+      <% end %>
+      <%= link_to travel_books_path, class: "text-sm underline hover:opacity-50" do %>
+        マイしおりへ <i class="fa-solid fa-chevron-right"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="card bg-base-100 shadow-md mt-2 mx-3 md:mx-5">
     <figure>
       <%= image_tag @travel_book.travel_book_image_url %>
     </figure>
