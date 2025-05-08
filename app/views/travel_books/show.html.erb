@@ -63,7 +63,7 @@
 
         <div>
           <p class="font-bold text-sm"><%= t(".total_amount") %></p>
-          <p><%= total_budget(@travel_book.schedules) %><%= t("helpers.currency_unit") %></p>
+          <p><%= total_budget(@travel_book.schedules) %></p>
         </div>
 
         <% unless @travel_book.owned_by_user?(current_user) %>
