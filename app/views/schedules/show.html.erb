@@ -20,7 +20,7 @@
       <ul class="fa-ul space-y-5">
         <li><span class="fa-li"><i class="fa-regular fa-clock"></i></span><%= fmt_datetime_range(@schedule, :default) %></li>
         <li><span class="fa-li"><i class="fa-solid fa-location-dot"></i></span><%= schedule_spot_info(@schedule.spot) %></li>
-        <li><span class="fa-li"><i class="fa-solid fa-wallet"></i></span><%= @schedule.budged %><%= t("helpers.currency_unit") %></li>
+        <li><span class="fa-li"><i class="fa-solid fa-wallet"></i></span><%= fmt_budget(@schedule.budged) %></li>
         <li>
           <span class="fa-li"><i class="fa-solid fa-file-pen"></i></span>
           <% if @schedule.memo.blank? %>

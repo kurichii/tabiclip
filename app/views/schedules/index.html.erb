@@ -24,7 +24,7 @@
           <% schedules.each_with_index do |schedule, i| %>
             <%= render partial: "schedule", locals: { schedule: schedule, index: i } %>
           <% end %>
-          <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(schedules)) %><%= t("helpers.currency_unit") %></p>
+          <p class="text-right my-5"><%= t("helpers.total_amount", amount: total_budget(schedules)) %></p>
         </div>
       <% end %>
     </div>
