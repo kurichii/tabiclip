@@ -30,7 +30,7 @@ ja:
         name: 旅行スタイル
       schedule:
         title: タイトル
-        budged: 予算
+        budget: 予算
         memo: メモ
         start_date: 開始時刻
         end_date: 終了時刻

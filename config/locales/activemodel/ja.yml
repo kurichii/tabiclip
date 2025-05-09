@@ -8,7 +8,7 @@ ja:
         name: 場所名
         telephone: 電話番号
         address: 住所
-        budged: 予算
+        budget: 予算
         memo: メモ
     errors:
       models:

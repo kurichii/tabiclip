@@ -75,7 +75,7 @@ class SchedulesController < ApplicationController
       :title,
       :start_date,
       :end_date,
-      :budged,
+      :budget,
       :memo,
       :name,
       :telephone,

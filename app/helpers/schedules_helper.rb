@@ -21,7 +21,7 @@ module SchedulesHelper
   end
 
   def total_budget(schedules)
-    schedules.sum { |schedule| schedule.budged.to_i }.to_fs(:currency, locale: :ja)
+    schedules.sum { |schedule| schedule.budget.to_i }.to_fs(:currency, locale: :ja)
   end
 
   def fmt_budget(budget)

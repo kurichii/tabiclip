@@ -8,7 +8,7 @@ class ScheduleForm
   attribute :title, :string
   attribute :start_date, :datetime
   attribute :end_date, :datetime
-  attribute :budged, :integer, default: 0
+  attribute :budget, :integer, default: 0
   attribute :memo, :string
   attribute :name, :string
   attribute :telephone, :string
@@ -23,7 +23,7 @@ class ScheduleForm
   validates :travel_book_id, presence: true
   validates :title, presence: true, length: { maximum: 255 }
   validate  :end_date_after_start_date
-  validates :budged, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :budget, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :memo, length: { maximum: 65_535 }
   validates :name, length: { maximum: 255 }
   validates :telephone, length: { maximum: 15 }
@@ -52,7 +52,7 @@ class ScheduleForm
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule = Schedule.create!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id, schedule_image: schedule_image)
+      @schedule = Schedule.create!(title: title, budget: budget, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id, schedule_image: schedule_image)
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
         @spot = Spot.create!(name: name, telephone: telephone, post_code: post_code, address: address, schedule_id: schedule.id)
@@ -69,7 +69,7 @@ class ScheduleForm
   def update(attributes)
     return false if invalid?
     ActiveRecord::Base.transaction do
-      @schedule.update!(title: title, budged: budged, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id, schedule_image: schedule_image)
+      @schedule.update!(title: title, budget: budget, memo: memo, start_date: start_date, end_date: end_date, travel_book_id: travel_book_id, schedule_icon_id: schedule_icon_id, schedule_image: schedule_image)
 
       # Spot のデータが存在する場合のみ作成
       if name.present? || telephone.present? || post_code.present? || address.present?
@@ -100,7 +100,7 @@ class ScheduleForm
   def default_attributes(travel_book)
     {
       title: schedule.title,
-      budged: schedule.budged,
+      budget: schedule.budget,
       memo: schedule.memo,
       start_date: schedule.start_date || travel_book&.start_date&.in_time_zone&.change(hour: 12),
       end_date: schedule.end_date || travel_book&.start_date&.in_time_zone&.change(hour: 12),

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_03_020254) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_09_142200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_03_020254) do
   create_table "schedules", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "title", null: false
-    t.integer "budged", default: 0
+    t.integer "budget", default: 0
     t.text "memo"
     t.datetime "start_date"
     t.datetime "end_date"

@@ -42,9 +42,9 @@
     </div>
 
     <div>
-      <%= f.label :budged, Schedule.human_attribute_name(:budged), class: "label-text" %>
+      <%= f.label :budget, Schedule.human_attribute_name(:budget), class: "label-text" %>
       <div class="flex items-center">
-        <%= f.number_field :budged, class: "input input-bordered w-full", autocomplete: "off" %>
+        <%= f.number_field :budget, class: "input input-bordered w-full", autocomplete: "off" %>
         <span class="ml-2"><%= t("helpers.currency_unit") %></span>
       </div>
     </div>

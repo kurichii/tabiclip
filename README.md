@@ -107,4 +107,6 @@
 https://www.figma.com/design/hFI7FPp7fZ95IcAQkhaPwx/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=G3nde0mVRNaHbNWf-1
 
 ## ■ ER図
-[![Image from Gyazo](https://i.gyazo.com/e1e757a33dd611bc6778fb28367c0b28.png)](https://gyazo.com/e1e757a33dd611bc6778fb28367c0b28)
+https://drive.google.com/file/d/1dbgMbt2VltszC0EJGRvsLHx0v5A8Iyhb/view?usp=sharing
+
+[![Image from Gyazo](https://i.gyazo.com/998168297275b3ab629c086029c8acda.png)](https://gyazo.com/998168297275b3ab629c086029c8acda)
