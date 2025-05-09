@@ -6,7 +6,7 @@ RSpec.describe ScheduleForm, type: :model do
   let(:attributes) do
     {
       title: "title",
-      budged: 0,
+      budget: 0,
       travel_book_id: travel_book.id,
       schedule_icon_id: schedule_icon.id,
       start_date: nil,
@@ -48,11 +48,11 @@ RSpec.describe ScheduleForm, type: :model do
       expect(schedule_form.errors[:end_date]).to include("は開始時刻より後の時刻を入力してください")
     end
 
-    it "budgedが0未満の場合にバリデーションが機能してinvalidになるか" do
-      negative_budged = attributes.merge(budged: -1)
-      schedule_form = ScheduleForm.new(negative_budged)
+    it "budgetが0未満の場合にバリデーションが機能してinvalidになるか" do
+      negative_budget = attributes.merge(budget: -1)
+      schedule_form = ScheduleForm.new(negative_budget)
       expect(schedule_form).to be_invalid
-      expect(schedule_form.errors[:budged]).to include("は0以上の値にしてください")
+      expect(schedule_form.errors[:budget]).to include("は0以上の値にしてください")
     end
 
     it "memoが65536文字以上の場合にバリデーションが機能してinvalidになるか" do
