@@ -24,7 +24,7 @@ class TravelBook < ApplicationRecord
   end
 
   def sorted_schedules
-    schedules.sort_by { |schedule| schedule.start_date || DateTime.new(0) }
+    schedules.includes(:spot, :schedule_icon).sort_by { |schedule| schedule.start_date || DateTime.new(0) }
   end
 
   # ransackで検索に使用するカラムを記述
