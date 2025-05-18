@@ -63,7 +63,7 @@ class TravelBooksController < ApplicationController
 
   def public_travel_books
     @q = TravelBook.ransack(params[:q])
-    @travel_books = @q.result.where(is_public: true).includes(:users).order(created_at: :desc).page(params[:page])
+    @travel_books = @q.result.public_travel_books.page(params[:page])
   end
 
   def share
@@ -71,6 +71,7 @@ class TravelBooksController < ApplicationController
     @users = @travel_book.users
     @user = User.new
     @resource_name = @user.class.name.underscore
+    # すでに招待トークンがある場合、招待リンク生成
     @invite_link = accept_travel_book_url(invitation_token: @travel_book.invitation_token) if @travel_book.invitation_token.present?
   end
 
@@ -97,6 +98,7 @@ class TravelBooksController < ApplicationController
     @bookmark_travel_books = current_user.bookmark_travel_books.order(created_at: :desc)
   end
 
+  # 招待ボタンをクリックした際に招待URLを生成
   def invitation
     authorize(@travel_book)
     if @travel_book.generate_token
