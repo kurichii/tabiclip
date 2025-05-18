@@ -67,7 +67,7 @@
         </div>
 
         <% unless @travel_book.owned_by_user?(current_user) %>
-          <%= link_to travel_book_schedules_path(@travel_book.uuid), class: "btn btn-primary w-full" do %>
+          <%= link_to travel_book_schedules_path(@travel_book.uuid), data: { turbo: false }, class: "btn btn-primary w-full" do %>
             <i class="fa-regular fa-clock"></i> スケジュールを見る
           <% end %>
         <% else %>

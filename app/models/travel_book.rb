@@ -16,7 +16,7 @@ class TravelBook < ApplicationRecord
   validates :description, length: { maximum: 65_535 }
   validate :end_date_after_start_date
 
-  scope :public_travel_books, -> { where(is_public: true) }
+  scope :public_travel_books, -> { where(is_public: true).includes(:users).order(created_at: :desc) }
 
   def owned_by_user?(user)
     return false if user.nil?
