@@ -9,5 +9,6 @@
     <% end %>
     <%= f.text_field :title, autofocus: true, placeholder: t("check_lists.form.placeholder.title"), class: "input input-bordered w-full" %>
     <%= f.submit nil, class: "btn btn-primary w-full" %>
+    <button type="button" onclick="history.back()" class="btn btn-ghoast w-full">キャンセル</button>
   </div>
 <% end %>
