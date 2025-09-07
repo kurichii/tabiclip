@@ -56,7 +56,7 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 
 # 画像
-gem "carrierwave", "~> 3.0"
+gem "carrierwave", "~> 3.1"
 gem "mini_magick"
 
 # OGP
